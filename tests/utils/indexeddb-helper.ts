@@ -133,7 +133,7 @@ export class IndexedDBHelper {
           // Format must match common-data-store.ts: { id: recordId, commonDT: JSON.stringify(value) }
           const commonRecordToEncrypt = {
             id: commonDataId,
-            commonDT: JSON.stringify(commonDataValue)
+            commonData: JSON.stringify(commonDataValue)
           };
           const commonPlainText = JSON.stringify(commonRecordToEncrypt);
           console.log('[INIT] Encrypting commonData with cipher:', cipherKey.substring(0, 20) + '...');
