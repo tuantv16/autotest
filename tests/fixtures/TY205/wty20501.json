@@ -1,0 +1,84 @@
+{
+  "wty20501": {
+    "TC_01": {
+      "description": "Save customer summary successfully",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498019991",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "C0001",
+              "uesamaFlg": "0",
+              "hbKbn": "1"
+            }
+          ]
+        }
+      },
+      "commonData": {
+        "id": "commonDT",
+        "value": {
+          "unyoDate": "20250210",
+          "storeCd": "C0001",
+          "syoriStoreCd": "C0001",
+          "syoriStoreNmKnj": "テスト店舗",
+          "userId": "testuser",
+          "clientId": "client01",
+          "termNo": "TERM01",
+          "assetsNo": "ASSET01",
+          "keepPeriod": "6"
+        }
+      },
+      "formData": {
+        "customerNameKanji": "山田太郎",
+        "customerNameKana": "ｶｶｶ",
+        "deliveryDate": "2025/12/25",
+        "summaryText": "これはテストの摘要欄入力です"
+      },
+      "expectedMessages": {
+        "success": "保存しました"
+      }
+    },
+    "TC_02": {
+      "description": "Save with different customer",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498019992",
+              "jznuridenHkkDate": "20250215",
+              "kokCd": "C0002",
+              "uesamaFlg": "0",
+              "hbKbn": "2"
+            }
+          ]
+        }
+      },
+      "commonData": {
+        "id": "commonDT",
+        "value": {
+          "unyoDate": "20250215",
+          "storeCd": "C0002",
+          "syoriStoreCd": "C0002",
+          "syoriStoreNmKnj": "テスト店舗2",
+          "userId": "testuser2",
+          "clientId": "client02",
+          "termNo": "TERM02",
+          "assetsNo": "ASSET02",
+          "keepPeriod": "12"
+        }
+      },
+      "formData": {
+        "customerNameKanji": "佐藤花子",
+        "customerNameKana": "ｻﾄｳﾊﾅｺ",
+        "deliveryDate": "2025/12/31",
+        "summaryText": "別のテストデータです。"
+      },
+      "expectedMessages": {
+        "success": "保存しました"
+      }
+    }
+  }
+}
