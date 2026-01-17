@@ -146,7 +146,7 @@ export class BasePage {
     actionMenuSelector: string = 'button.MuiButtonBase-root[aria-haspopup="true"]',
     confirmText: string = '確定'
   ): Promise<void> {
-    await this.openActionMenu(actionMenuSelector);
+    // await this.openActionMenu(actionMenuSelector);
     await this.clickMenuItemByText(confirmText);
     await this.page.waitForTimeout(1000);
   }
@@ -158,7 +158,7 @@ export class BasePage {
     actionMenuSelector: string = 'button.MuiButtonBase-root[aria-haspopup="true"]',
     clearText: string = 'クリア'
   ): Promise<void> {
-    await this.openActionMenu(actionMenuSelector);
+    // await this.openActionMenu(actionMenuSelector);
     await this.clickMenuItemByText(clearText);
     await this.page.waitForTimeout(500);
   }
