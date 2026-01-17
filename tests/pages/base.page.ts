@@ -281,7 +281,7 @@ export class BasePage {
      */
     protected async clickOptionInCombobox(optionSelectors: string[], errorMessage: string, comboboxSelector: string): Promise<void> {
         const comboboxLocator = this.page.locator(comboboxSelector);
-        
+
         await this.waitForVisible(comboboxLocator, 10000);
         await comboboxLocator.click({ timeout: 10000 });
         await this.page.waitForTimeout(500);
@@ -315,7 +315,7 @@ export class BasePage {
 
     /**
      * Select option for Material UI Select (div role="combobox")
-     * 
+     *
      * @param selectLocator Locator of MUI select element
      * @param value value of option (data-value)
      */
@@ -346,7 +346,7 @@ export class BasePage {
 
     /**
      * Click button in action menu
-     * 
+     *
      * @param buttonText Text of the button to click
      */
     async clickButtonInMenuButton(buttonText: string): Promise<void> {
@@ -365,4 +365,4 @@ export class BasePage {
       // 4. Wait UI settle
       await this.page.waitForTimeout(500);
     }
-}   
+}
