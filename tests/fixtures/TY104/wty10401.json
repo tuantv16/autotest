@@ -40,20 +40,22 @@
           ]
         }
       },
-      "commonData": {
-        "id": "commonDT",
-        "value": {
-          "unyoDate": "20251022",
-          "storeCd": "C0001",
-          "syoriStoreCd": "C0001",
-          "syoriStoreNmKnj": "テスト店舗",
-          "userId": "testuser",
-          "clientId": "client01",
-          "termNo": "TERM01",
-          "assetsNo": "ASSET01",
-          "keepPeriod": "6"
+      "commonData": [
+          {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251022",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
         }
-      },
+      ],
       "formData": {
         "customerNameKanji": "山田太郎",
         "customerNameKana": "ｶｶｶ",

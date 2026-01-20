@@ -88,6 +88,20 @@ export class TY1040Page extends BasePage {
   }
 
   /**
+   * Open combobox dropdown if not already open
+   */
+  async openComboboxDropdown(): Promise<void> {
+    const dropdownMenu = this.page.locator(this.selectors.salesDepartmentDropdownMenu);
+    const isVisible = await dropdownMenu.isVisible({ timeout: 1000 }).catch(() => false);
+    
+    if (!isVisible) {
+      const comboboxLocator = this.page.locator(this.selectors.salesDepartmentComboboxId);
+      await comboboxLocator.click({ timeout: 10000 });
+      await this.page.waitForTimeout(500);
+    }
+  }
+
+  /**
    * Click on store label (店舗)
    */
   async clickStoreLabel(): Promise<void> {
@@ -109,26 +123,45 @@ export class TY1040Page extends BasePage {
    * @returns true if all options are found, false otherwise
    */
   async verifyComboboxOptions(expectedOptions: string[]): Promise<boolean> {
-    const locator = this.page.locator(this.selectors.salesDepartmentDropdownOption);
-    const count = await locator.count();
-    const availableTexts: string[] = [];
-    
-    // Get all available option texts from combobox
-    for (let i = 0; i < count; i++) {
-      const text = await locator.nth(i).textContent();
-      if (text) {
-        availableTexts.push(text.trim());
+    try {
+      // Ensure combobox dropdown is open
+      await this.openComboboxDropdown();
+      
+      // Wait for dropdown menu to be visible first
+      const dropdownMenu = this.page.locator(this.selectors.salesDepartmentDropdownMenu);
+      await dropdownMenu.waitFor({ state: 'visible', timeout: 5000 });
+      
+      // Wait for at least one option to be visible
+      const optionLocator = this.page.locator(this.selectors.salesDepartmentDropdownOption);
+      await optionLocator.first().waitFor({ state: 'visible', timeout: 5000 });
+      
+      // Wait a bit more for all options to load
+      await this.page.waitForTimeout(500);
+      
+      const count = await optionLocator.count();
+      const availableTexts: string[] = [];
+      
+      // Get all available option texts from combobox
+      for (let i = 0; i < count; i++) {
+        const text = await optionLocator.nth(i).textContent();
+        if (text) {
+          availableTexts.push(text.trim());
+        }
       }
-    }
-    
-    // Check if all expected options are present in available texts
-    for (const expectedText of expectedOptions) {
-      if (!availableTexts.includes(expectedText)) {
-        return false;
+      
+      // Check if all expected options are present in available texts
+      for (const expectedText of expectedOptions) {
+        if (!availableTexts.includes(expectedText)) {
+          console.log(`Expected option "${expectedText}" not found. Available options:`, availableTexts);
+          return false;
+        }
       }
+      
+      return true;
+    } catch (error) {
+      console.log('Error verifying combobox options:', error);
+      return false;
     }
-    
-    return true;
   }
 
 }
