@@ -15,6 +15,13 @@ export class TY1040Page extends BasePage {
     displayStockToggleContainer: 'label:has-text("表示在庫") ~ div',
     displayStockToggleEffective: 'label:has-text("表示在庫") ~ div label:has-text("有効") input[type="radio"]',
     displayStockToggleActual: 'label:has-text("表示在庫") ~ div label:has-text("実在庫") input[type="radio"]',
+    salesDepartmentCombobox: '#jgyksCd[role="combobox"], label[for="jgyksCd"] ~ div [role="combobox"]',
+    salesDepartmentComboboxContainer: 'label[for="jgyksCd"] ~ div',
+    salesDepartmentComboboxId: '#jgyksCd',
+    moveDownButton: 'button:has(svg path.stroke-text-sub)',
+    storeLabel: 'label:has-text("店舗")',
+    salesDepartmentDropdownMenu: '#_r_1_',
+    salesDepartmentDropdownOption: '#_r_1_ li',
   };
 
   constructor(page: Page) {
@@ -63,41 +70,66 @@ export class TY1040Page extends BasePage {
   }
 
   /**
-   * Check if display stock toggle section is visible
+   * Click on move down button (button containing SVG path with class stroke-text-sub)
    */
-  async isDisplayStockToggleVisible(): Promise<boolean> {
-    const locator = this.page.locator(this.selectors.displayStockToggleContainer);
-    return await locator.isVisible({ timeout: 10000 }).catch(() => false);
+  async clickMoveDown(): Promise<void> {
+    const locator = this.page.locator(this.selectors.moveDownButton);
+    await locator.click({ timeout: 2000 });
   }
 
-  /**
-   * Check if "有効" toggle button is visible
-   */
-  async isDisplayStockToggleEffectiveVisible(): Promise<boolean> {
-    const locator = this.page.locator(this.selectors.displayStockToggleEffective);
-    return await locator.isVisible({ timeout: 10000 }).catch(() => false);
-  }
-
-  /**
-   * Check if "実在庫" toggle button is visible
-   */
-  async isDisplayStockToggleActualVisible(): Promise<boolean> {
-    const locator = this.page.locator(this.selectors.displayStockToggleActual);
-    return await locator.isVisible({ timeout: 10000 }).catch(() => false);
-  }
-
-  /**
-   * Get default value of display stock toggle (should be 1 = "有効")
-   */
-  async getDisplayStockToggleDefaultValue(): Promise<string> {
-    const effectiveToggle = this.page.locator(this.selectors.displayStockToggleEffective);
-    const isChecked = await effectiveToggle.isChecked();
-    if (isChecked) {
-      return '1';
+  async isSalesDepartmentComboboxClickable(): Promise<boolean> {
+    try {
+      const locator = this.page.locator(this.selectors.salesDepartmentComboboxId);
+      await locator.click({ timeout: 10000 });
+      return true;
+    } catch {
+      return false;
     }
-    const actualToggle = this.page.locator(this.selectors.displayStockToggleActual);
-    const isActualChecked = await actualToggle.isChecked();
-    return isActualChecked ? '2' : '0';
   }
+
+  /**
+   * Click on store label (店舗)
+   */
+  async clickStoreLabel(): Promise<void> {
+    const locator = this.page.locator(this.selectors.storeLabel);
+    await locator.click({ timeout: 10000 });
+  }
+
+  /**
+   * Check if combobox dropdown option exists by text
+   */
+  async isComboboxOptionVisible(optionText: string): Promise<boolean> {
+    const locator = this.page.locator(`${this.selectors.salesDepartmentDropdownOption}:has-text("${optionText}")`);
+    return await locator.isVisible({ timeout: 5000 }).catch(() => false);
+  }
+
+  /**
+   * Verify that all provided option texts are present in combobox dropdown
+   * @param expectedOptions Array of option texts to check
+   * @returns true if all options are found, false otherwise
+   */
+  async verifyComboboxOptions(expectedOptions: string[]): Promise<boolean> {
+    const locator = this.page.locator(this.selectors.salesDepartmentDropdownOption);
+    const count = await locator.count();
+    const availableTexts: string[] = [];
+    
+    // Get all available option texts from combobox
+    for (let i = 0; i < count; i++) {
+      const text = await locator.nth(i).textContent();
+      if (text) {
+        availableTexts.push(text.trim());
+      }
+    }
+    
+    // Check if all expected options are present in available texts
+    for (const expectedText of expectedOptions) {
+      if (!availableTexts.includes(expectedText)) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+
 }
 
