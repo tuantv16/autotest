@@ -20,10 +20,58 @@ export interface ModeFlgDataPayload {
   value: any;
 }
 
+export interface BtnInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface LoginInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface SystemDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface TanInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface TaxInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface PreScreenIdDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface ScreenIdDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface ScreenDTDataPayload {
+  key: string;
+  value: any;
+}
+
 export interface InitializeDBOptions {
   sessionData?: SessionDataPayload;
   commonData?: CommonDataPayload[]; // Only support array
   modeFlgData?: ModeFlgDataPayload;
+  btnInfoData?: BtnInfoDataPayload;
+  loginInfoData?: LoginInfoDataPayload;
+  systemData?: SystemDataPayload;
+  tanInfoData?: TanInfoDataPayload;
+  taxInfoData?: TaxInfoDataPayload;
+  preScreenIdData?: PreScreenIdDataPayload;
+  screenIdData?: ScreenIdDataPayload;
+  screenDTData?: ScreenDTDataPayload;
   cipher?: string;
 }
 
@@ -34,16 +82,45 @@ export class IndexedDBHelper {
    * Initialize IndexedDB with session and common data - Direct injection
    */
   async initializeDB(options: InitializeDBOptions): Promise<void> {
-    const { sessionData, commonData, modeFlgData, cipher } = options;
+    const { 
+      sessionData, 
+      commonData, 
+      modeFlgData,
+      btnInfoData,
+      loginInfoData,
+      systemData,
+      tanInfoData,
+      taxInfoData,
+      preScreenIdData,
+      screenIdData,
+      screenDTData,
+      cipher 
+    } = options;
     const defaultCipher = cipher || 'LOCAL_DEV_DUMMY_KEY';
 
-    // Convert modeFlgData to commonData format if provided
+    // Convert all data types to commonData format if provided
     const allCommonData = [...(commonData || [])];
-    if (modeFlgData) {
-      allCommonData.push({
-        id: 'modeFlg',
-        value: modeFlgData.value
-      });
+    
+    // Map data types to their IDs (matching USER_SESSION_KEY_MAP from IndexedDBMenu.tsx)
+    const dataTypeMap: Array<{ data: any; id: string }> = [
+      { data: modeFlgData, id: 'modeFlg' },
+      { data: btnInfoData, id: 'btnInfoDT' },
+      { data: loginInfoData, id: 'loginInfoDT' },
+      { data: systemData, id: 'systemDT' },
+      { data: tanInfoData, id: 'tanInfoDT' },
+      { data: taxInfoData, id: 'taxInfoDT' },
+      { data: preScreenIdData, id: 'preScreenId' },
+      { data: screenIdData, id: 'screenId' },
+      { data: screenDTData, id: 'screenDT' }
+    ];
+
+    for (const { data, id } of dataTypeMap) {
+      if (data) {
+        allCommonData.push({
+          id: id,
+          value: data.value
+        });
+      }
     }
 
     if (!sessionData && allCommonData.length === 0) {
