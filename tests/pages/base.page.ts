@@ -5,6 +5,8 @@
 
 import { Page, Locator } from '@playwright/test';
 
+const DEFAULT_MENU_BUTTON_SELECTOR = 'button[aria-haspopup="true"][id="basic-button"], button[aria-haspopup="true"]';
+
 export class BasePage {
   protected page: Page;
   protected baseUrl: string;
@@ -182,5 +184,37 @@ export class BasePage {
     } catch {
       return false;
     }
+  }
+
+  /**
+   * Click icon menu - opens menu
+   * @param menuButtonSelector - Selector for the menu button (default: DEFAULT_MENU_BUTTON_SELECTOR)
+   */
+  async clickIconMenu(menuButtonSelector: string = DEFAULT_MENU_BUTTON_SELECTOR): Promise<void> {
+    const menuButton = this.page.locator(menuButtonSelector);
+    await menuButton.click({ timeout: 10000 });
+  }
+
+  /**
+   * Click icon menu - opens menu and clicks menu item by text
+   * @param menuItemText - Text of the menu item to click
+   * @param menuButtonSelector - Selector for the menu button (default: DEFAULT_MENU_BUTTON_SELECTOR)
+   */
+  async clickItemMenu(menuItemText: string, menuButtonSelector: string = DEFAULT_MENU_BUTTON_SELECTOR): Promise<void> {
+    const menuButton = this.page.locator(menuButtonSelector);
+    await menuButton.click({ timeout: 10000 });
+    await this.page.waitForTimeout(500);
+    const menuItem = this.page.locator('ul.MuiList-root li').filter({ hasText: menuItemText });
+    await menuItem.click({ timeout: 10000 });
+  }
+
+  /**
+   * Check if menu item is visible
+   * @param menuItemText - Text of the menu item to check
+   * @returns true if menu item is visible, false otherwise
+   */
+  async isMenuIconVisible(menuItemText: string): Promise<boolean> {
+    const menuItem = this.page.locator('ul.MuiList-root li').filter({ hasText: menuItemText });
+    return await menuItem.isVisible({ timeout: 10000 }).catch(() => false);
   }
 }

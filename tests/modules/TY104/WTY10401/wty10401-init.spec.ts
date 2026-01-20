@@ -146,7 +146,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickMoveDown();
         await page.waitForTimeout(1000);
         // Step 4: Observe Sales Department (営業部) section and verify combobox is visible
-        const isComboboxVisible = await summaryPage.isSalesDepartmentComboboxClickable();
+        await summaryPage.isSalesDepartmentComboboxClickable();
         await page.waitForTimeout(1000); 
         // Step 5: Verify combobox dropdown contains expected options
         const expectedOptions = ['エディオン', '中四国・九州', '旧東京エディオン'];
@@ -184,5 +184,50 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         expect(allOptionsPresent).toBe(true); 
     });
 
-});
+    test('WTY10401_15', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
 
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(3000);
+
+        await summaryPage.clickMoveDown();
+        await page.waitForTimeout(3000);
+
+        const isSearchButtonVisible = await summaryPage.isSearchButtonVisible();
+        expect(isSearchButtonVisible).toBe(true);
+    });
+
+    test('WTY10401_16', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
+
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(3000);
+
+        await summaryPage.clickIconMenu();
+        const isMenuIconVisible = await summaryPage.isMenuIconVisible('カート');
+        expect(isMenuIconVisible).toBe(true);
+        await page.waitForTimeout(3000);
+    });
+});
