@@ -15,9 +15,15 @@ export interface CommonDataPayload {
   value: any;
 }
 
+export interface ModeFlgDataPayload {
+  key: string;
+  value: any;
+}
+
 export interface InitializeDBOptions {
   sessionData?: SessionDataPayload;
   commonData?: CommonDataPayload[]; // Only support array
+  modeFlgData?: ModeFlgDataPayload;
   cipher?: string;
 }
 
@@ -28,10 +34,19 @@ export class IndexedDBHelper {
    * Initialize IndexedDB with session and common data - Direct injection
    */
   async initializeDB(options: InitializeDBOptions): Promise<void> {
-    const { sessionData, commonData, cipher } = options;
+    const { sessionData, commonData, modeFlgData, cipher } = options;
     const defaultCipher = cipher || 'LOCAL_DEV_DUMMY_KEY';
 
-    if (!sessionData && (!commonData || commonData.length === 0)) {
+    // Convert modeFlgData to commonData format if provided
+    const allCommonData = [...(commonData || [])];
+    if (modeFlgData) {
+      allCommonData.push({
+        id: 'modeFlg',
+        value: modeFlgData.value
+      });
+    }
+
+    if (!sessionData && allCommonData.length === 0) {
       console.warn('No data provided to initialize');
       return;
     }
@@ -215,10 +230,10 @@ export class IndexedDBHelper {
       {
         sessionDataKey: sessionData?.key,
         sessionDataValue: sessionData?.value,
-        commonDataList: commonData || [],
+        commonDataList: allCommonData,
         cipherKey: defaultCipher,
         hasSessionData: !!sessionData,
-        hasCommonData: !!(commonData && commonData.length > 0)
+        hasCommonData: allCommonData.length > 0
       }
     );
   }
