@@ -1,0 +1,132 @@
+{
+  "wty31001": {
+    "TC_24": {
+      "description": "",
+      "sessionData": {
+        "key": "WTY31001_IN_SD",
+        "value": {
+          "kkyIriHeadDT": [
+            {
+              "shoriKbn": "4",
+              "kkyHpn": "1"
+            }
+          ],
+          "kkyIriMsiDT": [
+            {
+              "rowId": "row_1",
+              "janCd": "4901234567890",
+              "shnCd": "00010006467",
+              "shnNm": "商品名A",
+              "iraiSu": "10"
+            },
+            {
+              "rowId": "row_1",
+              "janCd": "4901234567891",
+              "shnCd": "00010006468",
+              "shnNm": "商品名A",
+              "iraiSu": "10"
+            },
+            {
+              "rowId": "row_1",
+              "janCd": "4901234567892",
+              "shnCd": "00010006469",
+              "shnNm": "商品名A",
+              "iraiSu": "10"
+            }
+          ],
+          "inPutCommonDT": {
+            "index": 1
+          }
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251022",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ]
+    },
+    "TC_25": {
+      "description": "",
+      "sessionData": {
+        "key": "WTY31001_IN_SD",
+        "value": {
+          "kkyIriHeadDT": [
+            {
+              "shoriKbn": "2",
+              "kkyHpn": "1"
+            }
+          ],
+          "kkyIriMsiDT": [
+            {
+              "rowId": "row_1",
+              "janCd": "4901234567890",
+              "shnCd": "00010006467",
+              "shnNm": "商品名A",
+              "iraiSu": "10"
+            },
+            {
+              "rowId": "row_1",
+              "janCd": "4901234567891",
+              "shnCd": "00010006468",
+              "shnNm": "商品名A",
+              "iraiSu": "10"
+            },
+            {
+              "rowId": "row_1",
+              "janCd": "4901234567892",
+              "shnCd": "00010006469",
+              "shnNm": "商品名A",
+              "iraiSu": "10"
+            }
+          ],
+          "inPutCommonDT": {
+            "index": 1
+          }
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251022",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        },
+        {
+            "id": "systemDT",
+            "value": {
+              "nendo": "2025",
+              "hikiwatashi": "0",
+              "defaultTh": "1",
+              "defaultKyoten": "1",
+              "jnrurNbnthanKbn": "2",
+              "pntKyotenIds": "0",
+              "defaultPortrait": "1"
+            }
+        },
+        {
+            "id": "preScreenId",
+            "value": "WTY31001"
+        }
+      ]
+    }
+  }
+}
