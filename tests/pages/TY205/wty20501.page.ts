@@ -25,9 +25,9 @@ export class TY2050Page extends BasePage {
     summaryTextarea: '#tkyRn',
 
     // Buttons
-    actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
-    confirmButton: 'ul.MuiList-root:has-text("確定")',
-    clearButton: 'ul.MuiList-root:has-text("クリア")',
+    actionMenuButton: 'button:has-text("確定")',
+    confirmButton: 'button:has-text("確定")',
+    clearButton: 'button:has-text("クリア")',
 
     // Messages
     staffCode: '.text-xs.text-gray-500.text-right',
@@ -116,17 +116,23 @@ export class TY2050Page extends BasePage {
   }
 
   /**
-   * Click confirm button (確定) - uses parent class implementation
+   * Click confirm button (確定) - direct button click
    */
   async clickConfirm(): Promise<void> {
-    await super.clickConfirm(this.selectors.actionMenuButton, '確定');
+    const locator = this.page.locator(this.selectors.confirmButton);
+    await this.waitForVisible(locator);
+    await this.clickWithRetry(locator);
+    await this.page.waitForTimeout(1000);
   }
 
   /**
-   * Click clear button (クリア) - uses parent class implementation
+   * Click clear button (クリア) - direct button click
    */
   async clickClear(): Promise<void> {
-    await super.clickClear(this.selectors.actionMenuButton, 'クリア');
+    const locator = this.page.locator(this.selectors.clearButton);
+    await this.waitForVisible(locator);
+    await this.clickWithRetry(locator);
+    await this.page.waitForTimeout(500);
   }
 
   /**

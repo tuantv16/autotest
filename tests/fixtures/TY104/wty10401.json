@@ -1,0 +1,69 @@
+{
+  "wty10401": {
+    "TC_01": {
+      "description": "Save customer summary successfully",
+      "sessionData": {
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "4974019201234",
+              "mkKata": "SJ-PD28H-T",
+              "shnZhlv": "　",
+              "tnpJch": "可",
+              "thKbn": "大物",
+              "ckS": "可",
+              "ykBri": "在庫有可",
+              "hjZai": "1",
+              "zaiBten": "2",
+              "jgyksCd": "02",
+              "jgybCd": "10",
+              "zoneCd": "G1",
+              "blkCd": "A101",
+              "areaCd": "13"
+            }
+          ],
+          "searchJknDT": [
+            {
+              "shnCd": "00004974019201",
+              "hjZai": "1",
+              "zaiBten": "2",
+              "jiJgyksCd": "02",
+              "jgyksCd": "02",
+              "jgybCd": "10",
+              "zoneCd": "G1",
+              "blkCd": "A101",
+              "areaCd": "13",
+              "fromNo": 1,
+              "toNo": 100
+            }
+          ]
+        }
+      },
+      "commonData": {
+        "id": "commonDT",
+        "value": {
+          "unyoDate": "20251022",
+          "storeCd": "C0001",
+          "syoriStoreCd": "C0001",
+          "syoriStoreNmKnj": "テスト店舗",
+          "userId": "testuser",
+          "clientId": "client01",
+          "termNo": "TERM01",
+          "assetsNo": "ASSET01",
+          "keepPeriod": "6"
+        }
+      },
+      "formData": {
+        "customerNameKanji": "山田太郎",
+        "customerNameKana": "ｶｶｶ",
+        "deliveryDate": "2025/12/25",
+        "summaryText": "これはテストの摘要欄入力です"
+      },
+      "expectedMessages": {
+        "success": "登録が完了しました。"
+      }
+    }
+  }
+}
+
