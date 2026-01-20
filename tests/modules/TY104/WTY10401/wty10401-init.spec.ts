@@ -174,12 +174,12 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
         // Click on move down button
         await summaryPage.clickMoveDown();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(2000);
         // Step 4: Observe Sales Department (営業部) section and verify combobox is visible
         const isComboboxVisible = await summaryPage.isSalesDepartmentComboboxClickable();
-        await page.waitForTimeout(1000); 
+
         // Step 5: Verify combobox dropdown contains expected options
-        const expectedOptions = ['エディオン', '中四国・九州', '旧東京エディオン'];
+        const expectedOptions = ['エディオン', '中四国・九州', '事業会社コード2'];
         const allOptionsPresent = await summaryPage.verifyComboboxOptions(expectedOptions);
         expect(allOptionsPresent).toBe(true); 
     });

@@ -34,7 +34,11 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         // Step 2: Inject IndexedDB data AFTER page loaded
         console.log('[TEST] Injecting IndexedDB data...');
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
         await page.waitForTimeout(500);
 
         // Step 3: Navigate to target URL
@@ -75,7 +79,10 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         // Step 2: Inject IndexedDB data AFTER page loaded
         console.log('[TEST] Injecting IndexedDB data...');
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
         await page.waitForTimeout(500);
 
         // Step 3: Navigate to target URL
@@ -116,7 +123,11 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         // Step 2: Inject IndexedDB data AFTER page loaded
         console.log('[TEST] Injecting IndexedDB data...');
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+
         await page.waitForTimeout(500);
 
         // Step 3: Navigate to target URL
