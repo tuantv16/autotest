@@ -17,12 +17,12 @@ export interface CommonDataPayload {
 
 export interface InitializeDBOptions {
   sessionData?: SessionDataPayload;
-  commonData?: CommonDataPayload;
+  commonData?: CommonDataPayload[]; // Only support array
   cipher?: string;
 }
 
 export class IndexedDBHelper {
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   /**
    * Initialize IndexedDB with session and common data - Direct injection
@@ -31,18 +31,18 @@ export class IndexedDBHelper {
     const { sessionData, commonData, cipher } = options;
     const defaultCipher = cipher || 'LOCAL_DEV_DUMMY_KEY';
 
-    if (!sessionData && !commonData) {
+    if (!sessionData && (!commonData || commonData.length === 0)) {
       console.warn('No data provided to initialize');
       return;
     }
 
     await this.page.evaluate(
-      async ({ sessionDataKey, sessionDataValue, commonDataId, commonDataValue, cipherKey, hasSessionData, hasCommonData }) => {
+      async ({ sessionDataKey, sessionDataValue, commonDataList, cipherKey, hasSessionData, hasCommonData }) => {
         try {
-          
+
           // Set cipher in localStorage
           localStorage.setItem('cipher', cipherKey);
-          
+
           // Load CryptoJS if needed
           if (!(window as any).CryptoJS) {
             await new Promise((resolve, reject) => {
@@ -112,7 +112,7 @@ export class IndexedDBHelper {
               const tx = db.transaction('sessionData', 'readwrite');
               const store = tx.objectStore('sessionData');
               const record = { sessionDataId: sessionDataKey, value: encryptedValue };
-              
+
               // Set transaction handlers BEFORE making the request
               tx.oncomplete = () => {
                 console.log('[INIT] SessionData transaction completed:', sessionDataKey);
@@ -126,7 +126,7 @@ export class IndexedDBHelper {
                 console.error('[INIT] SessionData transaction aborted:', tx.error);
                 reject(tx.error || new Error('Transaction aborted'));
               };
-              
+
               const req = store.put(record);
               req.onsuccess = () => {
                 console.log('[INIT] SessionData put request succeeded:', sessionDataKey);
@@ -139,47 +139,70 @@ export class IndexedDBHelper {
             });
           }
 
-          // Encrypt and insert commonData if provided
-          if (hasCommonData) {
-            // Format must match common-data-store.ts: { id: recordId, commonDT: JSON.stringify(value) }
-            const commonRecordToEncrypt = {
-              id: commonDataId,
-              commonData: JSON.stringify(commonDataValue)
+          // Encrypt and insert commonData if provided (support multiple records)
+          if (hasCommonData && commonDataList.length > 0) {
+            // Map record ID to field name in encrypted payload
+            // This allows users to use friendly IDs like "commonDT" in test data
+            // while storing with correct field names like "commonData"
+            const FIELD_NAME_MAP: { [key: string]: string } = {
+              'btnInfoDT': 'btnInfoData',
+              'taxInfoDT': 'taxInfoData',
+              'commonDT': 'commonData',
+              'loginInfoDT': 'loginInfoData',
+              'systemDT': 'systemData',
+              'tanInfoDT': 'tanInfoData',
+              'modeFlg': 'modeFlg',
+              'preScreenId': 'preScreenId',
+              'screenDT': 'screenDT',
+              'screenId': 'screenId'
             };
-            const commonPlainText = JSON.stringify(commonRecordToEncrypt);
-            console.log('[INIT] Encrypting commonData with cipher:', cipherKey.substring(0, 20) + '...');
-            const encryptedCommonValue = CryptoJS.AES.encrypt(commonPlainText, cipherKey).toString();
-            console.log('[INIT] Encrypted commonData length:', encryptedCommonValue.length);
 
-            await new Promise<void>((resolve, reject) => {
-              const tx = db.transaction('commonData', 'readwrite');
-              const store = tx.objectStore('commonData');
-              const record = { id: commonDataId, value: encryptedCommonValue };
-              
-              // Set transaction handlers BEFORE making the request
-              tx.oncomplete = () => {
-                console.log('[INIT] CommonData transaction completed:', commonDataId);
-                resolve();
+            for (const commonDataItem of commonDataList) {
+              const { id: commonDataId, value: commonDataValue } = commonDataItem;
+
+              // Map id to fieldName (e.g., commonDT -> commonData)
+              const fieldName = FIELD_NAME_MAP[commonDataId] || commonDataId;
+
+              // Format must match common-data-store.ts: { id: recordId, [fieldName]: JSON.stringify(value) }
+              const commonRecordToEncrypt = {
+                id: commonDataId,
+                [fieldName]: JSON.stringify(commonDataValue)
               };
-              tx.onerror = () => {
-                console.error('[INIT] CommonData transaction error:', tx.error);
-                reject(tx.error);
-              };
-              tx.onabort = () => {
-                console.error('[INIT] CommonData transaction aborted:', tx.error);
-                reject(tx.error || new Error('Transaction aborted'));
-              };
-              
-              const req = store.put(record);
-              req.onsuccess = () => {
-                console.log('[INIT] CommonData put request succeeded:', commonDataId);
-                // Transaction will complete automatically, oncomplete handler will resolve
-              };
-              req.onerror = () => {
-                console.error('[INIT] CommonData put request failed:', req.error);
-                reject(req.error);
-              };
-            });
+              const commonPlainText = JSON.stringify(commonRecordToEncrypt);
+              console.log('[INIT] Encrypting commonData:', commonDataId);
+              const encryptedCommonValue = CryptoJS.AES.encrypt(commonPlainText, cipherKey).toString();
+              console.log('[INIT] Encrypted commonData length:', encryptedCommonValue.length);
+
+              await new Promise<void>((resolve, reject) => {
+                const tx = db.transaction('commonData', 'readwrite');
+                const store = tx.objectStore('commonData');
+                const record = { id: commonDataId, value: encryptedCommonValue };
+
+                // Set transaction handlers BEFORE making the request
+                tx.oncomplete = () => {
+                  console.log('[INIT] CommonData transaction completed:', commonDataId);
+                  resolve();
+                };
+                tx.onerror = () => {
+                  console.error('[INIT] CommonData transaction error:', tx.error);
+                  reject(tx.error);
+                };
+                tx.onabort = () => {
+                  console.error('[INIT] CommonData transaction aborted:', tx.error);
+                  reject(tx.error || new Error('Transaction aborted'));
+                };
+
+                const req = store.put(record);
+                req.onsuccess = () => {
+                  console.log('[INIT] CommonData put request succeeded:', commonDataId);
+                  // Transaction will complete automatically, oncomplete handler will resolve
+                };
+                req.onerror = () => {
+                  console.error('[INIT] CommonData put request failed:', req.error);
+                  reject(req.error);
+                };
+              });
+            }
           }
 
           db.close();
@@ -192,11 +215,10 @@ export class IndexedDBHelper {
       {
         sessionDataKey: sessionData?.key,
         sessionDataValue: sessionData?.value,
-        commonDataId: commonData?.id,
-        commonDataValue: commonData?.value,
+        commonDataList: commonData || [],
         cipherKey: defaultCipher,
         hasSessionData: !!sessionData,
-        hasCommonData: !!commonData
+        hasCommonData: !!(commonData && commonData.length > 0)
       }
     );
   }
@@ -288,7 +310,7 @@ export class IndexedDBHelper {
               sessionDataId: sessionDataKey,
               value: encryptedValue,
             };
-            
+
             // Set transaction handlers BEFORE making the request
             tx.oncomplete = () => {
               console.log('[REINJECT] SessionData transaction completed:', sessionDataKey);
@@ -302,7 +324,7 @@ export class IndexedDBHelper {
               console.error('[REINJECT] SessionData transaction aborted:', tx.error);
               reject(tx.error || new Error('Transaction aborted'));
             };
-            
+
             const req = store.put(record);
             req.onsuccess = () => {
               console.log('[REINJECT] SessionData put request succeeded:', sessionDataKey);
