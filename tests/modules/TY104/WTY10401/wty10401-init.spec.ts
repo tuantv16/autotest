@@ -223,11 +223,9 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         });
 
         await summaryPage.navigate();
-        await page.waitForTimeout(3000);
-
         await summaryPage.clickIconMenu();
         const isMenuIconVisible = await summaryPage.isMenuIconVisible('カート');
         expect(isMenuIconVisible).toBe(true);
-        await page.waitForTimeout(3000);
     });
+    
 });

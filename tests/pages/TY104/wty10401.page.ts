@@ -23,6 +23,7 @@ export class TY1040Page extends BasePage {
     salesDepartmentDropdownMenu: '#_r_1_',
     salesDepartmentDropdownOption: '#_r_1_ li',
     searchButton: 'form button[type="submit"]:has-text("検索")',
+    shnCdInput: 'input[name="shnCd"], #shnCd',
     };
 
   constructor(page: Page) {
@@ -75,6 +76,7 @@ export class TY1040Page extends BasePage {
    */
   async clickMoveDown(): Promise<void> {
     const locator = this.page.locator(this.selectors.moveDownButton);
+    await this.waitForVisible(locator, 2000);
     await locator.click({ timeout: 2000 });
   }
 
@@ -144,6 +146,22 @@ export class TY1040Page extends BasePage {
 
   async clickItemMenuCart(): Promise<void> {
     await super.clickItemMenu('カート');
+  }
+
+  async isShnCdDisabled(): Promise<boolean> {
+    const locator = this.page.locator(this.selectors.shnCdInput).first();
+    await this.page.waitForTimeout(1000); // Wait for modeFlg to be applied
+    return await this.isInputDisabled(locator);
+  }
+
+  async isIconDisabled(): Promise<boolean> {
+    const locator = this.page.locator(this.selectors.searchButton);
+    return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
+  }
+
+  async isErrorMessageVisible(errorMessage: string, field: string): Promise<boolean> {
+    const locator = this.page.locator(`p.text-red-600:has-text("${errorMessage}")`);
+    return await locator.isVisible({ timeout: 10000 }).catch(() => false);
   }
 }
 
