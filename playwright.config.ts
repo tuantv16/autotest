@@ -9,7 +9,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    headless: true,
+    headless: false,
     viewport: { width: 1280, height: 800 },
     actionTimeout: 10000,
     trace: 'on-first-retry',
