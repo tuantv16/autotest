@@ -56,12 +56,6 @@
           }
         }
       ],
-      "formData": {
-        "customerNameKanji": "山田太郎",
-        "customerNameKana": "ｶｶｶ",
-        "deliveryDate": "2025/12/25",
-        "summaryText": "これはテストの摘要欄入力です"
-      },
       "expectedMessages": {
         "success": "登録が完了しました。"
       }
