@@ -29,7 +29,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
 
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
@@ -51,7 +54,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
 
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
@@ -75,7 +81,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
 
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
@@ -99,7 +108,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
 
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
@@ -122,7 +134,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
 
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
@@ -149,7 +164,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB(testData.sessionData, testData.commonData);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
 
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
