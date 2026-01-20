@@ -125,6 +125,52 @@
       "expectedMessages": {
         "success": "登録が完了しました。"
       }
+    },
+    "TC_03": {
+      "description": "Validate product code length (7 characters - invalid)",
+      "sessionData": {
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "1234567",
+              "mkKata": "",
+              "shnZhlv": "",
+              "tnpJch": "",
+              "thKbn": "",
+              "ckS": "",
+              "ykBri": "",
+              "hjZai": "1",
+              "zaiBten": "1",
+              "jgyksCd": "01",
+              "jgybCd": "",
+              "zoneCd": "",
+              "blkCd": "",
+              "areaCd": ""
+            }
+          ],
+          "searchJknDT": []
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251022",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "expectedMessages": {
+        "error": "商品の桁数が正しくありません"
+      }
     }
   }
 }
