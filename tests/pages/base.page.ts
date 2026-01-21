@@ -217,4 +217,57 @@ export class BasePage {
     const menuItem = this.page.locator('ul.MuiList-root li').filter({ hasText: menuItemText });
     return await menuItem.isVisible({ timeout: 10000 }).catch(() => false);
   }
+
+  
+
+  /**
+   * Select option for Material UI Select (div role="combobox")
+   * 
+   * @param selectLocator Locator of MUI select element
+   * @param value value of option (data-value)
+   */
+  async selectMuiSelect(selectLocator: Locator, value: string): Promise<void> {
+    // Wait select visible
+    await this.waitForVisible(selectLocator, 20000);
+
+    // Open dropdown
+    await selectLocator.click();
+
+    // Locate option by data-value
+    const option = this.page.locator(`li[data-value="${value}"]`);
+    await this.waitForVisible(option, 10000);
+
+    // Click option
+    await option.click();
+  }
+
+  /**
+   * Click action menu button
+   */
+  async clickMenuButton(): Promise<void> {
+    const locator = this.page.locator('button.MuiButtonBase-root[aria-haspopup="true"]');
+    await this.waitForVisible(locator);
+    await this.clickWithRetry(locator);
+    await this.page.waitForTimeout(1000);
+  }
+
+  /**
+   * Click button in action menu
+   */
+  async clickButtonInMenuButton(buttonText: string): Promise<void> {
+    // 1. Open action menu dropdown
+    await this.clickMenuButton();
+
+    // 2. Wait for MUI menu to appear
+    const menu = this.page.locator('ul[role="menu"]');
+    await this.waitForVisible(menu);
+
+    // 3. Click the specified button text
+    const button = menu.locator(`li[role="menuitem"]:has-text("${buttonText}")`);
+    await this.waitForVisible(button);
+    await button.click();
+
+    // 4. Wait UI settle
+    await this.page.waitForTimeout(500);
+  }
 }

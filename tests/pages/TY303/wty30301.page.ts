@@ -1,11 +1,40 @@
-import { Page, Locator } from "@playwright/test";
+import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "../base.page";
+
+export interface WTY30301FormData {
+    outputDateInput: string;
+    merchandiseCdInput: string;
+    multiCmmentInput: string;
+    sizeInput: string;
+    numberSheetsInput: string;
+    listedPriceInput: string;
+    finalSellingPriceInput: string;
+}
 
 export class TY30301Page extends BasePage {
 
     // Selectors
     private readonly selectors = {
-        // Buttons
+        // Form fields
+        outputDateInput: 'input[name="outYmd"]',
+        merchandiseCdInput: '#shnCd',
+        manufacturerInput: '#mkNm',
+        classificationInput: '#mkNm',
+        modelNumberInput: '#kata',
+        saleKknInput: '#saleKkn',
+        saleNmInput: '#saleNm',
+        validInput: '#yukoZai',
+        overCounterInput: '#tentZai',
+        exhibitionInput: '#tenjiZai',
+        mockSuMaeInput: '#mockSuMae',
+        mockSuInput: '#mockSu',
+        multiCmmentInput: '#cmtKbn',
+        sizeInput: '#mpopSiz',
+        numberSheetsInput: '#prtMsu',
+        listedPriceInput: '#keisaiKk',
+        finalSellingPriceInput: '#lbk',
+
+        // Buttons text
         actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
         clearButton: 'ul.MuiList-root:has-text("クリア")',
         deleteButton: 'ul.MuiList-root:has-text("削除")',
@@ -38,18 +67,10 @@ export class TY30301Page extends BasePage {
     }
 
     /**
-     * Click clear button (クリア) - uses parent class implementation
+     * Click Clear (クリア) from action menu (MUI Menu)
      */
     async clickClear(): Promise<void> {
-        await super.clickClear(this.selectors.actionMenuButton, 'クリア');
-    }
-
-    /**
-     * Click action menu button
-     */
-    async clickMenuButton(): Promise<void> {
-        await this.clickWithRetry(this.page.locator(this.selectors.actionMenuButton));
-        await this.page.waitForTimeout(1000);
+        await this.clickButtonInMenuButton('クリア');
     }
 
     /**
@@ -104,5 +125,134 @@ export class TY30301Page extends BasePage {
         const disposalToggle = this.page.locator(this.selectors.disposalToggle);
         await this.waitForVisible(disposalToggle);
         return disposalToggle;
+    }
+
+    /**
+     * Fill output date
+     */
+    async fillOutputDate(value: string): Promise<void> {
+        const locator = this.page.locator(this.selectors.outputDateInput);
+        await this.waitForVisible(locator, 20000);
+        await this.fillInput(locator, value);
+    }
+
+    /**
+     * Fill merchandise code
+     */
+    async fillMerchandiseCd(value: string): Promise<void> {
+        const locator = this.page.locator(this.selectors.merchandiseCdInput);
+        await this.waitForVisible(locator, 20000);
+        await this.fillInput(locator, value);
+    }
+
+    /**
+     * Fill merchandise code
+     */
+    async fillMultiCmment(value: string): Promise<void> {
+        const locator = this.page.locator(this.selectors.multiCmmentInput);
+        await this.waitForVisible(locator, 20000);
+        await this.selectMuiSelect(locator, value);
+    }
+
+    /**
+     * Fill size
+     */
+    async fillSize(value: string): Promise<void> {
+        const locator = this.page.locator(this.selectors.sizeInput);
+        await this.waitForVisible(locator, 20000);
+        await this.selectMuiSelect(locator, value);
+    }
+
+    /**
+     * Fill number of sheets
+     */
+    async fillNumberSheets(value: string): Promise<void> {
+        const locator = this.page.locator(this.selectors.numberSheetsInput);
+        await this.waitForVisible(locator, 20000);
+        await this.fillInput(locator, value);
+    }
+
+    /**
+     * Fill listed price
+     */
+    async fillListedPrice(value: string): Promise<void> {
+        const locator = this.page.locator(this.selectors.listedPriceInput);
+        await this.waitForVisible(locator, 20000);
+        await this.fillInput(locator, value);
+    }
+
+    /**
+     * Fill final selling price
+     */
+    async fillFinalSellingPrice(value: string): Promise<void> {
+        const locator = this.page.locator(this.selectors.finalSellingPriceInput);
+        await this.waitForVisible(locator, 20000);
+        await this.fillInput(locator, value);
+    }
+
+    /**
+     * Fill entire form
+     */
+    async fillForm(formData: WTY30301FormData): Promise<void> {
+        await this.fillOutputDate(formData.outputDateInput);
+        await this.fillMerchandiseCd(formData.merchandiseCdInput);
+        await this.fillMultiCmment(formData.multiCmmentInput);
+        await this.fillSize(formData.sizeInput);
+        await this.fillNumberSheets(formData.numberSheetsInput);
+        await this.fillListedPrice(formData.listedPriceInput);
+        await this.fillFinalSellingPrice(formData.finalSellingPriceInput);
+    }
+
+    
+    /**
+     * Wait for form to be ready
+     */
+    async waitForFormReady(): Promise<void> {
+        await this.page.waitForSelector(this.selectors.outputDateInput, {
+        state: 'visible',
+        timeout: 10000,
+        });
+    }
+
+    /**
+     * Get current form values (snapshot)
+     */
+    async getFormValues(): Promise<WTY30301FormData> {
+        return {
+            outputDateInput: await this.page.locator(this.selectors.outputDateInput).inputValue(),
+            merchandiseCdInput: await this.page.locator(this.selectors.merchandiseCdInput).inputValue(),
+            multiCmmentInput: await this.page.locator(this.selectors.multiCmmentInput).textContent() ?? '',
+            sizeInput: await this.page.locator(this.selectors.sizeInput).textContent() ?? '',
+            numberSheetsInput: await this.page.locator(this.selectors.numberSheetsInput).inputValue(),
+            listedPriceInput: await this.page.locator(this.selectors.listedPriceInput).inputValue(),
+            finalSellingPriceInput: await this.page.locator(this.selectors.finalSellingPriceInput).inputValue(),
+        };
+    }
+    
+    /**
+     * Verify form values equal to expected snapshot
+     */
+    async verifyFormEquals(expected: WTY30301FormData): Promise<void> {
+        await expect(this.page.locator(this.selectors.outputDateInput))
+            .toHaveValue(expected.outputDateInput);
+
+        await expect(this.page.locator(this.selectors.merchandiseCdInput))
+            .toHaveValue(expected.merchandiseCdInput);
+
+        await expect(this.page.locator(this.selectors.numberSheetsInput))
+            .toHaveValue(expected.numberSheetsInput);
+
+        await expect(this.page.locator(this.selectors.listedPriceInput))
+            .toHaveValue(expected.listedPriceInput);
+
+        await expect(this.page.locator(this.selectors.finalSellingPriceInput))
+            .toHaveValue(expected.finalSellingPriceInput);
+
+        // MUI Select → compare text
+        await expect(this.page.locator(this.selectors.multiCmmentInput))
+            .toHaveText(expected.multiCmmentInput);
+
+        await expect(this.page.locator(this.selectors.sizeInput))
+            .toHaveText(expected.sizeInput);
     }
 }
