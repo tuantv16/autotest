@@ -101,7 +101,11 @@ export class IndexedDBHelper {
     // Convert all data types to commonData format if provided
     const allCommonData = [...(commonData || [])];
     
+    // Create a set of IDs that already exist in commonData array
+    const existingIds = new Set(allCommonData.map(item => item.id));
+    
     // Map data types to their IDs (matching USER_SESSION_KEY_MAP from IndexedDBMenu.tsx)
+    // Only add if not already present in commonData array
     const dataTypeMap: Array<{ data: any; id: string }> = [
       { data: modeFlgData, id: 'modeFlg' },
       { data: btnInfoData, id: 'btnInfoDT' },
@@ -115,7 +119,10 @@ export class IndexedDBHelper {
     ];
 
     for (const { data, id } of dataTypeMap) {
-      if (data) {
+      // Only add if:
+      // 1. Data is provided at top-level
+      // 2. AND not already present in commonData array
+      if (data && !existingIds.has(id)) {
         allCommonData.push({
           id: id,
           value: data.value

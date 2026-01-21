@@ -1,0 +1,12 @@
+/**
+ * API Endpoints Constants
+ * Centralized location for all API endpoints used in tests
+ */
+
+export const API_ENDPOINTS = {
+  // TY104 - Store Inventory Inquiry (店別在庫照会)
+  TY104_WTY10411ZaiInfoGetBC: 'TY104_WTY10411ZaiInfoGetBC',
+} as const;
+
+export type ApiEndpoint = typeof API_ENDPOINTS[keyof typeof API_ENDPOINTS];
+

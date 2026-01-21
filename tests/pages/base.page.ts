@@ -273,4 +273,44 @@ export class BasePage {
         return await locator.inputValue();
     }
 
+    /**
+     * Helper method to open combobox and click option
+     * @param optionSelectors - Array of selectors to try for finding the option
+     * @param errorMessage - Error message to throw if option not found
+     * @param comboboxSelector - Selector for the combobox
+     */
+    protected async clickOptionInCombobox(optionSelectors: string[], errorMessage: string, comboboxSelector: string): Promise<void> {
+        const comboboxLocator = this.page.locator(comboboxSelector);
+        
+        await this.waitForVisible(comboboxLocator, 10000);
+        await comboboxLocator.click({ timeout: 10000 });
+        await this.page.waitForTimeout(500);
+
+        for (const selector of optionSelectors) {
+            const optionLocator = this.page.locator(selector);
+            if (await optionLocator.count() > 0) {
+                await this.waitForVisible(optionLocator.first(), 5000);
+                await optionLocator.first().click({ timeout: 5000 });
+                await this.page.waitForTimeout(500);
+                return;
+            }
+        }
+        throw new Error(errorMessage);
+    }
+
+    /**
+     * Click on combobox and select option by data-value
+     * @param dataValue - data-value attribute of the option to select (e.g., "01", "02")
+     * @param comboboxSelector - Selector for the combobox
+     * @param dropdownOptionSelector - Optional selector for dropdown option container (for more specific search)
+     */
+    async selectComboboxOptionByValue(dataValue: string, comboboxSelector: string, dropdownOptionSelector?: string): Promise<void> {
+        const optionSelectors = [
+            `ul.MuiList-root li[role="option"][data-value="${dataValue}"]`,
+            `li[role="option"][data-value="${dataValue}"]`,
+            ...(dropdownOptionSelector ? [`${dropdownOptionSelector}[data-value="${dataValue}"]`] : []),
+        ];
+        await this.clickOptionInCombobox(optionSelectors, `Option with data-value "${dataValue}" not found in combobox dropdown`, comboboxSelector);
+    }
+
 }   

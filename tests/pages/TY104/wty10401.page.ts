@@ -107,6 +107,31 @@ export class TY1040Page extends BasePage {
   }
 
   /**
+   * Click on combobox and select option by data-value
+   * @param dataValue - data-value attribute of the option to select (e.g., "01", "02")
+   * @param comboboxSelector - Optional selector for the combobox (default: salesDepartmentCombobox)
+   */
+  async selectComboboxOptionByValue(dataValue: string, comboboxSelector?: string): Promise<void> {
+    const selector = comboboxSelector ?? this.selectors.salesDepartmentCombobox;
+    await super.selectComboboxOptionByValue(dataValue, selector, this.selectors.salesDepartmentDropdownOption);
+  }
+
+  /**
+   * Click on combobox and select option by text
+   * @param optionText - Text of the option to select
+   * @param comboboxSelector - Optional selector for the combobox (default: salesDepartmentCombobox)
+   */
+  async selectComboboxOptionByText(optionText: string, comboboxSelector?: string): Promise<void> {
+    const selector = comboboxSelector ?? this.selectors.salesDepartmentCombobox;
+    const optionSelectors = [
+      `ul.MuiList-root li[role="option"]:has-text("${optionText}")`,
+      `${this.selectors.salesDepartmentDropdownOption}:has-text("${optionText}")`,
+      `li[role="option"]:has-text("${optionText}")`,
+    ];
+    await super.clickOptionInCombobox(optionSelectors, `Option with text "${optionText}" not found in combobox dropdown`, selector);
+  }
+
+  /**
    * Verify that all provided option texts are present in combobox dropdown
    * @param expectedOptions Array of option texts to check
    * @returns true if all options are found, false otherwise
