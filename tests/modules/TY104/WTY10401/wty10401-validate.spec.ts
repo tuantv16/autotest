@@ -76,7 +76,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         // Step 5: Fill product code with invalid length (7 characters)
-        await summaryPage.fillInputById('shnCd', testData.sessionData.value.wty10401InfoDT[0].shnCd);
+        await summaryPage.fillInputById('shnCd', testData.sessionData[0].value.wty10401InfoDT[0].shnCd);
         await page.waitForTimeout(1000);
 
         // Step 6: Click search button
@@ -107,10 +107,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickMoveDown();
         await page.waitForTimeout(1000);
 
-        await summaryPage.fillInputById('shnCd', testData.sessionData.value.wty10401InfoDT[0].shnCd);
+        await summaryPage.fillInputById('shnCd', testData.sessionData[0].value.wty10401InfoDT[0].shnCd);
         await page.waitForTimeout(1000);
 
-        const jgyksCdValue = testData.sessionData.value.wty10401InfoDT[0].jgyksCd;
+        const jgyksCdValue = testData.sessionData[0].value.wty10401InfoDT[0].jgyksCd;
         await summaryPage.selectComboboxOptionByValue(jgyksCdValue);
 
         // Wait for API response before clicking search button
