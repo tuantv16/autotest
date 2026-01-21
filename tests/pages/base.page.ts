@@ -273,6 +273,11 @@ export class BasePage {
         return await locator.inputValue();
     }
 
+    async getTextByLocator(locator: Locator): Promise<string> {
+        await this.waitForVisible(locator, 10000);
+        return await locator.innerText();
+    }
+
     /**
      * Helper method to open combobox and click option
      * @param optionSelectors - Array of selectors to try for finding the option
