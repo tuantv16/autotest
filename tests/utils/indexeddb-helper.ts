@@ -15,9 +15,63 @@ export interface CommonDataPayload {
   value: any;
 }
 
+export interface ModeFlgDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface BtnInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface LoginInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface SystemDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface TanInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface TaxInfoDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface PreScreenIdDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface ScreenIdDataPayload {
+  key: string;
+  value: any;
+}
+
+export interface ScreenDTDataPayload {
+  key: string;
+  value: any;
+}
+
 export interface InitializeDBOptions {
-  sessionData?: SessionDataPayload;
+  sessionData?: SessionDataPayload | SessionDataPayload[]; // Support both object and array
   commonData?: CommonDataPayload[]; // Only support array
+  modeFlgData?: ModeFlgDataPayload;
+  btnInfoData?: BtnInfoDataPayload;
+  loginInfoData?: LoginInfoDataPayload;
+  systemData?: SystemDataPayload;
+  tanInfoData?: TanInfoDataPayload;
+  taxInfoData?: TaxInfoDataPayload;
+  preScreenIdData?: PreScreenIdDataPayload;
+  screenIdData?: ScreenIdDataPayload;
+  screenDTData?: ScreenDTDataPayload;
   cipher?: string;
 }
 
@@ -28,16 +82,69 @@ export class IndexedDBHelper {
    * Initialize IndexedDB with session and common data - Direct injection
    */
   async initializeDB(options: InitializeDBOptions): Promise<void> {
-    const { sessionData, commonData, cipher } = options;
+    const { 
+      sessionData, 
+      commonData, 
+      modeFlgData,
+      btnInfoData,
+      loginInfoData,
+      systemData,
+      tanInfoData,
+      taxInfoData,
+      preScreenIdData,
+      screenIdData,
+      screenDTData,
+      cipher 
+    } = options;
     const defaultCipher = cipher || 'LOCAL_DEV_DUMMY_KEY';
 
-    if (!sessionData && (!commonData || commonData.length === 0)) {
+    // Convert sessionData to array format if provided
+    // Support both object and array for backward compatibility
+    const allSessionData: SessionDataPayload[] = Array.isArray(sessionData) 
+      ? [...sessionData] 
+      : sessionData 
+        ? [sessionData] 
+        : [];
+
+    // Convert all data types to commonData format if provided
+    const allCommonData = [...(commonData || [])];
+    
+    // Create a set of IDs that already exist in commonData array
+    const existingIds = new Set(allCommonData.map(item => item.id));
+    
+    // Map data types to their IDs (matching USER_SESSION_KEY_MAP from IndexedDBMenu.tsx)
+    // Only add if not already present in commonData array
+    const dataTypeMap: Array<{ data: any; id: string }> = [
+      { data: modeFlgData, id: 'modeFlg' },
+      { data: btnInfoData, id: 'btnInfoDT' },
+      { data: loginInfoData, id: 'loginInfoDT' },
+      { data: systemData, id: 'systemDT' },
+      { data: tanInfoData, id: 'tanInfoDT' },
+      { data: taxInfoData, id: 'taxInfoDT' },
+      { data: preScreenIdData, id: 'preScreenId' },
+      { data: screenIdData, id: 'screenId' },
+      { data: screenDTData, id: 'screenDT' }
+    ];
+
+    for (const { data, id } of dataTypeMap) {
+      // Only add if:
+      // 1. Data is provided at top-level
+      // 2. AND not already present in commonData array
+      if (data && !existingIds.has(id)) {
+        allCommonData.push({
+          id: id,
+          value: data.value
+        });
+      }
+    }
+
+    if (allSessionData.length === 0 && allCommonData.length === 0) {
       console.warn('No data provided to initialize');
       return;
     }
 
     await this.page.evaluate(
-      async ({ sessionDataKey, sessionDataValue, commonDataList, cipherKey, hasSessionData, hasCommonData }) => {
+      async ({ sessionDataList, commonDataList, cipherKey, hasSessionData, hasCommonData }) => {
         try {
 
           // Set cipher in localStorage
@@ -98,45 +205,49 @@ export class IndexedDBHelper {
 
           // Encrypt and insert sessionData if provided
           if (hasSessionData) {
-            // Format must match session_data.ts: { sessionDataId: key, sessionData: JSON.stringify(value) }
-            const recordToEncrypt = {
-              sessionDataId: sessionDataKey,
-              sessionData: JSON.stringify(sessionDataValue)
-            };
-            const plainText = JSON.stringify(recordToEncrypt);
-            console.log('[INIT] Encrypting sessionData with cipher:', cipherKey.substring(0, 20) + '...');
-            const encryptedValue = CryptoJS.AES.encrypt(plainText, cipherKey).toString();
-            console.log('[INIT] Encrypted sessionData length:', encryptedValue.length);
+            for (const sessionDataItem of sessionDataList) {
+              const { key: sessionDataKey, value: sessionDataValue } = sessionDataItem;
+              
+              // Format must match session_data.ts: { sessionDataId: key, sessionData: JSON.stringify(value) }
+              const recordToEncrypt = {
+                sessionDataId: sessionDataKey,
+                sessionData: JSON.stringify(sessionDataValue)
+              };
+              const plainText = JSON.stringify(recordToEncrypt);
+              console.log('[INIT] Encrypting sessionData with cipher:', cipherKey.substring(0, 20) + '...');
+              const encryptedValue = CryptoJS.AES.encrypt(plainText, cipherKey).toString();
+              console.log('[INIT] Encrypted sessionData length:', encryptedValue.length);
 
-            await new Promise<void>((resolve, reject) => {
-              const tx = db.transaction('sessionData', 'readwrite');
-              const store = tx.objectStore('sessionData');
-              const record = { sessionDataId: sessionDataKey, value: encryptedValue };
+              await new Promise<void>((resolve, reject) => {
+                const tx = db.transaction('sessionData', 'readwrite');
+                const store = tx.objectStore('sessionData');
+                const record = { sessionDataId: sessionDataKey, value: encryptedValue };
 
-              // Set transaction handlers BEFORE making the request
-              tx.oncomplete = () => {
-                console.log('[INIT] SessionData transaction completed:', sessionDataKey);
-                resolve();
-              };
-              tx.onerror = () => {
-                console.error('[INIT] SessionData transaction error:', tx.error);
-                reject(tx.error);
-              };
-              tx.onabort = () => {
-                console.error('[INIT] SessionData transaction aborted:', tx.error);
-                reject(tx.error || new Error('Transaction aborted'));
-              };
+                // Set transaction handlers BEFORE making the request
+                tx.oncomplete = () => {
+                  console.log('[INIT] SessionData transaction completed:', sessionDataKey);
+                  resolve();
+                };
+                tx.onerror = () => {
+                  console.error('[INIT] SessionData transaction error:', tx.error);
+                  reject(tx.error);
+                };
+                tx.onabort = () => {
+                  console.error('[INIT] SessionData transaction aborted:', tx.error);
+                  reject(tx.error || new Error('Transaction aborted'));
+                };
 
-              const req = store.put(record);
-              req.onsuccess = () => {
-                console.log('[INIT] SessionData put request succeeded:', sessionDataKey);
-                // Transaction will complete automatically, oncomplete handler will resolve
-              };
-              req.onerror = () => {
-                console.error('[INIT] SessionData put request failed:', req.error);
-                reject(req.error);
-              };
-            });
+                const req = store.put(record);
+                req.onsuccess = () => {
+                  console.log('[INIT] SessionData put request succeeded:', sessionDataKey);
+                  // Transaction will complete automatically, oncomplete handler will resolve
+                };
+                req.onerror = () => {
+                  console.error('[INIT] SessionData put request failed:', req.error);
+                  reject(req.error);
+                };
+              });
+            }
           }
 
           // Encrypt and insert commonData if provided (support multiple records)
@@ -213,12 +324,11 @@ export class IndexedDBHelper {
         }
       },
       {
-        sessionDataKey: sessionData?.key,
-        sessionDataValue: sessionData?.value,
-        commonDataList: commonData || [],
+        sessionDataList: allSessionData,
+        commonDataList: allCommonData,
         cipherKey: defaultCipher,
-        hasSessionData: !!sessionData,
-        hasCommonData: !!(commonData && commonData.length > 0)
+        hasSessionData: allSessionData.length > 0,
+        hasCommonData: allCommonData.length > 0
       }
     );
   }

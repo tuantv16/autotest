@@ -30,3 +30,7 @@ export const BUTTON_LABELS = {
   NO: 'いいえ',
 } as const;
 
+export const VALIDATION_ERROR_MESSAGES = {
+  REQUIRED_FIELD: '必須入力エラー',
+  INVALID_LENGTH: '商品の桁数が正しくありません',
+} as const;
