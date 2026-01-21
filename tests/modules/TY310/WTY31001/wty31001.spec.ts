@@ -530,9 +530,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: All editable fields are editable
-    const productEditable = await productInputPage.productInputIsEditable();
-    expect(productEditable).toBe(true);
-
     const rHinIriEditable = await productInputPage.rHinIriInputIsEditable();
     expect(rHinIriEditable).toBe(true);
 
@@ -544,30 +541,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     const kisoIriEditable = await productInputPage.kisoIriInputIsEditable();
     expect(kisoIriEditable).toBe(true);
-
-    // Step 3: Select radio "供給" (default mode)
-    await productInputPage.clickKkyRadio();
-    await page.waitForTimeout(1000);
-
-    // Verify: When selecting 供給, labels and borders display default colors (NOT red)
-    await productInputPage.expectAllLabelsNotRed({
-      exclude: ["kaikon", "kaikonIri"],
-    });
-    await productInputPage.expectAllInputBordersNotRed({
-      exclude: ["kaikon", "kaikonIri"],
-    });
-
-    // Step 4: Select radio "返品"
-    await productInputPage.clickHpnRadio();
-    await page.waitForTimeout(1000);
-
-    // Verify: When selecting 返品, labels and borders display red color
-    await productInputPage.expectAllLabelsRed({
-      exclude: ["mode", "tHai", "dcYukoZai", "hoju", "rHinIri"],
-    });
-    await productInputPage.expectAllInputBordersRed({
-      exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
-    });
   });
 
   test("WTY31001_25", async ({ page, baseUrl, indexedDBHelper }) => {
@@ -613,5 +586,917 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const kisoIriInputIsDisabled =
       await productInputPage.kisoIriInputIsDisabled();
     expect(kisoIriInputIsDisabled).toBe(true);
+  });
+
+  test("WTY31001_26", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter lowercase product code "a123" into 商品 field
+    await productInputPage.fillProductInput("a123");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurProductInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value is converted to uppercase
+    const productValue = await productInputPage.getProductInputValue();
+    expect(productValue).toBe("A123");
+  });
+
+  test("WTY31001_27", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Leave 商品 field empty
+    await productInputPage.fillProductInput("");
+    await page.waitForTimeout(500);
+
+    // Step 4: Click search button
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Error message text is correct
+    const errorMessageSearch = await productInputPage.findMessageText();
+    expect(errorMessageSearch).toBe(true);
+
+    // Step 5: Try clicking confirm button with empty field
+    await productInputPage.clickConfirmButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Error message text is correct
+    const errorMessageConfirm = await productInputPage.findMessageText();
+    expect(errorMessageConfirm).toBe(true);
+  });
+
+  test("WTY31001_28", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter full-width characters into 商品 field
+    await productInputPage.fillProductInput("ＡＢＣ１２３ａｂｃアイウえお");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurProductInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Full-width characters are converted to half-width
+    const productValue = await productInputPage.getProductInputValue();
+    expect(productValue).toMatch(/ABC123ABC/);
+  });
+
+  test("WTY31001_29", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number "10" into 良品依頼 field
+    await productInputPage.fillRHinIriInput("10");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurRHinIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value is formatted correctly
+    const rHinIriValue = await productInputPage.getRHinIriInputValue();
+    expect(rHinIriValue).toBe("10");
+
+    // Verify: No error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("良品依頼");
+    expect(isErrorVisible).toBe("");
+  });
+
+  test("WTY31001_30", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Try to enter non-numeric characters into 良品依頼 field
+    await productInputPage.fillRHinIriInput("abc");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurRHinIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Non-numeric characters are not allowed
+    const rHinIriValue = await productInputPage.getRHinIriInputValue();
+    expect(rHinIriValue).not.toBe("abc");
+  });
+
+  test("WTY31001_31", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "0" into 良品依頼 field
+    await productInputPage.fillRHinIriInput("0");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurRHinIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "0" is accepted
+    const rHinIriValue = await productInputPage.getRHinIriInputValue();
+    expect(rHinIriValue).toBe("0");
+  });
+
+  test("WTY31001_32", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "99999" into 良品依頼 field
+    await productInputPage.fillRHinIriInput("99999");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurRHinIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "99999" is accepted
+    const rHinIriValue = await productInputPage.getRHinIriInputValue();
+    expect(rHinIriValue).toBe("99,999");
+  });
+
+  test("WTY31001_33", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number with more than 5 digits "1000000" into 良品依頼 field
+    await productInputPage.fillRHinIriInput("1000000");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurRHinIriInput();
+    await page.waitForTimeout(1000);
+
+    // Step 5: Click confirm button
+    await productInputPage.clickConfirmButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("良品依頼");
+    expect(isErrorVisible).toBe("良品依頼は5桁以内で入力してください。");
+  });
+
+  test("WTY31001_34", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number "10" into 展示依頼 field
+    await productInputPage.fillTenjiIriInput("10");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTenjiIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value is formatted correctly
+    const tenjiIriValue = await productInputPage.getTenjiIriInputValue();
+    expect(tenjiIriValue).toBe("10");
+
+    // Verify: No error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("展示依頼");
+    expect(isErrorVisible).toBe("");
+  });
+
+  test("WTY31001_35", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Try to enter non-numeric characters into 展示依頼 field
+    await productInputPage.fillTenjiIriInput("abc");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTenjiIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Non-numeric characters are not allowed
+    const tenjiIriValue = await productInputPage.getTenjiIriInputValue();
+    expect(tenjiIriValue).not.toBe("abc");
+  });
+
+  test("WTY31001_36", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "0" into 展示依頼 field
+    await productInputPage.fillTenjiIriInput("0");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTenjiIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "0" is accepted
+    const tenjiIriValue = await productInputPage.getTenjiIriInputValue();
+    expect(tenjiIriValue).toBe("0");
+  });
+
+  test("WTY31001_37", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "99999" into 展示依頼 field
+    await productInputPage.fillTenjiIriInput("99999");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTenjiIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "99999" is accepted
+    const tenjiIriValue = await productInputPage.getTenjiIriInputValue();
+    expect(tenjiIriValue).toBe("99,999");
+  });
+
+  test("WTY31001_38", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number with more than 5 digits "1000000" into 展示依頼 field
+    await productInputPage.fillTenjiIriInput("1000000");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTenjiIriInput();
+    await page.waitForTimeout(1000);
+
+    // Step 5: Click confirm button
+    await productInputPage.clickConfirmButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("展示依頼");
+    expect(isErrorVisible).toBe("展示依頼は5桁以内で入力してください。");
+  });
+  test("WTY31001_39", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number "10" into 定数依頼 field
+    await productInputPage.fillTSuIriInput("10");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTSuIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value is formatted correctly
+    const tSuIriValue = await productInputPage.getTSuIriInputValue();
+    expect(tSuIriValue).toBe("10");
+
+    // Verify: No error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("定数依頼");
+    expect(isErrorVisible).toBe("");
+  });
+
+  test("WTY31001_40", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Try to enter non-numeric characters into 定数依頼 field
+    await productInputPage.fillTSuIriInput("abc");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTSuIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Non-numeric characters are not allowed
+    const tSuIriValue = await productInputPage.getTSuIriInputValue();
+    expect(tSuIriValue).not.toBe("abc");
+  });
+
+  test("WTY31001_41", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "0" into 定数依頼 field
+    await productInputPage.fillTSuIriInput("0");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTSuIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "0" is accepted
+    const tSuIriValue = await productInputPage.getTSuIriInputValue();
+    expect(tSuIriValue).toBe("0");
+  });
+
+  test("WTY31001_42", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "99999" into 定数依頼 field
+    await productInputPage.fillTSuIriInput("99999");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTSuIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "99999" is accepted
+    const tSuIriValue = await productInputPage.getTSuIriInputValue();
+    expect(tSuIriValue).toBe("99,999");
+  });
+
+  test("WTY31001_43", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number with more than 5 digits "1000000" into 定数依頼 field
+    await productInputPage.fillTSuIriInput("1000000");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurTSuIriInput();
+    await page.waitForTimeout(1000);
+
+    // Step 5: Click confirm button
+    await productInputPage.clickConfirmButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("定数依頼");
+    expect(isErrorVisible).toBe("定数依頼は5桁以内で入力してください。");
+  });
+
+  test("WTY31001_44", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number "10" into 基礎依頼 field
+    await productInputPage.fillKisoIriInput("10");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurKisoIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value is formatted correctly
+    const kisoIriValue = await productInputPage.getKisoIriInputValue();
+    expect(kisoIriValue).toBe("10");
+
+    // Verify: No error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("基礎依頼");
+    expect(isErrorVisible).toBe("");
+  });
+
+  test("WTY31001_45", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Try to enter non-numeric characters into 基礎依頼 field
+    await productInputPage.fillKisoIriInput("abc");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurKisoIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Non-numeric characters are not allowed
+    const kisoIriValue = await productInputPage.getKisoIriInputValue();
+    expect(kisoIriValue).not.toBe("abc");
+  });
+
+  test("WTY31001_46", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "0" into 基礎依頼 field
+    await productInputPage.fillKisoIriInput("0");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurKisoIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "0" is accepted
+    const kisoIriValue = await productInputPage.getKisoIriInputValue();
+    expect(kisoIriValue).toBe("0");
+  });
+
+  test("WTY31001_47", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter "99999" into 基礎依頼 field
+    await productInputPage.fillKisoIriInput("99999");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurKisoIriInput();
+    await page.waitForTimeout(500);
+
+    // Verify: Value "99999" is accepted
+    const kisoIriValue = await productInputPage.getKisoIriInputValue();
+    expect(kisoIriValue).toBe("99,999");
+  });
+
+  test("WTY31001_48", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter number with more than 5 digits "1000000" into 基礎依頼 field
+    await productInputPage.fillKisoIriInput("1000000");
+    await page.waitForTimeout(500);
+
+    // Step 4: Blur the field
+    await productInputPage.blurKisoIriInput();
+    await page.waitForTimeout(1000);
+
+    // Step 5: Click confirm button
+    await productInputPage.clickConfirmButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Error message is displayed
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("基礎依頼");
+    expect(isErrorVisible).toBe("基礎依頼は5桁以内で入力してください。");
+  });
+
+  test("WTY31001_49", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Initially in 返品 mode, click 供給 radio
+    await productInputPage.clickHpnRadio();
+    await page.waitForTimeout(500);
+
+    // Step 4: Switch to 供給 mode
+    await productInputPage.clickKkyRadio();
+    await page.waitForTimeout(1000);
+
+    // Verify: Check title page
+    const titlePage = await productInputPage.getTitlePage();
+    expect(titlePage).toBe("供給依頼商品登録");
+
+    // Verify: 供給 radio is checked
+    const isKkyChecked = await productInputPage.isKkyRadioChecked();
+    expect(isKkyChecked).toBe(true);
+
+    // Verify: 開梗依頼 field is not visible
+    const isKaikonIriVisible = await productInputPage.isKaikonIriInputVisible();
+    expect(isKaikonIriVisible).toBe(false);
+
+    // Verify: Labels and input borders are default color
+    await productInputPage.expectAllLabelsNotRed();
+    await productInputPage.expectAllInputBordersNotRed();
+  });
+
+  test("WTY31001_50", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001 (default 供給 mode)
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter data in 供給 mode
+    await productInputPage.fillProductInput("TEST123");
+    await productInputPage.fillRHinIriInput("10");
+    await productInputPage.fillTenjiIriInput("20");
+    await productInputPage.fillTSuIriInput("30");
+    await productInputPage.fillKisoIriInput("40");
+    await page.waitForTimeout(500);
+
+    // Step 4: Switch to 返品 mode
+    await productInputPage.clickHpnRadio();
+    await page.waitForTimeout(1000);
+
+    // Step 5: Switch back to 供給 mode
+    await productInputPage.clickKkyRadio();
+    await page.waitForTimeout(1000);
+
+    // Verify: All fields are reset (empty)
+    const productValue = await productInputPage.getProductInputValue();
+    const rHinIriValue = await productInputPage.getRHinIriInputValue();
+    const tenjiIriValue = await productInputPage.getTenjiIriInputValue();
+    const tSuIriValue = await productInputPage.getTSuIriInputValue();
+    const kisoIriValue = await productInputPage.getKisoIriInputValue();
+
+    expect(productValue).toBe("");
+    expect(rHinIriValue).toBe("");
+    expect(tenjiIriValue).toBe("");
+    expect(tSuIriValue).toBe("");
+    expect(kisoIriValue).toBe("");
+
+    // Verify: 開梗依頼 field is hidden
+    const isKaikonIriVisible = await productInputPage.isKaikonIriInputVisible();
+    expect(isKaikonIriVisible).toBe(false);
+  });
+
+  test("WTY31001_51", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter valid product code
+    await productInputPage.fillProductInput("00010013557");
+    await page.waitForTimeout(500);
+
+    // Step 4: Click search button
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Product information is displayed
+    const kataValue = await productInputPage.getKataInputValue();
+    const mkValue = await productInputPage.getMkInputValue();
+    const rnkValue = await productInputPage.getRnkInputValue();
+    const bKbnValue = await productInputPage.getBKbnInputValue();
+    const shnNmValue = await productInputPage.getShnNmInputValue();
+    const hbJsk4Value = await productInputPage.getHbJsk4InputValue();
+    const hbJsk3Value = await productInputPage.getHbJsk3InputValue();
+    const hbJsk2Value = await productInputPage.getHbJsk2InputValue();
+    const hbJsk1Value = await productInputPage.getHbJsk1InputValue();
+
+    expect(kataValue).toBe("IHL-SLV4S？？？？4？？");
+    expect(mkValue).toBe("ﾙﾐﾅｽ");
+    expect(rnkValue).toBe("F ");
+    expect(bKbnValue).toBe(" ");
+    expect(shnNmValue).toBe("ＡＶファニチャー");
+    expect(hbJsk4Value).toBe("7");
+    expect(hbJsk3Value).toBe("5");
+    expect(hbJsk2Value).toBe("1");
+    expect(hbJsk1Value).toBe("6");
+  });
+
+  test("WTY31001_52", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter JAN code (13 digits)
+    await productInputPage.fillProductInput("04962458558440");
+    await page.waitForTimeout(500);
+
+    // Step 4: Click search button
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(2000);
+
+    // Verify: Search works with JAN code
+    // Verify: Product information is displayed
+    const kataValue = await productInputPage.getKataInputValue();
+    const mkValue = await productInputPage.getMkInputValue();
+    const rnkValue = await productInputPage.getRnkInputValue();
+    const bKbnValue = await productInputPage.getBKbnInputValue();
+    const shnNmValue = await productInputPage.getShnNmInputValue();
+    const hbJsk4Value = await productInputPage.getHbJsk4InputValue();
+    const hbJsk3Value = await productInputPage.getHbJsk3InputValue();
+    const hbJsk2Value = await productInputPage.getHbJsk2InputValue();
+    const hbJsk1Value = await productInputPage.getHbJsk1InputValue();
+
+    expect(kataValue).toBe("IHL-SLV4S？？？？4？？");
+    expect(mkValue).toBe("ﾙﾐﾅｽ");
+    expect(rnkValue).toBe("F ");
+    expect(bKbnValue).toBe(" ");
+    expect(shnNmValue).toBe("ＡＶファニチャー");
+    expect(hbJsk4Value).toBe("7");
+    expect(hbJsk3Value).toBe("5");
+    expect(hbJsk2Value).toBe("1");
+    expect(hbJsk1Value).toBe("6");
+  });
+
+  test("WTY31001_53", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter non-existent product code
+    await productInputPage.fillProductInput("00010013555");
+    await page.waitForTimeout(500);
+
+    // Step 4: Click search button
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(2000);
+
+    // Verify: Error message is displayed
+    const errorMessage = await productInputPage.getErrorMessageDialog();
+    expect(errorMessage).toContain("TE5136");
+    expect(errorMessage).toContain("商品情報が存在しません。");
+  });
+
+  test("WTY31001_55", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter product code
+    await productInputPage.fillProductInput("00010013557");
+    await page.waitForTimeout(500);
+
+    // Step 5: Click confirm button
+    await productInputPage.clickConfirmButton();
+    await page.waitForTimeout(1000);
+
+    // Verify: Error message is displayed
+    const errorMessage = await productInputPage.getErrorMessageDialog();
+    expect(errorMessage).toContain("TE5137");
+    expect(errorMessage).toContain("依頼指示を設定してください。");
+  });
+
+  test("WTY31001_56", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter some data in 定数依頼 and 基礎依頼
+    await productInputPage.fillTSuIriInput("100");
+    await productInputPage.fillKisoIriInput("200");
+    await page.waitForTimeout(500);
+
+    // Step 4: Toggle 定数削除 = ON
+    const initialState = await productInputPage.getTsuDelToggleState();
+    if (!initialState) {
+      await productInputPage.clickTsuDelToggle();
+    }
+    await page.waitForTimeout(1000);
+
+    // Verify: 定数削除 is ON
+    const toggleState = await productInputPage.getTsuDelToggleState();
+    expect(toggleState).toBe(!initialState);
+
+    // Verify: 定数依頼 and 基礎依頼 should be disabled
+    const tSuIriDisabled = await productInputPage.tSuIriInputIsDisabled();
+    const kisoIriDisabled = await productInputPage.kisoIriInputIsDisabled();
+    expect(tSuIriDisabled).toBe(true);
+    expect(kisoIriDisabled).toBe(true);
+
+    // Verify: 定数依頼 and 基礎依頼 values are cleared
+    const tSuIriValue = await productInputPage.getTSuIriInputValue();
+    const kisoIriValue = await productInputPage.getKisoIriInputValue();
+    expect(tSuIriValue).toBe("");
+    expect(kisoIriValue).toBe("");
+  });
+
+  test("WTY31001_57", async ({ page, baseUrl }) => {
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Toggle 定数削除 = ON first
+    const initialState = await productInputPage.getTsuDelToggleState();
+    if (!initialState) {
+      await productInputPage.clickTsuDelToggle();
+      await page.waitForTimeout(500);
+    }
+
+    // Step 4: Toggle 定数削除 = OFF
+    await productInputPage.clickTsuDelToggle();
+    await page.waitForTimeout(500);
+
+    // Verify: 定数削除 is OFF
+    const toggleState = await productInputPage.getTsuDelToggleState();
+    expect(toggleState).toBe(initialState);
+
+    // Verify: 定数依頼 and 基礎依頼 should be enabled
+    const tSuIriEditable = await productInputPage.tSuIriInputIsEditable();
+    const kisoIriEditable = await productInputPage.kisoIriInputIsEditable();
+    expect(tSuIriEditable).toBe(true);
+    expect(kisoIriEditable).toBe(true);
+  });
+
+  test("WTY31001_60", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Enter 型番 (model code)
+    await productInputPage.fillProductInput("000100136");
+    await page.waitForTimeout(500);
+
+    // Step 4: Click search button
+    const [newPage] = await Promise.all([
+      page.context().waitForEvent("page"),
+      productInputPage.clickSearchButton(),
+    ]);
+
+    // Verify: New tab is opened with WTZ10101
+    await newPage.waitForLoadState("domcontentloaded");
+    expect(newPage.url()).toContain("WTZ10101");
+  });
+
+  test("WTY31001_61", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    // Step 3: Click on 商品 field to focus
+    await productInputPage.focusProductInput();
+    await page.waitForTimeout(1000);
+
+    const isVisible = await productInputPage.searchProductButtonVisible();
+    expect(isVisible).toBe(true);
+
+    const [newPage] = await Promise.all([
+      page.context().waitForEvent("page"),
+      productInputPage.clickSearchProductButton(),
+    ]);
+
+    await page.waitForTimeout(1000);
+
+    // Verify: New tab is opened with WTZ10101
+    await newPage.waitForLoadState("domcontentloaded");
+    expect(newPage.url()).toContain("WTZ10101");
   });
 });

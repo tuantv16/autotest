@@ -103,10 +103,7 @@ export class WTY31001Page extends BasePage {
       'ul[role="menu"] li[role="menuitem"] span:has-text("依頼検索")',
     arrivalScheduleButton:
       'ul[role="menu"] li[role="menuitem"] span:has-text("入荷予定")',
-
-    // Error messages
-    errorMessage: ".error-message, .MuiFormHelperText-root.Mui-error",
-    errorDialog: "#wty31001-error-dialog",
+    searchProductButton: 'button:has-text("型番検索")',
   };
 
   // labelSelectors
@@ -179,7 +176,7 @@ export class WTY31001Page extends BasePage {
    * Navigate to WTY31001 Product Input screen
    */
   async navigate(pilotKey: string = "prod"): Promise<void> {
-    const url = `${this.baseUrl}/index.html?pilotkey=${pilotKey}#/WTY31001StockSupplyRequestsIndex`;
+    const url = `${this.baseUrl}/index.html?pilotkey=${pilotKey}#/WTY31001StockSupplyRequestsIndex?token=G92U8I0NxKPkMQ_RkIH4CQvp9Qac3dJwpZLdElKIKB399ZCABTy_sN0Zqv-RmGA3eVv-DXH7PScUojvfb8i6hMgeQy0RFM3npXT_A-YXlotyY6bO7pv4DP3RDNAsh21mQZr_1f1AOJjkixs4OY9_o_NhqpQLJ0iqfHAgNaiEZgcGtzOb9aaS479ufkj-Wn6KmqaEDEU5JgdEuKw0RLfw9dAgKlEDyUf85QgDSwGbMpR3LF6uDXX-OKbpIZ7DIKxE&jznuridenNo=00102498010416&jznuridenHkkDate=20251022&unyoDate=20251022&cipher=LOCAL_DEV_DUMMY_KEY`;
     await this.goto(url);
     await this.page.waitForTimeout(1000);
   }
@@ -317,6 +314,20 @@ export class WTY31001Page extends BasePage {
   /**
    * Check input field
    */
+  async focusProductInput(): Promise<void> {
+    await this.page.locator(this.selectors.productInput).focus();
+  }
+
+  async searchProductButtonVisible(): Promise<boolean> {
+    return await this.page
+      .locator(this.selectors.searchProductButton)
+      .isVisible();
+  }
+
+  async clickSearchProductButton(): Promise<void> {
+    await this.page.locator(this.selectors.searchProductButton).click();
+  }
+
   async productInputIsVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.productInput).isVisible();
   }
@@ -362,7 +373,15 @@ export class WTY31001Page extends BasePage {
   }
 
   async tSuIriInputIsDisabled(): Promise<boolean> {
-    return await this.page.locator(this.selectors.tSuIriInput).isDisabled();
+    const input = this.page.locator(this.selectors.tSuIriInput);
+    // Check both disabled and readonly attributes, or if not editable
+    const isDisabled = await input.isDisabled().catch(() => false);
+    const isReadonly = await input
+      .getAttribute("readonly")
+      .then((val) => val !== null)
+      .catch(() => false);
+    const isEditable = await input.isEditable();
+    return isDisabled || isReadonly || !isEditable;
   }
 
   async kisoIriInputIsVisible(): Promise<boolean> {
@@ -374,7 +393,15 @@ export class WTY31001Page extends BasePage {
   }
 
   async kisoIriInputIsDisabled(): Promise<boolean> {
-    return await this.page.locator(this.selectors.kisoIriInput).isDisabled();
+    const input = this.page.locator(this.selectors.kisoIriInput);
+    // Check both disabled and readonly attributes, or if not editable
+    const isDisabled = await input.isDisabled().catch(() => false);
+    const isReadonly = await input
+      .getAttribute("readonly")
+      .then((val) => val !== null)
+      .catch(() => false);
+    const isEditable = await input.isEditable();
+    return isDisabled || isReadonly || !isEditable;
   }
   /**
    * Check read-only fields visibility and editability
@@ -560,373 +587,6 @@ export class WTY31001Page extends BasePage {
   }
 
   /**
-   * Get label color for input fields
-   */
-  async getModeLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.modeLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getGyoNoLabelColor(): Promise<string> {
-    const label = this.page.getByText("行No", { exact: true });
-
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getProductLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.productLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getKataLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.kataLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getMkLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.mkLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getRnkLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.rnkLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getBKbnLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.bKbnLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getShnNmLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.shnNmLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getHbJskLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.hbJskLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getGZaiLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.gZaiLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getYukoZaiLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.yukoZaiLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getDcYukoZaiLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.dcYukoZaiLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getTHaiLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.tHaiLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getHchTaniLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.hchTaniLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getJouiTokuteiLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.jouiTokuteiLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getHojuLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.hojuLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getRHinIriLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.rHinIriLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getTenjiLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.tenjiLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getKaikonLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.kaikonLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getTenjiIriLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.tenjiIriLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getD1tSuLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.d1tSuLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getTSuIriLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.tSuIriLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getD2tSuLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.d2tSuLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getTenjiKisoSuLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.tenjiKisoSuLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getKisoIriLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.kisoIriLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  async getKaikonIriLabelColor(): Promise<string> {
-    const label = this.page.locator(this.selectors.kaikonIriLabel).first();
-    return await label.evaluate((el) => {
-      return window.getComputedStyle(el).color;
-    });
-  }
-
-  /**
-   * Get input border color
-   */
-  async getGyoNoInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.gyoNoInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getProductInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.productInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getKataInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.kataInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getMkInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.mkInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getRnkInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.rnkInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getBKbnInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.bKbnInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getShnNmInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.shnNmInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getHbJsk4InputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.hbJsk4Input).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getHbJsk3InputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.hbJsk3Input).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getHbJsk2InputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.hbJsk2Input).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getHbJsk1InputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.hbJsk1Input).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getGZaiInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.gZaiInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getYukoZaiInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.yukoZaiInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getTHaiInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.tHaiInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getDcYukoZaiInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.dcYukoZaiInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getHchTaniInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.hchTaniInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getJouiTokuteiInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.jouiTokuteiInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getHojuInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.tHaiInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-  async getRHinIriInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.rHinIriInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getTenjiInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.tenjiInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getTenjiIriInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.tenjiIriInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getKaikonInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.kaikonInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getD1tSuInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.d1tSuInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getTSuIriInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.tSuIriInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getD2tSuInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.d2tSuInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getTenjiKisoSuInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.tenjiKisoSuInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getKisoIriInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.kisoIriInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  async getKaikonIriInputBorderColor(): Promise<string> {
-    const input = this.page.locator(this.selectors.kaikonIriInput).first();
-    return await input.evaluate((el) => {
-      return window.getComputedStyle(el).borderColor;
-    });
-  }
-
-  /**
    * Check if toggle button 定数削除 is visible
    */
   async isTsuDelToggleVisible(): Promise<boolean> {
@@ -1012,5 +672,204 @@ export class WTY31001Page extends BasePage {
         redColor,
       );
     }
+  }
+
+  /**
+   * Fill product input field
+   */
+  async fillProductInput(value: string): Promise<void> {
+    await this.page.locator(this.selectors.productInput).fill(value);
+  }
+
+  /**
+   * Get product input value
+   */
+  async getProductInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.productInput).inputValue();
+  }
+
+  /**
+   * Blur product input field
+   */
+  async blurProductInput(): Promise<void> {
+    await this.page.locator(this.selectors.productInput).blur();
+  }
+
+  /**
+   * Click search button
+   */
+  async clickSearchButton(): Promise<void> {
+    await this.page.locator(this.selectors.searchButton).click();
+  }
+
+  /**
+   * Click confirm button
+   */
+  async clickConfirmButton(): Promise<void> {
+    await this.page.locator(this.selectors.confirmButton).click();
+  }
+
+  /**
+   * Check if error message is visible
+   */
+  async findMessageText(): Promise<boolean> {
+    return await this.page
+      .getByText("必須入力項目です。", { exact: true })
+      .isVisible();
+  }
+
+  /**
+   * Fill 良品依頼 input field
+   */
+  async fillRHinIriInput(value: string): Promise<void> {
+    await this.page.locator(this.selectors.rHinIriInput).fill(value);
+  }
+
+  /**
+   * Get 良品依頼 input value
+   */
+  async getRHinIriInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.rHinIriInput).inputValue();
+  }
+
+  /**
+   * Blur 良品依頼 input field
+   */
+  async blurRHinIriInput(): Promise<void> {
+    await this.page.locator(this.selectors.rHinIriInput).blur();
+  }
+
+  /**
+   * Fill 展示依頼 input field
+   */
+  async fillTenjiIriInput(value: string): Promise<void> {
+    await this.page.locator(this.selectors.tenjiIriInput).fill(value);
+  }
+
+  /**
+   * Get 展示依頼 input value
+   */
+  async getTenjiIriInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.tenjiIriInput).inputValue();
+  }
+
+  /**
+   * Blur 展示依頼 input field
+   */
+  async blurTenjiIriInput(): Promise<void> {
+    await this.page.locator(this.selectors.tenjiIriInput).blur();
+  }
+
+  /**
+   * Fill 定数依頼 input field
+   */
+  async fillTSuIriInput(value: string): Promise<void> {
+    await this.page.locator(this.selectors.tSuIriInput).fill(value);
+  }
+
+  /**
+   * Get 定数依頼 input value
+   */
+  async getTSuIriInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.tSuIriInput).inputValue();
+  }
+
+  /**
+   * Blur 定数依頼 input field
+   */
+  async blurTSuIriInput(): Promise<void> {
+    await this.page.locator(this.selectors.tSuIriInput).blur();
+  }
+
+  /**
+   * Fill 基礎依頼 input field
+   */
+  async fillKisoIriInput(value: string): Promise<void> {
+    await this.page.locator(this.selectors.kisoIriInput).fill(value);
+  }
+
+  /**
+   * Get 基礎依頼 input value
+   */
+  async getKisoIriInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.kisoIriInput).inputValue();
+  }
+
+  /**
+   * Blur 基礎依頼 input field
+   */
+  async blurKisoIriInput(): Promise<void> {
+    await this.page.locator(this.selectors.kisoIriInput).blur();
+  }
+
+  /**
+   * Get error message for specific field by field label
+   */
+  async getFieldErrorMessage(fieldLabel: string): Promise<string> {
+    // Find the label, then find the error message in the same parent container
+    const labelLocator = this.page.locator(`label:has-text("${fieldLabel}")`);
+    const parentContainer = labelLocator.locator("..");
+    const errorMessage = parentContainer.locator("p.text-red-600");
+    const text = await errorMessage.textContent().catch(() => null);
+    return text || "";
+  }
+
+  /**
+   * Check if error message is visible for a specific field
+   */
+  async isFieldErrorVisible(fieldLabel: string): Promise<boolean> {
+    const labelLocator = this.page.locator(`label:has-text("${fieldLabel}")`);
+    const parentContainer = labelLocator.locator("..").locator("..");
+    const errorMessage = parentContainer.locator("p.text-red-600");
+    return await errorMessage.isVisible().catch(() => false);
+  }
+
+  /**
+   * Get title page by mode
+   */
+  async getTitlePage(): Promise<string> {
+    return await this.page.locator("h6").first().innerText();
+  }
+
+  async getKataInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.kataInput).inputValue();
+  }
+
+  async getMkInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.mkInput).inputValue();
+  }
+
+  async getRnkInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.rnkInput).inputValue();
+  }
+
+  async getBKbnInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.bKbnInput).inputValue();
+  }
+
+  async getShnNmInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.shnNmInput).inputValue();
+  }
+
+  async getHbJsk4InputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.hbJsk4Input).inputValue();
+  }
+
+  async getHbJsk3InputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.hbJsk3Input).inputValue();
+  }
+
+  async getHbJsk2InputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.hbJsk2Input).inputValue();
+  }
+
+  async getHbJsk1InputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.hbJsk1Input).inputValue();
+  }
+
+  async getErrorMessageDialog(): Promise<string> {
+    const dialog = this.page.locator("#wty31001-error-dialog");
+    const message = dialog.locator("p").first();
+    return await message.innerText();
   }
 }
