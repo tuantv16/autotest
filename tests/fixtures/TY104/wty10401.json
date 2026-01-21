@@ -2,7 +2,7 @@
   "wty10401": {
     "TC_01": {
       "description": "Save customer summary successfully",
-      "sessionData": {
+      "sessionData": [{
         "key": "WTY10401_IN_SD",
         "value": {
           "wty10401InfoDT": [
@@ -39,7 +39,7 @@
             }
           ]
         }
-      },
+      }],
       "commonData": [
           {
           "id": "commonDT",
@@ -62,7 +62,7 @@
     },
     "TC_02": {
       "description": "Mode flag data",
-      "sessionData": {
+      "sessionData": [{
         "key": "WTY10401_IN_SD",
         "value": {
           "wty10401InfoDT": [
@@ -99,7 +99,7 @@
             }
           ]
         }
-      },
+      }],
       "commonData": [
           {
           "id": "commonDT",
@@ -128,7 +128,7 @@
     },
     "TC_03": {
       "description": "Validate product code length (7 characters - invalid)",
-      "sessionData": {
+      "sessionData": [{
         "key": "WTY10401_IN_SD",
         "value": {
           "wty10401InfoDT": [
@@ -151,7 +151,7 @@
           ],
           "searchJknDT": []
         }
-      },
+      }],
       "commonData": [
         {
           "id": "commonDT",
@@ -174,7 +174,7 @@
     },
     "TC_04": {
       "description": "Validate product code length (8 characters - valid)",
-      "sessionData": {
+      "sessionData": [{
         "key": "WTY10401_IN_SD",
         "value": {
           "wty10401InfoDT": [
@@ -197,7 +197,7 @@
           ],
           "searchJknDT": []
         }
-      },
+      }],
       "commonData": [
         {
           "id": "commonDT",
