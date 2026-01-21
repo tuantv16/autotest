@@ -2,7 +2,7 @@
   "wty10401": {
     "TC_01": {
       "description": "Save customer summary successfully",
-      "sessionData": {
+      "sessionData": [{
         "key": "WTY10401_IN_SD",
         "value": {
           "wty10401InfoDT": [
@@ -39,7 +39,7 @@
             }
           ]
         }
-      },
+      }],
       "commonData": [
           {
           "id": "commonDT",
@@ -56,14 +56,208 @@
           }
         }
       ],
-      "formData": {
-        "customerNameKanji": "山田太郎",
-        "customerNameKana": "ｶｶｶ",
-        "deliveryDate": "2025/12/25",
-        "summaryText": "これはテストの摘要欄入力です"
-      },
       "expectedMessages": {
         "success": "登録が完了しました。"
+      }
+    },
+    "TC_02": {
+      "description": "Mode flag data",
+      "sessionData": [{
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "4974019201234",
+              "mkKata": "SJ-PD28H-T",
+              "shnZhlv": "　",
+              "tnpJch": "可",
+              "thKbn": "大物",
+              "ckS": "可",
+              "ykBri": "在庫有可",
+              "hjZai": "1",
+              "zaiBten": "2",
+              "jgyksCd": "02",
+              "jgybCd": "10",
+              "zoneCd": "G1",
+              "blkCd": "A101",
+              "areaCd": "13"
+            }
+          ],
+          "searchJknDT": [
+            {
+              "shnCd": "00004974019201",
+              "hjZai": "1",
+              "zaiBten": "2",
+              "jiJgyksCd": "02",
+              "jgyksCd": "02",
+              "jgybCd": "10",
+              "zoneCd": "G1",
+              "blkCd": "A101",
+              "areaCd": "13",
+              "fromNo": 1,
+              "toNo": 100
+            }
+          ]
+        }
+      }],
+      "commonData": [
+          {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251022",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "modeFlg",
+          "value": {
+            "modeFlg": "1"
+          }
+        }
+      ],
+      "expectedMessages": {
+        "success": "登録が完了しました。"
+      }
+    },
+    "TC_03": {
+      "description": "Validate product code length (7 characters - invalid)",
+      "sessionData": [{
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "1234567",
+              "mkKata": "",
+              "shnZhlv": "",
+              "tnpJch": "",
+              "thKbn": "",
+              "ckS": "",
+              "ykBri": "",
+              "hjZai": "1",
+              "zaiBten": "1",
+              "jgyksCd": "01",
+              "jgybCd": "",
+              "zoneCd": "",
+              "blkCd": "",
+              "areaCd": ""
+            }
+          ],
+          "searchJknDT": []
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251022",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "expectedMessages": {
+        "error": "商品の桁数が正しくありません"
+      }
+    },
+    "TC_04": {
+      "description": "Validate product code length (8 characters - valid)",
+      "sessionData": [{
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "00010006917",
+              "mkKata": "",
+              "shnZhlv": "",
+              "tnpJch": "",
+              "thKbn": "",
+              "ckS": "",
+              "ykBri": "",
+              "hjZai": "1",
+              "zaiBten": "1",
+              "jgyksCd": "02",
+              "jgybCd": "",
+              "zoneCd": "",
+              "blkCd": "",
+              "areaCd": ""
+            }
+          ],
+          "searchJknDT": []
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "C0001",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "テスト店舗",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "",
+            "jgyksCd": "02",
+            "jusCd": "",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "02000",
+            "ktKbn": "01",
+            "pstNo": "",
+            "ryAbtknNmKn": "",
+            "ryAbtknNmKnj": "",
+            "skgCd": "",
+            "skgNmKn": "",
+            "tofNmKnj": "",
+            "termNo": "TERM01",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20250210",
+            "zoneCd": ""
+          }
+        }
+      ],
+      "expectedMessages": {
+        "error": "商品の桁数が正しくありません"
       }
     }
   }

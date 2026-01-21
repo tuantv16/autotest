@@ -22,7 +22,9 @@ export class TY1040Page extends BasePage {
     storeLabel: 'label:has-text("店舗")',
     salesDepartmentDropdownMenu: '#_r_1_',
     salesDepartmentDropdownOption: '#_r_1_ li',
-  };
+    searchButton: 'form button[type="submit"]:has-text("検索")',
+    shnCdInput: 'input[name="shnCd"], #shnCd',
+    };
 
   constructor(page: Page) {
     super(page);
@@ -74,6 +76,7 @@ export class TY1040Page extends BasePage {
    */
   async clickMoveDown(): Promise<void> {
     const locator = this.page.locator(this.selectors.moveDownButton);
+    await this.waitForVisible(locator, 2000);
     await locator.click({ timeout: 2000 });
   }
 
@@ -84,20 +87,6 @@ export class TY1040Page extends BasePage {
       return true;
     } catch {
       return false;
-    }
-  }
-
-  /**
-   * Open combobox dropdown if not already open
-   */
-  async openComboboxDropdown(): Promise<void> {
-    const dropdownMenu = this.page.locator(this.selectors.salesDepartmentDropdownMenu);
-    const isVisible = await dropdownMenu.isVisible({ timeout: 1000 }).catch(() => false);
-    
-    if (!isVisible) {
-      const comboboxLocator = this.page.locator(this.selectors.salesDepartmentComboboxId);
-      await comboboxLocator.click({ timeout: 10000 });
-      await this.page.waitForTimeout(500);
     }
   }
 
@@ -118,51 +107,86 @@ export class TY1040Page extends BasePage {
   }
 
   /**
+   * Click on combobox and select option by data-value
+   * @param dataValue - data-value attribute of the option to select (e.g., "01", "02")
+   * @param comboboxSelector - Optional selector for the combobox (default: salesDepartmentCombobox)
+   */
+  async selectComboboxOptionByValue(dataValue: string, comboboxSelector?: string): Promise<void> {
+    const selector = comboboxSelector ?? this.selectors.salesDepartmentCombobox;
+    await super.selectComboboxOptionByValue(dataValue, selector, this.selectors.salesDepartmentDropdownOption);
+  }
+
+  /**
+   * Click on combobox and select option by text
+   * @param optionText - Text of the option to select
+   * @param comboboxSelector - Optional selector for the combobox (default: salesDepartmentCombobox)
+   */
+  async selectComboboxOptionByText(optionText: string, comboboxSelector?: string): Promise<void> {
+    const selector = comboboxSelector ?? this.selectors.salesDepartmentCombobox;
+    const optionSelectors = [
+      `ul.MuiList-root li[role="option"]:has-text("${optionText}")`,
+      `${this.selectors.salesDepartmentDropdownOption}:has-text("${optionText}")`,
+      `li[role="option"]:has-text("${optionText}")`,
+    ];
+    await super.clickOptionInCombobox(optionSelectors, `Option with text "${optionText}" not found in combobox dropdown`, selector);
+  }
+
+  /**
    * Verify that all provided option texts are present in combobox dropdown
    * @param expectedOptions Array of option texts to check
    * @returns true if all options are found, false otherwise
    */
   async verifyComboboxOptions(expectedOptions: string[]): Promise<boolean> {
-    try {
-      // Ensure combobox dropdown is open
-      await this.openComboboxDropdown();
-      
-      // Wait for dropdown menu to be visible first
-      const dropdownMenu = this.page.locator(this.selectors.salesDepartmentDropdownMenu);
-      await dropdownMenu.waitFor({ state: 'visible', timeout: 5000 });
-      
-      // Wait for at least one option to be visible
-      const optionLocator = this.page.locator(this.selectors.salesDepartmentDropdownOption);
-      await optionLocator.first().waitFor({ state: 'visible', timeout: 5000 });
-      
-      // Wait a bit more for all options to load
-      await this.page.waitForTimeout(500);
-      
-      const count = await optionLocator.count();
-      const availableTexts: string[] = [];
-      
-      // Get all available option texts from combobox
-      for (let i = 0; i < count; i++) {
-        const text = await optionLocator.nth(i).textContent();
-        if (text) {
-          availableTexts.push(text.trim());
-        }
+    const locator = this.page.locator(this.selectors.salesDepartmentDropdownOption);
+    const count = await locator.count();
+    const availableTexts: string[] = [];
+    
+    // Get all available option texts from combobox
+    for (let i = 0; i < count; i++) {
+      const text = await locator.nth(i).textContent();
+      if (text) {
+        availableTexts.push(text.trim());
       }
-      
-      // Check if all expected options are present in available texts
-      for (const expectedText of expectedOptions) {
-        if (!availableTexts.includes(expectedText)) {
-          console.log(`Expected option "${expectedText}" not found. Available options:`, availableTexts);
-          return false;
-        }
-      }
-      
-      return true;
-    } catch (error) {
-      console.log('Error verifying combobox options:', error);
-      return false;
     }
+    
+    // Check if all expected options are present in available texts
+    for (const expectedText of expectedOptions) {
+      if (!availableTexts.includes(expectedText)) {
+        return false;
+      }
+    }
+    
+    return true;
   }
 
+  async clickSearchButton(): Promise<void> {
+    const locator = this.page.locator(this.selectors.searchButton);
+    await locator.click({ timeout: 10000 });
+  }
+
+  async isSearchButtonVisible(): Promise<boolean> {
+    const locator = this.page.locator(this.selectors.searchButton);
+    return await locator.isVisible({ timeout: 10000 }).catch(() => false);
+  }
+
+  async clickItemMenuCart(): Promise<void> {
+    await super.clickItemMenu('カート');
+  }
+
+  async isShnCdDisabled(): Promise<boolean> {
+    const locator = this.page.locator(this.selectors.shnCdInput).first();
+    await this.page.waitForTimeout(1000); // Wait for modeFlg to be applied
+    return await this.isInputDisabled(locator);
+  }
+
+  async isIconDisabled(): Promise<boolean> {
+    const locator = this.page.locator(this.selectors.searchButton);
+    return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
+  }
+
+  async isErrorMessageVisible(errorMessage: string, field: string): Promise<boolean> {
+    const locator = this.page.locator(`p.text-red-600:has-text("${errorMessage}")`);
+    return await locator.isVisible({ timeout: 10000 }).catch(() => false);
+  }
 }
 
