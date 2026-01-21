@@ -62,12 +62,6 @@
     },
     "TC_02": {
       "description": "Mode flag data",
-      "modeFlgData": {
-        "key": "WTY10401_MODE_FLAG",
-        "value": {
-          "modeFlg": "1"
-        }
-      },
       "sessionData": {
         "key": "WTY10401_IN_SD",
         "value": {
@@ -120,6 +114,12 @@
             "assetsNo": "ASSET01",
             "keepPeriod": "6"
           }
+        },
+        {
+          "id": "modeFlg",
+          "value": {
+            "modeFlg": "1"
+          }
         }
       ],
       "expectedMessages": {
@@ -165,6 +165,94 @@
             "termNo": "TERM01",
             "assetsNo": "ASSET01",
             "keepPeriod": "6"
+          }
+        }
+      ],
+      "expectedMessages": {
+        "error": "商品の桁数が正しくありません"
+      }
+    },
+    "TC_04": {
+      "description": "Validate product code length (8 characters - valid)",
+      "sessionData": {
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "00010006917",
+              "mkKata": "",
+              "shnZhlv": "",
+              "tnpJch": "",
+              "thKbn": "",
+              "ckS": "",
+              "ykBri": "",
+              "hjZai": "1",
+              "zaiBten": "1",
+              "jgyksCd": "02",
+              "jgybCd": "",
+              "zoneCd": "",
+              "blkCd": "",
+              "areaCd": ""
+            }
+          ],
+          "searchJknDT": []
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "C0001",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "テスト店舗",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "",
+            "jgyksCd": "02",
+            "jusCd": "",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "02000",
+            "ktKbn": "01",
+            "pstNo": "",
+            "ryAbtknNmKn": "",
+            "ryAbtknNmKnj": "",
+            "skgCd": "",
+            "skgNmKn": "",
+            "tofNmKnj": "",
+            "termNo": "TERM01",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20250210",
+            "zoneCd": ""
           }
         }
       ],
