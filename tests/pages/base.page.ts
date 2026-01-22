@@ -482,7 +482,6 @@ export class BasePage {
     }
 
     /**
-<<<<<<< HEAD
      * Scroll in detail table until "End of data" text appears
      * @param tableId - Table ID selector (default: '#store-inventory-inquiry-2')
      * @param maxScrollAttempts - Maximum number of scroll attempts (default: 50)
