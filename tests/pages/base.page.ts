@@ -3,7 +3,7 @@
  * Common methods for all page objects
  */
 
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 const DEFAULT_MENU_BUTTON_SELECTOR = 'button[aria-haspopup="true"][id="basic-button"], button[aria-haspopup="true"]';
 
@@ -278,6 +278,24 @@ export class BasePage {
     }
 
     /**
+     * Get text by locator
+     * @param locator - Locator of the element
+     * @returns Inner text of the element
+     */
+    async getTextByLocator(locator: Locator): Promise<string> {
+        await this.waitForVisible(locator, 10000);
+        return await locator.innerText();
+    }
+
+    async isConfirmButtonVisible(selectorConfirmButton: string): Promise<boolean> {
+        return await this.page.locator(selectorConfirmButton).isVisible();
+    }
+
+    async isClearButtonVisible(selectorClearButton: string): Promise<boolean> {
+        return await this.page.locator(selectorClearButton).isVisible();
+    }
+
+    /**
      * Helper method to open combobox and click option
      * @param optionSelectors - Array of selectors to try for finding the option
      * @param errorMessage - Error message to throw if option not found
@@ -461,5 +479,27 @@ export class BasePage {
       // 4. Wait UI settle
       await this.page.waitForTimeout(500);
 
+    }
+
+    /**
+     * Verify validation message by label text
+     * @param labelText - Text of the label associated with the input
+     * @param expectedMessage - Expected validation message text
+     */
+    async verifyValidateMessageByLabel(labelText: string, expectedMessage: string): Promise<void> {
+        const formBlock = this.page.locator(
+            `div:has(label:text-is("${labelText}"))`
+        );
+
+        const errorMessage = formBlock.locator(
+            'p.text-red-600'
+        );
+
+        await expect(errorMessage).toBeVisible();
+        await expect(errorMessage).toHaveText(expectedMessage);
+    }
+
+    async clickOutside(): Promise<void> {
+      await this.page.mouse.click(1, 1);
     }
 }   
