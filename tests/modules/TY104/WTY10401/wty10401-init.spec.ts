@@ -176,7 +176,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickMoveDown();
         await page.waitForTimeout(2000);
         // Step 4: Observe Sales Department (営業部) section and verify combobox is visible
-        const isComboboxVisible = await summaryPage.isSalesDepartmentComboboxClickable();
+        await summaryPage.isSalesDepartmentComboboxClickable();
 
         // Step 5: Verify combobox dropdown contains expected options
         const expectedOptions = ['エディオン', '中四国・九州', '事業会社コード2'];

@@ -174,6 +174,23 @@
     },
     "TC_04": {
       "description": "Validate product code length (8 characters - valid)",
+      "formData": {
+        "shnCd_25": "1234567",
+        "shnCd_26": "12345678",
+        "shnCd_27": "00010006917",
+        "jgyksCd_27": "02",
+        "shnCd_28": "1234567891234",
+        "shnCd_29": "１２３４５６７８",
+        "shnCd_29_expected": "12345678",
+        "shnCd_30": "mac0122",
+        "shnCd_33": "00010000069",
+        "jgyksCd_33": "02",
+        "shnCd_36": "０００１０００７０９９",
+        "shnCd_36_expected": "00010007099",
+        "shnCd_37": "00010013960",
+        "shnCd_38": "4997236590169",
+        "shnCd_sample": "00010007099"
+      },
       "sessionData": [{
         "key": "WTY10401_IN_SD",
         "value": {
@@ -230,7 +247,7 @@
           "value": {
             "areaCd": "529",
             "blkCd": "520",
-            "btenCd": "C0001",
+            "btenCd": "00251",
             "btrktKbn": "",
             "chainId": "1",
             "csNmKn": "テスト店舗",

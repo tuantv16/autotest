@@ -16,6 +16,10 @@ export class BasePage {
         this.baseUrl = baseUrl;
     }
 
+    protected readonly selectors = {
+        errorClass: '_error_cbu4e_24',
+    };
+
     /**
      * Navigate to a specific path
      */
@@ -318,6 +322,98 @@ export class BasePage {
         await this.clickOptionInCombobox(optionSelectors, `Option with data-value "${dataValue}" not found in combobox dropdown`, comboboxSelector);
     }
 
+    async blurInputById(id: string): Promise<void> {
+        const locator = this.page.locator(`#${id}`);
+        await this.waitForVisible(locator, 10000);
+        await locator.blur();
+    }
+
+    async hasErrorBorderById(id: string): Promise<boolean> {
+        const locator = this.page.locator(`#${id}`);
+        
+        // Check if element exists and is visible
+        const isVisible = await locator.isVisible({ timeout: 10000 }).catch(() => false);
+        if (!isVisible) {
+            return false;
+        }
+      
+        // Get error class - use fallback if not defined in child class
+        const errorClass = this.selectors?.errorClass || '_error_cbu4e_24';
+      
+        // Wait for error class to appear (class might be added asynchronously after validation)
+        // Retry checking for the class with intervals
+        const maxRetries = 6; // 6 retries * 500ms = 3 seconds
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                const classList = await locator
+                    .evaluate((el: Element) => Array.from(el.classList) as string[])
+                    .catch(() => [] as string[]);
+                
+                if (classList.includes(errorClass)) {
+                    return true;
+                }
+            } catch {
+                // Continue to next retry
+            }
+            
+            // Wait 500ms before next check (except on last iteration)
+            if (i < maxRetries - 1) {
+                await this.page.waitForTimeout(500);
+            }
+        }
+
+        // Final check if element has error class
+        try {
+            const classList = await locator
+                .evaluate((el: Element) => Array.from(el.classList) as string[])
+                .catch(() => [] as string[]);
+            return classList.includes(errorClass);
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * Select a radio option by group label and option value
+     * @param groupLabel - Label text of the radio group (e.g., "表示在庫")
+     * @param optionValue - Value text of the option to select (e.g., "実在庫", "有効")
+     */
+    async selectedOption(groupLabel: string, optionValue: string): Promise<void> {
+        // Since input is hidden, we need to click on the label or span containing the option text
+        // Try multiple selectors to find the clickable element
+        const selectors = [
+        // Click on label containing the option text
+        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}")`,
+        // Click on span containing the option text
+        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}") span`,
+        // Alternative: click on label by value attribute
+        `label:has-text("${groupLabel}") ~ div label:has(input[type="radio"][value="${optionValue}"])`,
+        ];
+
+        let clicked = false;
+        for (const selector of selectors) {
+            try {
+                const locator = this.page.locator(selector).first();
+                const isVisible = await locator.isVisible({ timeout: 2000 }).catch(() => false);
+                if (isVisible) {
+                    await locator.scrollIntoViewIfNeeded();
+                    await locator.click({ timeout: 5000, force: true });
+                    clicked = true;
+                    break;
+                }
+            } catch (error) {
+                // Continue to next selector
+                continue;
+            }
+        }
+
+        if (!clicked) {
+            throw new Error(`Could not find or click radio option "${optionValue}" in group "${groupLabel}"`);
+        }
+
+        await this.page.waitForTimeout(300); // Wait for selection to be applied
+    }
+
     /**
      * Select option for Material UI Select (div role="combobox")
      * 
@@ -369,5 +465,6 @@ export class BasePage {
 
       // 4. Wait UI settle
       await this.page.waitForTimeout(500);
+
     }
 }   
