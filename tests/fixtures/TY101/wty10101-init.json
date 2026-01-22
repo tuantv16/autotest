@@ -1,0 +1,260 @@
+{
+    "wty10101": {
+        "TC_05": {
+            "description": "TC05 - Khởi tạo màn hình - Kiểm tra màn hình hiển thị đúng khi mở từ menu",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ],
+            "expectedResults": {
+                "pageTitle": "商品基本照会",
+                "searchInputVisible": true,
+                "searchButtonVisible": true,
+                "searchInputEmpty": true,
+                "searchInputEnabled": true,
+                "searchButtonEnabled": true,
+                "productInfoVisible": false
+            }
+        },
+        "TC_06": {
+            "description": "TC06 - Kiểm tra màn hình hiển thị đúng khi có dữ liệu trước đó",
+            "sessionData": [
+                {
+                    "key": "WTY10101_IN_SD",
+                    "value": {
+                        "searchJknDT": [
+                            {
+                                "shnCd": "00010011645"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_07": {
+            "description": "TC07 - Kiểm tra màn hình hiển thị đúng khi ko có dữ liệu trước đó",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ]
+        },
+        "TC_09": {
+            "description": "TC09",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_10": {
+            "description": "TC10",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_11": {
+            "description": "TC11",
+            "sessionData": [
+                {
+                    "key": "WTY10101_IN_SD",
+                    "value": {
+                        "searchJknDT": [
+                            {
+                                "shnCd": "00010011645"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "shnInfoDS",
+                    "value": {
+                        "shnInfoDT": [
+                            {
+                                "shnCd": "00010011645",
+                                "janCd": "04905959334496",
+                                "canAddCart": "1"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_13": {
+            "description": "TC13",
+            "sessionData": [
+                {
+                    "key": "WTY10101_IN_SD",
+                    "value": {
+                        "searchJknDT": [
+                            {
+                                "shnCd": "00010011645"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "1"
+                },
+                {
+                    "id": "btnInfoDT",
+                    "value": {
+                        "areaCd": "529",
+                        "blkCd": "520",
+                        "btenCd": "04388",
+                        "btrktKbn": "1",
+                        "chainId": "1",
+                        "csNmKn": "七丁目 1丁目",
+                        "fcFlg": "0",
+                        "fcKtkbn": "0",
+                        "jgybCd": "120",
+                        "jgyksCd": "03",
+                        "jusCd": "231101403001",
+                        "kdoJt": "10",
+                        "keepPeriod": "99991231",
+                        "ksCd": "0300",
+                        "ktKbn": "6",
+                        "pstNo": "4550001",
+                        "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+                        "ryAbtknNmKnj": "東海通",
+                        "skgCd": "23111",
+                        "skgNmKn": "名古屋市 港区",
+                        "tofNmKnj": "愛知県",
+                        "termNo": "419",
+                        "tsutayaFlg": "0",
+                        "unyoYmd": "20251028",
+                        "zoneCd": "520"
+                    }
+                },
+                {
+                    "id": "systemDT",
+                    "value": {
+                        "nendo": "2024",
+                        "jznuriNoHtbanKbn": "2",
+                        "defaultThi": "0",
+                        "defaultKyoten": "2",
+                        "hikiwatashi": "1",
+                        "pntKyseiTs": "0"
+                    }
+                }
+            ]
+        }
+    }
+}
+

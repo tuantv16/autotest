@@ -1,0 +1,373 @@
+{
+    "wty10101": {
+        "TC_14": {
+            "description": "TC14 - Verify menu buttons are hidden in inquiry mode",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "1"
+                }
+            ]
+        },
+        "TC_15": {
+            "description": "TC15 - Verify popup appears on search input focus",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_16": {
+            "description": "TC16 - Verify popup hides on blur",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20260119",
+                            "btenCd": "001",
+                            "tanCd": "001",
+                            "storeCd": "001",
+                            "syoriStoreCd": "001",
+                            "syoriStoreNmKnj": "テスト店舗",
+                            "userId": "001",
+                            "clientId": "client01",
+                            "termNo": "TERM01",
+                            "assetsNo": "ASSET01",
+                            "keepPeriod": "6"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_17": {
+            "description": "TC17 - Search with 8-digit product code",
+            "searchCode": "00010013854",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ],
+            "responseData": {
+                "outDS": {
+                    "resultDT": [
+                        {
+                            "resultKbn": "0",
+                            "msgID": ""
+                        }
+                    ],
+                    "shnKhnInfoDT": [
+                        {
+                            "shnCd": "00010013854",
+                            "janCd": "04984824491830",
+                            "mkKata": "TA-BCS40R1",
+                            "rykmkrNmKnj": "パナソニック-8",
+                            "rykchuNmKnj": "テレビオプション",
+                            "daiCd": "11",
+                            "chuCd": "60"
+                        }
+                    ]
+                }
+            }
+        },
+        "TC_18": {
+            "description": "TC18 - Search with 11-digit product code",
+            "searchCode": "00010013854",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ],
+            "responseData": {
+                "outDS": {
+                    "resultDT": [
+                        {
+                            "resultKbn": "0",
+                            "msgID": ""
+                        }
+                    ],
+                    "shnKhnInfoDT": [
+                        {
+                            "shnCd": "00010013854",
+                            "janCd": "04984824491830",
+                            "mkKata": "TA-BCS40R1",
+                            "rykmkrNmKnj": "パナソニック",
+                            "rykchuNmKnj": "テレビオプション",
+                            "daiCd": "11",
+                            "chuCd": "60"
+                        }
+                    ],
+                    "baikaInfoDT": [
+                        {
+                            "bk1umFlg": "1",
+                            "bk1": 2000,
+                            "bk1Zein": 1818,
+                            "pntRt1": 5,
+                            "pntGaku1": 100
+                        }
+                    ],
+                    "zaikoInfoDT": [
+                        {
+                            "zaiKtenNm": "テスト店舗",
+                            "zaiRhinJzai": 5
+                        }
+                    ]
+                }
+            }
+        },
+        "TC_19": {
+            "description": "TC19 - Search with 13-digit JAN code",
+            "searchCode": "4984824491830",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ],
+            "responseData": {
+                "outDS": {
+                    "resultDT": [
+                        {
+                            "resultKbn": "0",
+                            "msgID": ""
+                        }
+                    ],
+                    "shnKhnInfoDT": [
+                        {
+                            "shnCd": "00010013854",
+                            "janCd": "04984824491830",
+                            "mkKata": "TA-BCS40R1",
+                            "rykmkrNmKnj": "パナソニック",
+                            "rykchuNmKnj": "テレビオプション",
+                            "daiCd": "11",
+                            "chuCd": "60"
+                        }
+                    ],
+                    "baikaInfoDT": [
+                        {
+                            "bk1umFlg": "1",
+                            "bk1": 3000,
+                            "bk1Zein": 2727,
+                            "pntRt1": 1,
+                            "pntGaku1": 30
+                        }
+                    ],
+                    "zaikoInfoDT": [
+                        {
+                            "zaiKtenNm": "テスト店舗",
+                            "zaiRhinJzai": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "TC_20": {
+            "description": "TC20 - Check navigation to Model Search when 10-digit code is entered",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                },
+                {
+                    "id": "screenDT",
+                    "value": []
+                },
+                {
+                    "id": "screenId",
+                    "value": "WTY10101"
+                },
+                {
+                    "id": "preScreenId",
+                    "value": "WTY10101"
+                }
+            ],
+            "searchCode": "1234567890"
+        },
+        "TC_21": {
+            "description": "TC21",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_22": {
+            "description": "TC22",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_24": {
+            "description": "TC24",
+            "errorMessage": "スキャナーはFlutterアプリ内でのみ動作します",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        },
+        "TC_26": {
+            "description": "TC26 - Kiểm tra xóa dữ liệu bằng nút Clear",
+            "searchCode": "00010013854",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00102",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": "0"
+                }
+            ]
+        }
+    }
+}
+
