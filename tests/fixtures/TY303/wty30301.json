@@ -1,0 +1,67 @@
+{
+    "wty30301":{
+        "TC_01":{
+            "description":"Verify clear form functionality",
+            "sessionData": {
+                "key": "WTZ11203_IN_SD",
+                "value": {
+                    "wty10401InfoDT": [
+                        {
+                            "shnCd": "4974019201234",
+                            "mkKata": "SJ-PD28H-T",
+                            "shnZhlv": "　",
+                            "tnpJch": "可",
+                            "thKbn": "大物",
+                            "ckS": "可",
+                            "ykBri": "在庫有可",
+                            "hjZai": "1",
+                            "zaiBten": "2",
+                            "jgyksCd": "02",
+                            "jgybCd": "10",
+                            "zoneCd": "G1",
+                            "blkCd": "A101",
+                            "areaCd": "13"
+                        }
+                    ],
+                    "searchJknDT": [
+                        {
+                            "shnCd": "00004974019201",
+                            "hjZai": "1",
+                            "zaiBten": "2",
+                            "jiJgyksCd": "02",
+                            "jgyksCd": "02",
+                            "jgybCd": "10",
+                            "zoneCd": "G1",
+                            "blkCd": "A101",
+                            "areaCd": "13",
+                            "fromNo": 1,
+                            "toNo": 100
+                        }
+                    ]
+                }
+            },
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "outYmd": "20251201",
+                        "cmtKbn": "1",
+                        "mpopSiz": "1",
+                        "prtMsu": "1",
+                        "keisaiKk": "227333",
+                        "lbk": "227333"
+                    }
+                }
+            ],
+            "formData": {
+                "outputDateInput": "2025/12/01",
+                "merchandiseCdInput": "00010004456",
+                "multiCmmentInput": "1",
+                "sizeInput": "C",
+                "numberSheetsInput": "1",
+                "listedPriceInput": "227333",
+                "finalSellingPriceInput": "227333"
+            }
+        }
+    }
+}

@@ -217,5 +217,17 @@ export class TY1040Page extends BasePage {
         await this.selectedOption('在庫部店', 'DC＆SC');
         await this.selectComboboxOptionByValue(formData.jgyksCd_33);
     }
+
+    async clickOptionDCSC(): Promise<void> {
+        await this.selectedOption('在庫部店', 'DC＆SC');
+    }
+
+    async clickOptionOtherStore(): Promise<void> {
+        await this.selectedOption('在庫部店', '店舗');
+    }
+
+    async selectComboboxOptionKinki(): Promise<void> {
+        await this.selectComboboxOptionByText('近畿');
+    }
 }
 
