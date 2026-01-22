@@ -462,4 +462,154 @@ export class BasePage {
       await this.page.waitForTimeout(500);
 
     }
+
+    /**
+     * Scroll in detail table until "End of data" text appears
+     * @param tableId - Table ID selector (default: '#store-inventory-inquiry-2')
+     * @param maxScrollAttempts - Maximum number of scroll attempts (default: 50)
+     * @param scrollDelay - Delay between scrolls in ms (default: 500)
+     * @throws Error if "End of data" is not found after max attempts
+     */
+    async scrollTableUntilEndOfData(
+        tableId: string = '',
+        maxScrollAttempts: number = 50,
+        scrollDelay: number = 500
+    ): Promise<void> {
+        const endOfDataTexts = ['End of data', 'End Of Data', 'End of Data'];
+        
+        for (let attempt = 0; attempt < maxScrollAttempts; attempt++) {
+            // Check if "End of data" text exists
+            // It's displayed in a div with class "mt-2" after the ag-grid component
+            let found = false;
+            for (const text of endOfDataTexts) {
+                // Try multiple selectors to find "End of data"
+                const selectors = [
+                    `${tableId} div.mt-2:has-text("${text}")`,
+                    `${tableId} div:has-text("${text}")`,
+                    `div.mt-2:has-text("${text}")`,
+                    `text="${text}"`,
+                ];
+                
+                for (const selector of selectors) {
+                    const endOfDataLocator = this.page.locator(selector).first();
+                    const isVisible = await endOfDataLocator.isVisible({ timeout: 500 }).catch(() => false);
+                    
+                    if (isVisible) {
+                        found = true;
+                        break;
+                    }
+                }
+                
+                if (found) break;
+            }
+            
+            if (found) {
+                return; // Found "End of data", exit successfully
+            }
+
+            // Scroll within the table's viewport
+            await this.page.evaluate((selector) => {
+                const tableElement = document.querySelector(selector);
+                if (tableElement) {
+                    // Find the ag-grid body viewport
+                    const viewport = tableElement.querySelector('.ag-body-viewport') as HTMLElement;
+                    if (viewport) {
+                        // Scroll down by a reasonable amount (e.g., 80% of viewport height)
+                        const scrollAmount = viewport.clientHeight * 0.8;
+                        viewport.scrollTop = Math.min(viewport.scrollTop + scrollAmount, viewport.scrollHeight - viewport.clientHeight);
+                    } else {
+                        // Fallback: scroll the table container itself
+                        const table = tableElement as HTMLElement;
+                        const scrollAmount = table.clientHeight * 0.8;
+                        table.scrollTop = Math.min(table.scrollTop + scrollAmount, table.scrollHeight - table.clientHeight);
+                    }
+                }
+            }, tableId);
+
+            // Wait before next scroll attempt
+            await this.page.waitForTimeout(scrollDelay);
+        }
+
+        // If we reach here, "End of data" was not found
+        throw new Error(
+            `"End of data" text not found after ${maxScrollAttempts} scroll attempts in table ${tableId}`
+        );
+    }
+
+    /**
+     * Scroll table to bottom and verify "End of data" text appears
+     * @param tableId - Table ID selector (required, e.g., '#store-inventory-inquiry-2')
+     * @param timeout - Timeout for waiting "End of data" to appear (default: 10000ms)
+     * @returns Text content of "End of data" element
+     */
+    async scrollToBottomAndVerifyEndOfData(
+        tableId: string,
+        timeout: number = 10000
+    ): Promise<string> {
+        // Scroll table to bottom
+        await this.page.evaluate((selector) => {
+            const tableElement = document.querySelector(selector);
+            if (tableElement) {
+                // Find the ag-grid body viewport
+                const viewport = tableElement.querySelector('.ag-body-viewport') as HTMLElement;
+                if (viewport) {
+                    // Scroll to bottom
+                    viewport.scrollTop = viewport.scrollHeight;
+                } else {
+                    // Fallback: scroll the table container itself
+                    const table = tableElement as HTMLElement;
+                    table.scrollTop = table.scrollHeight;
+                }
+            }
+        }, tableId);
+
+        // Wait a bit for the scroll to complete
+        await this.page.waitForTimeout(500);
+
+        // Find "End of data" text - it can be in different formats
+        const endOfDataTexts = ['End of data', 'End Of Data', 'End of Data'];
+        let endOfDataLocator: ReturnType<typeof this.page.locator> | null = null;
+
+        for (const text of endOfDataTexts) {
+            // Try multiple selectors to find "End of data"
+            const selectors = [
+                `${tableId} div.mt-2:has-text("${text}")`,
+                `${tableId} div:has-text("${text}")`,
+                `div.mt-2:has-text("${text}")`,
+            ];
+
+            for (const selector of selectors) {
+                const locator = this.page.locator(selector).first();
+                const isVisible = await locator.isVisible({ timeout: 1000 }).catch(() => false);
+                if (isVisible) {
+                    endOfDataLocator = locator;
+                    break;
+                }
+            }
+            if (endOfDataLocator) break;
+        }
+
+        // If not found with specific selectors, try to find by text content
+        if (!endOfDataLocator) {
+            endOfDataLocator = this.page.locator('text=End of data').first();
+        }
+
+        // Wait for "End of data" to be visible
+        await endOfDataLocator.waitFor({ state: 'visible', timeout });
+
+        // Get text content
+        const endOfDataText = await endOfDataLocator.textContent();
+        return endOfDataText?.trim() || '';
+    }
+
+    /**
+     * Click on a table row by row index
+     * @param rowIndex - Row index (0-based)
+     */
+    async clickRowTable(rowIndex: number): Promise<void> {
+        const rowLocator = this.page.locator(`div[role="row"][row-index="${rowIndex}"]`).first();
+        await rowLocator.waitFor({ state: 'visible', timeout: 5000 });
+        await rowLocator.click({ timeout: 5000 });
+        await this.page.waitForTimeout(500);
+    }
 }   
