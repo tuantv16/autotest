@@ -18,7 +18,6 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     // Step 1: Navigate to base URL
     console.log('[TEST] Loading base page to establish origin...');
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
 
     // Step 2: Initialize IndexedDB
     console.log('[TEST] Injecting IndexedDB data...');
@@ -26,13 +25,11 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(500);
 
     // Step 3: Navigate to target screen
     const testPage = new WTY207010Page(page);
     console.log('[TEST] Navigating to WTY20701 screen...');
     await testPage.navigate();
-    await page.waitForTimeout(500); // Increased wait time for page to fully load
 
     // Step 4: Verify title
     console.log('[TEST] Checking title 手配予定照会（直送）...');
@@ -57,7 +54,6 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     // Step 1: Navigate to base URL first to establish origin for localStorage
     console.log('[TEST] Loading base page to establish origin...');
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
 
     // Step 2: Initialize IndexedDB (now localStorage is accessible)
     console.log('[TEST] Injecting IndexedDB data...');
@@ -65,13 +61,11 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(500);
 
     // Step 3: Navigate to target screen
     const testPage = new WTY207010Page(page);
     console.log('[TEST] Navigating to WTY20701 screen...');
     await testPage.navigate();
-    await page.waitForTimeout(500);
 
     // Check label and input value
     const inputValue = await testPage.checkLabelAndInputValue('出庫店', 'ＬＣ中部・ＤＣ');
@@ -83,16 +77,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
         await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Check label and input value (no expected value, just verify it exists)
     const inputValue = await testPage.checkLabelAndInputValue('配送種類');
@@ -104,16 +95,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
-        await indexedDBHelper.initializeDB({
+    await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Check label and input value
     const inputValue = await testPage.checkLabelAndInputValue('L/T', '97日');
@@ -125,16 +113,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
         await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Check label and input value
     const inputValue = await testPage.checkLabelAndInputValue('最短お届け日');
@@ -156,16 +141,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
-        await indexedDBHelper.initializeDB({
+    await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Get input value by id
     console.log('[TEST] Getting input value for #SaiBin_Lable...');
@@ -182,16 +164,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
-        await indexedDBHelper.initializeDB({
+    await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Check if rows in ag-pinned-left-cols-container have sequential numbers
     console.log('[TEST] Checking sequential row numbers in ag-pinned-left-cols-container...');
@@ -225,16 +204,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
-        await indexedDBHelper.initializeDB({
+    await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Get unique thiKbn display texts from test data
     console.log('[TEST] Extracting thiKbn display texts from test data...');

@@ -17,16 +17,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
     await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Check if rows in ag-pinned-left-cols-container have sequential numbers
     console.log('[TEST] Checking sequential row numbers in ag-pinned-left-cols-container...');
@@ -60,16 +57,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
     await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(1000);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(1000);
 
     // Find indices of items with hkatFukaFlg == "1"
     console.log('[TEST] Finding rows with hkatFukaFlg == "1"...');
@@ -93,16 +87,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_api');
 
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(500);
     await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
-    await page.waitForTimeout(500);
 
     const testPage = new WTY207010Page(page);
     await testPage.navigate();
-    await page.waitForTimeout(500);
 
     const msgID = await testPage.waitForTextInBody(testData.outDS.resultDT[0].msgID, 500);
     expect(msgID).toBe(true);
