@@ -3,14 +3,14 @@
  * Common setup and utilities for all tests
  */
 
-import { test as base, expect } from '@playwright/test';
-import { IndexedDBHelper } from '../utils/indexeddb-helper';
-import { CommonHelper } from '../utils/common-helper';
-import * as dotenv from 'dotenv';
-import * as path from 'path';
+import { test as base, expect } from "@playwright/test";
+import { IndexedDBHelper } from "../utils/indexeddb-helper";
+import { CommonHelper } from "../utils/common-helper";
+import * as dotenv from "dotenv";
+import * as path from "path";
 
 // Load environment variables
-dotenv.config({ path: path.join(__dirname, '../../.env.test') });
+dotenv.config({ path: path.join(__dirname, "../../.env.test") });
 
 export interface TestFixtures {
   indexedDBHelper: IndexedDBHelper;
@@ -25,12 +25,12 @@ export const test = base.extend<TestFixtures>({
   // Page fixture with automatic cipher setup
   page: async ({ page }, use) => {
     // Set cipher in localStorage before any page navigation
-    const defaultCipher = process.env.DEFAULT_CIPHER || 'LOCAL_DEV_DUMMY_KEY';
+    const defaultCipher = process.env.DEFAULT_CIPHER || "LOCAL_DEV_DUMMY_KEY";
     await page.addInitScript((cipher) => {
-      localStorage.setItem('cipher', cipher);
-      console.log('[PAGE] Cipher preset in localStorage:', cipher);
+      localStorage.setItem("cipher", cipher);
+      console.log("[PAGE] Cipher preset in localStorage:", cipher);
     }, defaultCipher);
-    
+
     await use(page);
   },
 
@@ -49,7 +49,7 @@ export const test = base.extend<TestFixtures>({
 
   // Base URL fixture
   baseUrl: async ({}, use) => {
-    const url = process.env.BASE_URL || 'http://localhost:5173';
+    const url = process.env.BASE_URL || "http://localhost:5173";
     await use(url);
   },
 });
@@ -71,12 +71,58 @@ export interface BaseTestData {
 }
 
 /**
- * Helper to load test data from fixtures
+ * Helper to load test data from fixtures with shared data support
  * @param fileName - Name of the test data file (e.g., 'TY205/wty20501' or 'wty20501')
  * @param screenCode - Screen code (e.g., 'wty20501')
  * @param caseCode - Test case code (e.g., 'TC_01')
  */
-export function loadTestData(fileName: string, screenCode: string, caseCode: string): any {
+export function loadTestData(
+  fileName: string,
+  screenCode: string,
+  caseCode: string,
+): any {
   const allData = CommonHelper.loadTestData(fileName);
-  return allData[screenCode]?.[caseCode];
+  const testData = allData[screenCode]?.[caseCode];
+
+  if (!testData) {
+    return testData;
+  }
+
+  // Check if test data uses shared references
+  if (testData._useShared) {
+    // Try to load shared data file
+    try {
+      const sharedFileName = fileName.endsWith(".json")
+        ? fileName.replace(".json", "-shared")
+        : fileName + "-shared";
+      const { SHARED_DATA } = require(`../fixtures/${sharedFileName}`);
+
+      // Clone the test data to avoid mutating original
+      const result = JSON.parse(JSON.stringify(testData));
+
+      // Process commonData to expand shared references
+      if (result.commonData && Array.isArray(result.commonData)) {
+        result.commonData = result.commonData.map((item: any) => {
+          if (item._ref) {
+            // Replace with shared data
+            return {
+              id: item.id,
+              value: SHARED_DATA[item._ref],
+            };
+          }
+          return item;
+        });
+      }
+
+      // Remove _useShared flag from result
+      delete result._useShared;
+
+      return result;
+    } catch (error) {
+      console.warn(`Failed to load shared data for ${fileName}:`, error);
+      return testData;
+    }
+  }
+
+  return testData;
 }

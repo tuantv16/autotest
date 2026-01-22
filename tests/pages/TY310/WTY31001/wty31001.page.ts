@@ -96,6 +96,9 @@ export class WTY31001Page extends BasePage {
     tSuDelToggle: 'button:has-text("定数削除")',
 
     // Buttons
+    buttonBack: 'button:has(svg path[d^="M15 19.9201"])',
+    confirmDialogButton: "button#ok_button",
+    cancelDialogButton: "button#cancel_button",
     actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
     confirmButton: 'button:has-text("確定")',
     clearButton: 'button:has-text("クリア")',
@@ -172,18 +175,12 @@ export class WTY31001Page extends BasePage {
     super(page);
   }
 
-  /**
-   * Navigate to WTY31001 Product Input screen
-   */
   async navigate(pilotKey: string = "prod"): Promise<void> {
     const url = `${this.baseUrl}/index.html?pilotkey=${pilotKey}#/WTY31001StockSupplyRequestsIndex?token=G92U8I0NxKPkMQ_RkIH4CQvp9Qac3dJwpZLdElKIKB399ZCABTy_sN0Zqv-RmGA3eVv-DXH7PScUojvfb8i6hMgeQy0RFM3npXT_A-YXlotyY6bO7pv4DP3RDNAsh21mQZr_1f1AOJjkixs4OY9_o_NhqpQLJ0iqfHAgNaiEZgcGtzOb9aaS479ufkj-Wn6KmqaEDEU5JgdEuKw0RLfw9dAgKlEDyUf85QgDSwGbMpR3LF6uDXX-OKbpIZ7DIKxE&jznuridenNo=00102498010416&jznuridenHkkDate=20251022&unyoDate=20251022&cipher=LOCAL_DEV_DUMMY_KEY`;
     await this.goto(url);
     await this.page.waitForTimeout(1000);
   }
 
-  /**
-   * Wait for form to be ready
-   */
   async waitForFormReady(): Promise<void> {
     await this.page.waitForSelector(
       `${this.selectors.kkyRadio}, ${this.selectors.hpnRadio}`,
@@ -191,9 +188,6 @@ export class WTY31001Page extends BasePage {
     );
   }
 
-  /**
-   * Check if page title is displayed correctly
-   */
   async getPageTitle(): Promise<boolean> {
     return await this.page
       .locator(this.selectors.pageTitle)
@@ -216,9 +210,18 @@ export class WTY31001Page extends BasePage {
     }
   }
 
-  /**
-   * Check item menu
-   */
+  async clickBackButton(): Promise<void> {
+    await this.page.locator(this.selectors.buttonBack).first().click();
+  }
+
+  async clickConfirmDialogButton(): Promise<void> {
+    await this.page.locator(this.selectors.confirmDialogButton).first().click();
+  }
+
+  async clickCancelDialogButton(): Promise<void> {
+    await this.page.locator(this.selectors.cancelDialogButton).first().click();
+  }
+
   async isRequestSearchButtonVisible(): Promise<boolean> {
     return await this.page
       .locator(this.selectors.requestSearchButton)
@@ -233,13 +236,21 @@ export class WTY31001Page extends BasePage {
   async isConfirmButtonVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.confirmButton).isVisible();
   }
+
   async isClearButtonButtonVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.clearButton).isVisible();
   }
 
-  /**
-   * Check radio button for mode
-   */
+  async clickClearButton(): Promise<void> {
+    await this.page.locator(this.selectors.clearButton).click();
+  }
+
+  async clickRequestSearchButton(): Promise<void> {
+    await this.openMenu();
+    await this.page.locator(this.selectors.requestSearchButton).click();
+    await this.page.waitForTimeout(500);
+  }
+
   async isKkyRadioVisible(): Promise<boolean> {
     return (await this.page.locator(this.selectors.kkyRadio).count()) > 0;
   }
@@ -268,9 +279,6 @@ export class WTY31001Page extends BasePage {
     return true;
   }
 
-  /**
-   * Click radio button
-   */
   async clickKkyRadio(): Promise<void> {
     await this.page
       .locator('label:has(input[type="radio"][value="1"])')
@@ -283,18 +291,11 @@ export class WTY31001Page extends BasePage {
       .click();
   }
 
-  /**
-   * Check if Clear button
-   */
   async isBtnClearProductVisible(): Promise<boolean> {
     return await this.page
       .locator(this.selectors.clearProductButton)
       .isVisible();
   }
-
-  /**
-   * Check if Search button
-   */
 
   async isBtnSearchProductVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.searchButton).isVisible();
@@ -304,16 +305,10 @@ export class WTY31001Page extends BasePage {
     return await this.page.locator(this.selectors.searchButton).isEnabled();
   }
 
-  /**
-   * Check if 開梱依頼 field is visible
-   */
   async isKaikonIriInputVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.kaikonIriInput).isVisible();
   }
 
-  /**
-   * Check input field
-   */
   async focusProductInput(): Promise<void> {
     await this.page.locator(this.selectors.productInput).focus();
   }
@@ -326,6 +321,10 @@ export class WTY31001Page extends BasePage {
 
   async clickSearchProductButton(): Promise<void> {
     await this.page.locator(this.selectors.searchProductButton).click();
+  }
+
+  async clickClearProductButton(): Promise<void> {
+    await this.page.locator(this.selectors.clearProductButton).click();
   }
 
   async productInputIsVisible(): Promise<boolean> {
@@ -374,7 +373,6 @@ export class WTY31001Page extends BasePage {
 
   async tSuIriInputIsDisabled(): Promise<boolean> {
     const input = this.page.locator(this.selectors.tSuIriInput);
-    // Check both disabled and readonly attributes, or if not editable
     const isDisabled = await input.isDisabled().catch(() => false);
     const isReadonly = await input
       .getAttribute("readonly")
@@ -394,7 +392,6 @@ export class WTY31001Page extends BasePage {
 
   async kisoIriInputIsDisabled(): Promise<boolean> {
     const input = this.page.locator(this.selectors.kisoIriInput);
-    // Check both disabled and readonly attributes, or if not editable
     const isDisabled = await input.isDisabled().catch(() => false);
     const isReadonly = await input
       .getAttribute("readonly")
@@ -403,9 +400,7 @@ export class WTY31001Page extends BasePage {
     const isEditable = await input.isEditable();
     return isDisabled || isReadonly || !isEditable;
   }
-  /**
-   * Check read-only fields visibility and editability
-   */
+
   async gyoNoInputIsVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.gyoNoInput).isVisible();
   }
@@ -586,9 +581,6 @@ export class WTY31001Page extends BasePage {
       .isEditable();
   }
 
-  /**
-   * Check if toggle button 定数削除 is visible
-   */
   async isTsuDelToggleVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.tSuDelToggle).isVisible();
   }
@@ -674,139 +666,89 @@ export class WTY31001Page extends BasePage {
     }
   }
 
-  /**
-   * Fill product input field
-   */
   async fillProductInput(value: string): Promise<void> {
     await this.page.locator(this.selectors.productInput).fill(value);
   }
 
-  /**
-   * Get product input value
-   */
   async getProductInputValue(): Promise<string> {
     return await this.page.locator(this.selectors.productInput).inputValue();
   }
 
-  /**
-   * Blur product input field
-   */
   async blurProductInput(): Promise<void> {
     await this.page.locator(this.selectors.productInput).blur();
   }
 
-  /**
-   * Click search button
-   */
   async clickSearchButton(): Promise<void> {
     await this.page.locator(this.selectors.searchButton).click();
   }
 
-  /**
-   * Click confirm button
-   */
   async clickConfirmButton(): Promise<void> {
     await this.page.locator(this.selectors.confirmButton).click();
   }
 
-  /**
-   * Check if error message is visible
-   */
   async findMessageText(): Promise<boolean> {
     return await this.page
       .getByText("必須入力項目です。", { exact: true })
       .isVisible();
   }
 
-  /**
-   * Fill 良品依頼 input field
-   */
   async fillRHinIriInput(value: string): Promise<void> {
     await this.page.locator(this.selectors.rHinIriInput).fill(value);
   }
 
-  /**
-   * Get 良品依頼 input value
-   */
   async getRHinIriInputValue(): Promise<string> {
     return await this.page.locator(this.selectors.rHinIriInput).inputValue();
   }
 
-  /**
-   * Blur 良品依頼 input field
-   */
   async blurRHinIriInput(): Promise<void> {
     await this.page.locator(this.selectors.rHinIriInput).blur();
   }
 
-  /**
-   * Fill 展示依頼 input field
-   */
   async fillTenjiIriInput(value: string): Promise<void> {
     await this.page.locator(this.selectors.tenjiIriInput).fill(value);
   }
 
-  /**
-   * Get 展示依頼 input value
-   */
   async getTenjiIriInputValue(): Promise<string> {
     return await this.page.locator(this.selectors.tenjiIriInput).inputValue();
   }
 
-  /**
-   * Blur 展示依頼 input field
-   */
   async blurTenjiIriInput(): Promise<void> {
     await this.page.locator(this.selectors.tenjiIriInput).blur();
   }
 
-  /**
-   * Fill 定数依頼 input field
-   */
   async fillTSuIriInput(value: string): Promise<void> {
     await this.page.locator(this.selectors.tSuIriInput).fill(value);
   }
 
-  /**
-   * Get 定数依頼 input value
-   */
   async getTSuIriInputValue(): Promise<string> {
     return await this.page.locator(this.selectors.tSuIriInput).inputValue();
   }
 
-  /**
-   * Blur 定数依頼 input field
-   */
   async blurTSuIriInput(): Promise<void> {
     await this.page.locator(this.selectors.tSuIriInput).blur();
   }
 
-  /**
-   * Fill 基礎依頼 input field
-   */
   async fillKisoIriInput(value: string): Promise<void> {
     await this.page.locator(this.selectors.kisoIriInput).fill(value);
   }
 
-  /**
-   * Get 基礎依頼 input value
-   */
   async getKisoIriInputValue(): Promise<string> {
     return await this.page.locator(this.selectors.kisoIriInput).inputValue();
   }
 
-  /**
-   * Blur 基礎依頼 input field
-   */
   async blurKisoIriInput(): Promise<void> {
     await this.page.locator(this.selectors.kisoIriInput).blur();
   }
 
-  /**
-   * Get error message for specific field by field label
-   */
+  async fillKaikonIriInput(value: string): Promise<void> {
+    await this.page.locator(this.selectors.kaikonIriInput).fill(value);
+  }
+
+  async getKaikonIriInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.kaikonIriInput).inputValue();
+  }
+
   async getFieldErrorMessage(fieldLabel: string): Promise<string> {
-    // Find the label, then find the error message in the same parent container
     const labelLocator = this.page.locator(`label:has-text("${fieldLabel}")`);
     const parentContainer = labelLocator.locator("..");
     const errorMessage = parentContainer.locator("p.text-red-600");
@@ -814,9 +756,6 @@ export class WTY31001Page extends BasePage {
     return text || "";
   }
 
-  /**
-   * Check if error message is visible for a specific field
-   */
   async isFieldErrorVisible(fieldLabel: string): Promise<boolean> {
     const labelLocator = this.page.locator(`label:has-text("${fieldLabel}")`);
     const parentContainer = labelLocator.locator("..").locator("..");
@@ -824,9 +763,6 @@ export class WTY31001Page extends BasePage {
     return await errorMessage.isVisible().catch(() => false);
   }
 
-  /**
-   * Get title page by mode
-   */
   async getTitlePage(): Promise<string> {
     return await this.page.locator("h6").first().innerText();
   }
@@ -871,5 +807,9 @@ export class WTY31001Page extends BasePage {
     const dialog = this.page.locator("#wty31001-error-dialog");
     const message = dialog.locator("p").first();
     return await message.innerText();
+  }
+
+  async getGyoNoValue(): Promise<string> {
+    return await this.page.locator(this.selectors.gyoNoInput).inputValue();
   }
 }
