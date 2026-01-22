@@ -1,8 +1,3 @@
-/**
- * WTY10401 Summary Input Test Suite
- * Tests for 摘要欄入力 screen using Page Object Model
- */
-
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { TY1040Page } from '../../../pages/TY104/wty10401.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
@@ -20,75 +15,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await takeScreenshotOnFailure(page, testInfo);
     });
 
-    test('WTY10401_24', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-    }) => {
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
-        // Step 1: Go to base URL and wait for it to load
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
-        // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        // Step 3: Navigate to target URL
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-
-        // Step 4: Click on move down button
-        await summaryPage.clickMoveDown();
-        await page.waitForTimeout(1000);
-
-        // Step 5: Click search button
-        await summaryPage.clickSearchButton();
-
-        await page.waitForTimeout(2000);
-
-        const isErrorMessageVisible = await summaryPage.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.REQUIRED_FIELD, '商品');
-        expect(isErrorMessageVisible).toBe(true);
-    });
-
-    test('WTY10401_25', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-    }) => {
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
-        // Step 1: Go to base URL and wait for it to load
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
-        // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        // Step 3: Navigate to target URL
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-
-        // Step 4: Click on move down button
-        await summaryPage.clickMoveDown();
-        await page.waitForTimeout(1000);
-
-        // Step 5: Fill product code with invalid length (7 characters)
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_25);
-        await page.waitForTimeout(1000);
-
-        // Step 6: Click search button
-        await summaryPage.clickSearchButton();
-        await page.waitForTimeout(2000);
-
-        // Step 7: Verify error message for invalid length
-        const isErrorMessageVisible = await summaryPage.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.INVALID_LENGTH, '商品');
-        expect(isErrorMessageVisible).toBe(true);
-    });
-
-    test('WTY10401_26', async ({
+    test('WTY10401_33', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -107,10 +34,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickMoveDown();
         await page.waitForTimeout(1000);
 
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_26);
-        await page.waitForTimeout(1000);
+        await summaryPage.inputDataSearchBasic(testData.formData);
 
-        // Wait for API response before clicking search button
         const apiResponsePromise = page.waitForResponse((res) => {
             return (
                 res.request().method() === 'POST' &&
@@ -118,25 +43,21 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
             );
         }, { timeout: 15000 });
 
-        // Click search button and wait for API response
         await summaryPage.clickSearchButton();
 
         // Wait for API response to complete
         const apiResponse = await apiResponsePromise;
         expect(apiResponse.status()).toBe(200);
-
-        // Wait a bit for UI to update after search
-        await page.waitForTimeout(2000);
     });
 
-    test('WTY10401_27', async ({
+    test('WTY10401_36', async ({
         page,
         baseUrl,
         indexedDBHelper,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
+        
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
             commonData: testData.commonData,
@@ -145,87 +66,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        await summaryPage.clickMoveDown();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_27);
-        await page.waitForTimeout(1000);
-
-        const jgyksCdValue = testData.formData.jgyksCd_27;
-        await summaryPage.selectComboboxOptionByValue(jgyksCdValue);
-
-        // Wait for API response before clicking search button
-        const apiResponsePromise = page.waitForResponse((res) => {
-            return (
-                res.request().method() === 'POST' &&
-                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
-            );
-        }, { timeout: 15000 });
-
-        // Click search button and wait for API response
-        await summaryPage.clickSearchButton();
-
-        // Wait for API response to complete
-        const apiResponse = await apiResponsePromise;
-        expect(apiResponse.status()).toBe(200);
-    });
-
-    test('WTY10401_28', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-    }) => {
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.clickMoveDown();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_28);
-        await page.waitForTimeout(1000);
-
-        // Wait for API response before clicking search button
-        const apiResponsePromise = page.waitForResponse((res) => {
-            return (
-                res.request().method() === 'POST' &&
-                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
-            );
-        }, { timeout: 15000 });
-
-        // Click search button and wait for API response
-        await summaryPage.clickSearchButton();
-
-        // Wait for API response to complete
-        const apiResponse = await apiResponsePromise;
-        expect(apiResponse.status()).toBe(200);
-    });
-
-    test('WTY10401_29', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-    }) => {
-
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_29);
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_36);
         await page.waitForTimeout(1000);
 
         await summaryPage.clickMoveDown();
@@ -233,49 +74,31 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // await summaryPage.blurInputById('shnCd');
 
         const shnCdValue = await summaryPage.getValueById('shnCd');
-        expect(shnCdValue).toBe( testData.formData.shnCd_29_expected);
+        expect(shnCdValue).toBe( testData.formData.shnCd_36_expected);
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
+            );
+        }, { timeout: 15000 });
+
+        await summaryPage.clickSearchButton();
+
+        // Wait for API response to complete
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
 
     });
 
-    test('WTY10401_30', async ({
+    test('WTY10401_37', async ({
         page,
         baseUrl,
         indexedDBHelper,
     }) => {
-
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
-        // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
-        // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        // Step 3: Navigate to target URL
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_30);
-        await page.waitForTimeout(1000);
-
-        await summaryPage.blurShnCd();
-        await page.waitForTimeout(500); // Wait for validation error to appear
-        expect(await summaryPage.hasErrorBorderShnCd()).toBe(true);
-
-    });
-
-    test('WTY10401_31', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-    }) => {
-
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
-        // Step 1: Go to base URL and wait for it to load
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
+        
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
             commonData: testData.commonData,
@@ -284,12 +107,188 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_30);
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_37);
         await page.waitForTimeout(1000);
 
-        await summaryPage.blurShnCd();
-        await summaryPage.focusShnCd();
-        expect(await summaryPage.hasErrorBorderShnCd()).toBe(false);
+        await summaryPage.clickMoveDown();
+        await summaryPage.clickSearchButton();
+        // await summaryPage.blurInputById('shnCd');
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
+            );
+        }, { timeout: 15000 });
+
+        await summaryPage.clickSearchButton();
+
+        // Wait for API response to complete
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
 
     });
+
+    test('WTY10401_38', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_38);
+        await page.waitForTimeout(1000);
+
+        await summaryPage.clickMoveDown();
+        await summaryPage.clickSearchButton();
+        // await summaryPage.blurInputById('shnCd');
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
+            );
+        }, { timeout: 15000 });
+
+        await summaryPage.clickSearchButton();
+
+        // Wait for API response to complete
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+    });
+
+    test('WTY10401_39', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+       
+        await page.waitForTimeout(1000);
+
+        await summaryPage.clickMoveDown();
+
+        await summaryPage.clickOptionDCSC();
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_39);
+
+        await summaryPage.clickSearchButton();
+        // await summaryPage.blurInputById('shnCd');
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
+            );
+        }, { timeout: 15000 });
+
+        await summaryPage.clickSearchButton();
+
+        // Wait for API response to complete
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+    });
+
+    test('WTY10401_40', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+       
+        await page.waitForTimeout(1000);
+
+        await summaryPage.clickMoveDown();
+
+        await summaryPage.clickOptionOtherStore();
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_sample);
+
+        await summaryPage.clickSearchButton();
+        // await summaryPage.blurInputById('shnCd');
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
+            );
+        }, { timeout: 15000 });
+
+        await summaryPage.clickSearchButton();
+
+        // Wait for API response to complete
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+    });
+
+    test('WTY10401_41', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+       
+        await page.waitForTimeout(1000);
+
+        await summaryPage.clickMoveDown();
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_sample);
+        await summaryPage.selectComboboxOptionKinki();
+        await summaryPage.clickSearchButton();
+        // await summaryPage.blurInputById('shnCd');
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
+            );
+        }, { timeout: 15000 });
+
+        await summaryPage.clickSearchButton();
+
+        // Wait for API response to complete
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+    });
+
 });
