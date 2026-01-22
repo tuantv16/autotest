@@ -11,6 +11,8 @@ export interface WTY30301FormData {
     finalSellingPriceInput: string;
 }
 
+export type WTY30301FormFieldKey = keyof WTY30301FormData;
+
 export class TY30301Page extends BasePage {
 
     // Selectors
@@ -40,11 +42,71 @@ export class TY30301Page extends BasePage {
         deleteButton: 'ul.MuiList-root:has-text("削除")',
         listButton: 'ul.MuiList-root:has-text("一覧")',
         confirmButton: 'ul.MuiList-root:has-text("確定")',
+        exitButton: 'ul.MuiList-root:has-text("終了")',
 
         // Toggle 
         normalToggle: 'label:has-text("通常")',
         disposalToggle: 'label:has-text("処分品")',
+
+        // Buttons image
+        clearMerchandiseCdInput: 'img[aria-label="clear"]'
     };
+
+    private readonly formFieldGetters: Record<
+        WTY30301FormFieldKey,
+        () => Promise<string>
+    > = {
+        outputDateInput: async () =>
+            this.page.locator(this.selectors.outputDateInput).inputValue(),
+
+        merchandiseCdInput: async () =>
+            this.page.locator(this.selectors.merchandiseCdInput).inputValue(),
+
+        multiCmmentInput: async () =>
+            this.getTextOrEmpty(this.page.locator(this.selectors.multiCmmentInput)),
+
+        sizeInput: async () =>
+            this.getTextOrEmpty(this.page.locator(this.selectors.sizeInput)),
+
+        numberSheetsInput: async () =>
+            this.page.locator(this.selectors.numberSheetsInput).inputValue(),
+
+        listedPriceInput: async () =>
+            this.page.locator(this.selectors.listedPriceInput).inputValue(),
+
+        finalSellingPriceInput: async () =>
+            this.page.locator(this.selectors.finalSellingPriceInput).inputValue(),
+    };
+
+    private readonly formFieldFillers: Record<
+        WTY30301FormFieldKey,
+        (value: string) => Promise<void>
+    > = {
+        outputDateInput: async (value) =>
+            this.fillOutputDate(value),
+
+        merchandiseCdInput: async (value) =>
+            this.fillMerchandiseCd(value),
+
+        multiCmmentInput: async (value) =>
+            this.fillMultiCmment(value),
+
+        sizeInput: async (value) =>
+            this.fillSize(value),
+
+        numberSheetsInput: async (value) =>
+            this.fillNumberSheets(value),
+
+        listedPriceInput: async (value) =>
+            this.fillListedPrice(value),
+
+        finalSellingPriceInput: async (value) =>
+            this.fillFinalSellingPrice(value),
+    };
+
+    private async getTextOrEmpty(locator: Locator): Promise<string> {
+        return (await locator.textContent())?.trim() ?? '';
+    }
 
     constructor(page: Page) {
         super(page);
@@ -59,6 +121,10 @@ export class TY30301Page extends BasePage {
         await this.page.waitForTimeout(1000);
     }
 
+    async urlScreenList(): Promise<string> {
+        return '#/WTY30302MultiPopOutputInstructionList';
+    }
+
     /**
      * Click confirm button (確定) - uses parent class implementation
      */
@@ -71,6 +137,13 @@ export class TY30301Page extends BasePage {
      */
     async clickClear(): Promise<void> {
         await this.clickButtonInMenuButton('クリア');
+    }
+
+    /**
+     * Click List (一覧) from action menu (MUI Menu)
+     */
+    async clickList(): Promise<void> {
+        await this.clickButtonInMenuButton('一覧');
     }
 
     /**
@@ -191,18 +264,24 @@ export class TY30301Page extends BasePage {
     }
 
     /**
-     * Fill entire form
+     * Fill form dynamically (only provided fields)
      */
-    async fillForm(formData: WTY30301FormData): Promise<void> {
-        await this.fillOutputDate(formData.outputDateInput);
-        await this.fillMerchandiseCd(formData.merchandiseCdInput);
-        await this.fillMultiCmment(formData.multiCmmentInput);
-        await this.fillSize(formData.sizeInput);
-        await this.fillNumberSheets(formData.numberSheetsInput);
-        await this.fillListedPrice(formData.listedPriceInput);
-        await this.fillFinalSellingPrice(formData.finalSellingPriceInput);
-    }
+    async fillForm(
+        formData: Partial<WTY30301FormData>
+    ): Promise<void> {
+        for (const key of Object.keys(formData) as WTY30301FormFieldKey[]) {
+            const value = formData[key];
+            if (value == null) continue;
 
+            const filler = this.formFieldFillers[key];
+
+            if (!filler) {
+                throw new Error(`No filler defined for field: ${key}`);
+            }
+
+            await filler(value);
+        }
+    }
     
     /**
      * Wait for form to be ready
@@ -213,46 +292,55 @@ export class TY30301Page extends BasePage {
         timeout: 10000,
         });
     }
-
+    
     /**
-     * Get current form values (snapshot)
+     * Get form values (snapshot)
+     * @param fields fields to get (optional)
      */
-    async getFormValues(): Promise<WTY30301FormData> {
-        return {
-            outputDateInput: await this.page.locator(this.selectors.outputDateInput).inputValue(),
-            merchandiseCdInput: await this.page.locator(this.selectors.merchandiseCdInput).inputValue(),
-            multiCmmentInput: await this.page.locator(this.selectors.multiCmmentInput).textContent() ?? '',
-            sizeInput: await this.page.locator(this.selectors.sizeInput).textContent() ?? '',
-            numberSheetsInput: await this.page.locator(this.selectors.numberSheetsInput).inputValue(),
-            listedPriceInput: await this.page.locator(this.selectors.listedPriceInput).inputValue(),
-            finalSellingPriceInput: await this.page.locator(this.selectors.finalSellingPriceInput).inputValue(),
-        };
+    async getFormValues(
+        fields?: WTY30301FormFieldKey[]
+    ): Promise<Partial<WTY30301FormData>> {
+
+        const keys =
+            fields ?? (Object.keys(this.formFieldGetters) as WTY30301FormFieldKey[]);
+
+        const result: Partial<WTY30301FormData> = {};
+
+        for (const key of keys) {
+            result[key] = await this.formFieldGetters[key]();
+        }
+
+        return result;
     }
     
     /**
      * Verify form values equal to expected snapshot
      */
-    async verifyFormEquals(expected: WTY30301FormData): Promise<void> {
-        await expect(this.page.locator(this.selectors.outputDateInput))
-            .toHaveValue(expected.outputDateInput);
+    async verifyFormEquals(
+        expected: Partial<WTY30301FormData>
+    ): Promise<void> {
 
-        await expect(this.page.locator(this.selectors.merchandiseCdInput))
-            .toHaveValue(expected.merchandiseCdInput);
+        for (const [key, value] of Object.entries(expected)) {
+            if (value === undefined) continue;
 
-        await expect(this.page.locator(this.selectors.numberSheetsInput))
-            .toHaveValue(expected.numberSheetsInput);
+            const field = key as WTY30301FormFieldKey;
+            const locator = this.page.locator(this.selectors[field]);
 
-        await expect(this.page.locator(this.selectors.listedPriceInput))
-            .toHaveValue(expected.listedPriceInput);
+            // MUI Select
+            if (field === 'multiCmmentInput' || field === 'sizeInput') {
+                await expect(locator).toHaveText(value);
+            } else {
+                await expect(locator).toHaveValue(value);
+            }
+        }
+    }
 
-        await expect(this.page.locator(this.selectors.finalSellingPriceInput))
-            .toHaveValue(expected.finalSellingPriceInput);
-
-        // MUI Select → compare text
-        await expect(this.page.locator(this.selectors.multiCmmentInput))
-            .toHaveText(expected.multiCmmentInput);
-
-        await expect(this.page.locator(this.selectors.sizeInput))
-            .toHaveText(expected.sizeInput);
+    /**     
+     * Click clear merchandise code button (image button)
+     */
+    async clickMerchandiseCdButton(): Promise<void> {
+        const locator = this.page.locator(this.selectors.clearMerchandiseCdInput);
+        await this.waitForVisible(locator, 20000);
+        await locator.click();
     }
 }
