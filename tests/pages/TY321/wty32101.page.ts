@@ -1,13 +1,38 @@
+import { expect } from "@playwright/test";
 import { BasePage } from "../base.page";
 
 export class TY32101Page extends BasePage {
-    public selectors = {
-        InventoryGuideCombobox: '#tnorsShiji[role="combobox"], label[for="tnorsShiji"] ~ div [role="combobox"]',
-        inventoryDateCombobox: '#tnorsDate[role="combobox"], label[for="tnorsDate"] ~ div [role="combobox"]',
-        InventoryGuideDropdownOption: '#_r_1_ li',
-        errorDialog: '#wty32101-error-dialog',
-        inventoryGuideText: '#tnorsShiji span',
-        inventoryDateText: '#tnorsDate span',
+    // Test data constants
+    public readonly INVENTORY_GUIDES = {
+        JANUARY_REGULAR: '1月定期棚卸／2',
+        DECEMBER_CYCLE: '12月循環棚卸／3',
+        NOVEMBER_CYCLE: '12月中旬棚卸／4',
+    };
+
+    public readonly INVENTORY_DATES = {
+        JANUARY_20_2025: '2025年01月20日',
+        DECEMBER_15_2024: '2024年12月15日',
+        DECEMBER_20_2024: '2024年12月20日',
+    };
+
+    public readonly INVENTORY_CLASSIFICATIONS = {
+        SAME_DAY_WITH_TOTAL: '当日差異調査(総数確認有)',
+        NEXT_DAY: '翌日差異調査',
+    };
+
+    public readonly selectors = {
+      tnorsKbn: 'tnorsKbn',
+      errorDialog: '#wty32101-error-dialog',
+      inventoryGuideText: '#tnorsShiji span',
+      inventoryDateText: '#tnorsDate span',
+      
+      InventoryGuideCombobox: '#tnorsShiji[role="combobox"], label[for="tnorsShiji"] ~ div [role="combobox"]',
+      inventoryDateCombobox: '#tnorsDate[role="combobox"], label[for="tnorsDate"] ~ div [role="combobox"]',
+      inventoryDateDropdownOption: '#_r_3_',
+      InventoryGuideDropdownOption: '#_r_4_',
+      
+      confirmButton: 'button:has-text("確定")',
+      clearButton: 'button:has-text("クリア")',
     };
 
     async navigate(pilotKey: string = 'prod'): Promise<void>{
@@ -23,6 +48,18 @@ export class TY32101Page extends BasePage {
    */
   async selectComboboxOptionByText(optionText: string, comboboxSelector?: string): Promise<void> {
     const selector = comboboxSelector || '';
+
+    if (optionText === '') {
+      await super.clickOptionInCombobox(
+        [
+          'li[role="option"][data-value=""]',
+        ],
+        'Empty option not found in combobox dropdown',
+        selector
+      );
+      return;
+    }
+
     const optionSelectors = [
       `ul.MuiList-root li[role="option"]:has-text("${optionText}")`,
       `${this.selectors.InventoryGuideDropdownOption}:has-text("${optionText}")`,
@@ -30,4 +67,29 @@ export class TY32101Page extends BasePage {
     ];
     await super.clickOptionInCombobox(optionSelectors, `Option with text "${optionText}" not found in combobox dropdown`, selector);
   }
+
+    /**
+     * Verify that all provided option texts are present in combobox dropdown
+     * @param expectedOptions Array of option texts to check
+     * @returns true if all options are found, false otherwise
+     */
+    async verifyOpenedComboboxOptionsText(
+      expectedTexts: string[]
+    ): Promise<void> {
+
+      const listbox = this.page.locator(
+        'div.MuiPopover-paper:visible ul[role="listbox"]'
+      );
+
+      await expect(listbox).toBeVisible();
+
+      const actualTexts = (await listbox
+        .locator('li[role="option"]')
+        .allTextContents()
+      )
+        .map(t => t.trim())
+        .filter(t => t !== '');
+      
+      expect(actualTexts).toEqual(expectedTexts);
+    }
 }
