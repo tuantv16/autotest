@@ -1,8 +1,8 @@
 {
   "wty20701": {
-    "TC_01": {
-      "description": "wty20701",
-      "sessionData": {
+    "TC_init": {
+      "description": "wty20701 TC_init",
+      "sessionData": [{
         "key": "WTY20701_SD",
         "value": {
           "searchJknChDT": [
@@ -43,8 +43,8 @@
             }
           ]
         }
-      },
-      "commonData": {
+      }],
+      "commonData": [{
         "id": "commonDT",
         "value": {
           "clientId": "0438874190",
@@ -55,55 +55,127 @@
           "unyoDate": "20251028",
           "userId": "70000"
         }
-      },
-      "formData": {
-        "customerNameKanji": "山田太郎",
-        "customerNameKana": "ｶｶｶ",
-        "deliveryDate": "2025/12/25",
-        "summaryText": "これはテストの摘要欄入力です"
-      },
-      "expectedMessages": {
-        "success": "保存しました"
+      }],
+      "outDS": {
+        "resultDT": [
+          {
+            "msgArg1": "",
+            "msgArg2": "",
+            "msgArg3": "",
+            "msgArg4": "",
+            "msgArg5": "",
+            "msgID": "",
+            "resultKbn": "0"
+          }
+        ],
+        "rstHeadChDT": [
+          {
+            "chikiNm": "ChikiNm3",
+            "ldtmNsu": "97",
+            "saitanBin": "",
+            "saitanOtdkYoteiDate": "",
+            "shkobtenCd": "04923",
+            "shkobtenNm": "ＬＣ中部・ＤＣ"
+          }
+        ],
+        "rstHkatChDT": [
+          {
+            "btrKbn": "X",
+            "hchSu": "不可",
+            "hkatFukaFlg": "1",
+            "janCd": "4974019604619",
+            "jchSu": "3",
+            "mkKata": "LC52RX5B",
+            "ordHkatSu": "",
+            "shnCd": "00010006467",
+            "thiKbn": "0",
+            "yykShnHtbDate": "",
+            "zaiHkatSu": ""
+          },
+          {
+            "btrKbn": "X",
+            "hchSu": "不可",
+            "hkatFukaFlg": "1",
+            "janCd": "4974019604619",
+            "jchSu": "4",
+            "mkKata": "LC52RX5B",
+            "ordHkatSu": "",
+            "shnCd": "00010006467",
+            "thiKbn": "0",
+            "yykShnHtbDate": "",
+            "zaiHkatSu": ""
+          }
+        ]
       }
     },
-    "TC_02": {
-      "description": "Save with different customer",
-      "sessionData": {
-        "key": "WTY20501_IN_SD",
+    "TC_api": {
+      "description": "wty20701 TC_api",
+      "sessionData": [{
+        "key": "WTY20701_SD",
         "value": {
-          "cartHeaderDT": [
+          "searchJknChDT": [
             {
-              "jznuridenNo": "00102498019992",
-              "jznuridenHkkDate": "20250215",
-              "kokCd": "C0002",
-              "uesamaFlg": "0",
-              "hbKbn": "2"
+              "jchtenCd": "test_api_fail",
+              "shkobtenCd": "test_api_fail",
+              "chikiCd": "test_api_fail",
+              "chikiNm": "test_api_fail",
+              "pstNo": "test_api_fail",
+              "haisgsKbn": "test_api_fail",
+              "unyoDate": "test_api_fail",
+              "capaShtkFlg": "test_api_fail",
+              "capaBtrKtenCd": "",
+              "capaShtkDate": "",
+              "capaHaisSteiSbt": "",
+              "jznUriDenNo": "test_api_fail",
+              "jznUriDenHkkDate": "test_api_fail"
+            }
+          ],
+          "shnChDT": [
+            {
+              "shnCd": "00010006467",
+              "jchSu": 3,
+              "zaiJt": "1",
+              "thiKbn": "0",
+              "thibtenCd": "00102",
+              "jznUriGyoNo": "001",
+              "jznUriSetgyoNo": "02"
+            },
+            {
+              "shnCd": "00010006467",
+              "jchSu": 4,
+              "zaiJt": "1",
+              "thiKbn": "0",
+              "thibtenCd": "00102",
+              "jznUriGyoNo": "001",
+              "jznUriSetgyoNo": "02"
             }
           ]
         }
-      },
-      "commonData": {
+      }],
+      "commonData": [{
         "id": "commonDT",
         "value": {
-          "unyoDate": "20250215",
-          "storeCd": "C0002",
-          "syoriStoreCd": "C0002",
-          "syoriStoreNmKnj": "テスト店舗2",
-          "userId": "testuser2",
-          "clientId": "client02",
-          "termNo": "TERM02",
-          "assetsNo": "ASSET02",
-          "keepPeriod": "12"
+          "clientId": "0438874190",
+          "screenId": "WTY20701",
+          "storeCd": "04388",
+          "syoriStoreCd": "04388",
+          "termNo": "419",
+          "unyoDate": "20251028",
+          "userId": "70000"
         }
-      },
-      "formData": {
-        "customerNameKanji": "佐藤花子",
-        "customerNameKana": "ｻﾄｳﾊﾅｺ",
-        "deliveryDate": "2025/12/31",
-        "summaryText": "別のテストデータです。"
-      },
-      "expectedMessages": {
-        "success": "保存しました"
+      }],
+      "outDS": {
+        "resultDT": [
+          {
+            "msgArg1": "出庫部店コードは数値5桁で",
+            "msgArg2": "",
+            "msgArg3": "",
+            "msgArg4": "",
+            "msgArg5": "",
+            "msgID": "TE5130",
+            "resultKbn": "1"
+          }
+        ]
       }
     }
   }

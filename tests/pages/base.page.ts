@@ -365,4 +365,49 @@ export class BasePage {
       // 4. Wait UI settle
       await this.page.waitForTimeout(500);
     }
+
+    /**
+     * Get label's 'for' attribute by its visible text
+     * @param labelText - Text of the label
+     * @param timeout - Timeout in milliseconds (default: 5000)
+     * @returns 'for' attribute value or null if not found
+     */
+    async getLabelForByText(labelText: string, timeout: number = 5000): Promise<string | null> {
+        const label = this.page.locator(`label:has-text("${labelText}")`).first();
+        try {
+            await this.waitForVisible(label, timeout);
+            const forAttr = await label.getAttribute('for');
+            if (forAttr && forAttr.trim().length > 0) return forAttr.trim();
+
+            // Fallback: try to infer from id if 'for' not present
+            const idAttr = await label.getAttribute('id');
+            return idAttr ? idAttr.trim() : null;
+        } catch {
+            return null;
+        }
+    }
+
+    /**
+     * Get value from input or text element
+     * Tries input first, then falls back to text content
+     * @param selector - CSS selector or Locator
+     * @returns Value as string
+     */
+    async getFieldValue(selector: string | Locator): Promise<string> {
+        const locator = typeof selector === 'string' ? this.page.locator(selector) : selector;
+
+        try {
+            // Try getting input value first
+            const val = await locator.inputValue({ timeout: 2000 });
+            return (val ?? '').trim();
+        } catch {
+            // Fallback to text content (for non-input elements)
+            try {
+                const textValue = await locator.textContent({ timeout: 2000 });
+                return textValue?.trim() || '';
+            } catch {
+                return '';
+            }
+        }
+    }
 }
