@@ -651,4 +651,10 @@ export class BasePage {
     async clickOutside(): Promise<void> {
       await this.page.mouse.click(1, 1);
     }
+
+    async clickButtonByText(text: string): Promise<void> {
+        const locator = this.page.locator(`button:has-text("${text}")`);
+        await locator.click({ timeout: 10000 });
+    }
+
 }   

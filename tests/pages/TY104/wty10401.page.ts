@@ -5,6 +5,7 @@
 
 import { Page } from '@playwright/test';
 import { BasePage } from '../base.page';
+import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 
 export class TY1040Page extends BasePage {
     // Selectors
@@ -25,7 +26,8 @@ export class TY1040Page extends BasePage {
         searchButton: 'form button[type="submit"]:has-text("検索")',
         shnCdInput: 'input[name="shnCd"], #shnCd',
         errorClass: '_error_cbu4e_24',
-        mkKataInput: '#mkKata'
+        mkKataInput: '#mkKata',
+        errorDialogAddCart: '#wty10401-error-dialog',
     };
 
     constructor(page: Page) {
@@ -173,6 +175,30 @@ export class TY1040Page extends BasePage {
 
     async clickItemMenuCart(): Promise<void> {
         await super.clickItemMenu('カート');
+    }
+
+    async clickItemMenuProductBasic(): Promise<void> {
+        await super.clickItemMenu('商品基本');
+    }
+
+    async clickItemMenuProductPrice(): Promise<void> {
+        await super.clickItemMenu('商品価格');
+    }
+
+    async clickItemMenuOrder(): Promise<void> {
+        await super.clickItemMenu('オーダー');
+    }
+
+    async clickItemMenuColorVariation(): Promise<void> {
+        await super.clickItemMenu('カラバリ');
+    }
+
+    async clickItemMenuArrivePlan(): Promise<void> {
+        await super.clickItemMenu('入荷予定');
+    }
+
+    async clickItemMenuBarcode(): Promise<void> {
+        await super.clickItemMenu('バーコード');
     }
 
     async isShnCdDisabled(): Promise<boolean> {
@@ -375,5 +401,94 @@ export class TY1040Page extends BasePage {
         return this.scrollToBottomAndVerifyEndOfData('#store-inventory-inquiry-2');
     }
 
+    /**
+     * Check if error message exists in add cart dialog
+     * Finds the dialog with id wty10401-error-dialog and checks if it contains the expected text
+     * @param expectedText - Expected error message text to check
+     * @returns true if the dialog contains the expected text, false otherwise
+     */
+    async getErrorMessageAddCart(expectedText: string): Promise<boolean> {
+        const dialogLocator = this.page.locator(this.selectors.errorDialogAddCart);
+        await dialogLocator.waitFor({ state: 'visible', timeout: 5000 });
+        
+        // Get text content from dialog and check if it contains the expected text
+        const dialogText = await dialogLocator.textContent();
+        return dialogText?.includes(expectedText) || false;
+    }
+
+    async clearInputShnCd(): Promise<void> {
+        const locator = this.page.locator(this.selectors.shnCdInput);
+        await locator.clear({ timeout: 10000 });
+    }
+
+    async clickButtonSearchNumber(): Promise<void> {
+        this.clickButtonByText('型番検索');
+    }
+
+    async fillInputDataCondition(formData: any): Promise<void> {
+        await this.fillInputById('shnCd', formData.shnCd_standard);
+        await this.selectedOption('表示在庫', '実在庫');
+        await this.selectedOption('在庫部店', '店舗');  
+        await this.selectCbArea();
+    }
+
+    async clearData(): Promise<void> {
+        await this.clickButtonByText('クリア');
+    }
+
+    async verifyDefaultData(): Promise<boolean> {
+        // 商品(shnCd) should be empty
+        const shnCdValue = await this.getValueById('shnCd');
+        if (shnCdValue.trim() !== '') {
+            return false;
+        }
+
+        // 表示在庫 radio should default to 有効
+        const hjZaiChecked = await this.page
+            .locator('input[type="radio"][name="hjZai"]:checked')
+            .first()
+            .getAttribute('value');
+        if ((hjZaiChecked ?? '').trim() !== '有効') {
+            return false;
+        }
+
+        // 在庫部店 radio should default to DC&SC (UI label shows DC＆SC)
+        const zaiBtenChecked = await this.page
+            .locator('input[type="radio"][name="zaiBten2"]:checked')
+            .first()
+            .getAttribute('value');
+        if ((zaiBtenChecked ?? '').trim() !== 'DC&SC') {
+            return false;
+        }
+
+        // 営業部 combobox should default to エディオン
+        const jgyksText = (await this.page.locator('#jgyksCd[role="combobox"]').first().textContent())?.trim() || '';
+        if (jgyksText !== 'エディオン') {
+            return false;
+        }
+
+        return true;
+    }
+
+    async verifySummaryTableHasNoDataRow(): Promise<boolean> {
+        const grid = this.page.locator('#store-inventory-inquiry');
+        const firstRowVisible = await grid.locator('div[role="row"][row-index="0"]').isVisible().catch(() => false);
+        return !firstRowVisible;
+    }
+
+    async verifyDefaultShnCd(): Promise<boolean> {
+        // 商品(shnCd) should be empty
+        const shnCdValue = await this.getValueById('shnCd');
+        if (shnCdValue.trim() !== '') {
+            return false;
+        }
+
+        return true;
+    }
+
+    async verifyErrorMessageInvalid(field: string): Promise<boolean> {
+        const isErrorMessageVisible = await this.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.REQUIRED_FIELD, '商品');
+        return isErrorMessageVisible;
+    }
 }
 
