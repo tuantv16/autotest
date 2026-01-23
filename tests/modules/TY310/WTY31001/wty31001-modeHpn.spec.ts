@@ -295,6 +295,84 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
     expect(kisoIriEditable).toBe(true);
   });
 
+  test("WTY31001_70", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Navigate to WTY31001 and switch to 返品 mode
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+    await productInputPage.clickHpnRadio();
+
+    await productInputPage.fillProductInput("00010013557");
+    await page.waitForTimeout(500);
+
+    // Step 2: Click search button
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(500);
+    const gyoNoValueBefore = await productInputPage.getGyoNoValue();
+    expect(gyoNoValueBefore).toBe("001");
+
+    // Step 3: Click clear button
+    await productInputPage.fillTSuIriInput("1");
+    await productInputPage.clickConfirmButton()
+    await page.waitForTimeout(1000);
+
+    // Step 4: Redirect to WTY31002 and click back to return to WTY31001
+    await productInputPage.clickBackButton();
+    await page.waitForTimeout(1000);
+
+    const gyoNoValue = await productInputPage.getGyoNoValue();
+    expect(gyoNoValue).toBe("002");
+  });
+
+  test("WTY31001_71", async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Navigate to WTY31001 and switch to 返品 mode
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+    await productInputPage.clickHpnRadio();
+
+    await productInputPage.fillProductInput("00010013557");
+    await page.waitForTimeout(500);
+
+    // Step 2: Click search button
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(500);
+    const gyoNoValueBefore = await productInputPage.getGyoNoValue();
+    expect(gyoNoValueBefore).toBe("001");
+    expect(gyoNoValueBefore.length).toBe(3);
+
+    // Step 3: Click clear button
+    await productInputPage.fillTSuIriInput("1");
+    await productInputPage.clickConfirmButton();
+    await page.waitForTimeout(1000);
+
+    // Step 4: Redirect to WTY31002 and click back to return to WTY31001
+    await productInputPage.clickBackButton();
+    await page.waitForTimeout(1000);
+
+    const gyoNoValue = await productInputPage.getGyoNoValue();
+    expect(gyoNoValue).toBe("002");
+    expect(gyoNoValue.length).toBe(3);
+  });
+
   test("WTY31001_72", async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup

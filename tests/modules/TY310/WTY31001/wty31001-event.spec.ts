@@ -17,7 +17,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test("WTY31001_83", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_77", async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_6");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -39,7 +39,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(page.url()).not.toContain("WTY31001");
   });
 
-  test("WTY31001_84", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_78", async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_84");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -73,7 +73,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(page.url()).not.toContain("WTY31001");
   });
 
-  test("WTY31001_85", async ({ page, baseUrl }) => {
+  test("WTY31001_79", async ({ page, baseUrl }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -97,7 +97,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(await productInputPage.getTenjiIriInputValue()).toBe("");
   });
 
-  test("WTY31001_86", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_80", async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -126,7 +126,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(newPage.url()).toContain("WTY31003");
   });
 
-  test("WTY31001_87", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_81", async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
 
     // Step 1: Setup
@@ -163,7 +163,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(newPage.url()).toContain("WTY31002");
   });
 
-  test("WTY31001_88", async ({ page, baseUrl }) => {
+  test("WTY31001_82", async ({ page, baseUrl }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -181,7 +181,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(isPopupVisible).toBe(true);
   });
 
-  test("WTY31001_89", async ({ page, baseUrl }) => {
+  test("WTY31001_83", async ({ page, baseUrl }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -203,7 +203,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(valueAfterClear).toBe("");
   });
 
-  test("WTY31001_95", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_89", async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_95");
 
     // Step 1: Setup
