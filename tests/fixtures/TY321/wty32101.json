@@ -2,43 +2,35 @@
     "wty32101":{
         "TC_01":{
             "description":"Register warranty claim successfully",
-            "commonData": {
-                "id": "commonDT",
-                "value": {
-                    "assetsNo": "EF7096380",
-                    "clientId": "00102PD498",
-                    "keepPeriod": "6",
-                    "storeCd": "00644",
-                    "syoriStoreCd": "00644",
-                    "syoriStoreNmKnJ": "東海通",
-                    "syoriStoreNmKn": "トウカゲイ",
-                    "syoriStoreNmKnj": "東海通",
-                    "termNo": "498",
-                    "unyoDate": "20251205",
-                    "userId": "0015400907",
-                    "screenId": "WTY10401"
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "assetsNo": "EF7096380",
+                        "clientId": "00102PD498",
+                        "keepPeriod": "6",
+                        "storeCd": "11804",
+                        "syoriStoreCd": "11804",
+                        "syoriStoreNmKnJ": "東海通",
+                        "syoriStoreNmKn": "トウカゲイ",
+                        "syoriStoreNmKnj": "東海通",
+                        "termNo": "498",
+                        "unyoDate": "20251205",
+                        "userId": "0015400907",
+                        "screenId": "WTY10401"
+                    }
                 }
-            }
+            ]
         }, 
         "TC_02":{
             "description":"",
-            "commonData": {
-                "id": "commonDT",
-                "value": {
-                    "assetsNo": "EF7096380",
-                    "clientId": "00102PD498",
-                    "keepPeriod": "6",
-                    "storeCd": "",
-                    "syoriStoreCd": "",
-                    "syoriStoreNmKnJ": "東海通",
-                    "syoriStoreNmKn": "トウカゲイ",
-                    "syoriStoreNmKnj": "東海通",
-                    "termNo": "498",
-                    "unyoDate": "20251205",
-                    "userId": "0015400907",
-                    "screenId": "WTY10401"
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                    }
                 }
-            }
+            ]
         }
     }
 }
