@@ -178,7 +178,7 @@
       "commonData": [
         {
           "id": "commonDT",
-          "_ref": "commonDT_test"
+          "_ref": "commonDT_default"
         },
         {
           "id": "systemDT",
@@ -237,7 +237,7 @@
       "commonData": [
         {
           "id": "commonDT",
-          "_ref": "commonDT_test"
+          "_ref": "commonDT_default"
         },
         {
           "id": "systemDT",

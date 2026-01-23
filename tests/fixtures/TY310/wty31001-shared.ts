@@ -15,19 +15,6 @@ export const SHARED_DATA = {
     userId: "70000",
   },
 
-  // Common data for test store
-  commonDT_test: {
-    unyoDate: "20251022",
-    storeCd: "C0001",
-    syoriStoreCd: "C0001",
-    syoriStoreNmKnj: "テスト店舗",
-    userId: "testuser",
-    clientId: "client01",
-    termNo: "TERM01",
-    assetsNo: "ASSET01",
-    keepPeriod: "6",
-  },
-
   // System data (used in all test cases)
   systemDT_default: {
     nendo: "2025",
