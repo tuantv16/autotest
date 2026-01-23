@@ -382,7 +382,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
       // Step 8: Verify form is cleared
-      const text = await page.locator('div.ag-cell-wrapper span[role="presentation"]').first().innerText();
+      const text = await productPricePage.selectorsObj.cellTable.first().innerText();
       await page.waitForTimeout(1000);
       expect(text).toBe('一般');
     });
@@ -415,7 +415,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
       // Step 8: Verify form is cleared
-      const text = await page.locator('div.ag-cell-wrapper span[role="presentation"]').first().innerText();
+      const text = await productPricePage.selectorsObj.cellTable.first().innerText();
       await page.waitForTimeout(1000);
       expect(text).toBe('正会員');
     });
@@ -448,7 +448,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
       // Step 8: Verify form is cleared
-      const text = await page.locator('div.ag-cell-wrapper span[role="presentation"]').first().innerText();
+      const text = await productPricePage.selectorsObj.cellTable.first().innerText();
       await page.waitForTimeout(1000);
       expect(text).toBe('あ会員');
     });
@@ -482,10 +482,10 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await page.waitForTimeout(1000);
       // Step 8: Verify form is cleared
       let text = '';
-      const count = await page.locator('div.ag-cell-wrapper span[role="presentation"]').count();
+      const count = await productPricePage.selectorsObj.cellTable.count();
       for (let i = 0; i < count; i++) {
         if(i == 2){
-          text = await page.locator('div.ag-cell-wrapper span[role="presentation"]').nth(i).innerText();
+          text = await productPricePage.selectorsObj.cellTable.nth(i).innerText();
         }
       }
       await page.waitForTimeout(1000);
@@ -522,10 +522,10 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 8: Verify form is cleared
       let text = '';
       let color = '';
-      const count = await page.locator('div.ag-cell-wrapper span[role="presentation"]').count();
+      const count = await productPricePage.selectorsObj.cellTable.count();
       for (let i = 0; i < count; i++) {
         if(i == 3){
-          text = await page.locator('div.ag-cell-wrapper span[role="presentation"]').nth(i).innerText();
+          text = await productPricePage.selectorsObj.cellTable.nth(i).innerText();
         }
       }
       await page.waitForTimeout(1000);
@@ -562,11 +562,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 8: Verify form is cleared
       let text = '';
       let color = '';
-      const count = await page.locator('div.ag-cell-wrapper span[role="presentation"]').count();
+      const count = await productPricePage.selectorsObj.cellTable.count();
       for (let i = 0; i < count; i++) {
         if(i == 2){
-          text = await page.locator('div.ag-cell-wrapper span[role="presentation"]').nth(i).innerText();
-          color = await page.locator('div.ag-cell-wrapper span[role="presentation"]').nth(i).evaluate(el => {
+          text = await productPricePage.selectorsObj.cellTable.nth(i).innerText();
+          color = await productPricePage.selectorsObj.cellTable.nth(i).evaluate(el => {
             return getComputedStyle(el).color;
           });
         }
@@ -604,9 +604,9 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
       // Step 8: Verify form is cleared
-      await page.locator('div[row-index="0"]').first().click();
+      await productPricePage.selectorsObj.firstRowTable.first().click();
       await page.waitForTimeout(1000);
-      expect(await page.locator('#kkNm').inputValue()).toBe('テスト_最大処理件数調査_特売');
+      expect(await productPricePage.selectorsObj.kkNmInput.inputValue()).toBe('テスト_最大処理件数調査_特売');
     });
 
     test('WTY10301_51 - clear form', async ({
@@ -666,7 +666,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 4: Wait for form to be ready
       await productPricePage.waitForFormReady();
 
-      await page.locator('#baseDate+img').click();
+      await productPricePage.selectorsObj.clearBaseDate.click();
       await page.waitForTimeout(500);
 
       const result = await productPricePage.checkValueInput(productPricePage.selectorsObj.baseDateInput, 10000);
@@ -696,7 +696,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 4: Wait for form to be ready
       await productPricePage.waitForFormReady();
 
-      await page.locator('#btnCd+img').click();
+      await productPricePage.selectorsObj.clearBtnCd.click();
       await page.waitForTimeout(500);
 
       const result = await productPricePage.checkValueInput(productPricePage.selectorsObj.btnCdInput, 10000);
@@ -726,7 +726,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 4: Wait for form to be ready
       await productPricePage.waitForFormReady();
 
-      await page.locator('#shnCd+div+img').click();
+      await productPricePage.selectorsObj.clearShnCd.click();
       await page.waitForTimeout(500);
 
       const result = await productPricePage.checkValueInput(productPricePage.selectorsObj.shnCdInput, 10000);
