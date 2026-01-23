@@ -16,10 +16,6 @@
                             "screenId": "WTY10101"
                         }
                     ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
                 }
             ],
             "expectedResults": {
@@ -60,10 +56,6 @@
                             "screenId": "WTY10101"
                         }
                     ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
                 }
             ]
         },
@@ -102,10 +94,6 @@
                             "screenId": "WTY10101"
                         }
                     ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
                 }
             ]
         },
@@ -125,10 +113,6 @@
                             "screenId": "WTY10101"
                         }
                     ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
                 }
             ]
         },
@@ -172,10 +156,6 @@
                             "screenId": "WTY10101"
                         }
                     ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
                 }
             ]
         },
@@ -210,7 +190,9 @@
                 },
                 {
                     "id": "modeFlg",
-                    "value": "1"
+                    "value": {
+                        "modeFlg": "1"
+                    }
                 },
                 {
                     "id": "btnInfoDT",
@@ -257,4 +239,3 @@
         }
     }
 }
-

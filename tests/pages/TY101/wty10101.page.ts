@@ -12,7 +12,10 @@ export interface WTY10101SearchData {
 
 export class TY10101Page extends BasePage {
     // Selectors
-    readonly selectors = {
+    protected readonly selectors = {
+        // Required by BasePage
+        errorClass: '_error_cbu4e_24',
+
         // Page title
         pageTitle: 'div:has-text("商品基本照会")',
 
@@ -45,9 +48,9 @@ export class TY10101Page extends BasePage {
         setDisplay: 'div:has-text("セット") + div',
 
         // Price section
-        generalButton: 'button:has-text("一般")',
-        memberButton: 'button:has-text("正会員")',
-        anshinButton: 'button:has-text("あんしん会員")',
+        generalButton: 'label:has-text("一般")',
+        memberButton: 'label:has-text("正会員")',
+        anshinButton: 'label:has-text("あんしん会員")',
         normalPointButton: 'button:has-text("通常P")',
         limitedPointButton: 'button:has-text("期間限定P")',
         dmDisplayToggleButton: 'button:has-text("ＤＭ・展示売価表示")',
@@ -67,15 +70,37 @@ export class TY10101Page extends BasePage {
         electronicPriceCouponDiscountInput: '#couponDiscount',
         electronicPriceNoInterestTimesInput: '#noInterestNumberOfPay',
 
+        // Product image slider section (商品画像)
+        productImageAccordionButton: 'button:has-text("商品画像")',
+        productImageSliderWrapper: 'div[class*="ecSliderWrapper"]',
+        productImageMainImage: 'div[class*="ecSliderWrapper"] img[alt*="商品画像"]',
+        productImagePrevButton: 'div[class*="ecSliderWrapper"] button:has(svg[data-testid="ChevronLeftIcon"])',
+        productImageNextButton: 'div[class*="ecSliderWrapper"] button:has(svg[data-testid="ChevronRightIcon"])',
+        productImageThumbnails: 'div[class*="ecSliderWrapper"] img[alt*="Thumbnail"]',
+
+        // Product description section (商品説明)
+        productDescriptionAccordionButton: 'div.product-description button:has-text("商品説明")',
+        productDescriptionContent: 'div.product-description div[class*="ecContent"]',
+
+        // Product spec section (スペック)
+        productSpecAccordionButton: 'div.product-spec button:has-text("スペック")',
+        productSpecContent: 'div.product-spec div[class*="ecContent"]',
+
+        // Product color variation section (カラーバリエーション)
+        productColorSection: 'div.product-color',
+        productColorAccordionButton: 'div.product-color button:has-text("カラーバリエーション")',
+        productColorLabels: 'div.product-color div[class*="ecLabel"]',
+        productColorJanLink: 'div.product-color div[class*="ecLabel"].underline',
+
         // Menu buttons
         menuPopup: 'ul[role="menu"]',
-        actionMenuButton: 'button[aria-label="menu"]',
         productPriceMenuItem: 'ul[role="menu"] li:has-text("商品価格")',
         storeStockMenuItem: 'ul[role="menu"] li:has-text("店別在庫")',
         orderMenuItem: 'ul[role="menu"] li:has-text("オーダー")',
         arrivalMenuItem: 'ul[role="menu"] li:has-text("入荷予定")',
         cartMenuItem: 'ul[role="menu"] li:has-text("カート")',
         clearMenuItem: 'ul[role="menu"] li:has-text("クリア")',
+        iconBack: ".page-header-left button",
 
         // Error messages
         errorMessage: 'p.text-red-500',
@@ -401,39 +426,118 @@ export class TY10101Page extends BasePage {
     }
 
     /**
-     * Open action menu
+     * Product image slider helpers (商品画像)
      */
-    async openActionMenu(): Promise<void> {
-        const locator = this.page.locator(this.selectors.actionMenuButton).first();
-        await this.clickWithRetry(locator);
+    getProductImageAccordionButton(): Locator {
+        return this.page.locator(this.selectors.productImageAccordionButton).first();
+    }
+
+    getProductImageSliderWrapper(): Locator {
+        return this.page.locator(this.selectors.productImageSliderWrapper).first();
+    }
+
+    getProductImageMainImage(): Locator {
+        return this.page.locator(this.selectors.productImageMainImage).first();
+    }
+
+    getProductImagePrevButton(): Locator {
+        return this.page.locator(this.selectors.productImagePrevButton).first();
+    }
+
+    getProductImageNextButton(): Locator {
+        return this.page.locator(this.selectors.productImageNextButton).first();
+    }
+
+    getProductImageThumbnails(): Locator {
+        return this.page.locator(this.selectors.productImageThumbnails);
+    }
+
+    async clickProductImageAccordion(): Promise<void> {
+        const button = this.getProductImageAccordionButton();
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(500);
+    }
+
+    async clickProductImageNext(): Promise<void> {
+        const button = this.getProductImageNextButton();
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(500);
+    }
+
+    async clickProductImagePrev(): Promise<void> {
+        const button = this.getProductImagePrevButton();
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(500);
+    }
+
+    async getProductImageMainImageSrc(): Promise<string> {
+        const img = this.getProductImageMainImage();
+        return await img.getAttribute('src') || '';
+    }
+
+    async getProductImageThumbnailCount(): Promise<number> {
+        return await this.getProductImageThumbnails().count();
+    }
+
+    /**
+     * Product description helpers (商品説明)
+     */
+    getProductDescriptionAccordionButton(): Locator {
+        return this.page.locator(this.selectors.productDescriptionAccordionButton).first();
+    }
+
+    getProductDescriptionContent(): Locator {
+        return this.page.locator(this.selectors.productDescriptionContent).first();
+    }
+
+    async clickProductDescriptionAccordion(): Promise<void> {
+        const button = this.getProductDescriptionAccordionButton();
+        await this.clickWithRetry(button);
         await this.page.waitForTimeout(500);
     }
 
     /**
-     * Check if menu item is visible
+     * Product spec helpers (スペック)
      */
+    getProductSpecAccordionButton(): Locator {
+        return this.page.locator(this.selectors.productSpecAccordionButton).first();
+    }
+
+    getProductSpecContent(): Locator {
+        return this.page.locator(this.selectors.productSpecContent).first();
+    }
+
+    async clickProductSpecAccordion(): Promise<void> {
+        const button = this.getProductSpecAccordionButton();
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(500);
+    }
+
+    getProductColorSection(): Locator {
+        return this.page.locator(this.selectors.productColorSection).first();
+    }
+
+    getProductColorAccordionButton(): Locator {
+        return this.page.locator(this.selectors.productColorAccordionButton).first();
+    }
+
+    getProductColorLabels(): Locator {
+        return this.page.locator(this.selectors.productColorLabels).first();
+    }
+
+    getProductColorJanLink(janCode: string): Locator {
+        return this.page.locator(this.selectors.productColorJanLink).filter({ hasText: `JAN: ${janCode}` }).first();
+    }
+
+    async clickProductColorAccordion(): Promise<void> {
+        const button = this.getProductColorAccordionButton();
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(500);
+    }
+
     async isMenuItemVisible(menuItemSelector: string): Promise<boolean> {
         const locator = this.page.locator(menuItemSelector);
         return await locator.isVisible({ timeout: 3000 }).catch(() => false);
-    }
-
-    /**
-     * Check if all main menu items are visible
-     */
-    async areMainMenuItemsVisible(): Promise<{
-        productPrice: boolean;
-        storeStock: boolean;
-        order: boolean;
-        arrival: boolean;
-    }> {
-        await this.openActionMenu();
-
-        return {
-            productPrice: await this.isMenuItemVisible(this.selectors.productPriceMenuItem),
-            storeStock: await this.isMenuItemVisible(this.selectors.storeStockMenuItem),
-            order: await this.isMenuItemVisible(this.selectors.orderMenuItem),
-            arrival: await this.isMenuItemVisible(this.selectors.arrivalMenuItem),
-        };
     }
 
     /**
@@ -551,6 +655,11 @@ export class TY10101Page extends BasePage {
     async isBlankErrorMsgVisible(): Promise<boolean> {
         const locator = this.page.locator(this.selectors.blankError).first();
         return await locator.isVisible({ timeout: 1000 }).catch(() => false);
+    }
+
+    async clickIconBack(): Promise<void> {
+        const locator = this.page.locator(this.selectors.iconBack).first();
+        await this.clickWithRetry(locator);
     }
 }
 
