@@ -24,10 +24,48 @@ export class WTY207010Page extends BasePage {
 
 
     /**
-     * Wrapper to read a field value using BasePage helper
+     * Get label's 'for' attribute by its visible text
+     * @param labelText - Text of the label
+     * @param timeout - Timeout in milliseconds (default: 5000)
+     * @returns 'for' attribute value or null if not found
+     */
+    async getLabelForByText(labelText: string, timeout: number = 5000): Promise<string | null> {
+        const label = this.page.locator(`label:has-text("${labelText}")`).first();
+        try {
+            await this.waitForVisible(label, timeout);
+            const forAttr = await label.getAttribute('for');
+            if (forAttr && forAttr.trim().length > 0) return forAttr.trim();
+
+            // Fallback: try to infer from id if 'for' not present
+            const idAttr = await label.getAttribute('id');
+            return idAttr ? idAttr.trim() : null;
+        } catch {
+            return null;
+        }
+    }
+
+    /**
+     * Get value from input or text element
+     * Tries input first, then falls back to text content
+     * @param selector - CSS selector or Locator
+     * @returns Value as string
      */
     async getFieldValue(selector: string | Locator): Promise<string> {
-        return super.getFieldValue(selector);
+        const locator = typeof selector === 'string' ? this.page.locator(selector) : selector;
+
+        try {
+            // Try getting input value first
+            const val = await locator.inputValue({ timeout: 2000 });
+            return (val ?? '').trim();
+        } catch {
+            // Fallback to text content (for non-input elements)
+            try {
+                const textValue = await locator.textContent({ timeout: 2000 });
+                return textValue?.trim() || '';
+            } catch {
+                return '';
+            }
+        }
     }
 
     /**
@@ -37,27 +75,19 @@ export class WTY207010Page extends BasePage {
      * @returns Input value
      */
     async checkLabelAndInputValue(labelText: string, expectedValue?: string): Promise<string> {
-        console.log(`[TEST] Waiting for label ${labelText} to be visible...`);
         const labelVisible = await this.waitForTextInBody(labelText, 5000);
         if (!labelVisible) {
             throw new Error(`Label ${labelText} not found`);
         }
-
-        console.log('[TEST] Getting label for attribute...');
         const labelFor = await this.getLabelForByText(labelText);
-
-        console.log('[TEST] Getting input value...');
         const inputSelector = `#${labelFor}`;
         const inputValue = await this.getFieldValue(inputSelector);
-        console.log(`[TEST] Input value for ${labelText} (${inputSelector}) is: ${inputValue}`);
 
         if (expectedValue !== undefined) {
             if (inputValue !== expectedValue) {
                 throw new Error(`Expected value "${expectedValue}" but got "${inputValue}"`);
             }
         }
-
-        console.log('[TEST] ✅ Check passed successfully');
         return inputValue;
     }
 
@@ -140,7 +170,6 @@ export class WTY207010Page extends BasePage {
 
             const cellCount = await multiRowCells.count();
             if (cellCount === 0) {
-                console.log(`[VERIFY] No ${this.classCellOutput} found`);
                 return true; // No cells to verify
             }
 
@@ -155,8 +184,6 @@ export class WTY207010Page extends BasePage {
                 });
             }
 
-            console.log(`[VERIFY] Valid values from mock data: ${Array.from(validValues).join(', ')}`);
-
             const listTextNotInData = ["", "自動", "自店", "他店", "手配済", "伝替"];
             // Check each multi-row-cell-item
             for (let i = 0; i < cellCount; i++) {
@@ -169,17 +196,11 @@ export class WTY207010Page extends BasePage {
 
                 // Check if the text exists in the valid values set
                 if (!validValues.has(trimmedText)) {
-                    console.log(`[VERIFY] ❌ Text "${trimmedText}" not found in mock data`);
                     return false;
                 }
-
-                console.log(`[VERIFY] ✅ Text "${trimmedText}" found in mock data`);
             }
-
-            console.log('[VERIFY] ✅ All multi-row-cell-item texts are valid');
             return true;
         } catch (error) {
-            console.error(`[VERIFY] Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
             return false;
         }
     }
@@ -229,7 +250,6 @@ export class WTY207010Page extends BasePage {
 
             const cellCount = await multiRowCells.count();
             if (cellCount === 0) {
-                console.log(`[VERIFY] No ${this.classCellOutput} found`);
                 return false;
             }
 
@@ -242,24 +262,17 @@ export class WTY207010Page extends BasePage {
                     foundTexts.add(trimmedText);
                 }
             }
-
-            console.log(`[VERIFY] Expected thiKbn texts: ${Array.from(expectedTexts).join(', ')}`);
-            console.log(`[VERIFY] Found texts in multi-row-cell-item: ${Array.from(foundTexts).join(', ')}`);
-
             // Check if all expected texts are found
             let allFound = true;
             for (const expectedText of expectedTexts) {
                 if (!foundTexts.has(expectedText)) {
-                    console.log(`[VERIFY] ❌ Expected text "${expectedText}" not found in multi-row-cell-item`);
                     allFound = false;
                 } else {
-                    console.log(`[VERIFY] ✅ Text "${expectedText}" found in multi-row-cell-item`);
                 }
             }
 
             return allFound;
         } catch (error) {
-            console.error(`[VERIFY] Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
             return false;
         }
     }
@@ -291,13 +304,9 @@ export class WTY207010Page extends BasePage {
             const color = await element.evaluate((el) => {
                 return window.getComputedStyle(el).color;
             });
-
             const isRed = this.isRedColor(color);
-            console.log(`[VERIFY] Element text color: ${color}, isRed: ${isRed}`);
-
             return isRed;
         } catch (error) {
-            console.error(`[VERIFY] Error checking text color: ${error instanceof Error ? error.message : 'Unknown error'}`);
             return false;
         }
     }
@@ -321,14 +330,11 @@ export class WTY207010Page extends BasePage {
             const rows = container.locator('div[role="row"]');
             const rowCount = await rows.count();
 
-            console.log(`[VERIFY] Found ${rowCount} rows in ag-center-cols-container`);
-
             const details: Array<{ rowIndex: number; color: string; isRed: boolean }> = [];
             let allRed = true;
 
             for (const rowIndex of rowIndices) {
                 if (rowIndex >= rowCount) {
-                    console.log(`[VERIFY] ❌ Row index ${rowIndex} out of bounds (total rows: ${rowCount})`);
                     allRed = false;
                     continue;
                 }
@@ -341,7 +347,6 @@ export class WTY207010Page extends BasePage {
                 const cellCount = await cellItems.count();
 
                 if (cellCount === 0) {
-                    console.log(`[VERIFY] ⚠ No ${this.classCellOutput} found in row ${rowIndex}`);
                     continue;
                 }
 
@@ -352,16 +357,13 @@ export class WTY207010Page extends BasePage {
                 details.push({ rowIndex, color: '', isRed });
 
                 if (isRed) {
-                    console.log(`[VERIFY] ✅ Row ${rowIndex} has red text`);
                 } else {
-                    console.log(`[VERIFY] ❌ Row ${rowIndex} does not have red text`);
                     allRed = false;
                 }
             }
 
             return { allRed, details };
         } catch (error) {
-            console.error(`[VERIFY] Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
             return {
                 allRed: false,
                 details: []
@@ -429,10 +431,8 @@ export class WTY207010Page extends BasePage {
             const multiRowCells = this.page.locator(`div.${this.classCellOutput}`);
             const count = await multiRowCells.count();
 
-            console.log(`[VERIFY] Found ${count} div.${this.classCellOutput} elements`);
             return count === 0;
         } catch (error) {
-            console.error(`[VERIFY] Error checking classCellOutput: ${error instanceof Error ? error.message : 'Unknown error'}`);
             return false;
         }
     }
