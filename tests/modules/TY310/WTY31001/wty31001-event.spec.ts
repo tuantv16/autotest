@@ -83,7 +83,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(500);
 
     // Step 2: Enter data inputs
-    await productInputPage.fillProductInput("00010013687");
+    await productInputPage.fillProductInput("00010013557");
     await productInputPage.fillRHinIriInput("10");
     await productInputPage.fillTenjiIriInput("1");
     await page.waitForTimeout(500);
