@@ -38,6 +38,27 @@ const SNAPSHOT_VIEWPORTS: SnapshotViewport[] = [
   },
 ];
 
+function normalizeDeviceFlag(flagRaw: unknown): DeviceTier | 'ALL' {
+  const v = String(flagRaw ?? '')
+    .trim()
+    .toLowerCase();
+
+  if (!v || v === 'all') return 'ALL';
+  if (v === 'pc' || v === 'desktop') return 'PC';
+  if (v === 'tablet' || v === 'tab') return 'Tablet';
+  if (v === 'mobile' || v === 'phone') return 'Mobile';
+
+  throw new Error(
+    `[snap] Invalid SNAP_DEVICE='${v}'. Allowed: pc|tablet|mobile|all`,
+  );
+}
+
+function getEnabledSnapshotViewports(): SnapshotViewport[] {
+  const flag = normalizeDeviceFlag(process.env.SNAP_DEVICE);
+  if (flag === 'ALL') return SNAPSHOT_VIEWPORTS;
+  return SNAPSHOT_VIEWPORTS.filter((x) => x.tier === flag);
+}
+
 function ensureDir(dirPath: string): void {
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
@@ -175,7 +196,7 @@ async function snap(
 ): Promise<string> {
   const outputs: string[] = [];
 
-  for (const vp of SNAPSHOT_VIEWPORTS) {
+  for (const vp of getEnabledSnapshotViewports()) {
     outputs.push(await snapForViewport(page, testInfo, kind, vp.tier, vp, index));
   }
 
