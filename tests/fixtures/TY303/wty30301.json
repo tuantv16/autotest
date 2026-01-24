@@ -2,7 +2,7 @@
     "wty30301":{
         "TC_01":{
             "description":"Verify clear form functionality",
-            "sessionData": {
+            "sessionData": [{
                 "key": "WTZ11203_IN_SD",
                 "value": {
                     "wty10401InfoDT": [
@@ -39,7 +39,7 @@
                         }
                     ]
                 }
-            },
+            }],
             "commonData": [
                 {
                     "id": "commonDT",

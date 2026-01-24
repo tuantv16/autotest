@@ -19,6 +19,8 @@ export const COMMON_MESSAGES = {
   CONFIRM_SAVE: '保存しますか？',
   CONFIRM_DELETE: '削除しますか？',
   CONFIRM_CANCEL: 'キャンセルしますか？',
+
+  ERROR_MESSAGE_ADD_CART: '商品が指定されていません。商品を指定してください',
 } as const;
 
 export const BUTTON_LABELS = {

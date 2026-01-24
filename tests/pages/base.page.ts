@@ -3,7 +3,7 @@
  * Common methods for all page objects
  */
 
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 const DEFAULT_MENU_BUTTON_SELECTOR = 'button[aria-haspopup="true"][id="basic-button"], button[aria-haspopup="true"]';
 
@@ -15,6 +15,10 @@ export class BasePage {
         this.page = page;
         this.baseUrl = baseUrl;
     }
+
+    protected readonly selectors = {
+        errorClass: '_error_cbu4e_24',
+    };
 
     /**
      * Navigate to a specific path
@@ -274,6 +278,24 @@ export class BasePage {
     }
 
     /**
+     * Get text by locator
+     * @param locator - Locator of the element
+     * @returns Inner text of the element
+     */
+    async getTextByLocator(locator: Locator): Promise<string> {
+        await this.waitForVisible(locator, 10000);
+        return await locator.innerText();
+    }
+
+    async isConfirmButtonVisible(selectorConfirmButton: string): Promise<boolean> {
+        return await this.page.locator(selectorConfirmButton).isVisible();
+    }
+
+    async isClearButtonVisible(selectorClearButton: string): Promise<boolean> {
+        return await this.page.locator(selectorClearButton).isVisible();
+    }
+
+    /**
      * Helper method to open combobox and click option
      * @param optionSelectors - Array of selectors to try for finding the option
      * @param errorMessage - Error message to throw if option not found
@@ -281,7 +303,7 @@ export class BasePage {
      */
     protected async clickOptionInCombobox(optionSelectors: string[], errorMessage: string, comboboxSelector: string): Promise<void> {
         const comboboxLocator = this.page.locator(comboboxSelector);
-
+        
         await this.waitForVisible(comboboxLocator, 10000);
         await comboboxLocator.click({ timeout: 10000 });
         await this.page.waitForTimeout(500);
@@ -313,9 +335,101 @@ export class BasePage {
         await this.clickOptionInCombobox(optionSelectors, `Option with data-value "${dataValue}" not found in combobox dropdown`, comboboxSelector);
     }
 
+    async blurInputById(id: string): Promise<void> {
+        const locator = this.page.locator(`#${id}`);
+        await this.waitForVisible(locator, 10000);
+        await locator.blur();
+    }
+
+    async hasErrorBorderById(id: string): Promise<boolean> {
+        const locator = this.page.locator(`#${id}`);
+
+        // Check if element exists and is visible
+        const isVisible = await locator.isVisible({ timeout: 10000 }).catch(() => false);
+        if (!isVisible) {
+            return false;
+        }
+
+        // Get error class - use fallback if not defined in child class
+        const errorClass = this.selectors?.errorClass || '_error_cbu4e_24';
+
+        // Wait for error class to appear (class might be added asynchronously after validation)
+        // Retry checking for the class with intervals
+        const maxRetries = 6; // 6 retries * 500ms = 3 seconds
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                const classList = await locator
+                    .evaluate((el: Element) => Array.from(el.classList) as string[])
+                    .catch(() => [] as string[]);
+
+                if (classList.includes(errorClass)) {
+                    return true;
+                }
+            } catch {
+                // Continue to next retry
+            }
+
+            // Wait 500ms before next check (except on last iteration)
+            if (i < maxRetries - 1) {
+                await this.page.waitForTimeout(500);
+            }
+        }
+
+        // Final check if element has error class
+        try {
+            const classList = await locator
+                .evaluate((el: Element) => Array.from(el.classList) as string[])
+                .catch(() => [] as string[]);
+            return classList.includes(errorClass);
+        } catch {
+            return false;
+        }
+    }
+
+    /**
+     * Select a radio option by group label and option value
+     * @param groupLabel - Label text of the radio group (e.g., "表示在庫")
+     * @param optionValue - Value text of the option to select (e.g., "実在庫", "有効")
+     */
+    async selectedOption(groupLabel: string, optionValue: string): Promise<void> {
+        // Since input is hidden, we need to click on the label or span containing the option text
+        // Try multiple selectors to find the clickable element
+        const selectors = [
+        // Click on label containing the option text
+        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}")`,
+        // Click on span containing the option text
+        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}") span`,
+        // Alternative: click on label by value attribute
+        `label:has-text("${groupLabel}") ~ div label:has(input[type="radio"][value="${optionValue}"])`,
+        ];
+
+        let clicked = false;
+        for (const selector of selectors) {
+            try {
+                const locator = this.page.locator(selector).first();
+                const isVisible = await locator.isVisible({ timeout: 2000 }).catch(() => false);
+                if (isVisible) {
+                    await locator.scrollIntoViewIfNeeded();
+                    await locator.click({ timeout: 5000, force: true });
+                    clicked = true;
+                    break;
+                }
+            } catch (error) {
+                // Continue to next selector
+                continue;
+            }
+        }
+
+        if (!clicked) {
+            throw new Error(`Could not find or click radio option "${optionValue}" in group "${groupLabel}"`);
+        }
+
+        await this.page.waitForTimeout(300); // Wait for selection to be applied
+    }
+
     /**
      * Select option for Material UI Select (div role="combobox")
-     *
+     * 
      * @param selectLocator Locator of MUI select element
      * @param value value of option (data-value)
      */
@@ -346,7 +460,7 @@ export class BasePage {
 
     /**
      * Click button in action menu
-     *
+     * 
      * @param buttonText Text of the button to click
      */
     async clickButtonInMenuButton(buttonText: string): Promise<void> {
@@ -364,50 +478,183 @@ export class BasePage {
 
       // 4. Wait UI settle
       await this.page.waitForTimeout(500);
+
     }
 
     /**
-     * Get label's 'for' attribute by its visible text
-     * @param labelText - Text of the label
-     * @param timeout - Timeout in milliseconds (default: 5000)
-     * @returns 'for' attribute value or null if not found
+     * Scroll in detail table until "End of data" text appears
+     * @param tableId - Table ID selector (default: '#store-inventory-inquiry-2')
+     * @param maxScrollAttempts - Maximum number of scroll attempts (default: 50)
+     * @param scrollDelay - Delay between scrolls in ms (default: 500)
+     * @throws Error if "End of data" is not found after max attempts
      */
-    async getLabelForByText(labelText: string, timeout: number = 5000): Promise<string | null> {
-        const label = this.page.locator(`label:has-text("${labelText}")`).first();
-        try {
-            await this.waitForVisible(label, timeout);
-            const forAttr = await label.getAttribute('for');
-            if (forAttr && forAttr.trim().length > 0) return forAttr.trim();
+    async scrollTableUntilEndOfData(
+        tableId: string = '',
+        maxScrollAttempts: number = 50,
+        scrollDelay: number = 500
+    ): Promise<void> {
+        const endOfDataTexts = ['End of data', 'End Of Data', 'End of Data'];
 
-            // Fallback: try to infer from id if 'for' not present
-            const idAttr = await label.getAttribute('id');
-            return idAttr ? idAttr.trim() : null;
-        } catch {
-            return null;
-        }
-    }
+        for (let attempt = 0; attempt < maxScrollAttempts; attempt++) {
+            // Check if "End of data" text exists
+            // It's displayed in a div with class "mt-2" after the ag-grid component
+            let found = false;
+            for (const text of endOfDataTexts) {
+                // Try multiple selectors to find "End of data"
+                const selectors = [
+                    `${tableId} div.mt-2:has-text("${text}")`,
+                    `${tableId} div:has-text("${text}")`,
+                    `div.mt-2:has-text("${text}")`,
+                    `text="${text}"`,
+                ];
 
-    /**
-     * Get value from input or text element
-     * Tries input first, then falls back to text content
-     * @param selector - CSS selector or Locator
-     * @returns Value as string
-     */
-    async getFieldValue(selector: string | Locator): Promise<string> {
-        const locator = typeof selector === 'string' ? this.page.locator(selector) : selector;
+                for (const selector of selectors) {
+                    const endOfDataLocator = this.page.locator(selector).first();
+                    const isVisible = await endOfDataLocator.isVisible({ timeout: 500 }).catch(() => false);
 
-        try {
-            // Try getting input value first
-            const val = await locator.inputValue({ timeout: 2000 });
-            return (val ?? '').trim();
-        } catch {
-            // Fallback to text content (for non-input elements)
-            try {
-                const textValue = await locator.textContent({ timeout: 2000 });
-                return textValue?.trim() || '';
-            } catch {
-                return '';
+                    if (isVisible) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) break;
             }
+
+            if (found) {
+                return; // Found "End of data", exit successfully
+            }
+
+            // Scroll within the table's viewport
+            await this.page.evaluate((selector) => {
+                const tableElement = document.querySelector(selector);
+                if (tableElement) {
+                    // Find the ag-grid body viewport
+                    const viewport = tableElement.querySelector('.ag-body-viewport') as HTMLElement;
+                    if (viewport) {
+                        // Scroll down by a reasonable amount (e.g., 80% of viewport height)
+                        const scrollAmount = viewport.clientHeight * 0.8;
+                        viewport.scrollTop = Math.min(viewport.scrollTop + scrollAmount, viewport.scrollHeight - viewport.clientHeight);
+                    } else {
+                        // Fallback: scroll the table container itself
+                        const table = tableElement as HTMLElement;
+                        const scrollAmount = table.clientHeight * 0.8;
+                        table.scrollTop = Math.min(table.scrollTop + scrollAmount, table.scrollHeight - table.clientHeight);
+                    }
+                }
+            }, tableId);
+
+            // Wait before next scroll attempt
+            await this.page.waitForTimeout(scrollDelay);
         }
+
+        // If we reach here, "End of data" was not found
+        throw new Error(
+            `"End of data" text not found after ${maxScrollAttempts} scroll attempts in table ${tableId}`
+        );
     }
+
+    /**
+     * Scroll table to bottom and verify "End of data" text appears
+     * @param tableId - Table ID selector (required, e.g., '#store-inventory-inquiry-2')
+     * @param timeout - Timeout for waiting "End of data" to appear (default: 10000ms)
+     * @returns Text content of "End of data" element
+     */
+    async scrollToBottomAndVerifyEndOfData(
+        tableId: string,
+        timeout: number = 10000
+    ): Promise<string> {
+        // Scroll table to bottom
+        await this.page.evaluate((selector) => {
+            const tableElement = document.querySelector(selector);
+            if (tableElement) {
+                // Find the ag-grid body viewport
+                const viewport = tableElement.querySelector('.ag-body-viewport') as HTMLElement;
+                if (viewport) {
+                    // Scroll to bottom
+                    viewport.scrollTop = viewport.scrollHeight;
+                } else {
+                    // Fallback: scroll the table container itself
+                    const table = tableElement as HTMLElement;
+                    table.scrollTop = table.scrollHeight;
+                }
+            }
+        }, tableId);
+
+        // Wait a bit for the scroll to complete
+        await this.page.waitForTimeout(500);
+
+        // Find "End of data" text - it can be in different formats
+        const endOfDataTexts = ['End of data', 'End Of Data', 'End of Data'];
+        let endOfDataLocator: ReturnType<typeof this.page.locator> | null = null;
+
+        for (const text of endOfDataTexts) {
+            // Try multiple selectors to find "End of data"
+            const selectors = [
+                `${tableId} div.mt-2:has-text("${text}")`,
+                `${tableId} div:has-text("${text}")`,
+                `div.mt-2:has-text("${text}")`,
+            ];
+
+            for (const selector of selectors) {
+                const locator = this.page.locator(selector).first();
+                const isVisible = await locator.isVisible({ timeout: 1000 }).catch(() => false);
+                if (isVisible) {
+                    endOfDataLocator = locator;
+                    break;
+                }
+            }
+            if (endOfDataLocator) break;
+        }
+
+        // If not found with specific selectors, try to find by text content
+        if (!endOfDataLocator) {
+            endOfDataLocator = this.page.locator('text=End of data').first();
+        }
+
+        // Wait for "End of data" to be visible
+        await endOfDataLocator.waitFor({ state: 'visible', timeout });
+
+        // Get text content
+        const endOfDataText = await endOfDataLocator.textContent();
+        return endOfDataText?.trim() || '';
+    }
+
+    /**
+     * Click on a table row by row index
+     * @param rowIndex - Row index (0-based)
+     */
+    async clickRowTable(rowIndex: number): Promise<void> {
+        const rowLocator = this.page.locator(`div[role="row"][row-index="${rowIndex}"]`).first();
+        await rowLocator.waitFor({ state: 'visible', timeout: 5000 });
+        await rowLocator.click({ timeout: 5000 });
+        await this.page.waitForTimeout(500);
+    }
+    /*
+     * Verify validation message by label text
+     * @param labelText - Text of the label associated with the input
+     * @param expectedMessage - Expected validation message text
+     */
+    async verifyValidateMessageByLabel(labelText: string, expectedMessage: string): Promise<void> {
+        const formBlock = this.page.locator(
+            `div:has(label:text-is("${labelText}"))`
+        );
+
+        const errorMessage = formBlock.locator(
+            'p.text-red-600'
+        );
+
+        await expect(errorMessage).toBeVisible();
+        await expect(errorMessage).toHaveText(expectedMessage);
+    }
+
+    async clickOutside(): Promise<void> {
+      await this.page.mouse.click(1, 1);
+    }
+
+    async clickButtonByText(text: string): Promise<void> {
+        const locator = this.page.locator(`button:has-text("${text}")`);
+        await locator.click({ timeout: 10000 });
+    }
+
 }
