@@ -88,15 +88,11 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
         await summaryPage.clickMoveDown();
-        
         await summaryPage.fillInputShnCd(testData.formData.shnCd_72);
-
         await summaryPage.clickSearchButton();
         await page.waitForTimeout(1000);
         await summaryPage.clickItemMenuColorVariation();
-
         await page.waitForTimeout(2000);
         const currentUrl = page.url();
         expect(currentUrl).toContain('TZ120');   
@@ -180,7 +176,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickItemMenuProductBasic();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY101');   
@@ -207,7 +203,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickItemMenuProductPrice();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY103');   
@@ -234,7 +230,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickItemMenuOrder();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY107');   
@@ -261,7 +257,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickItemMenuArrivePlan();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY110');   
@@ -288,7 +284,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickItemMenuBarcode();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TZ121');   
@@ -321,7 +317,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickSearchButton();
 
         await summaryPage.clickItemMenuCart();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY201');
