@@ -658,6 +658,34 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.verifyTableCell('defective', '0', 0);
     });
         
+    test('WTY10401_57', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_05');
+        // Step 1: Go to base URL and wait for it to load
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+        // Step 2: Inject IndexedDB data AFTER page loaded
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.clickMoveDown();
+        
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_57);
+
+        await summaryPage.clickSearchButton();
+        await page.waitForTimeout(1000);
+        const isMenuIconVisible = await summaryPage.isMenuIconVisible('カラバリ');
+        expect(isMenuIconVisible).toBe(false);
+    });
+
     test('WTY10401_58', async ({
         page,
         baseUrl,
@@ -684,6 +712,31 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         await summaryPage.verifyEndOfData();
 
+    });
+
+    test('WTY10401_59', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_05');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.clickMoveDown();
+        await summaryPage.fillInputShnCd(testData.formData.shnCdNotExist);
+        await summaryPage.clickSearchButton();
+
+        await page.waitForTimeout(1000);
+        const verifyDefaultTable = await summaryPage.verifySummaryTableHasNoDataRow();
+        expect(verifyDefaultTable).toBe(true);
     });
 
     test('WTY10401_60', async ({

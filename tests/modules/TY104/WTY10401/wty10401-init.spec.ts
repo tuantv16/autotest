@@ -199,10 +199,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         });
 
         await summaryPage.navigate();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
 
         await summaryPage.clickMoveDown();
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(1000);
 
         const isSearchButtonVisible = await summaryPage.isSearchButtonVisible();
         expect(isSearchButtonVisible).toBe(true);
