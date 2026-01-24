@@ -479,7 +479,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
         
         await summaryPage.clickMoveDown();
-        await summaryPage.fillInputShnCd(testData.formData.shnCd_5);
+        await summaryPage.fillInputShnCd(testData.formData.shnCd_50);
         await page.waitForTimeout(1000);
 
         await summaryPage.clickSearchButton();
