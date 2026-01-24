@@ -17,7 +17,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test("WTY31001_10", async ({ page, baseUrl }) => {
+  test("WTY31001_12", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Load base page
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -26,12 +26,16 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await snapInput();
+
     // Verify: Page title
     const pageTitle = await productInputPage.getPageTitle();
     expect(pageTitle).toBe(true);
+
+    await snapExpect();
   });
 
-  test("WTY31001_11", async ({ page, baseUrl }) => {
+  test("WTY31001_13", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -44,6 +48,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.openMenu();
     await page.waitForTimeout(500);
 
+    await snapInput();
+
     // Verify: Menu buttons visibility
     const requestSearchButton =
       await productInputPage.isRequestSearchButtonVisible();
@@ -52,9 +58,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     expect(requestSearchButton).toBe(true);
     expect(arrivalScheduleButton).toBe(true);
+
+    await snapExpect();
   });
 
-  test("WTY301001_12", async ({ page, baseUrl }) => {
+  test("WTY301001_14", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -63,15 +71,19 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await snapInput();
+
     // Verify: Menu buttons visibility
     const clearButton = await productInputPage.isClearButtonButtonVisible();
     const confirmButton = await productInputPage.isConfirmButtonVisible();
 
     expect(clearButton).toBe(true);
     expect(confirmButton).toBe(true);
+
+    await snapExpect();
   });
 
-  test("WTY31001_13", async ({ page, baseUrl }) => {
+  test("WTY31001_15", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -79,6 +91,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Radio button 供給 is visible
     const kkyRadioVisible = await productInputPage.isKkyRadioVisible();
@@ -95,9 +109,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Verify: Radio button 返品 is not checked by default
     const hpnRadioChecked = await productInputPage.isHpnRadioChecked();
     expect(hpnRadioChecked).toBe(false);
+
+    await snapExpect();
   });
 
-  test("WTY31001_14", async ({ page, baseUrl }) => {
+  test("WTY31001_16", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -105,6 +121,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Input 商品 is visible and editable
     const isProductInputVisible =
@@ -145,9 +163,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const isKisoIriInputEditable =
       await productInputPage.kisoIriInputIsEditable();
     expect(isKisoIriInputEditable).toBe(true);
+
+    await snapExpect();
   });
 
-  test("WTY31001_15", async ({ page, baseUrl }) => {
+  test("WTY31001_17", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -159,6 +179,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Select radio "供給" (should already be selected by default)
     await productInputPage.clickKkyRadio();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Radio button 供給 is checked
     const kkyRadioChecked = await productInputPage.isKkyRadioChecked();
@@ -177,9 +199,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.expectAllInputBordersNotRed({
       exclude: ["kaikon", "kaikonIri"],
     });
+
+    await snapExpect();
   });
 
-  test("WTY31001_16", async ({ page, baseUrl }) => {
+  test("WTY31001_18", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -191,6 +215,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Select radio "返品"
     await productInputPage.clickHpnRadio();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Radio button 返品 is checked
     const hpnRadioChecked = await productInputPage.isHpnRadioChecked();
@@ -209,9 +235,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.expectAllInputBordersRed({
       exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
+
+    await snapExpect();
   });
 
-  test("WTY31001_17", async ({ page, baseUrl }) => {
+  test("WTY31001_19", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -219,6 +247,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: 行No is visible and NOT editable
     const gyoNoVisible = await productInputPage.gyoNoInputIsVisible();
@@ -355,9 +385,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const tenjiKisoSuEditable =
       await productInputPage.tenjiKisoSuInputIsEditable();
     expect(tenjiKisoSuEditable).toBe(false);
+
+    await snapExpect();
   });
 
-  test("WTY31001_18", async ({ page, baseUrl }) => {
+  test("WTY31001_20", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -365,14 +397,18 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Button Clear is visible and enabled
     const clearButtonVisible =
       await productInputPage.isClearButtonButtonVisible();
     expect(clearButtonVisible).toBe(true);
+
+    await snapExpect();
   });
 
-  test("WTY31001_19", async ({ page, baseUrl }) => {
+  test("WTY31001_21", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -380,6 +416,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Button Clear is visible and enabled
     const searchButtonVisible =
@@ -389,9 +427,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const searchButtonEnabled =
       await productInputPage.isBtnSearchProductEnable();
     expect(searchButtonEnabled).toBe(true);
+
+    await snapExpect();
   });
 
-  test("WTY31001_20", async ({ page, baseUrl }) => {
+  test("WTY31001_22", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -399,6 +439,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Toggle button 定数削除 is visible
     const toggleVisible = await productInputPage.isTsuDelToggleVisible();
@@ -412,14 +454,17 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const stateAfterFirstClick = await productInputPage.getTsuDelToggleState();
     expect(stateAfterFirstClick).toBe(!initialState);
 
+    await snapExpect(1);
+
     await productInputPage.clickTsuDelToggle();
     await page.waitForTimeout(500);
 
     const stateAfterSecondClick = await productInputPage.getTsuDelToggleState();
     expect(stateAfterSecondClick).toBe(initialState);
+    await snapExpect(2);
   });
 
-  test("WTY31001_21", async ({ page, baseUrl }) => {
+  test("WTY31001_23", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -432,15 +477,19 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.clickTsuDelToggle();
     await page.waitForTimeout(500);
 
+    await snapInput();
+
     // Verify: 定数依頼 và 基礎依頼 fields are disabled when ON
     const tSuIriInputEnabled = await productInputPage.tSuIriInputIsEditable();
     expect(tSuIriInputEnabled).toBe(false);
 
     const kisoIriInputEnabled = await productInputPage.kisoIriInputIsEditable();
     expect(kisoIriInputEnabled).toBe(false);
+
+    await snapExpect();
   });
 
-  test("WTY31001_22", async ({ page, baseUrl }) => {
+  test("WTY31001_24", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -455,6 +504,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Uncheck Toggle button 定数削除
     await productInputPage.clickTsuDelToggle();
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Verify: 定数依頼 và 基礎依頼 fields are disabled when ON
     const tSuIriInputEnabled = await productInputPage.tSuIriInputIsEditable();
@@ -462,9 +512,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     const kisoIriInputEnabled = await productInputPage.kisoIriInputIsEditable();
     expect(kisoIriInputEnabled).toBe(true);
+
+    // await snapExpect();
   });
 
-  test("WTY31001_23", async ({ page, baseUrl }) => {
+  test("WTY31001_25", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -472,6 +524,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen in NEW mode)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput(1);
 
     // Verify: All editable fields are editable
     const productEditable = await productInputPage.productInputIsEditable();
@@ -489,9 +543,13 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const kisoIriEditable = await productInputPage.kisoIriInputIsEditable();
     expect(kisoIriEditable).toBe(true);
 
+    await snapExpect(1);
+
     // Step 3: Select radio "供給" (default mode)
     await productInputPage.clickKkyRadio();
     await page.waitForTimeout(1000);
+
+    await snapInput(2);
 
     // Verify: When selecting 供給, labels and borders display default colors (NOT red)
     await productInputPage.expectAllLabelsNotRed({
@@ -501,9 +559,13 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
       exclude: ["kaikon", "kaikonIri"],
     });
 
+    await snapExpect(2);
+
     // Step 4: Select radio "返品"
     await productInputPage.clickHpnRadio();
     await page.waitForTimeout(1000);
+
+    await snapInput(3);
 
     // Verify: When selecting 返品, labels and borders display red color
     await productInputPage.expectAllLabelsRed({
@@ -512,9 +574,17 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.expectAllInputBordersRed({
       exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
+
+    await snapExpect(3);
   });
 
-  test("WTY31001_24", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_26", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_24");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -528,6 +598,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen in NEW mode)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+    await snapInput();
 
     // Verify: All editable fields are editable
     const rHinIriEditable = await productInputPage.rHinIriInputIsEditable();
@@ -541,9 +612,16 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     const kisoIriEditable = await productInputPage.kisoIriInputIsEditable();
     expect(kisoIriEditable).toBe(true);
+    await snapExpect();
   });
 
-  test("WTY31001_25", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_27", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_25");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -557,6 +635,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen in View mode)
     await productInputPage.navigate();
     await page.waitForTimeout(10000);
+
+    await snapInput();
 
     // Verify: Radio button 供給 is disabled
     const kkyRadioDisabled = await productInputPage.isKkyRadioDisabled();
@@ -586,5 +666,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const kisoIriInputIsDisabled =
       await productInputPage.kisoIriInputIsDisabled();
     expect(kisoIriInputIsDisabled).toBe(true);
+
+    await snapExpect();
   });
 });

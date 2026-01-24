@@ -17,7 +17,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test("WTY31001_75", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_77", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -42,6 +42,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.fillTSuIriInput("0");
     await productInputPage.fillKisoIriInput("0");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Blur the field
     await productInputPage.blurKisoIriInput();
@@ -53,5 +54,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const errorMessage = await productInputPage.getErrorMessageDialog();
     expect(errorMessage).toContain("TE5137");
     expect(errorMessage).toContain("依頼指示を設定してください。");
+    await snapExpect();
   });
 });

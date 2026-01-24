@@ -17,21 +17,31 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test("WTY31001_5", async ({ page, baseUrl }) => {
+  test("WTY31001_5", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Login to system
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
 
-    // Step 2: Open menu "供給移動依頼商品入力"
+    // Step 2: Open WTY31001 screen
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
-    // Verify: Page title displays "供給移動依頼商品入力"
+    await snapInput();
+
+    // Verify: Page title displays
     const pageTitle = await productInputPage.getPageTitle();
     expect(pageTitle).toBe(true);
+
+    await snapExpect();
   });
 
-  test("WTY31001_6", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_6", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_6");
 
     // Step 1: Setup - Initialize with data from screen (WTY31001)
@@ -53,6 +63,13 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(500);
 
     await productInputPage.fillRHinIriInput("10");
+
+    // Verify: Data persists after navigating back
+    const gyoNoValueInit = await productInputPage.getGyoNoValue();
+    expect(gyoNoValueInit).toBe("001");
+
+    await snapInput();
+
     await productInputPage.clickConfirmButton();
     await page.waitForTimeout(1000);
 
@@ -65,15 +82,19 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     const productValue = await productInputPage.getProductInputValue();
     expect(productValue).toBe("");
+
+    await snapExpect();
   });
 
-  test("WTY31001_7", async ({ page, baseUrl }) => {
+  test("WTY31001_7", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Open screen without data in indexDB
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
 
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+
+    await snapInput();
 
     // Verify: Screen is ready for new input without errors
     const pageTitle = await productInputPage.getPageTitle();
@@ -95,9 +116,17 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     const hpnRadioChecked = await productInputPage.isHpnRadioChecked();
     expect(hpnRadioChecked).toBe(false);
+
+    await snapExpect();
   });
 
-  test("WTY31001_8", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_8", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_8");
 
     // Step 1: Setup - Initialize with data from screen (WTY31001)
@@ -111,14 +140,24 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
-    await page.waitForTimeout(500);
+
+    await snapInput();
 
     // Verify:
     const productValue = await productInputPage.getProductInputValue();
+    await page.waitForTimeout(500);
     expect(productValue).toBe("04962458558440");
+
+    await snapExpect();
   });
 
-  test("WTY31001_9", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_9", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_9");
 
     // Step 1: Setup
@@ -130,12 +169,16 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
       commonData: testData.commonData,
     });
 
+    await snapInput();
+
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(500);
 
     // Verify:
     const productValue = await productInputPage.getProductInputValue();
-    expect(productValue).toBe("04962458558440");
+    expect(productValue).toBe(testData.expected.productInputValue);
+
+    await snapExpect();
   });
 });

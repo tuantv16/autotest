@@ -17,7 +17,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test("WTY31001_49", async ({ page, baseUrl }) => {
+  test("WTY31001_51", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -33,6 +33,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 4: Switch to 供給 mode
     await productInputPage.clickKkyRadio();
     await page.waitForTimeout(1000);
+    await snapInput();
 
     // Verify: Check title page
     const titlePage = await productInputPage.getTitlePage();
@@ -53,9 +54,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.expectAllInputBordersNotRed({
       exclude: ["kaikon", "kaikonIri"],
     });
+    await snapExpect();
   });
 
-  test("WTY31001_50", async ({ page, baseUrl }) => {
+  test("WTY31001_52", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -71,10 +73,12 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.fillTSuIriInput("30");
     await productInputPage.fillKisoIriInput("40");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Switch to 返品 mode
     await productInputPage.clickHpnRadio();
     await page.waitForTimeout(1000);
+    await snapExpect(1);
 
     // Step 5: Switch back to 供給 mode
     await productInputPage.clickKkyRadio();
@@ -96,10 +100,17 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Verify: 開梗依頼 field is hidden
     const isKaikonIriVisible = await productInputPage.isKaikonIriInputVisible();
     expect(isKaikonIriVisible).toBe(false);
+    await snapExpect(2);
   });
 
-  test("WTY31001_51", async ({ page, baseUrl, indexedDBHelper }) => {
-    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+  test("WTY31001_53", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -116,6 +127,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Enter valid product code
     await productInputPage.fillProductInput("00010013557");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Click search button
     await productInputPage.clickSearchButton();
@@ -141,10 +153,17 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(hbJsk3Value).toBe(testData.expected.hbJsk3);
     expect(hbJsk2Value).toBe(testData.expected.hbJsk2);
     expect(hbJsk1Value).toBe(testData.expected.hbJsk1);
+    await snapExpect();
   });
 
-  test("WTY31001_52", async ({ page, baseUrl, indexedDBHelper }) => {
-    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+  test("WTY31001_54", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -161,10 +180,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Enter JAN code (13 digits)
     await productInputPage.fillProductInput("04962458558440");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Click search button
     await productInputPage.clickSearchButton();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(500);
 
     // Verify: Search works with JAN code
     // Verify: Product information is displayed
@@ -187,10 +207,17 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(hbJsk3Value).toBe(testData.expected.hbJsk3);
     expect(hbJsk2Value).toBe(testData.expected.hbJsk2);
     expect(hbJsk1Value).toBe(testData.expected.hbJsk1);
+    await snapExpect();
   });
 
-  test("WTY31001_53", async ({ page, baseUrl, indexedDBHelper }) => {
-    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+  test("WTY31001_55", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -207,19 +234,27 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Enter non-existent product code
     await productInputPage.fillProductInput("00010013555");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Click search button
     await productInputPage.clickSearchButton();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(500);
 
     // Verify: Error message is displayed
     const errorMessage = await productInputPage.getErrorMessageDialog();
     expect(errorMessage).toContain("TE5136");
     expect(errorMessage).toContain("商品情報が存在しません。");
+    await snapExpect();
   });
 
-  test("WTY31001_55", async ({ page, baseUrl, indexedDBHelper }) => {
-    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+  test("WTY31001_57", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -234,20 +269,33 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter product code
-    await productInputPage.fillProductInput("00010013557");
+    await productInputPage.fillProductInput("00579159611");
+    await page.waitForTimeout(500);
+    await snapInput();
+
+    // Step 5: Click search button
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(1000);
+
+    // Step 6: Enter data
+    await productInputPage.fillRHinIriInput("0");
+    await productInputPage.fillTenjiIriInput("0");
+    await productInputPage.fillTSuIriInput("0");
+    await productInputPage.fillKisoIriInput("0");
     await page.waitForTimeout(500);
 
-    // Step 5: Click confirm button
+    // Step 7: Click confirm button
     await productInputPage.clickConfirmButton();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(500);
 
     // Verify: Error message is displayed
     const errorMessage = await productInputPage.getErrorMessageDialog();
     expect(errorMessage).toContain("TE5137");
     expect(errorMessage).toContain("依頼指示を設定してください。");
+    await snapExpect();
   });
 
-  test("WTY31001_56", async ({ page, baseUrl }) => {
+  test("WTY31001_58", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -260,6 +308,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.fillTSuIriInput("100");
     await productInputPage.fillKisoIriInput("200");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Toggle 定数削除 = ON
     const initialState = await productInputPage.getTsuDelToggleState();
@@ -283,9 +332,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const kisoIriValue = await productInputPage.getKisoIriInputValue();
     expect(tSuIriValue).toBe("");
     expect(kisoIriValue).toBe("");
+    await snapExpect();
   });
 
-  test("WTY31001_57", async ({ page, baseUrl }) => {
+  test("WTY31001_59", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -300,6 +350,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
       await productInputPage.clickTsuDelToggle();
       await page.waitForTimeout(500);
     }
+    await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Toggle 定数削除 = OFF
     await productInputPage.clickTsuDelToggle();
@@ -314,9 +366,16 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const kisoIriEditable = await productInputPage.kisoIriInputIsEditable();
     expect(tSuIriEditable).toBe(true);
     expect(kisoIriEditable).toBe(true);
+    await snapExpect();
   });
 
-  test("WTY31001_58", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_60", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -344,6 +403,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.fillTSuIriInput("1");
     await productInputPage.clickConfirmButton();
     await page.waitForTimeout(1000);
+    await snapInput();
 
     // Step 4: Redirect to WTY31002 and click back to return to WTY31001
     await productInputPage.clickBackButton();
@@ -351,9 +411,16 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     const gyoNoValue = await productInputPage.getGyoNoValue();
     expect(gyoNoValue).toBe("002");
+    await snapExpect();
   });
 
-  test("WTY31001_59", async ({ page, baseUrl, indexedDBHelper }) => {
+  test("WTY31001_61", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -370,6 +437,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     await productInputPage.fillProductInput("00010013557");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 2: Click search button
     await productInputPage.clickSearchButton();
@@ -377,6 +445,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const gyoNoValueBefore = await productInputPage.getGyoNoValue();
     expect(gyoNoValueBefore).toBe("001");
     expect(gyoNoValueBefore.length).toBe(3);
+    await snapExpect(1);
 
     // Step 3: Click clear button
     await productInputPage.fillTSuIriInput("1");
@@ -390,10 +459,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const gyoNoValue = await productInputPage.getGyoNoValue();
     expect(gyoNoValue).toBe("002");
     expect(gyoNoValue.length).toBe(3);
+    await snapExpect(2);
   });
 
-  test("WTY31001_60", async ({ page, baseUrl, indexedDBHelper }) => {
-    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+  test("WTY31001_62", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -410,6 +480,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Enter 型番 (model code)
     await productInputPage.fillProductInput("000100136");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 4: Click search button
     const [newPage] = await Promise.all([
@@ -420,10 +491,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Verify: New tab is opened with WTZ10101
     await newPage.waitForLoadState("domcontentloaded");
     expect(newPage.url()).toContain("WTZ10101");
+    await snapExpect();
   });
 
-  test("WTY31001_61", async ({ page, baseUrl, indexedDBHelper }) => {
-    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_51");
+  test("WTY31001_63", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -439,7 +511,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Step 3: Click on 商品 field to focus
     await productInputPage.focusProductInput();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(100);
+    await snapInput();
 
     const isVisible = await productInputPage.searchProductButtonVisible();
     expect(isVisible).toBe(true);
@@ -452,5 +525,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Verify: New tab is opened with WTZ10101
     await newPage.waitForLoadState("domcontentloaded");
     expect(newPage.url()).toContain("WTZ10101");
+    await snapExpect();
   });
 });

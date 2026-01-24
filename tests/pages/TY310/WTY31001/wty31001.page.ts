@@ -251,6 +251,12 @@ export class WTY31001Page extends BasePage {
     await this.page.waitForTimeout(500);
   }
 
+  async clickArrivalScheduleButton(): Promise<void> {
+    await this.openMenu();
+    await this.page.locator(this.selectors.arrivalScheduleButton).click();
+    await this.page.waitForTimeout(500);
+  }
+
   async isKkyRadioVisible(): Promise<boolean> {
     return (await this.page.locator(this.selectors.kkyRadio).count()) > 0;
   }
@@ -600,7 +606,7 @@ export class WTY31001Page extends BasePage {
 
   async expectAllLabelsNotRed(
     options?: ExcludeKeys<typeof this.labelSelectors>,
-    redColor =  /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -610,14 +616,14 @@ export class WTY31001Page extends BasePage {
       const label = this.page.locator(selector).first();
       await expect(label, `Label "${key}" should NOT be red`).not.toHaveCSS(
         "color",
-        redColor
+        redColor,
       );
     }
   }
 
   async expectAllLabelsRed(
     options?: ExcludeKeys<typeof this.labelSelectors>,
-    redColor =  /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -634,7 +640,7 @@ export class WTY31001Page extends BasePage {
 
   async expectAllInputBordersNotRed(
     options?: ExcludeKeys<typeof this.inputSelectors>,
-    redColor =  /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -651,7 +657,7 @@ export class WTY31001Page extends BasePage {
 
   async expectAllInputBordersRed(
     options?: ExcludeKeys<typeof this.inputSelectors>,
-    redColor =  /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
