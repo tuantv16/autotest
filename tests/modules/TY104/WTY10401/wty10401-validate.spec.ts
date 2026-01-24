@@ -48,7 +48,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         await page.waitForTimeout(2000);
 
-        const isErrorMessageVisible = await summaryPage.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.REQUIRED_FIELD, '商品');
+        const isErrorMessageVisible = await summaryPage.verifyErrorMessageInvalid(testData.formData.shnCd_24);
         expect(isErrorMessageVisible).toBe(true);
     });
 

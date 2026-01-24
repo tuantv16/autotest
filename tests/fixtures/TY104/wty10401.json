@@ -288,10 +288,12 @@
       "description": "Testcase feature search",
       "formData": {
         "shnCd_standard": "00010006917",
+        "shnCdNotExist": "9999999999999",
         "shnCd_50": "00011651000",
         "shnCd_51": "00011651000",
         "shnCd_52": "00011651000",
-        "shnCd_55": "00010006917"
+        "shnCd_55": "00010006917",
+        "shnCd_57": "00010635360"
       },
       "sessionData": [{
         "key": "WTY10401_IN_SD",
@@ -392,7 +394,9 @@
     "TC_06": {
       "description": "Testcase feature search",
       "formData": {
-        "shnCd_standard": "00010006917"
+        "shnCd_standard": "00010006917",
+        "shnCd_72": "00010635360",
+        "shnCdInvalid": "sample"
       },
       "sessionData": [{
         "key": "WTY10401_IN_SD",
