@@ -6,6 +6,7 @@
 import { test as base, expect } from '@playwright/test';
 import { IndexedDBHelper } from '../utils/indexeddb-helper';
 import { CommonHelper } from '../utils/common-helper';
+import { snapExpect as snapExpectImpl, snapInput as snapInputImpl } from '../utils/screenshot-helper';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
@@ -16,6 +17,8 @@ export interface TestFixtures {
   indexedDBHelper: IndexedDBHelper;
   commonHelper: typeof CommonHelper;
   baseUrl: string;
+  snapInput: (index?: string | number) => Promise<string>;
+  snapExpect: (index?: string | number) => Promise<string>;
 }
 
 /**
@@ -51,6 +54,14 @@ export const test = base.extend<TestFixtures>({
   baseUrl: async ({}, use) => {
     const url = process.env.BASE_URL || 'http://localhost:5173';
     await use(url);
+  },
+
+  snapInput: async ({ page }, use, testInfo) => {
+    await use(async (index?: string | number) => snapInputImpl(page, testInfo, index));
+  },
+
+  snapExpect: async ({ page }, use, testInfo) => {
+    await use(async (index?: string | number) => snapExpectImpl(page, testInfo, index));
   },
 });
 
