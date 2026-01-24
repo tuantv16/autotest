@@ -7,6 +7,7 @@ import { test, expect, loadTestData } from '../../../base/base-test';
 import { TY103Page } from '../../../pages/TY103/wty10301.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
 import { COMMON_MESSAGES } from '../../../constants/messages';
+import { snapInput } from '../../../utils/screenshot-helper';
 
 test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
   let productPricePage: TY103Page;
@@ -23,6 +24,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'init');
     //   Step 1: Go to base URL and wait for it to load
@@ -38,10 +41,12 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await page.waitForTimeout(1000);
       // Step 4: Wait for form to be ready
       await productPricePage.waitForFormReady();
+      await snapInput();
       //Step 5: blur form
       await productPricePage.selectorsObj.baseDateInput.click();
       // Step 6: Check format value
       const inputValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.baseDateInput, 10000);
+      await snapExpect();
       expect(inputValue).toBe('1028');
     });
 
@@ -49,6 +54,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_28');
     //   Step 1: Go to base URL and wait for it to load
@@ -69,6 +75,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 6: blur form
       productPricePage.selectorsObj.baseDateInput.blur();
       await page.waitForTimeout(500);
+      await snapExpect();
       // Step 7: Check format value
       const inputValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.baseDateInput, 10000);
       expect(inputValue).toBe('10/28');
@@ -78,6 +85,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
     //   Step 1: Go to base URL and wait for it to load
       await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -90,6 +98,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       //Step 4: click input
       await productPricePage.selectorsObj.btnCdInput.click();
       await page.waitForTimeout(500);
+      await snapExpect();
       // Step 5: Check value
       const resultFound = await productPricePage.waitForTextInBody('部店検索', 10000);
       expect(resultFound).toBe(true);
@@ -99,6 +108,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
     //   Step 1: Go to base URL and wait for it to load
       await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -111,6 +121,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       //Step 4: click input
       await productPricePage.selectorsObj.shnCdInput.click();
       await page.waitForTimeout(500);
+      await snapExpect();
       // Step 5: Check format value
       const resultFound = await productPricePage.waitForTextInBody('型番検索', 10000);
       expect(resultFound).toBe(true);
@@ -120,6 +131,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_32');
       // Step 1: Go to base URL and wait for it to load
@@ -139,8 +152,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.waitForFormReady();
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
+      await page.waitForTimeout(1000);
+      await snapInput();
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const shnCdValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.kataInput, 10000);
       expect(shnCdValue).toBe('ディン・バ・クエット');
@@ -150,6 +166,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_33');
       // Step 1: Go to base URL and wait for it to load
@@ -169,8 +187,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.waitForFormReady();
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
+      await page.waitForTimeout(1000);
+      await snapInput();
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const shnCdValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.kataInput, 10000);
       expect(shnCdValue).toBe('L32H01');
@@ -180,6 +201,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_34');
       // Step 1: Go to base URL and wait for it to load
@@ -199,8 +222,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.waitForFormReady();
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
+      await page.waitForTimeout(1000);
+      await snapInput();
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const shnCdValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.kataInput, 10000);
       expect(shnCdValue).toBe('DSA-456');
@@ -210,6 +236,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_35');
       // Step 1: Go to base URL and wait for it to load
@@ -227,8 +255,12 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await productPricePage.waitForFormReady();
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
+      await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Search
       await productPricePage.clickSearch();
+      await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 7: Verify search results
       await expect(page).toHaveURL(/WTZ10101ModelSearch/);
     });
@@ -237,6 +269,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
     //   Step 1: Go to base URL and wait for it to load
       await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -249,6 +282,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       //Step 4: click barcode button
       await productPricePage.clickBarCode();
       await page.waitForTimeout(500);
+      await snapExpect();
       // Step 5: check result
       const resultFound = await productPricePage.waitForTextInBody('スキャナーはFlutterアプリ内でのみ動作します', 10000);
       expect(resultFound).toBe(true);
@@ -258,6 +292,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_41');
       // Step 1: Go to base URL and wait for it to load
@@ -278,9 +314,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const btnNmInputValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.btnNmInput, 10000);
       expect(btnNmInputValue).toBe('東海通');
@@ -294,6 +332,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_42');
       // Step 1: Go to base URL and wait for it to load
@@ -314,9 +354,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const priceBkInputValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.priceBkInput, 10000);
       expect(priceBkInputValue).toBe('206,667');
@@ -326,6 +368,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_43');
       // Step 1: Go to base URL and wait for it to load
@@ -346,9 +390,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const priceBkInputValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.priceBkInput, 10000);
       expect(priceBkInputValue).toBe('227,333');
@@ -358,6 +404,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
+      snapInput,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_44');
       // Step 1: Go to base URL and wait for it to load
@@ -378,9 +426,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const text = await productPricePage.selectorsObj.cellTable.first().innerText();
       await page.waitForTimeout(1000);
@@ -391,6 +441,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
+      snapInput,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_45');
       // Step 1: Go to base URL and wait for it to load
@@ -411,9 +463,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       const text = await productPricePage.selectorsObj.cellTable.first().innerText();
       await page.waitForTimeout(1000);
@@ -424,6 +478,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_46');
       // Step 1: Go to base URL and wait for it to load
@@ -444,12 +500,14 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
       // Step 8: Verify form is cleared
       const text = await productPricePage.selectorsObj.cellTable.first().innerText();
       await page.waitForTimeout(1000);
+      await snapExpect();
       expect(text).toBe('あ会員');
     });
 
@@ -457,6 +515,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
+      snapInput,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_46');
       // Step 1: Go to base URL and wait for it to load
@@ -477,9 +537,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      snapExpect();
       // Step 8: Verify form is cleared
       let text = '';
       const count = await productPricePage.selectorsObj.cellTable.count();
@@ -496,6 +558,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_48');
       // Step 1: Go to base URL and wait for it to load
@@ -516,9 +580,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       let text = '';
       let color = '';
@@ -536,6 +602,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_49');
       // Step 1: Go to base URL and wait for it to load
@@ -556,9 +624,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       let text = '';
       let color = '';
@@ -580,6 +650,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_50');
       // Step 1: Go to base URL and wait for it to load
@@ -600,9 +672,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 8: Verify form is cleared
       await productPricePage.selectorsObj.firstRowTable.first().click();
       await page.waitForTimeout(1000);
@@ -613,6 +687,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_51');
       // Step 1: Go to base URL and wait for it to load
@@ -633,9 +709,10 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(1000);
-
+      await snapInput();
       await productPricePage.clickSearch();
       await page.waitForTimeout(1000);
+      await snapExpect();
       // Step 6: Click clear button
       await productPricePage.clickClearButton();
       await page.waitForTimeout(500);
@@ -648,6 +725,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
+      snapInput,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -665,10 +744,10 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await page.waitForTimeout(1000);
       // Step 4: Wait for form to be ready
       await productPricePage.waitForFormReady();
-
+      await snapInput();
       await productPricePage.selectorsObj.clearBaseDate.click();
       await page.waitForTimeout(500);
-
+      await snapExpect();
       const result = await productPricePage.checkValueInput(productPricePage.selectorsObj.baseDateInput, 10000);
 
       expect(result).toBe('');
@@ -678,6 +757,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -695,10 +776,11 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await page.waitForTimeout(1000);
       // Step 4: Wait for form to be ready
       await productPricePage.waitForFormReady();
-
+      await snapInput();
+      await snapInput();
       await productPricePage.selectorsObj.clearBtnCd.click();
       await page.waitForTimeout(500);
-
+      await snapExpect();
       const result = await productPricePage.checkValueInput(productPricePage.selectorsObj.btnCdInput, 10000);
 
       expect(result).toBe('');
@@ -708,6 +790,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -725,10 +809,10 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await page.waitForTimeout(1000);
       // Step 4: Wait for form to be ready
       await productPricePage.waitForFormReady();
-
+      await snapInput();
       await productPricePage.selectorsObj.clearShnCd.click();
       await page.waitForTimeout(500);
-
+      await snapExpect();
       const result = await productPricePage.checkValueInput(productPricePage.selectorsObj.shnCdInput, 10000);
 
       expect(result).toBe('');
@@ -738,6 +822,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       // Step 1: Go to base URL and wait for it to load
       await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -751,6 +836,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 3: Wait for form to be ready
       await expect(productPricePage.selectorsObj.actionMenuButton).toBeEnabled();
       const duration = Date.now() - (start);
+      await snapExpect();
       expect(duration).toBeLessThan(1000);
     });
 
@@ -758,6 +844,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_41');
       // Step 1: Go to base URL and wait for it to load
@@ -777,6 +865,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(500);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       const start = Date.now();
@@ -789,6 +878,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       const priceBkInputValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.priceBkInput, 10000);
       expect(priceBkInputValue).toBe('227,333');
       const duration = Date.now() - (start);
+      await snapExpect();
       expect(duration).toBeLessThan(3000);
     });
 
@@ -796,6 +886,8 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapInput,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_41');
       // Step 1: Go to base URL and wait for it to load
@@ -815,6 +907,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Step 5: Fill form
       await productPricePage.fillForm(testData.formData);
       await page.waitForTimeout(500);
+      await snapInput();
       // Step 6: Click search button
       await productPricePage.clickSearch();
       const start = Date.now();
@@ -827,6 +920,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       const priceBkInputValue = await productPricePage.checkValueInput(productPricePage.selectorsObj.priceBkInput, 10000);
       expect(priceBkInputValue).toBe('227,333');
       const duration = Date.now() - (start);
+      await snapExpect();
       expect(duration).toBeLessThan(3000);
     });
 });

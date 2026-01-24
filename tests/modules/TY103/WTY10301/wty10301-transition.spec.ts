@@ -23,6 +23,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -46,6 +47,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Click exact menu item by accessible role/name
       await productPricePage.clickItemMenuByText('商品基本');
       await page.waitForTimeout(500);
+      await snapExpect();
       await expect(page).toHaveURL(/WTY101ProductBasicInquiry/);
     });
 
@@ -53,6 +55,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -76,6 +79,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Click exact menu item by accessible role/name
       await productPricePage.clickItemMenuByText('店別在庫');
       await page.waitForTimeout(500);
+      await snapExpect();
       await expect(page).toHaveURL(/WTY10401StoreInventoryInquiry/);
     });
 
@@ -83,6 +87,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -110,6 +115,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Click exact menu item by accessible role/name
       await productPricePage.clickItemMenuByText('オーダー');
       await page.waitForTimeout(500);
+      await snapExpect();
       await expect(page).toHaveURL(/WTY10701InquiryOfOrderedProductInventory/);
     });
 
@@ -117,6 +123,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -144,6 +151,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       // Click exact menu item by accessible role/name
       await productPricePage.clickItemMenuByText('カート');
       await page.waitForTimeout(500);
+      await snapExpect();
       await expect(page).toHaveURL(/WTY20201/);
     });
 
@@ -151,6 +159,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -173,7 +182,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await page.waitForTimeout(500);
 
       await productPricePage.clickSubMenuBtn('部店検索');
-
+      await snapExpect();
       await expect(page).toHaveURL(/WTZ10901/);
     });
 
@@ -181,6 +190,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       page,
       baseUrl,
       indexedDBHelper,
+      snapExpect,
     }) => {
       const testData = loadTestData('TY103/wty10301', 'wty10301', 'TC_56');
       // Step 1: Go to base URL and wait for it to load
@@ -203,7 +213,7 @@ test.describe('WTY10301 - Product price inquiry (商品価格照会)', () => {
       await page.waitForTimeout(500);
 
       await productPricePage.clickSubMenuBtn('型番検索');
-
+      await snapExpect();
       await expect(page).toHaveURL(/WTZ10101ModelSearch/);
     });
 });
