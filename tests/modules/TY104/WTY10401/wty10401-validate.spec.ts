@@ -25,7 +25,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         baseUrl,
         indexedDBHelper,
     }) => {
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 

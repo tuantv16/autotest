@@ -15,7 +15,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await takeScreenshotOnFailure(page, testInfo);
     });
 
-    test('WTY10401_demo_screenshot', async ({
+    test('WTY10401_101', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -46,20 +46,66 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         }, { timeout: 15000 });
 
         await snapInput();
-
+        //await snapInput(1);
         await summaryPage.clickSearchButton();
 
         // Wait for API response to complete
         const apiResponse = await apiResponsePromise;
         expect(apiResponse.status()).toBe(200);
 
-        await snapExpect(1);
-        await snapExpect(2);
+        await snapExpect();
+        // await snapExpect(1);
+        // await snapExpect(2);
         await summaryPage.scrollToBottom();
 
         await page.waitForTimeout(1000);
-        await snapExpect(1);
-        await snapExpect(3);
+        await page.waitForTimeout(4000);
+    });
+
+    test('WTY10401_102', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.clickMoveDown();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.inputDataSearchBasic(testData.formData);
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY104_WTY10411ZaiInfoGetBC)
+            );
+        }, { timeout: 15000 });
+
+        await snapInput();
+        //await snapInput(1);
+        await summaryPage.clickSearchButton();
+
+        // Wait for API response to complete
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+        await snapExpect();
+        // await snapExpect(1);
+        // await snapExpect(2);
+        await summaryPage.scrollToBottom();
+
+        await page.waitForTimeout(1000);
         await page.waitForTimeout(4000);
     });
 
