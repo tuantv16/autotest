@@ -23,6 +23,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
         // Step 1: Go to base URL and wait for it to load
@@ -33,13 +35,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
             sessionData: testData.sessionData,
             commonData: testData.commonData
         });
-
-        // Step 3: Navigate to target URL
+        
         await summaryPage.navigate();
-        //await page.waitForTimeout(1000);
 
-        // Step 4: Wait for page to be ready and verify heading title
-        //await summaryPage.waitForFormReady();
+        await snapExpect();
         const isVisible = await summaryPage.isHeadingTitleVisible();
         expect(isVisible).toBe(true);
     });

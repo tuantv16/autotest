@@ -454,7 +454,7 @@ export class TY1040Page extends BasePage {
 
         // 在庫部店 radio should default to DC&SC (UI label shows DC＆SC)
         const zaiBtenChecked = await this.page
-            .locator('input[type="radio"][name="zaiBten2"]:checked')
+            .locator('input[type="radio"][name="zaiBten"]:checked')
             .first()
             .getAttribute('value');
         if ((zaiBtenChecked ?? '').trim() !== 'DC&SC') {
@@ -471,7 +471,7 @@ export class TY1040Page extends BasePage {
     }
 
     async verifySummaryTableHasNoDataRow(): Promise<boolean> {
-        const grid = this.page.locator('#store-inventory-inquiry');
+        const grid = this.page.locator('#store-inventory-inquiry2');
         const firstRowVisible = await grid.locator('div[role="row"][row-index="0"]').isVisible().catch(() => false);
         return !firstRowVisible;
     }
