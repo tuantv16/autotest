@@ -1,0 +1,42 @@
+{
+    "wty10101": {
+        "actionData": {
+            "menuItem": {
+                "TC_79": "商品価格",
+                "TC_80": "店別在庫",
+                "TC_81": "オーダー",
+                "TC_82": "入荷予定",
+                "TC_83": "カート",
+                "TC_84": "カラバリ"
+            },
+            "searchCode": "00010013854",
+            "searchCode2": "00010013809"
+        },
+        "TC_83": {
+            "sessionData": [
+                {
+                    "key": "WTY10101_IN_SD",
+                    "value": {
+                        "searchJknDT": [
+                            {
+                                "shnCd": "00010011645"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "key": "shnInfoDS",
+                    "value": {
+                        "shnInfoDT": [
+                            {
+                                "shnCd": "00010011645",
+                                "janCd": "04905959334496",
+                                "canAddCart": "1"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,133 @@
+{
+    "wty10101": {
+        "TC_101": {
+            "searchCode": "00010013922",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ]
+        },
+        "TC_102": {
+            "searchCode": "00010013922",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "releaseDateInputValue": "未定"
+            }
+        },
+        "TC_103": {
+            "searchCode": "00010013854",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "releaseDateInputValue": "2026年01月01日"
+            }
+        },
+        "TC_104": {
+            "searchCode": "00010001998",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "releaseDateInputValue": "2018年09月上旬"
+            }
+        },
+        "TC_105": {
+            "searchCode": "00010000854",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "releaseDateInputValue": "2008年03月中旬"
+            }
+        },
+        "TC_106": {
+            "searchCode": "00579708628",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "0001",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "releaseDateInputValue": "2023年08月下旬"
+            }
+        }
+    }
+}
