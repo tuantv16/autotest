@@ -12,7 +12,7 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test('TC07 - Check title 手配予定照会（直送） and red text "不可" for hkatFukaFlg = 1', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_07 - Check title 手配予定照会（直送） and red text "不可" for hkatFukaFlg = 1', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Step 1: Navigate to base URL
@@ -38,7 +38,7 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     expect(result.allRed).toBe(true);
   });
 
-  test('TC11 - Check field labels and data 出庫店', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_11 - Check field labels and data 出庫店', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
     // Step 1: Navigate to base URL first to establish origin for localStorage
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -54,29 +54,11 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     await testPage.navigate();
 
     // Check label and input value
-    const inputValue = await testPage.checkLabelAndInputValue('出庫店', 'ＬＣ中部・ＤＣ');
-    expect(inputValue).toBe('ＬＣ中部・ＤＣ');
+    const inputValue = await testPage.checkLabelAndInputValue(testPage.Texts.Shkoten_Lable, testData.outDS.rstHeadChDT[0].shkobtenNm);
+    expect(inputValue).toBe(testData.outDS.rstHeadChDT[0].shkobtenNm);
   });
 
-  test('TC12 - Check field labels and data 配送種類', async ({ page, baseUrl, indexedDBHelper }) => {
-    const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
-
-    // Initialize
-    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-      await indexedDBHelper.initializeDB({
-      sessionData: testData.sessionData,
-      commonData: testData.commonData
-    });
-
-    const testPage = new WTY207010Page(page);
-    await testPage.navigate();
-
-    // Check label and input value (no expected value, just verify it exists)
-    const inputValue = await testPage.checkLabelAndInputValue('配送種類');
-    expect(inputValue).toBeTruthy();
-  });
-
-  test('TC13 - Check field labels and data L/T', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_12 - Check field labels and data 配送種類', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -90,16 +72,16 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     await testPage.navigate();
 
     // Check label and input value
-    const inputValue = await testPage.checkLabelAndInputValue('L/T', '97日');
-    expect(inputValue).toBe('97日');
+    const inputValue = await testPage.checkLabelAndInputValue(testPage.Texts.HaisSri_Lable, testData.outDS.rstHeadChDT[0].chikiNm);
+    expect(inputValue).toBe(testData.outDS.rstHeadChDT[0].chikiNm);
   });
 
-  test('TC14 - Check field labels and data 最短お届け日', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_13 - Check field labels and data L/T', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-        await indexedDBHelper.initializeDB({
+    await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData
     });
@@ -108,7 +90,26 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     await testPage.navigate();
 
     // Check label and input value
-    const inputValue = await testPage.checkLabelAndInputValue('最短お届け日');
+    const expectedValue = testData.outDS.rstHeadChDT[0].ldtmNsu + '日';
+    const inputValue = await testPage.checkLabelAndInputValue(testPage.Texts.LdtmNsu_Lable, expectedValue);
+    expect(inputValue).toBe(expectedValue);
+  });
+
+  test('WTY20701_14 - Check field labels and data 最短お届け日', async ({ page, baseUrl, indexedDBHelper }) => {
+    const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
+
+    // Initialize
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData
+    });
+
+    const testPage = new WTY207010Page(page);
+    await testPage.navigate();
+
+    // Check label and input value
+    const inputValue = await testPage.checkLabelAndInputValue(testPage.Texts.SaiOtdkDate_Lable);
 
     // If input has value, it must match YYYY/MM/DD format
     if (inputValue && inputValue.trim() !== '') {
@@ -120,7 +121,7 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     }
   });
 
-  test('TC15 - Check input SaiBin_Lable contains text 便', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_15 - Check input SaiBin_Lable contains text 便', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -134,13 +135,13 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     await testPage.navigate();
 
     // Get input value by id
-    const inputValue = await testPage.getFieldValue('#SaiBin_Lable');
+    const inputValue = await testPage.getFieldValue(testPage.Selectors.idSaiBin);
 
     // Check if value contains text 便
     expect(inputValue).toContain('便');
   });
 
-  test('TC16- Check ag-pinned-left-cols-container has sequential row numbers', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_16 - Check ag-pinned-left-cols-container has sequential row numbers', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -169,7 +170,7 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     expect(verifyOutput).toBe(true);
   });
 
-  test('TC18 - Verify thiKbn display texts in multi-row-cell-item', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_18 - Verify thiKbn display texts in multi-row-cell-item', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize

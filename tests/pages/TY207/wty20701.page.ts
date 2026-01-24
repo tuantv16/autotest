@@ -7,7 +7,20 @@ import { Page, Locator } from '@playwright/test';
 import { BasePage } from '../base.page';
 
 export class WTY207010Page extends BasePage {
-    public readonly classCellOutput = 'multi-row-cell-item';
+    public readonly Locators = {
+        classCellOutput: 'multi-row-cell-item',
+    };
+
+    public readonly Selectors = {
+        idSaiBin : '#SaiBin_Lable'
+    };
+
+    public readonly Texts = {
+        Shkoten_Lable: '出庫店',
+        HaisSri_Lable: '配送種類',
+        LdtmNsu_Lable: 'L/T',
+        SaiOtdkDate_Lable: '最短お届け日',
+    };
 
     constructor(page: Page) {
         super(page);
@@ -165,7 +178,7 @@ export class WTY207010Page extends BasePage {
     async verifyMultiRowCellData(outputData: any[], timeout: number = 5000): Promise<boolean> {
         try {
             // Get all divs with class multi-row-cell-item
-            const multiRowCells = this.page.locator(`div.${this.classCellOutput}`);
+            const multiRowCells = this.page.locator(`div.${this.Locators.classCellOutput}`);
             await this.waitForVisible(multiRowCells.first(), timeout);
 
             const cellCount = await multiRowCells.count();
@@ -245,7 +258,7 @@ export class WTY207010Page extends BasePage {
     async verifyThiKbnTextsInMultiRowCells(expectedTexts: Set<string>, timeout: number = 5000): Promise<boolean> {
         try {
             // Get all divs with class multi-row-cell-item
-            const multiRowCells = this.page.locator(`div.${this.classCellOutput}`);
+            const multiRowCells = this.page.locator(`div.${this.Locators.classCellOutput}`);
             await this.waitForVisible(multiRowCells.first(), timeout);
 
             const cellCount = await multiRowCells.count();
@@ -343,7 +356,7 @@ export class WTY207010Page extends BasePage {
                 const row = rows.nth(rowIndex);
 
                 // Find multi-row-cell-item divs in this row
-                const cellItems = row.locator(`div.${this.classCellOutput}`);
+                const cellItems = row.locator(`div.${this.Locators.classCellOutput}`);
                 const cellCount = await cellItems.count();
 
                 if (cellCount === 0) {
@@ -428,7 +441,7 @@ export class WTY207010Page extends BasePage {
      */
     async verifyCellOutputNotExist(timeout: number = 2000): Promise<boolean> {
         try {
-            const multiRowCells = this.page.locator(`div.${this.classCellOutput}`);
+            const multiRowCells = this.page.locator(`div.${this.Locators.classCellOutput}`);
             const count = await multiRowCells.count();
 
             return count === 0;

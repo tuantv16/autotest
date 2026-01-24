@@ -12,7 +12,7 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test('TC20, TC21 - Check ag-pinned-left-cols-container has sequential row numbers', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_20, WTY20701_21 - Check ag-pinned-left-cols-container has sequential row numbers', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -42,7 +42,7 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     expect(verifyOutput).toBe(true);
   });
 
-  test('TC19 - Verify red text color for rows with hkatFukaFlg = 1', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_19 - Verify red text color for rows with hkatFukaFlg = 1', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -64,7 +64,7 @@ test.describe('WTY207010Page - Arrage Plan Direct Delivery (手配予定照会(�
     expect(result.allRed).toBe(true);
   });
 
-  test('TC22 - Verify API error response with msgID TE5130 and no classCellOutput', async ({ page, baseUrl, indexedDBHelper }) => {
+  test('WTY20701_22 - Verify API error response with msgID TE5130 and no classCellOutput', async ({ page, baseUrl, indexedDBHelper }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_api');
 
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
