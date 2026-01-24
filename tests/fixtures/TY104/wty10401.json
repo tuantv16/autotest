@@ -173,7 +173,7 @@
       }
     },
     "TC_04": {
-      "description": "Validate product code length (8 characters - valid)",
+      "description": "Testcase feature search",
       "formData": {
         "shnCd_25": "1234567",
         "shnCd_26": "12345678",
@@ -189,7 +189,14 @@
         "shnCd_36_expected": "00010007099",
         "shnCd_37": "00010013960",
         "shnCd_38": "4997236590169",
-        "shnCd_sample": "00010007099"
+        "shnCd_sample": "00010007099",
+        "shnCd_46": "9999936590169",
+        "shnCd_48": "00010007099",
+        "mkKata_48": "THBS104C",
+        "shnCd_49": "00010000069",
+        "shnCd_50": "00010007099",
+        "shnCd_53": "00011651000",
+        "shnCd_54": "00010000199"
       },
       "sessionData": [{
         "key": "WTY10401_IN_SD",
@@ -276,7 +283,218 @@
       "expectedMessages": {
         "error": "商品の桁数が正しくありません"
       }
+    },
+    "TC_05": {
+      "description": "Testcase feature search",
+      "formData": {
+        "shnCd_standard": "00010006917",
+        "shnCdNotExist": "9999999999999",
+        "shnCd_50": "00011651000",
+        "shnCd_51": "00011651000",
+        "shnCd_52": "00011651000",
+        "shnCd_55": "00010006917",
+        "shnCd_57": "00010635360"
+      },
+      "sessionData": [{
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "00010006917",
+              "mkKata": "",
+              "shnZhlv": "",
+              "tnpJch": "",
+              "thKbn": "",
+              "ckS": "",
+              "ykBri": "",
+              "hjZai": "1",
+              "zaiBten": "1",
+              "jgyksCd": "02",
+              "jgybCd": "",
+              "zoneCd": "",
+              "blkCd": "",
+              "areaCd": ""
+            }
+          ],
+          "searchJknDT": []
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "04388",
+            "syoriStoreCd": "04388",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "04923",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "七丁目１丁目",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "23111043001",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "03000",
+            "ktKbn": "01",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "トウカゲイ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "loginInfoDT",
+          "value": {
+            "syoriStoreCd": "04388",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通"
+          }
+        }
+      ],
+      "expectedMessages": {
+        "error": "商品の桁数が正しくありません"
+      }
+    },
+    "TC_06": {
+      "description": "Testcase feature search",
+      "formData": {
+        "shnCd_standard": "00010006917",
+        "shnCd_72": "00010635360",
+        "shnCdInvalid": "sample"
+      },
+      "sessionData": [{
+        "key": "WTY10401_IN_SD",
+        "value": {
+          "wty10401InfoDT": [
+            {
+              "shnCd": "00010006917",
+              "mkKata": "",
+              "shnZhlv": "",
+              "tnpJch": "",
+              "thKbn": "",
+              "ckS": "",
+              "ykBri": "",
+              "hjZai": "1",
+              "zaiBten": "1",
+              "jgyksCd": "02",
+              "jgybCd": "",
+              "zoneCd": "",
+              "blkCd": "",
+              "areaCd": ""
+            }
+          ],
+          "searchJknDT": []
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "04388",
+            "syoriStoreCd": "04388",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "04923",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "七丁目１丁目",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "23111043001",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "03000",
+            "ktKbn": "01",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "トウカゲイ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "loginInfoDT",
+          "value": {
+            "syoriStoreCd": "04388",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通"
+          }
+        }
+      ],
+      "expectedMessages": {
+        "error": "商品の桁数が正しくありません"
+      }
     }
+    
   }
 }
 

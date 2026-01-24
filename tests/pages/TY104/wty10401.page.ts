@@ -5,6 +5,7 @@
 
 import { Page } from '@playwright/test';
 import { BasePage } from '../base.page';
+import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 
 export class TY1040Page extends BasePage {
     // Selectors
@@ -12,19 +13,21 @@ export class TY1040Page extends BasePage {
         headingTitle: '.text-heading-h5:has-text("店別在庫照会")',
         productInput: '#shnCd',
         productBarcodeButton: 'label[for="shnCd"] ~ div button[type="button"]:has(svg)',
-        displayStockToggleContainer: 'label:has-text("表示在庫") ~ div',
-        displayStockToggleEffective: 'label:has-text("表示在庫") ~ div label:has-text("有効") input[type="radio"]',
-        displayStockToggleActual: 'label:has-text("表示在庫") ~ div label:has-text("実在庫") input[type="radio"]',
         salesDepartmentCombobox: '#jgyksCd[role="combobox"], label[for="jgyksCd"] ~ div [role="combobox"]',
         salesDepartmentComboboxContainer: 'label[for="jgyksCd"] ~ div',
         salesDepartmentComboboxId: '#jgyksCd',
+        areaDropdownCombobox: '#areaCd[role="combobox"], label[for="areaCd"] ~ div [role="combobox"]',
+        areaDropdownComboboxContainer: 'label[for="areaCd"] ~ div',
+        areaDropdownComboboxId: '#areaCd',
         moveDownButton: 'button:has(svg path.stroke-text-sub)',
         storeLabel: 'label:has-text("店舗")',
         salesDepartmentDropdownMenu: '#_r_1_',
         salesDepartmentDropdownOption: '#_r_1_ li',
         searchButton: 'form button[type="submit"]:has-text("検索")',
         shnCdInput: 'input[name="shnCd"], #shnCd',
-        errorClass: '_error_cbu4e_24'
+        errorClass: '_error_cbu4e_24',
+        mkKataInput: '#mkKata',
+        errorDialogAddCart: '#wty10401-error-dialog',
     };
 
     constructor(page: Page) {
@@ -174,6 +177,30 @@ export class TY1040Page extends BasePage {
         await super.clickItemMenu('カート');
     }
 
+    async clickItemMenuProductBasic(): Promise<void> {
+        await super.clickItemMenu('商品基本');
+    }
+
+    async clickItemMenuProductPrice(): Promise<void> {
+        await super.clickItemMenu('商品価格');
+    }
+
+    async clickItemMenuOrder(): Promise<void> {
+        await super.clickItemMenu('オーダー');
+    }
+
+    async clickItemMenuColorVariation(): Promise<void> {
+        await super.clickItemMenu('カラバリ');
+    }
+
+    async clickItemMenuArrivePlan(): Promise<void> {
+        await super.clickItemMenu('入荷予定');
+    }
+
+    async clickItemMenuBarcode(): Promise<void> {
+        await super.clickItemMenu('バーコード');
+    }
+
     async isShnCdDisabled(): Promise<boolean> {
         const locator = this.page.locator(this.selectors.shnCdInput).first();
         await this.page.waitForTimeout(1000); // Wait for modeFlg to be applied
@@ -227,7 +254,241 @@ export class TY1040Page extends BasePage {
     }
 
     async selectComboboxOptionKinki(): Promise<void> {
-        await this.selectComboboxOptionByText('近畿');
+        await this.selectComboboxOptionByText('近畿', this.selectors.salesDepartmentCombobox);
+    }
+
+    async selectCbArea(): Promise<void> {
+        await this.selectComboboxOptionByText('エリアコ2', this.selectors.areaDropdownCombobox);
+    }
+
+    async selectCbAreaValueEmpty(): Promise<void> {
+        await this.selectComboboxOptionByText('', this.selectors.areaDropdownCombobox);
+    }
+
+    /**
+     * Get rank and logistics cell values from summary table
+     * @returns Object containing rankValue and logisticsValue (trimmed, empty string if no value)
+     */
+    async getRankAndLogisticsValues(): Promise<{ rankValue: string; logisticsValue: string }> {
+        const rankCell = this.page.locator('//*[@id="store-inventory-inquiry"]/div[1]/div[4]/div[1]/div[2]/div[3]/div[1]/div[2]/div/div/div[2]').first();
+        const logisticsCell = this.page.locator('//*[@id="store-inventory-inquiry"]/div[1]/div[4]/div[1]/div[2]/div[3]/div[1]/div[2]/div/div/div[3]').first();
+        
+        await rankCell.waitFor({ state: 'visible', timeout: 5000 });
+        await logisticsCell.waitFor({ state: 'visible', timeout: 5000 });
+
+        const rankText = await rankCell.textContent();
+        const logisticsText = await logisticsCell.textContent();
+        
+        const rankValue = rankText?.trim() || '';
+        const logisticsValue = logisticsText?.trim() || '';
+
+        return { rankValue, logisticsValue };
+    }
+
+    async getMkKataValue(): Promise<string> {
+        return this.getValueById('mkKata');
+    }
+
+    /**
+     * Get column header text by col-id
+     * @param colId - Column ID (e.g., 'rank', 'logistics', 'newProducts', 'display', 'unpacked', 'secured', 'defective')
+     * @returns Column header text content (trimmed)
+     */
+    async getColumnHeaderText(colId: string): Promise<string> {
+        const headerLocator = this.page.locator(`div[col-id="${colId}"][role="columnheader"] span.ag-header-cell-text`).first();
+        await headerLocator.waitFor({ state: 'visible', timeout: 5000 });
+        const text = await headerLocator.textContent();
+        return text?.trim() || '';
+    }
+
+    /**
+     * Verify all summary table column headers
+     * @param expectedHeaders - Object with col-id as key and expected header text as value
+     */
+    async verifySummaryTableHeaders(expectedHeaders: Record<string, string>): Promise<void> {
+        for (const [colId, expectedText] of Object.entries(expectedHeaders)) {
+            const actualText = await this.getColumnHeaderText(colId);
+            if (actualText !== expectedText) {
+                throw new Error(`Column header ${colId}: expected "${expectedText}", but got "${actualText}"`);
+            }
+        }
+    }
+
+    /**
+     * Get cell value from table data row by col-id
+     * @param colId - Column ID (e.g., 'rank', 'logistics', 'code', 'name', etc.)
+     * @param rowIndex - Row index (0-based, default: 0 for first data row)
+     * @param tableSelector - Optional selector to scope to specific table (e.g., for detail table)
+     * @returns Cell text content (trimmed)
+     */
+    async getTableCellValue(colId: string, rowIndex: number = 0, tableSelector?: string): Promise<string> {
+        const baseSelector = tableSelector 
+            ? `${tableSelector} div[role="row"][row-index="${rowIndex}"] div[col-id="${colId}"] span.ag-cell-value`
+            : `div[role="row"][row-index="${rowIndex}"] div[col-id="${colId}"] span.ag-cell-value`;
+        const cellLocator = this.page.locator(baseSelector).first();
+        await cellLocator.waitFor({ state: 'visible', timeout: 5000 });
+        const text = await cellLocator.textContent();
+        return text?.trim() || '';
+    }
+
+    /**
+     * Get cell value from detail table (table with code and name columns)
+     * @param colId - Column ID (e.g., 'code', 'name', 'newProducts', 'specific', 'display', 'unpacked')
+     * @param rowIndex - Row index (0-based, default: 0 for first data row)
+     * @returns Cell text content (trimmed)
+     */
+    async getDetailTableCellValue(colId: string, rowIndex: number = 0): Promise<string> {
+        // Find detail table by looking for table that has both 'code' and 'name' columns
+        const detailTableSelector = 'div[role="grid"]:has(div[col-id="code"]):has(div[col-id="name"])';
+        return this.getTableCellValue(colId, rowIndex, detailTableSelector);
+    }
+
+    /**
+     * Verify table cell value
+     * @param colId - Column ID
+     * @param expectedValue - Expected cell value
+     * @param rowIndex - Row index (default: 0)
+     * @param tableSelector - Optional selector to scope to specific table
+     */
+    async verifyTableCell(colId: string, expectedValue: string, rowIndex: number = 0, tableSelector?: string): Promise<void> {
+        const actualValue = await this.getTableCellValue(colId, rowIndex, tableSelector);
+        if (actualValue !== expectedValue) {
+            throw new Error(`Cell ${colId} at row ${rowIndex}: expected "${expectedValue}", but got "${actualValue}"`);
+        }
+    }
+
+    /**
+     * Verify detail table cell value (table with code and name columns)
+     * @param colId - Column ID
+     * @param expectedValue - Expected cell value
+     * @param rowIndex - Row index (default: 0)
+     */
+    async verifyDetailTableCell(colId: string, expectedValue: string, rowIndex: number = 0): Promise<void> {
+        const actualValue = await this.getDetailTableCellValue(colId, rowIndex);
+        if (actualValue !== expectedValue) {
+            throw new Error(`Detail table cell ${colId} at row ${rowIndex}: expected "${expectedValue}", but got "${actualValue}"`);
+        }
+    }
+
+    /**
+     * Get cell value from summary table data row by col-id (backward compatibility)
+     * @deprecated Use getTableCellValue instead
+     */
+    async getSummaryTableCellValue(colId: string, rowIndex: number = 0): Promise<string> {
+        return this.getTableCellValue(colId, rowIndex);
+    }
+
+    /**
+     * Verify summary table cell value (backward compatibility)
+     * @deprecated Use verifyTableCell instead
+     */
+    async verifySummaryTableCell(colId: string, expectedValue: string, rowIndex: number = 0): Promise<void> {
+        return this.verifyTableCell(colId, expectedValue, rowIndex);
+    }
+
+    async clickOptionActualInventory(): Promise<void> {
+        await this.selectedOption('表示在庫', '実在庫');
+    }
+
+    async scrollToBottom(): Promise<void> {
+        await this.page.evaluate(() => {
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+        await this.page.waitForTimeout(1000);
+    }
+
+    async verifyEndOfData(): Promise<string> {
+        return this.scrollToBottomAndVerifyEndOfData('#store-inventory-inquiry-2');
+    }
+
+    /**
+     * Check if error message exists in add cart dialog
+     * Finds the dialog with id wty10401-error-dialog and checks if it contains the expected text
+     * @param expectedText - Expected error message text to check
+     * @returns true if the dialog contains the expected text, false otherwise
+     */
+    async getErrorMessageAddCart(expectedText: string): Promise<boolean> {
+        const dialogLocator = this.page.locator(this.selectors.errorDialogAddCart);
+        await dialogLocator.waitFor({ state: 'visible', timeout: 5000 });
+        
+        // Get text content from dialog and check if it contains the expected text
+        const dialogText = await dialogLocator.textContent();
+        return dialogText?.includes(expectedText) || false;
+    }
+
+    async clearInputShnCd(): Promise<void> {
+        const locator = this.page.locator(this.selectors.shnCdInput);
+        await locator.clear({ timeout: 10000 });
+    }
+
+    async clickButtonSearchNumber(): Promise<void> {
+        this.clickButtonByText('型番検索');
+    }
+
+    async fillInputDataCondition(formData: any): Promise<void> {
+        await this.fillInputById('shnCd', formData.shnCd_standard);
+        await this.selectedOption('表示在庫', '実在庫');
+        await this.selectedOption('在庫部店', '店舗');  
+        await this.selectCbArea();
+    }
+
+    async clearData(): Promise<void> {
+        await this.clickButtonByText('クリア');
+    }
+
+    async verifyDefaultData(): Promise<boolean> {
+        // 商品(shnCd) should be empty
+        const shnCdValue = await this.getValueById('shnCd');
+        if (shnCdValue.trim() !== '') {
+            return false;
+        }
+
+        // 表示在庫 radio should default to 有効
+        const hjZaiChecked = await this.page
+            .locator('input[type="radio"][name="hjZai"]:checked')
+            .first()
+            .getAttribute('value');
+        if ((hjZaiChecked ?? '').trim() !== '有効') {
+            return false;
+        }
+
+        // 在庫部店 radio should default to DC&SC (UI label shows DC＆SC)
+        const zaiBtenChecked = await this.page
+            .locator('input[type="radio"][name="zaiBten2"]:checked')
+            .first()
+            .getAttribute('value');
+        if ((zaiBtenChecked ?? '').trim() !== 'DC&SC') {
+            return false;
+        }
+
+        // 営業部 combobox should default to エディオン
+        const jgyksText = (await this.page.locator('#jgyksCd[role="combobox"]').first().textContent())?.trim() || '';
+        if (jgyksText !== 'エディオン') {
+            return false;
+        }
+
+        return true;
+    }
+
+    async verifySummaryTableHasNoDataRow(): Promise<boolean> {
+        const grid = this.page.locator('#store-inventory-inquiry');
+        const firstRowVisible = await grid.locator('div[role="row"][row-index="0"]').isVisible().catch(() => false);
+        return !firstRowVisible;
+    }
+
+    async verifyDefaultShnCd(): Promise<boolean> {
+        // 商品(shnCd) should be empty
+        const shnCdValue = await this.getValueById('shnCd');
+        if (shnCdValue.trim() !== '') {
+            return false;
+        }
+
+        return true;
+    }
+
+    async verifyErrorMessageInvalid(field: string): Promise<boolean> {
+        const isErrorMessageVisible = await this.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.REQUIRED_FIELD, '商品');
+        return isErrorMessageVisible;
     }
 }
 

@@ -10,15 +10,25 @@ export default defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     headless: false,
-    viewport: { width: 1280, height: 800 },
+    // viewport: { width: 1280, height: 800 },
+    viewport: null,
     actionTimeout: 10000,
     trace: 'on-first-retry',
-    screenshot: 'off' // Disable default screenshot, we handle it in afterEach hook
+    screenshot: 'off', // Disable default screenshot, we handle it in afterEach hook
+    launchOptions: {
+      args: ['--start-maximized']
+    }
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      //use: { ...devices['Desktop Chrome'] }
+      use: { 
+        viewport: null,
+        launchOptions: {
+          args: ['--start-maximized']
+        }
+      }
     }
   ]
 });
