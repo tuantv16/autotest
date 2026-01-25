@@ -10,7 +10,8 @@ type SnapDevice = 'pc' | 'tablet' | 'mobile' | 'all';
 
 function normalizeSnapDevice(raw: unknown): SnapDevice {
   const v = String(raw ?? '').trim().toLowerCase();
-  if (!v || v === 'all') return 'all';
+  if (!v) return 'pc';
+  if (v === 'all') return 'all';
   if (v === 'pc' || v === 'desktop') return 'pc';
   if (v === 'tablet' || v === 'tab') return 'tablet';
   if (v === 'mobile' || v === 'phone') return 'mobile';
@@ -23,8 +24,7 @@ const ALL_PROJECTS = [
   {
     name: 'pc',
     use: {
-      ...devices['Desktop Chrome'],
-      // Let Chrome decide the window/viewport size (maximize)
+      // PC (maximize) must NOT set deviceScaleFactor when viewport is null.
       viewport: null,
       launchOptions: {
         args: ['--start-maximized'],
