@@ -23,6 +23,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_02');
         // Step 1: Go to base URL and wait for it to load
@@ -40,6 +42,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(2000); // Wait for page to load and modeFlg to be applied
         const isShnCdDisabled = await summaryPage.isShnCdDisabled();
         expect(isShnCdDisabled).toBe(true);
+        
+        await snapExpect();
     });
 
     // Test cases 19, 20, 21, 22 - same test logic
@@ -49,6 +53,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
             page,
             baseUrl,
             indexedDBHelper,
+            snapInput,
+            snapExpect,
         }) => {
             const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_02');
             // Step 1: Go to base URL and wait for it to load
@@ -68,6 +74,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
             // Step 4: Check if search icon (検索 button) is disabled
             const isIconDisabled = await summaryPage.isIconDisabled();
             expect(isIconDisabled).toBe(true);
+            
+            await snapExpect();
         });
     }
 
@@ -75,6 +83,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_02');
 
@@ -89,6 +99,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         const isMenuIconVisible = await summaryPage.isMenuIconVisible('カート');
         expect(isMenuIconVisible).toBe(false);
+        
+        await snapExpect();
     });
 
 });

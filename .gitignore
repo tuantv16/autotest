@@ -3,3 +3,5 @@ build/
 playwright-report/
 test-results/
 logs/
+screenshots/
+.env.test
