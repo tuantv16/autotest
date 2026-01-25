@@ -24,6 +24,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         // Step 1: Go to base URL and wait for it to load
@@ -50,12 +52,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         const isErrorMessageVisible = await summaryPage.verifyErrorMessageInvalid(testData.formData.shnCd_24);
         expect(isErrorMessageVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_25', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         // Step 1: Go to base URL and wait for it to load
@@ -86,12 +92,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 7: Verify error message for invalid length
         const isErrorMessageVisible = await summaryPage.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.INVALID_LENGTH, '商品');
         expect(isErrorMessageVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_26', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -127,12 +137,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         // Wait a bit for UI to update after search
         await page.waitForTimeout(2000);
+        
+        await snapExpect();
     });
 
     test('WTY10401_27', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -174,6 +188,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -206,12 +222,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Wait for API response to complete
         const apiResponse = await apiResponsePromise;
         expect(apiResponse.status()).toBe(200);
+        
+        await snapExpect();
     });
 
     test('WTY10401_29', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
@@ -234,6 +254,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         const shnCdValue = await summaryPage.getValueById('shnCd');
         expect(shnCdValue).toBe( testData.formData.shnCd_29_expected);
+        
+        await snapExpect();
 
     });
 
@@ -241,6 +263,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
@@ -263,6 +287,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.blurShnCd();
         await page.waitForTimeout(500); // Wait for validation error to appear
         expect(await summaryPage.hasErrorBorderShnCd()).toBe(true);
+        
+        await snapExpect();
 
     });
 
@@ -270,6 +296,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
@@ -290,6 +318,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.blurShnCd();
         await summaryPage.focusShnCd();
         expect(await summaryPage.hasErrorBorderShnCd()).toBe(false);
+        
+        await snapExpect();
 
     });
 });

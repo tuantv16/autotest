@@ -18,6 +18,14 @@ function normalizeSnapDevice(raw: unknown): SnapDevice {
   throw new Error(`[playwright.config] Invalid SNAP_DEVICE='${v}'. Allowed: pc|tablet|mobile|all`);
 }
 
+function normalizeHeadless(raw: unknown): boolean {
+  const v = String(raw ?? '').trim().toLowerCase();
+  if (!v) return true; // Mặc định là headless (không mở trình duyệt)
+  if (v === 'true') return true;
+  if (v === 'false') return false;
+  throw new Error(`[playwright.config] Invalid HEADLESS='${v}'. Allowed: true|false`);
+}
+
 const SNAP_DEVICE = normalizeSnapDevice(process.env.SNAP_DEVICE);
 
 const ALL_PROJECTS = [
@@ -61,7 +69,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    headless: false,
+    headless: normalizeHeadless(process.env.HEADLESS),
     actionTimeout: 10000,
     trace: 'on-first-retry',
     screenshot: 'off',
