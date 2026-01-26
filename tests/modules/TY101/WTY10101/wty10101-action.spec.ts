@@ -149,10 +149,10 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.navigate();
         await page.waitForTimeout(500);
 
-        await productInquiryPage.searchProduct(testData.searchCode);
-        await page.waitForTimeout(1000);
-
+        await productInquiryPage.fillSearchInput(testData.searchCode);
         await snapInput();
+        await productInquiryPage.clickSearch();
+
 
         const displayedModel = await productInquiryPage.getModelNumber();
         const expectedModel = testData.responseData.outDS.shnKhnInfoDT[0].mkKata;
@@ -182,10 +182,9 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.navigate();
         await page.waitForTimeout(500);
 
-        await productInquiryPage.searchProduct(testData.searchCode);
-        await page.waitForTimeout(1000);
-
+        await productInquiryPage.fillSearchInput(testData.searchCode);
         await snapInput();
+        await productInquiryPage.clickSearch();
 
         const displayedModel = await productInquiryPage.getModelNumber();
         const expectedModel = testData.responseData.outDS.shnKhnInfoDT[0].mkKata;
@@ -277,10 +276,11 @@ test.describe('WTY10101 - Action behavior', () => {
 
         const urlBeforeSearch = page.url();
 
+        await productInquiryPage.fillSearchInput(testData.searchCode);
+        await snapInput();
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
 
-        await snapInput();
 
         const urlAfterSearch = page.url();
         expect(urlAfterSearch).not.toBe(urlBeforeSearch);

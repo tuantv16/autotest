@@ -36,7 +36,11 @@ test.describe('WTY10101 - Show product info', () => {
         await snapInput();
 
         const productRecommendInfoLabel = await productInquiryPage.getProductRecommendInfoLabel();
+        await productInquiryPage.scrollToCenter(productRecommendInfoLabel);
         await expect(productRecommendInfoLabel).toBeVisible();
+        const endOfDataLabel = await productInquiryPage.getEndOfDataLabel();
+        await productInquiryPage.scrollToCenter(endOfDataLabel);
+        await expect(endOfDataLabel).toBeVisible();
         const productRecommendInfo = await productInquiryPage.getProductRecommendInfo();
         await expect(productRecommendInfo).toContainText(testData.expectedResults.endOfData);
         const recommendDataWrapper = await productInquiryPage.getRecommendDataWrapper();
@@ -65,6 +69,7 @@ test.describe('WTY10101 - Show product info', () => {
         await snapInput();
 
         const productRecommendInfoLabel = await productInquiryPage.getProductRecommendInfoLabel();
+        await productInquiryPage.scrollToCenter(productRecommendInfoLabel);
         await expect(productRecommendInfoLabel).toBeVisible();
         const productRecommendInfo = await productInquiryPage.getProductRecommendInfo();
         await expect(productRecommendInfo).toContainText(testData.expectedResults.endOfData);
@@ -95,6 +100,7 @@ test.describe('WTY10101 - Show product info', () => {
         await snapInput();
 
         const productRecommendInfoLabel = await productInquiryPage.getProductRecommendInfoLabel();
+        await productInquiryPage.scrollToCenter(productRecommendInfoLabel);
         await expect(productRecommendInfoLabel).toBeVisible();
         const productRecommendInfo = await productInquiryPage.getProductRecommendInfo();
         await expect(productRecommendInfo).toContainText(testData.expectedResults.endOfData);
@@ -122,6 +128,9 @@ test.describe('WTY10101 - Show product info', () => {
         await productInquiryPage.searchProduct(testData.searchCode);
 
         await snapInput();
+
+        const guaranteeRateInput = productInquiryPage.getGuaranteeRateInput();
+        await guaranteeRateInput.scrollIntoViewIfNeeded();
 
         const productRecommendInfo = await productInquiryPage.getProductRecommendInfoLabel();
         await expect(productRecommendInfo).not.toBeVisible();

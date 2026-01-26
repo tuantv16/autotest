@@ -505,6 +505,7 @@ test.describe('WTY10101 - Show product info', () => {
         await snapInput();
 
         const stockGrid = productInquiryPage.getStockGrid();
+        await stockGrid.scrollIntoViewIfNeeded();
         await expect(stockGrid).toBeVisible();
 
         const stockRows = await productInquiryPage.getStockRows().count();
@@ -539,6 +540,9 @@ test.describe('WTY10101 - Show product info', () => {
         const extendedWarranty = await productInquiryPage.getExtendedWarrantyValue();
         const warrantyRateLabel = productInquiryPage.getLabelByFor('guarantee');
 
+        const guaranteeRateInput = productInquiryPage.getGuaranteeRateInput();
+        await guaranteeRateInput.scrollIntoViewIfNeeded();
+
         expect(makerWarranty.trim()).toBe(expectedWarranty.makerWarranty);
         expect(anshinWarranty.trim()).toBe(expectedWarranty.anshin);
         expect(extendedWarranty.trim()).toBe(expectedWarranty.extendedWarranty);
@@ -570,6 +574,8 @@ test.describe('WTY10101 - Show product info', () => {
         await snapInput();
 
         const warrantyRateLabel = productInquiryPage.getLabelByFor('guarantee');
+        const guaranteeRateInput = productInquiryPage.getGuaranteeRateInput();
+        await guaranteeRateInput.scrollIntoViewIfNeeded();
         const warrantyRate = productInquiryPage.getGuaranteeRateValue();
         expect(await warrantyRateLabel.textContent()).toBe(testData.expectedResults.warranty.guaranteeRateLabel);
         expect(await warrantyRate).toBe(testData.expectedResults.warranty.guaranteeRate);
@@ -595,6 +601,8 @@ test.describe('WTY10101 - Show product info', () => {
         await page.waitForTimeout(1500);
 
         await snapInput();
+        const guaranteeRateInput = productInquiryPage.getGuaranteeRateInput();
+        await guaranteeRateInput.scrollIntoViewIfNeeded();
 
         const warrantyLabel = productInquiryPage.getLabelByFor('guarantee');
         const warrantyFee = productInquiryPage.getGuaranteeRateValue();
@@ -629,6 +637,9 @@ test.describe('WTY10101 - Show product info', () => {
         const supplierCode = await productInquiryPage.getSupplierCodeValue();
         expect(supplierName).toBe(testData.expectedResults.shiirerykKnj);
         expect(supplierCode).toBe(testData.expectedResults.shiireCd);
+
+        const supplierCodeLabel = productInquiryPage.getLabelSupplierCode();
+        await productInquiryPage.scrollToCenter(supplierCodeLabel);
 
         await snapExpect();
     });
@@ -680,6 +691,9 @@ test.describe('WTY10101 - Show product info', () => {
 
         const isSetProductTableVisible = await productInquiryPage.isSetProductTableVisible();
         expect(isSetProductTableVisible).toBe(true);
+        await productInquiryPage.scrollToCenter(productInquiryPage.getSetProductTable());
+
+        await snapInput(2);
 
         const apiRequestCount = await productInquiryPage.clickSetProductTableRowAndCountApiRequests(testData.expectedResults.filterText);
         await page.waitForTimeout(1000);

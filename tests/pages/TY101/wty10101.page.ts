@@ -117,6 +117,7 @@ export class TY10101Page extends BasePage {
 
         supplierName: 'input[name="shiirerykKnj"]',
         supplierCode: 'input[name="shiireCd"]',
+        supplierCodeLabel: 'label[for="shiireCd"]',
         // Related product section
         relatedProductTakeAwayButton: 'div.related-product label:has-text("持帰り")',
         relatedProductDeliveryButton: 'div.related-product label:has-text("配達")',
@@ -136,6 +137,8 @@ export class TY10101Page extends BasePage {
         buttonDeliveryInfo: 'button:has-text("納期情報")',
 
         recommendDataWrapper: 'div.recommend-data',
+
+        endOfDataLabel: 'p:has-text("End Of Data")',
     };
 
     constructor(page: Page) {
@@ -463,6 +466,10 @@ export class TY10101Page extends BasePage {
         return this.page.inputValue(this.selectors.extendedWarrantyInput);
     }
 
+    getGuaranteeRateInput(): Locator {
+        return this.page.locator(this.selectors.guaranteeRateInput).first();
+    }
+
     async getGuaranteeRateValue(): Promise<string> {
         return this.page.inputValue(this.selectors.guaranteeRateInput);
     }
@@ -752,6 +759,9 @@ export class TY10101Page extends BasePage {
     getLabelByFor(forValue: string): Locator {
         return this.page.locator(`label[for="${forValue}"]`).first();
     }
+    getLabelSupplierCode(): Locator {
+        return this.page.locator(this.selectors.supplierCodeLabel).first();
+    }
 
     async getSupplierNameValue(): Promise<string> {
         return await this.page.inputValue(this.selectors.supplierName);
@@ -1002,5 +1012,22 @@ export class TY10101Page extends BasePage {
 
     async getLimitedInputValue(): Promise<string> {
         return await this.page.inputValue(this.selectors.limitedInput);
+    }
+
+    /**
+     * Scroll element to center of viewport
+     */
+    async scrollToCenter(locator: Locator): Promise<void> {
+        await locator.evaluate((element) => {
+            element.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+        });
+        await this.page.waitForTimeout(300); // Wait for scroll animation
+    }
+
+    getSetProductTable(): Locator {
+        return this.page.locator(this.selectors.setProductTable).first();
+    }
+    getEndOfDataLabel(): Locator {
+        return this.page.locator(this.selectors.endOfDataLabel).first();
     }
 }
