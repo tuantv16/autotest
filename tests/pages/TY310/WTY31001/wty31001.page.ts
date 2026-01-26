@@ -182,10 +182,17 @@ export class WTY31001Page extends BasePage {
   }
 
   async waitForFormReady(): Promise<void> {
-    await this.page.waitForSelector(
-      `${this.selectors.kkyRadio}, ${this.selectors.hpnRadio}`,
-      { state: "visible", timeout: 10000 },
-    );
+    await this.page.waitForSelector(this.selectors.pageTitle, {
+      state: "visible",
+      timeout: 10000,
+    });
+  }
+
+  async waitForAPIReady(expectedValue: string, timeout = 10000): Promise<void> {
+    const input = this.page.locator(this.selectors.kataInput);
+
+    await expect(input).toBeVisible({ timeout });
+    await expect(input).toHaveValue(expectedValue, { timeout });
   }
 
   async getPageTitle(): Promise<boolean> {

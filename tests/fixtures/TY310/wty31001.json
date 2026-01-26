@@ -483,6 +483,9 @@
     },
     "TC_64": {
       "description": "Test data for 返品 mode - product search",
+      "formData": {
+        "shnCd": "00010013557"
+      },
       "sessionData": [],
       "commonData": [
         {
