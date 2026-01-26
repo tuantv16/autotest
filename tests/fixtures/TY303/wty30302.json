@@ -1,0 +1,226 @@
+{
+  "wty30302": {
+    "TC_01": {
+      "description": "WTY30302_TC_01: マルチPOP出力指示一覧 初期表示確認",
+      "sessionData": [
+        {
+          "key": "WTY30302_IN_SD",
+          "value": {
+            "shijiJknDT": [
+              {
+                "sbnFlg": "0"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "syoriStoreCd": "00102",
+            "storeCd": "10596",
+            "userId": "0596",
+            "clientId": "00102W581",
+            "termNo": "581",
+            "unyoDate": "20250806",
+            "screenId": "WTY30401"
+          }
+        }
+      ]
+    },
+    "TC_02": {
+       "description": "マルチコメント",
+        "sessionData": [
+          {
+            "key": "WTY30302_IN_SD",
+            "value": {
+              "shijiJknDT": [
+                {
+                  "sbnFlg": "0"
+                }
+              ]
+            }
+          }
+        ],
+        "commonData": [
+          {
+            "id": "commonDT",
+            "value": {
+              "syoriStoreCd": "00103",
+              "storeCd": "10596",
+              "userId": "0596",
+              "clientId": "00102W581",
+              "termNo": "581",
+              "unyoDate": "20250806",
+              "screenId": "WTY30401"
+            }
+          }
+        ]
+     },
+     "TC_03": {
+       "description": "セール名",
+        "sessionData": [
+          {
+            "key": "WTY30302_IN_SD",
+            "value": {
+              "shijiJknDT": [
+                {
+                  "sbnFlg": "0"
+                }
+              ]
+            }
+          }
+        ],
+        "commonData": [
+          {
+            "id": "commonDT",
+            "value": {
+              "syoriStoreCd": "00104",
+              "storeCd": "10596",
+              "userId": "0596",
+              "clientId": "00102W581",
+              "termNo": "582",
+              "unyoDate": "20250806",
+              "screenId": "WTY30401"
+            }
+          }
+        ]
+     },
+     "TC_04": {
+       "description": "セール名",
+        "sessionData": [
+          {
+            "key": "WTY30302_IN_SD",
+            "value": {
+              "shijiJknDT": [
+                {
+                  "sbnFlg": "0"
+                }
+              ],
+               "shnChkInDT": [
+                  {
+                    "shnCd": "00579974999",
+                    "janCd": "04977729584295",
+                    "hskkNo": "20210806004",
+                    "sbnFlg": "0",
+                    "dsgnKbn": "I",
+                    "outYmd": "20210806"
+                  }
+                ],
+                "screenInfoDT": [
+                  {
+                    "outYmd": "20210806",
+                    "shnCd": "00579974999",
+                    "mockSu": "0",
+                    "mpopSiz": "7",
+                    "prtMsu": "1"
+                  }
+                ]
+            }
+          }
+        ],
+        "commonData": [
+          {
+            "id": "commonDT",
+            "value": {
+              "syoriStoreCd": "00104",
+              "storeCd": "10596",
+              "userId": "0596",
+              "clientId": "00102W581",
+              "termNo": "582",
+              "unyoDate": "20250806",
+              "screenId": "WTY30401"
+            }
+          }
+        ]
+     },
+     "TC_05": {
+       "description": "sbnFlg is 1",
+        "sessionData": [
+          {
+            "key": "WTY30302_IN_SD",
+            "value": {
+              "shijiJknDT": [
+                {
+                  "sbnFlg": "1"
+                }
+              ]
+            }
+          }
+        ],
+        "commonData": [
+          {
+            "id": "commonDT",
+            "value": {
+              "syoriStoreCd": "00104",
+              "storeCd": "10596",
+              "userId": "0596",
+              "clientId": "00102W581",
+              "termNo": "582",
+              "unyoDate": "20250806",
+              "screenId": "WTY30401"
+            }
+          }
+        ]
+     },
+     "TC_06": {
+       "description": "mpopSiz is 'Z' - サイズ - Default",
+        "sessionData": [
+          {
+            "key": "WTY30302_IN_SD",
+            "value": {
+              "shijiJknDT": [
+                {
+                  "sbnFlg": "0"
+                }
+              ]
+            }
+          }
+        ],
+        "commonData": [
+          {
+            "id": "commonDT",
+            "value": {
+              "syoriStoreCd": "00105",
+              "storeCd": "10596",
+              "userId": "0596",
+              "clientId": "00102W581",
+              "termNo": "582",
+              "unyoDate": "20250806",
+              "screenId": "WTY30401"
+            }
+          }
+        ]
+     },
+     "TC_07": {
+       "description": "cmtKbn is 9 (invalid) - マルチコメント Empty value",
+        "sessionData": [
+          {
+            "key": "WTY30302_IN_SD",
+            "value": {
+              "shijiJknDT": [
+                {
+                  "sbnFlg": "0"
+                }
+              ]
+            }
+          }
+        ],
+        "commonData": [
+          {
+            "id": "commonDT",
+            "value": {
+              "syoriStoreCd": "00106",
+              "storeCd": "10596",
+              "userId": "0596",
+              "clientId": "00102W581",
+              "termNo": "582",
+              "unyoDate": "20250806",
+              "screenId": "WTY30401"
+            }
+          }
+        ]
+     }
+  }
+}

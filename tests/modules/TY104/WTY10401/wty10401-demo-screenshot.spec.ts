@@ -53,13 +53,12 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         const apiResponse = await apiResponsePromise;
         expect(apiResponse.status()).toBe(200);
 
-        await snapExpect();
-        // await snapExpect(1);
-        // await snapExpect(2);
-        await summaryPage.scrollToBottom();
-
         await page.waitForTimeout(1000);
-        await page.waitForTimeout(4000);
+        await snapExpect(1);
+
+        await summaryPage.scrollToBottom();
+        await page.waitForTimeout(1000);
+        await snapExpect(2);
     });
 
     test('WTY10401_102', async ({

@@ -1,0 +1,372 @@
+{
+    "wty10101": {
+        "TC_27": {
+            "description": "TC27",
+            "searchCode": "00010013854",
+            "responseData": {
+                "outDS": {
+                    "resultDT": [
+                        {
+                            "resultKbn": "0",
+                            "msgID": "",
+                            "msgArg1": "",
+                            "msgArg2": "",
+                            "msgArg3": "",
+                            "msgArg4": "",
+                            "msgArg5": ""
+                        }
+                    ],
+                    "shnKhnInfoDT": [
+                        {
+                            "shnCd": "00010013854",
+                            "janCd": "04984824491830",
+                            "mkKata": "TA-BCS40R1",
+                            "rykmkrNmKnj": "パナソニック",
+                            "rykchuNmKnj": "テレビオプション",
+                            "daiCd": "11",
+                            "chuCd": "60"
+                        }
+                    ],
+                    "baikaInfoDT": [
+                        {
+                            "bkSbtKbn": "0",
+                            "bk1UmFlg": "1",
+                            "bk1": 9878,
+                            "bk1Zein": 8980,
+                            "pntGaku1": 0,
+                            "pntRt1": 1,
+                            "kbPntGaku1": 0,
+                            "kbPntRt1": 0,
+                            "bk2UmFlg": "1",
+                            "bk2": 9878,
+                            "bk2Zein": 8980,
+                            "pntGaku2": 0,
+                            "pntRt2": 1,
+                            "kbPntGaku2": 0,
+                            "kbPntRt2": 0,
+                            "bk3UmFlg": "1",
+                            "bk3": 9878,
+                            "bk3Zein": 8980,
+                            "pntGaku3": 0,
+                            "pntRt3": 1,
+                            "kbPntGaku3": 0,
+                            "kbPntRt3": 0
+                        }
+                    ],
+                    "zaikoInfoDT": [
+                        {
+                            "zaiKtenNm": "自店",
+                            "zaiRhinJzai": 0,
+                            "zaiRhinYzai": 0,
+                            "zaiTenjiJzai": 0,
+                            "zaiTenjiYzai": 0,
+                            "zaiKiknJzai": 0,
+                            "zaiKiknYzai": 0
+                        }
+                    ]
+                }
+            }
+        },
+        "TC_28": {
+            "description": "TC28",
+            "searchCode": "00010013854",
+            "responseData": {
+                "outDS": {
+                    "resultDT": [
+                        {
+                            "resultKbn": "0",
+                            "msgID": ""
+                        }
+                    ],
+                    "shnKhnInfoDT": [
+                        {
+                            "shnCd": "00010013854",
+                            "janCd": "04984824491830",
+                            "mkKata": "TA-BCS40R1",
+                            "rykmkrNmKnj": "パナソニック",
+                            "rykchuNmKnj": "テレビオプション",
+                            "daiCd": "11",
+                            "chuCd": "60",
+                            "shnRnk": "C",
+                            "shnRnk2": " ",
+                            "btrKbn": "F",
+                            "setKbn": "K"
+                        }
+                    ]
+                }
+            }
+        },
+        "TC_29": {
+            "description": "TC29",
+            "searchCode": "00010013854",
+            "responseData": {
+                "outDS": {
+                    "resultDT": [
+                        {
+                            "resultKbn": "0",
+                            "msgID": ""
+                        }
+                    ],
+                    "shnKhnInfoDT": [
+                        {
+                            "shnCd": "00010013854",
+                            "janCd": "04984824491830",
+                            "mkKata": "TA-BCS40R1",
+                            "rykmkrNmKnj": "パナソニック",
+                            "rykchuNmKnj": "テレビオプション",
+                            "daiCd": "11",
+                            "chuCd": "60",
+                            "shnRnk": "C",
+                            "shnRnk2": " ",
+                            "btrKbn": "F",
+                            "setKbn": "K",
+                            "tenJchKahiFlg": "1",
+                            "htbDate": "",
+                            "htbDateHjKbn": "",
+                            "thKbn": "",
+                            "chksKahiFlg": "",
+                            "ykbrKahiFlg": "",
+                            "nykaskGntShnFlg": "0",
+                            "ktenNm1": "",
+                            "ktenNm2": "",
+                            "ktenNm3": ""
+                        }
+                    ]
+                }
+            },
+            "expectedResults": {
+                "detail": {
+                    "storeOrder": "可",
+                    "htbDate": "",
+                    "thKbn": "-",
+                    "chksKahiFlg": "不可",
+                    "ykbrKahiFlg": "不可",
+                    "nykaskGntShnFlg": "無",
+                    "ktenNm1": "",
+                    "ktenNm2": "",
+                    "ktenNm3": ""
+                }
+            }
+        },
+        "TC_30": {
+            "description": "TC30",
+            "searchCode": "00020099999",
+            "responseData": {
+                "outDS": {
+                    "resultDT": [
+                        {
+                            "resultKbn": "0",
+                            "msgID": ""
+                        }
+                    ],
+                    "shnKhnInfoDT": [
+                        {
+                            "shnCd": "00020099999",
+                            "janCd": "0123456789012",
+                            "mkKata": "NS-1000",
+                            "rykmkrNmKnj": "メーカーA",
+                            "rykchuNmKnj": "商品サンプルA",
+                            "daiCd": "22",
+                            "chuCd": "33",
+                            "shnRnk": "A",
+                            "shnRnk2": "",
+                            "btrKbn": "B",
+                            "setKbn": "",
+                            "tenJchKahiFlg": "1",
+                            "htbDate": "20251201",
+                            "htbDateHjKbn": "1",
+                            "thKbn": "2",
+                            "chksKahiFlg": "1",
+                            "ykbrKahiFlg": "1",
+                            "nykaskGntShnFlg": "1",
+                            "ktenNm1": "店舗A",
+                            "ktenNm2": "店舗B",
+                            "ktenNm3": ""
+                        }
+                    ]
+                }
+            }
+        },
+        "TC_31": {
+            "description": "TC31",
+            "searchCode": "00010013854"
+        },
+        "TC_32": {
+            "description": "TC32",
+            "searchCode": "00010013854"
+        },
+        "TC_33": {
+            "description": "TC33",
+            "searchCode": "00010013854"
+        },
+        "TC_34": {
+            "description": "TC34",
+            "searchCode": "00010013854"
+        },
+        "TC_35": {
+            "description": "TC35",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "priceTable": {
+                    "row1": {
+                        "price": "9,878"
+                    },
+                    "row2": {
+                        "price": "9,878"
+                    },
+                    "row3": {
+                        "price": "9,878"
+                    }
+                },
+                "activeButtonBg": "bg-white"
+            }
+        },
+        "TC_36": {
+            "description": "TC36",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "priceTable": {
+                    "row1": {
+                        "price": "8,980"
+                    },
+                    "row2": {
+                        "price": "8,980"
+                    },
+                    "row3": {
+                        "price": "8,980"
+                    }
+                },
+                "activeButtonBg": "bg-white"
+            }
+        },
+        "TC_37": {
+            "description": "TC37",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "pointTable": {
+                    "row1": {
+                        "rate": "1.00%",
+                        "amount": "0"
+                    },
+                    "row2": {
+                        "rate": "1.00%",
+                        "amount": "0"
+                    },
+                    "row3": {
+                        "rate": "1.00%",
+                        "amount": "0"
+                    }
+                },
+                "activeButtonBg": "bg-white"
+            }
+        },
+        "TC_38": {
+            "description": "TC38",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "pointTable": {
+                    "row1": {
+                        "rate": "",
+                        "amount": "0"
+                    },
+                    "row2": {
+                        "rate": "",
+                        "amount": "0"
+                    },
+                    "row3": {
+                        "rate": "",
+                        "amount": "0"
+                    }
+                },
+                "activeButtonBg": "bg-white"
+            }
+        },
+        "TC_39": {
+            "description": "TC39",
+            "searchCode": "00010013854"
+        },
+        "TC_40": {
+            "description": "TC40",
+            "searchCode": "00010013854"
+        },
+        "TC_41": {
+            "description": "TC41",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "warranty": {
+                    "makerWarranty": "1年",
+                    "anshin": "無",
+                    "extendedWarranty": "",
+                    "guaranteeRate": ""
+                }
+            }
+        },
+        "TC_51": {
+            "description": "TC51",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "electronicPrice": {
+                    "concentratedSale": "-",
+                    "priceSpecify": "-",
+                    "couponDiscount": "0円",
+                    "noInterestTimes": "10回"
+                }
+            }
+        },
+        "TC_56": {
+            "description": "TC56",
+            "searchCode": "00010013854"
+        },
+        "TC_57": {
+            "description": "TC57",
+            "searchCode": "00010013854"
+        },
+        "TC_59": {
+            "description": "TC59",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "description": {
+                    "content": "ライトシアンインク"
+                }
+            }
+        },
+        "TC_60": {
+            "description": "TC60",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "spec": {
+                    "content": "●対応機種:PM-A970、PM-T990"
+                }
+            }
+        },
+        "TC_61": {
+            "description": "TC61",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "color": {
+                    "colorValue": "シアン",
+                    "modelNumber": "DIA100",
+                    "janCode": "497985011110-4"
+                }
+            }
+        },
+        "TC_62": {
+            "description": "TC62",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "janCode": "497985011110-4",
+                "mkKata": "DIA100",
+                "rykmkrNmKnj": "八木アンテナ"
+            }
+        },
+        "TC_64": {
+            "description": "TC64",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "janCode": "497985011110-4",
+                "mkKata": "DIA100",
+                "rykmkrNmKnj": "八木アンテナ"
+            }
+        }
+    }
+}

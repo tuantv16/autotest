@@ -41,12 +41,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await snapExpect();
         const isVisible = await summaryPage.isHeadingTitleVisible();
         expect(isVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_08', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
         // Step 1: Go to base URL and wait for it to load
@@ -68,12 +72,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 5: Verify product barcode button exists
         const isBarcodeButtonVisible = await summaryPage.isProductBarcodeButtonVisible();
         expect(isBarcodeButtonVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_11', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
         // Step 1: Go to base URL and wait for it to load
@@ -95,12 +103,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         const isComboboxVisible = await summaryPage.isSalesDepartmentComboboxClickable();
         await page.waitForTimeout(1000);
         expect(isComboboxVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_12', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
         // Step 1: Go to base URL and wait for it to load
@@ -121,12 +133,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 4: Click on store label (店舗)
         await summaryPage.clickStoreLabel();
         await page.waitForTimeout(1000);
+        
+        await snapExpect();
     });
 
     test('WTY10401_13', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
         // Step 1: Go to base URL and wait for it to load
@@ -151,12 +167,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         const expectedOptions = ['エディオン', '中四国・九州', '旧東京エディオン'];
         const allOptionsPresent = await summaryPage.verifyComboboxOptions(expectedOptions);
         expect(allOptionsPresent).toBe(true); 
+        
+        await snapExpect();
     });
 
     test('WTY10401_14', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
         // Step 1: Go to base URL and wait for it to load
@@ -181,12 +201,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         const expectedOptions = ['エディオン', '中四国・九州', '事業会社コード2'];
         const allOptionsPresent = await summaryPage.verifyComboboxOptions(expectedOptions);
         expect(allOptionsPresent).toBe(true); 
+        
+        await snapExpect();
     });
 
     test('WTY10401_15', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
 
@@ -205,12 +229,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         const isSearchButtonVisible = await summaryPage.isSearchButtonVisible();
         expect(isSearchButtonVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_16', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
 
@@ -225,6 +253,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickIconMenu();
         const isMenuIconVisible = await summaryPage.isMenuIconVisible('カート');
         expect(isMenuIconVisible).toBe(true);
+        
+        await snapExpect();
     });
     
 });

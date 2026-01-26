@@ -38,6 +38,27 @@ const SNAPSHOT_VIEWPORTS: SnapshotViewport[] = [
   },
 ];
 
+function normalizeDeviceFlag(flagRaw: unknown): DeviceTier | 'ALL' {
+  const v = String(flagRaw ?? '')
+    .trim()
+    .toLowerCase();
+
+  if (!v || v === 'all') return 'ALL';
+  if (v === 'pc' || v === 'desktop') return 'PC';
+  if (v === 'tablet' || v === 'tab') return 'Tablet';
+  if (v === 'mobile' || v === 'phone') return 'Mobile';
+
+  throw new Error(
+    `[snap] Invalid SNAP_DEVICE='${v}'. Allowed: pc|tablet|mobile|all`,
+  );
+}
+
+function getEnabledSnapshotViewports(): SnapshotViewport[] {
+  const flag = normalizeDeviceFlag(process.env.SNAP_DEVICE);
+  if (flag === 'ALL') return SNAPSHOT_VIEWPORTS;
+  return SNAPSHOT_VIEWPORTS.filter((x) => x.tier === flag);
+}
+
 function ensureDir(dirPath: string): void {
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
@@ -108,60 +129,80 @@ async function snapForViewport(
   const fileName = buildFileName(kind, index);
   const filePath = path.join(dir, fileName);
 
-  // For PC, use the existing page to save time and context
-  if (tier === 'PC') {
-    const originalViewport = page.viewportSize();
-    try {
-      await page.setViewportSize(vp.viewport);
-      await page.screenshot({ path: filePath, fullPage: true });
-    } finally {
-      if (originalViewport) {
-        await page.setViewportSize(originalViewport);
+  // Option 1 behavior (when SNAP_DEVICE selects a single device):
+  // do NOT change viewport/device emulation here; just screenshot what the test currently shows.
+  const flag = normalizeDeviceFlag(process.env.SNAP_DEVICE);
+  if (flag !== 'ALL') {
+    await page.screenshot({ path: filePath, fullPage: false });
+    return filePath;
+  }
+
+  // Backward compatibility (SNAP_DEVICE=all): emulate each viewport and take fullPage screenshots.
+  const context = page.context();
+
+  const originalViewport = page.viewportSize();
+  const originalUA = await page.evaluate(() => navigator.userAgent);
+  const originalHasTouch = await page.evaluate(() => 'ontouchstart' in window);
+
+  try {
+    await page.setViewportSize(vp.viewport);
+
+    const browserName = context.browser()?.browserType().name();
+    if (browserName === 'chromium') {
+      const cdp = await context.newCDPSession(page);
+      await cdp.send('Emulation.setUserAgentOverride', {
+        userAgent:
+          tier === 'Mobile'
+            ? (devices['iPhone 12']?.userAgent ?? originalUA)
+            : tier === 'Tablet'
+              ? (devices['iPad (gen 7) landscape']?.userAgent ?? originalUA)
+              : (devices['Desktop Chrome']?.userAgent ?? originalUA),
+      });
+
+      const deviceScaleFactor = vp.deviceScaleFactor ?? 1;
+      const mobile = Boolean(vp.isMobile);
+
+      await cdp.send('Emulation.setDeviceMetricsOverride', {
+        width: vp.viewport.width,
+        height: vp.viewport.height,
+        deviceScaleFactor,
+        mobile,
+      });
+
+      if (tier === 'Mobile' || tier === 'Tablet') {
+        await cdp.send('Emulation.setTouchEmulationEnabled', {
+          enabled: true,
+          maxTouchPoints: 5,
+        });
+      } else {
+        await cdp.send('Emulation.setTouchEmulationEnabled', {
+          enabled: originalHasTouch,
+          maxTouchPoints: originalHasTouch ? 5 : 0,
+        });
       }
     }
-    return filePath;
-  }
 
-  // For Tablet/Mobile, create a new page with the correct device profile
-  const context = page.context();
-  const browser = context.browser();
-  if (!browser) {
-    // Fallback to original behavior if browser is not available
-    console.warn('[snap] Browser context not available. Taking screenshot on current page.');
+    await page.waitForTimeout(250);
     await page.screenshot({ path: filePath, fullPage: true });
-    return filePath;
-  }
-
-  const baseUrl = page.url();
-
-  const storageState = await context.storageState();
-
-  const newContext = await browser.newContext({
-    viewport: vp.viewport,
-    deviceScaleFactor: vp.deviceScaleFactor,
-    isMobile: vp.isMobile,
-    hasTouch: vp.hasTouch,
-    // Important: mobile/tablet should have their own UA to trigger responsive breakpoints
-    userAgent:
-      tier === 'Mobile'
-        ? (devices['iPhone 12']?.userAgent ?? undefined)
-        : (devices['iPad (gen 7) landscape']?.userAgent ?? undefined),
-    storageState,
-  });
-
-  const defaultCipher = process.env.DEFAULT_CIPHER || 'LOCAL_DEV_DUMMY_KEY';
-  await newContext.addInitScript((cipher) => {
-    localStorage.setItem('cipher', cipher);
-  }, defaultCipher);
-
-  const newPage = await newContext.newPage();
-  try {
-    await newPage.goto(baseUrl, { waitUntil: 'networkidle' });
-    await newPage.waitForTimeout(250);
-    await newPage.screenshot({ path: filePath, fullPage: true });
   } finally {
-    await newPage.close().catch(() => {});
-    await newContext.close().catch(() => {});
+    if (originalViewport) {
+      await page.setViewportSize(originalViewport);
+    }
+
+    const browserName = context.browser()?.browserType().name();
+    if (browserName === 'chromium') {
+      try {
+        const cdp = await context.newCDPSession(page);
+        await cdp.send('Emulation.setUserAgentOverride', { userAgent: originalUA });
+        await cdp.send('Emulation.clearDeviceMetricsOverride');
+        await cdp.send('Emulation.setTouchEmulationEnabled', {
+          enabled: originalHasTouch,
+          maxTouchPoints: originalHasTouch ? 5 : 0,
+        });
+      } catch {
+        // ignore restore errors
+      }
+    }
   }
 
   return filePath;
@@ -175,7 +216,7 @@ async function snap(
 ): Promise<string> {
   const outputs: string[] = [];
 
-  for (const vp of SNAPSHOT_VIEWPORTS) {
+  for (const vp of getEnabledSnapshotViewports()) {
     outputs.push(await snapForViewport(page, testInfo, kind, vp.tier, vp, index));
   }
 
