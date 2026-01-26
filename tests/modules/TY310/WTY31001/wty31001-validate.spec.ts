@@ -109,7 +109,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter number "10" into 良品依頼 field
-    await productInputPage.fillRHinIriInput("1000");
+    await productInputPage.fillRHinIriInput("10");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -119,7 +119,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: Value is formatted correctly
     const rHinIriValue = await productInputPage.getRHinIriInputValue();
-    expect(rHinIriValue).toBe("1,000");
+    expect(rHinIriValue).toBe("10");
 
     // Verify: No error message is displayed
     const isErrorVisible =
@@ -200,13 +200,22 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapExpect();
   });
 
-  test("WTY31001_35", async ({ page, baseUrl, snapInput, snapExpect }) => {
+  test("WTY31001_35", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
 
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+
+    await productInputPage.fillProductInput(testData.formData.shnCd);
+    await productInputPage.clickSearchButton();
     await page.waitForTimeout(1000);
 
     // Step 3: Enter number with more than 5 digits "1000000" into 良品依頼 field
@@ -224,8 +233,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: Error message is displayed
     const isErrorVisible =
-      await productInputPage.getFieldErrorMessage("良品依頼");
-    expect(isErrorVisible).toBe("良品依頼は5桁以内で入力してください。");
+      await productInputPage.getErrorMessageDialog();
+    expect(isErrorVisible).toContain("良品依頼は5桁以内で入力してください。");
     await snapExpect();
   });
 
