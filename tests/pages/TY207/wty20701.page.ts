@@ -6,7 +6,7 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from '../base.page';
 
-export class WTY207010Page extends BasePage {
+export class WTY20701Page extends BasePage {
     public readonly Locators = {
         classCellOutput: 'multi-row-cell-item',
     };

@@ -303,7 +303,7 @@ export class BasePage {
      */
     protected async clickOptionInCombobox(optionSelectors: string[], errorMessage: string, comboboxSelector: string): Promise<void> {
         const comboboxLocator = this.page.locator(comboboxSelector);
-        
+
         await this.waitForVisible(comboboxLocator, 10000);
         await comboboxLocator.click({ timeout: 10000 });
         await this.page.waitForTimeout(500);
@@ -395,12 +395,12 @@ export class BasePage {
         // Since input is hidden, we need to click on the label or span containing the option text
         // Try multiple selectors to find the clickable element
         const selectors = [
-        // Click on label containing the option text
-        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}")`,
-        // Click on span containing the option text
-        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}") span`,
-        // Alternative: click on label by value attribute
-        `label:has-text("${groupLabel}") ~ div label:has(input[type="radio"][value="${optionValue}"])`,
+            // Click on label containing the option text
+            `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}")`,
+            // Click on span containing the option text
+            `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}") span`,
+            // Alternative: click on label by value attribute
+            `label:has-text("${groupLabel}") ~ div label:has(input[type="radio"][value="${optionValue}"])`,
         ];
 
         let clicked = false;
@@ -429,55 +429,55 @@ export class BasePage {
 
     /**
      * Select option for Material UI Select (div role="combobox")
-     * 
+     *
      * @param selectLocator Locator of MUI select element
      * @param value value of option (data-value)
      */
     async selectMuiSelect(selectLocator: Locator, value: string): Promise<void> {
-      // Wait select visible
-      await this.waitForVisible(selectLocator, 20000);
+        // Wait select visible
+        await this.waitForVisible(selectLocator, 20000);
 
-      // Open dropdown
-      await selectLocator.click();
+        // Open dropdown
+        await selectLocator.click();
 
-      // Locate option by data-value
-      const option = this.page.locator(`li[data-value="${value}"]`);
-      await this.waitForVisible(option, 10000);
+        // Locate option by data-value
+        const option = this.page.locator(`li[data-value="${value}"]`);
+        await this.waitForVisible(option, 10000);
 
-      // Click option
-      await option.click();
+        // Click option
+        await option.click();
     }
 
     /**
      * Click action menu button
      */
     async clickMenuButton(): Promise<void> {
-      const locator = this.page.locator('button.MuiButtonBase-root[aria-haspopup="true"]');
-      await this.waitForVisible(locator);
-      await this.clickWithRetry(locator);
-      await this.page.waitForTimeout(1000);
+        const locator = this.page.locator('button.MuiButtonBase-root[aria-haspopup="true"]');
+        await this.waitForVisible(locator);
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(1000);
     }
 
     /**
      * Click button in action menu
-     * 
+     *
      * @param buttonText Text of the button to click
      */
     async clickButtonInMenuButton(buttonText: string): Promise<void> {
-      // 1. Open action menu dropdown
-      await this.clickMenuButton();
+        // 1. Open action menu dropdown
+        await this.clickMenuButton();
 
-      // 2. Wait for MUI menu to appear
-      const menu = this.page.locator('ul[role="menu"]');
-      await this.waitForVisible(menu);
+        // 2. Wait for MUI menu to appear
+        const menu = this.page.locator('ul[role="menu"]');
+        await this.waitForVisible(menu);
 
-      // 3. Click the specified button text
-      const button = menu.locator(`li[role="menuitem"]:has-text("${buttonText}")`);
-      await this.waitForVisible(button);
-      await button.click();
+        // 3. Click the specified button text
+        const button = menu.locator(`li[role="menuitem"]:has-text("${buttonText}")`);
+        await this.waitForVisible(button);
+        await button.click();
 
-      // 4. Wait UI settle
-      await this.page.waitForTimeout(500);
+        // 4. Wait UI settle
+        await this.page.waitForTimeout(500);
 
     }
 
@@ -649,7 +649,7 @@ export class BasePage {
     }
 
     async clickOutside(): Promise<void> {
-      await this.page.mouse.click(1, 1);
+        await this.page.mouse.click(1, 1);
     }
 
     async clickButtonByText(text: string): Promise<void> {
