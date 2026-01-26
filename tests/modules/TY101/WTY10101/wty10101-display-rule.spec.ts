@@ -15,7 +15,7 @@ test.describe('WTY10101 - Display rule', () => {
 
     const commonData = CommonHelper.loadTestData('TY101/wty10101-common-data').commonData;
 
-    test('WTY10101_94', async ({ page, baseUrl, indexedDBHelper }, testInfo) => {
+    test('WTY10101_94', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }, testInfo) => {
         const testData = loadTestData('TY101/wty10101-display-rule', 'wty10101', 'TC_94');
 
         // Start capturing API responses
@@ -29,6 +29,8 @@ test.describe('WTY10101 - Display rule', () => {
         await productInquiryPage.waitForPageReady();
 
         await productInquiryPage.searchProduct(testData.searchCode);
+
+        await snapInput();
 
         // Stop capturing and attach responses to test report
         responseCapture.stop();
@@ -41,9 +43,11 @@ test.describe('WTY10101 - Display rule', () => {
 
         const productImageAccordionButton = await productInquiryPage.getProductImageAccordionButton();
         await expect(productImageAccordionButton).not.toBeVisible();
+
+        await snapExpect();
     });
 
-    test('WTY10101_95', async ({ page, baseUrl, indexedDBHelper }, testInfo) => {
+    test('WTY10101_95', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }, testInfo) => {
         // use TC_94 data
         const testData = loadTestData('TY101/wty10101-display-rule', 'wty10101', 'TC_94');
 
@@ -58,6 +62,8 @@ test.describe('WTY10101 - Display rule', () => {
         await productInquiryPage.waitForPageReady();
 
         await productInquiryPage.searchProduct(testData.searchCode);
+
+        await snapInput();
 
         // Stop capturing and attach responses to test report
         responseCapture.stop();
@@ -70,9 +76,11 @@ test.describe('WTY10101 - Display rule', () => {
 
         const productImageAccordionButton = await productInquiryPage.getProductDescriptionAccordionButton();
         await expect(productImageAccordionButton).not.toBeVisible();
+
+        await snapExpect();
     });
 
-    test('WTY10101_96', async ({ page, baseUrl, indexedDBHelper }, testInfo) => {
+    test('WTY10101_96', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }, testInfo) => {
         // use TC_94 data
         const testData = loadTestData('TY101/wty10101-display-rule', 'wty10101', 'TC_94');
 
@@ -87,6 +95,8 @@ test.describe('WTY10101 - Display rule', () => {
         await productInquiryPage.waitForPageReady();
 
         await productInquiryPage.searchProduct(testData.searchCode);
+
+        await snapInput();
 
         // Stop capturing and attach responses to test report
         responseCapture.stop();
@@ -99,9 +109,11 @@ test.describe('WTY10101 - Display rule', () => {
 
         const productDescriptionAccordionButton = await productInquiryPage.getProductDescriptionAccordionButton();
         await expect(productDescriptionAccordionButton).not.toBeVisible();
+
+        await snapExpect();
     });
 
-    test('WTY10101_97', async ({ page, baseUrl, indexedDBHelper }, testInfo) => {
+    test('WTY10101_97', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }, testInfo) => {
         // use TC_94 data
         const testData = loadTestData('TY101/wty10101-display-rule', 'wty10101', 'TC_94');
 
@@ -116,6 +128,8 @@ test.describe('WTY10101 - Display rule', () => {
         await productInquiryPage.waitForPageReady();
 
         await productInquiryPage.searchProduct(testData.searchCode);
+
+        await snapInput();
 
         // Stop capturing and attach responses to test report
         responseCapture.stop();
@@ -128,9 +142,11 @@ test.describe('WTY10101 - Display rule', () => {
 
         const productColorAccordionButton = await productInquiryPage.getProductColorAccordionButton();
         await expect(productColorAccordionButton).not.toBeVisible();
+
+        await snapExpect();
     });
 
-    test('WTY10101_98', async ({ page, baseUrl, indexedDBHelper }, testInfo) => {
+    test('WTY10101_98', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }, testInfo) => {
         // use TC_94 data
         const testData = loadTestData('TY101/wty10101-display-rule', 'wty10101', 'TC_94');
 
@@ -146,6 +162,8 @@ test.describe('WTY10101 - Display rule', () => {
 
         await productInquiryPage.searchProduct(testData.searchCode);
 
+        await snapInput();
+
         // Stop capturing and attach responses to test report
         responseCapture.stop();
         if (responseCapture.responses.length > 0) {
@@ -157,6 +175,8 @@ test.describe('WTY10101 - Display rule', () => {
 
         const productMakerOptionAccordionButton = await productInquiryPage.getProductMakerAccordionButton();
         await expect(productMakerOptionAccordionButton).not.toBeVisible();
+
+        await snapExpect();
     });
 
 });

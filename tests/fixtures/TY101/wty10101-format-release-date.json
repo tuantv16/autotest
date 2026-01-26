@@ -1,6 +1,6 @@
 {
     "wty10101": {
-        "TC_101": {
+        "TC_99": {
             "searchCode": "00010013922",
             "commonData": [
                 {
@@ -19,14 +19,14 @@
                 }
             ]
         },
-        "TC_102": {
+        "TC_100": {
             "searchCode": "00010013922",
             "commonData": [
                 {
                     "id": "commonDT",
                     "value": [
                         {
-                            "unyoDate": "20250806",
+                            "unyoDate": "20060806",
                             "storeCd": "00905",
                             "syoriStoreCd": "00905",
                             "userId": "10596T401",
@@ -41,7 +41,7 @@
                 "releaseDateInputValue": "未定"
             }
         },
-        "TC_103": {
+        "TC_101": {
             "searchCode": "00010013854",
             "commonData": [
                 {
@@ -63,7 +63,7 @@
                 "releaseDateInputValue": "2026年01月01日"
             }
         },
-        "TC_104": {
+        "TC_102": {
             "searchCode": "00010001998",
             "commonData": [
                 {
@@ -85,7 +85,7 @@
                 "releaseDateInputValue": "2018年09月上旬"
             }
         },
-        "TC_105": {
+        "TC_103": {
             "searchCode": "00010000854",
             "commonData": [
                 {
@@ -107,7 +107,7 @@
                 "releaseDateInputValue": "2008年03月中旬"
             }
         },
-        "TC_106": {
+        "TC_104": {
             "searchCode": "00579708628",
             "commonData": [
                 {

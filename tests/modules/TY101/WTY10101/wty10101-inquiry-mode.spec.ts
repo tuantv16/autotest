@@ -29,6 +29,8 @@ test.describe('WTY10101 - Inquiry mode', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-inquiry', 'wty10101', 'WTY10101_93');
 
@@ -44,6 +46,8 @@ test.describe('WTY10101 - Inquiry mode', () => {
         await productInquiryPage.clickProductMakerAccordion();
         await page.waitForTimeout(1000);
 
+        await snapInput();
+
         let apiRequestCount = 0;
         let shouldTrack = false;
         const requestListener = (request: any) => {
@@ -65,12 +69,16 @@ test.describe('WTY10101 - Inquiry mode', () => {
         page.off('request', requestListener);
 
         expect(apiRequestCount).toBe(0);
+
+        await snapExpect();
     });
 
     test('WTY10101_92', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-inquiry', 'wty10101', 'WTY10101_92');
 
@@ -86,6 +94,8 @@ test.describe('WTY10101 - Inquiry mode', () => {
         await productInquiryPage.clickProductColorAccordion();
         await page.waitForTimeout(1000);
 
+        await snapInput();
+
         let apiRequestCount = 0;
         let shouldTrack = false;
         const requestListener = (request: any) => {
@@ -106,12 +116,16 @@ test.describe('WTY10101 - Inquiry mode', () => {
         page.off('request', requestListener);
 
         expect(apiRequestCount).toBe(0);
+
+        await snapExpect();
     });
 
     test('WTY10101_91', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-inquiry', 'wty10101', 'WTY10101_91');
 
@@ -124,8 +138,12 @@ test.describe('WTY10101 - Inquiry mode', () => {
         await productInquiryPage.waitForPageReady();
         await page.waitForTimeout(2000);
 
+        await snapInput();
+
         const apiRequestCount = await productInquiryPage.clickSetProductTableRowAndCountApiRequests(testData.expectedResults.filterText);
         expect(apiRequestCount).toBe(0);
+
+        await snapExpect();
     });
 
 });

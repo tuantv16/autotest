@@ -20,6 +20,8 @@ test.describe('WTY10101 - Screen transition', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({ commonData: commonData });
@@ -29,6 +31,8 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.waitForPageReady();
         await productInquiryPage.searchProduct(actionData.searchCode);
         await page.waitForTimeout(1500);
+
+        await snapInput();
 
         const urlBeforeClick = page.url();
         await productInquiryPage.clickMenuButton();
@@ -39,12 +43,16 @@ test.describe('WTY10101 - Screen transition', () => {
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
+
+        await snapExpect();
     });
 
     test('WTY10101_80', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({ commonData: commonData });
@@ -54,6 +62,8 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.waitForPageReady();
         await productInquiryPage.searchProduct(actionData.searchCode);
         await page.waitForTimeout(1500);
+
+        await snapInput();
 
         const urlBeforeClick = page.url();
         await productInquiryPage.clickMenuButton();
@@ -64,12 +74,16 @@ test.describe('WTY10101 - Screen transition', () => {
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
+
+        await snapExpect();
     });
 
     test('WTY10101_81', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({ commonData: commonData });
@@ -79,6 +93,8 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.waitForPageReady();
         await productInquiryPage.searchProduct(actionData.searchCode);
         await page.waitForTimeout(1500);
+
+        await snapInput();
 
         const urlBeforeClick = page.url();
         await productInquiryPage.clickMenuButton();
@@ -89,12 +105,16 @@ test.describe('WTY10101 - Screen transition', () => {
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
+
+        await snapExpect();
     });
 
     test('WTY10101_82', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({ commonData: commonData });
@@ -105,6 +125,8 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.searchProduct(actionData.searchCode);
         await page.waitForTimeout(1500);
 
+        await snapInput();
+
         const urlBeforeClick = page.url();
         await productInquiryPage.clickMenuButton();
         await page.waitForTimeout(200);
@@ -114,11 +136,15 @@ test.describe('WTY10101 - Screen transition', () => {
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
+
+        await snapExpect();
     });
     test('WTY10101_83', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-screen-transitsion', 'wty10101', 'TC_83');
 
@@ -129,6 +155,9 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
         await page.waitForTimeout(2000);
+
+        await snapInput();
+
         const urlBeforeClick = page.url();
         await productInquiryPage.clickMenuButton();
         await page.waitForTimeout(200);
@@ -138,12 +167,16 @@ test.describe('WTY10101 - Screen transition', () => {
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
+
+        await snapExpect();
     });
 
     test('WTY10101_84', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -157,6 +190,8 @@ test.describe('WTY10101 - Screen transition', () => {
 
         await productInquiryPage.searchProduct(actionData.searchCode);
         await page.waitForTimeout(1000);
+
+        await snapInput();
 
         const colorAccordion = productInquiryPage.getProductColorAccordionButton();
         await expect(colorAccordion).toBeVisible();
@@ -169,12 +204,16 @@ test.describe('WTY10101 - Screen transition', () => {
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
+
+        await snapExpect();
     });
 
     test('WTY10101_85', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({ commonData: commonData });
@@ -185,6 +224,8 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.searchProduct(actionData.searchCode2);
         await page.waitForTimeout(1500);
 
+        await snapInput();
+
         const colorAccordion = productInquiryPage.getProductColorAccordionButton();
         await expect(colorAccordion).not.toBeVisible();
 
@@ -192,12 +233,16 @@ test.describe('WTY10101 - Screen transition', () => {
         await page.waitForTimeout(200);
         const colorVariationMenuItem = page.locator(`ul[role="menu"] li:has-text("カラバリ")`);
         await expect(colorVariationMenuItem).not.toBeVisible();
+
+        await snapExpect();
     });
 
     test('WTY10101_87', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({ commonData: commonData });
@@ -206,10 +251,15 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
         await page.waitForTimeout(1000);
+
+        await snapInput();
+
         const urlBeforeClick = page.url();
         await productInquiryPage.clickIconBack();
         await page.waitForTimeout(1000);
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
+
+        await snapExpect();
     });
 });

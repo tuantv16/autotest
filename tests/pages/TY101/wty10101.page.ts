@@ -41,6 +41,7 @@ export class TY10101Page extends BasePage {
         objectTypeInput: 'input[name="btrKbn"]',
         setTypeInput: 'input[name="setKbn"]',
         releaseDateInput: 'input[name="htbDate"]',
+        limitedInput: 'input[id="nykaskGntShnFlg"]',
 
         // Product details section
         detailDisclosure: 'button:has-text("詳細")',
@@ -130,8 +131,11 @@ export class TY10101Page extends BasePage {
 
         taxIncludedButton: 'label:has-text("税込")',
         taxExcludedButton: 'label:has-text("税別")',
+        guaranteeRateLabel: 'label[for="guarantee"]',
 
         buttonDeliveryInfo: 'button:has-text("納期情報")',
+
+        recommendDataWrapper: 'div.recommend-data',
     };
 
     constructor(page: Page) {
@@ -159,6 +163,7 @@ export class TY10101Page extends BasePage {
             state: 'visible',
             timeout: 10000,
         });
+        await this.page.waitForTimeout(1000);
     }
 
     /**
@@ -222,7 +227,7 @@ export class TY10101Page extends BasePage {
     async searchProduct(productCode: string): Promise<void> {
         await this.fillSearchInput(productCode);
         await this.clickSearch();
-        await this.page.waitForTimeout(1500);
+        await this.page.waitForTimeout(2500);
     }
 
     /**
@@ -578,7 +583,7 @@ export class TY10101Page extends BasePage {
     }
 
     getProductColorLabels(): Locator {
-        return this.page.locator(this.selectors.productColorLabels).first();
+        return this.page.locator(this.selectors.productColorLabels);
     }
 
     getProductColorJanLink(janCode: string): Locator {
@@ -710,9 +715,9 @@ export class TY10101Page extends BasePage {
         return await locator.isVisible({ timeout: 1000 }).catch(() => false);
     }
 
-    async getClearMenuItem(): Promise<boolean> {
+    async getClearMenuItem(): Promise<Locator> {
         const locator = this.page.locator(this.selectors.clearMenuItem).first();
-        return await locator.isVisible({ timeout: 1000 }).catch(() => false);
+        return locator;
     }
 
     async focusSearchInput(): Promise<void> {
@@ -981,5 +986,21 @@ export class TY10101Page extends BasePage {
 
     getWarrantyLabel(): Locator {
         return this.page.locator(this.selectors.warrantyLabel).first();
+    }
+
+    getGuaranteeRateLabel(): Locator {
+        return this.page.locator(this.selectors.guaranteeRateLabel).first();
+    }
+
+    getRecommendDataWrapper(): Locator {
+        return this.page.locator(this.selectors.recommendDataWrapper).first();
+    }
+
+    getLimitedInput(): Locator {
+        return this.page.locator(this.selectors.limitedInput).first();
+    }
+
+    async getLimitedInputValue(): Promise<string> {
+        return await this.page.inputValue(this.selectors.limitedInput);
     }
 }
