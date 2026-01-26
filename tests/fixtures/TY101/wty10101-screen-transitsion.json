@@ -10,7 +10,9 @@
                 "TC_84": "カラバリ"
             },
             "searchCode": "00010013854",
-            "searchCode2": "00010013809"
+            "searchCode2": "00010013809",
+            "searchCode3": "11111111111",
+            "errorMessage": "商品（基本）マスタに該当データが存在しません"
         },
         "TC_83": {
             "sessionData": [

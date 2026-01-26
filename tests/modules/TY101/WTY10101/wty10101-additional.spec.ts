@@ -38,6 +38,7 @@ test.describe('WTY10101 - Additional', () => {
         await productInquiryPage.clickMenuButton();
         const clearMenuItem = await productInquiryPage.getClearMenuItem();
         await clearMenuItem.click();
+        await page.waitForTimeout(1000);
 
         searchValue = await productInquiryPage.getSearchInputValue();
         expect(searchValue).toBeFalsy();

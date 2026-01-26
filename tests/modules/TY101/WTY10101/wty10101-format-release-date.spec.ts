@@ -31,9 +31,13 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
 
-        await productInquiryPage.searchProduct(testData.searchCode);
-
+        await productInquiryPage.fillSearchInput(testData.searchCode);
         await snapInput();
+        await productInquiryPage.clickSearch();
+        await page.waitForTimeout(2000);
+
+        await productInquiryPage.clickDetailDisclosure();
+        await page.waitForTimeout(1000);
 
         const releaseDateInput = await productInquiryPage.getReleaseDateInputValue();
         expect(releaseDateInput).toBeFalsy();

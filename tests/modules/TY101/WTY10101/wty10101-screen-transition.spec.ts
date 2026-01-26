@@ -30,7 +30,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
         await productInquiryPage.searchProduct(actionData.searchCode);
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(2500);
 
         await snapInput();
 
@@ -39,7 +39,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await page.waitForTimeout(200);
         const menuItem = page.locator(`ul[role="menu"] li:has-text("${actionData.menuItem.TC_79}")`);
         await menuItem.click();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(3000);
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
@@ -61,7 +61,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
         await productInquiryPage.searchProduct(actionData.searchCode);
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(2500);
 
         await snapInput();
 
@@ -70,7 +70,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await page.waitForTimeout(200);
         const menuItem = page.locator(`ul[role="menu"] li:has-text("${actionData.menuItem.TC_80}")`);
         await menuItem.click();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(3000);
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
@@ -92,7 +92,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
         await productInquiryPage.searchProduct(actionData.searchCode);
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(2500);
 
         await snapInput();
 
@@ -101,7 +101,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await page.waitForTimeout(200);
         const menuItem = page.locator(`ul[role="menu"] li:has-text("${actionData.menuItem.TC_81}")`);
         await menuItem.click();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(3000);
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
@@ -132,7 +132,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await page.waitForTimeout(200);
         const menuItem = page.locator(`ul[role="menu"] li:has-text("${actionData.menuItem.TC_82}")`);
         await menuItem.click();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(3000);
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
@@ -163,7 +163,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await page.waitForTimeout(200);
         const menuItem = page.locator(`ul[role="menu"] li:has-text("${actionData.menuItem.TC_83}")`);
         await menuItem.click();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(3000);
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
@@ -200,7 +200,7 @@ test.describe('WTY10101 - Screen transition', () => {
         await page.waitForTimeout(200);
         const menuItem = page.locator(`ul[role="menu"] li:has-text("${actionData.menuItem.TC_84}")`);
         await menuItem.click();
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(3000);
 
         const urlAfterClick = page.url();
         expect(urlAfterClick).not.toBe(urlBeforeClick);
@@ -261,5 +261,34 @@ test.describe('WTY10101 - Screen transition', () => {
         expect(urlAfterClick).not.toBe(urlBeforeClick);
 
         await snapExpect();
+    });
+
+    test('WTY10101_88', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({ commonData: commonData });
+        await page.waitForTimeout(200);
+
+        await productInquiryPage.navigate();
+        await productInquiryPage.waitForPageReady();
+        await page.waitForTimeout(1000);
+
+        await productInquiryPage.fillSearchInput(actionData.searchCode3);
+        await snapInput();
+        await productInquiryPage.clickSearch();
+        await page.waitForTimeout(2000);
+
+        const errorDialog = productInquiryPage.getErrorDialog();
+        await expect(errorDialog).toBeVisible();
+
+        const errorDialogMessage = await productInquiryPage.getErrorDialogMessage();
+        expect(errorDialogMessage).toContain(actionData.errorMessage);
+        await snapExpect();
+
     });
 });

@@ -481,6 +481,10 @@ export class TY10101Page extends BasePage {
         return this.page.inputValue(this.selectors.electronicPriceConcentratedSaleInput);
     }
 
+    getElectronicPriceConcentratedSaleInput(): Locator {
+        return this.page.locator(this.selectors.electronicPriceConcentratedSaleInput).first();
+    }
+
     async getElectronicPricePriceSpecifyValue(): Promise<string> {
         return this.page.inputValue(this.selectors.electronicPricePriceSpecifyInput);
     }
@@ -1024,10 +1028,24 @@ export class TY10101Page extends BasePage {
         await this.page.waitForTimeout(300); // Wait for scroll animation
     }
 
+    /**
+     * Scroll page to top
+     */
+    async scrollToTop(): Promise<void> {
+        await this.page.evaluate(() => {
+            window.scrollTo(0, 0);
+        });
+        await this.page.waitForTimeout(300); // Wait for scroll animation
+    }
+
     getSetProductTable(): Locator {
         return this.page.locator(this.selectors.setProductTable).first();
     }
     getEndOfDataLabel(): Locator {
         return this.page.locator(this.selectors.endOfDataLabel).first();
+    }
+
+    getMemberButton(): Locator {
+        return this.page.locator(this.selectors.memberButton).first();
     }
 }
