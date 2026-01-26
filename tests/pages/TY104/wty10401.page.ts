@@ -463,7 +463,7 @@ export class TY1040Page extends BasePage {
 
         // 営業部 combobox should default to エディオン
         const jgyksText = (await this.page.locator('#jgyksCd[role="combobox"]').first().textContent())?.trim() || '';
-        if (jgyksText !== 'エディオン') {
+        if (jgyksText !== '事業会社コード2') {
             return false;
         }
 
