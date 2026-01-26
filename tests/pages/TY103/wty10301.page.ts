@@ -48,10 +48,18 @@ export class TY103Page extends BasePage {
     clearButton: 'button:has-text("クリア")',
     searchButton: 'button:has-text("検索")[type="submit"]',
     barCodeButton: 'div.right-2.absolute.top-1\\/2.-translate-y-1\\/2.transform button.cursor-pointer[type="button"]',
+    clearBaseDate: '#baseDate+img',
+    clearBtnCd: '#btnCd+img',
+    clearShnCd: '#shnCd+div+img',
+
     subMenuBtnCd: (text: string) => `div._popup_5j19k_21._horizontal_5j19k_51 button._menuItem_5j19k_63:has-text("${text}")`,
     // Messages
     staffCode: '.text-xs.text-gray-500.text-right',
     errorDialog: '#errorDialog div div div p',
+
+    cellTable: 'div.ag-cell-wrapper span[role="presentation"]',
+    firstRowTable: 'div[row-index="0"]',
+
   };
     constructor(page: Page) {
     super(page);
@@ -72,8 +80,13 @@ export class TY103Page extends BasePage {
         ptSbtRadio: (value: string) => this.page.locator(this.selectors.ptSbtRadio(value)),
         searchButton: this.page.locator(this.selectors.searchButton),
         actionMenuButton: this.page.locator(this.selectors.actionMenuButton),
+        clearBaseDate: this.page.locator(this.selectors.clearBaseDate),
+        clearBtnCd: this.page.locator(this.selectors.clearBtnCd),
+        clearShnCd: this.page.locator(this.selectors.clearShnCd),
         confirmButton: this.page.locator(this.selectors.confirmButton),
         errorDialog: this.page.locator(this.selectors.errorDialog),
+        cellTable: this.page.locator(this.selectors.cellTable),
+        firstRowTable: this.page.locator(this.selectors.firstRowTable),
       };
     }
 
