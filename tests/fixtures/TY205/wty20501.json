@@ -16,25 +16,35 @@
           ]
         }
       },
-      "commonData": {
-        "id": "commonDT",
-        "value": {
-          "unyoDate": "20250210",
-          "storeCd": "C0001",
-          "syoriStoreCd": "C0001",
-          "syoriStoreNmKnj": "テスト店舗",
-          "userId": "testuser",
-          "clientId": "client01",
-          "termNo": "TERM01",
-          "assetsNo": "ASSET01",
-          "keepPeriod": "6"
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
         }
-      },
+      ],
       "formData": {
         "customerNameKanji": "山田太郎",
         "customerNameKana": "ｶｶｶ",
+        "estimateDeliveryLabel": "お届け予定日",
+        "deliveryLabel": "納入期日",
         "deliveryDate": "2025/12/25",
-        "summaryText": "これはテストの摘要欄入力です"
+        "summaryText": "これはテストの摘要欄入力です",
+        "keishoKbn": "0",
+        "shHou": "0",
+        "honorific": "様",
+        "paymentMethod": "現金",
+        "cash": "現金",
+        "transfer": "振込"
       },
       "expectedMessages": {
         "success": "保存しました"
@@ -63,7 +73,7 @@
             "unyoDate": "20250215",
             "storeCd": "C0002",
             "syoriStoreCd": "C0002",
-            "syoriStoreNmKnj": "テスト店舗2",
+            "syoriStoreNmKnj": "テスト店舗",
             "userId": "testuser2",
             "clientId": "client02",
             "termNo": "TERM02",
@@ -77,6 +87,46 @@
         "customerNameKana": "ｻﾄｳﾊﾅｺ",
         "deliveryDate": "2025/12/31",
         "summaryText": "別のテストデータです。"
+      },
+      "expectedMessages": {
+        "success": "保存しました"
+      }
+    },
+    "TC_03": {
+      "description": "Show text 納入期日 (not お届け予定日), hbKbn = 0",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498019991",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "C0001",
+              "uesamaFlg": "0",
+              "hbKbn": "0"
+            }
+          ]
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "formData": {
+        "deliveryLabel": "納入期日",
+        "deliveryDate": "2025/12/25"
       },
       "expectedMessages": {
         "success": "保存しました"
