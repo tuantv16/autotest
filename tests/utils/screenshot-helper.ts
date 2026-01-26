@@ -23,7 +23,7 @@ const SNAPSHOT_VIEWPORTS: SnapshotViewport[] = [
   {
     tier: 'Tablet',
     name: 'iPad (landscape)',
-    viewport: devices['iPad (gen 7) landscape']?.viewport ?? { width: 1080, height: 810 },
+    viewport: devices['iPad (gen 7) landscape']?.viewport ?? { width: 1024, height: 768 },
     deviceScaleFactor: devices['iPad (gen 7) landscape']?.deviceScaleFactor,
     isMobile: devices['iPad (gen 7) landscape']?.isMobile,
     hasTouch: devices['iPad (gen 7) landscape']?.hasTouch,
@@ -31,7 +31,7 @@ const SNAPSHOT_VIEWPORTS: SnapshotViewport[] = [
   {
     tier: 'Mobile',
     name: 'iPhone 12',
-    viewport: devices['iPhone 12']?.viewport ?? { width: 390, height: 844 },
+    viewport: devices['iPhone 12']?.viewport ?? { width: 360, height: 720 },
     deviceScaleFactor: devices['iPhone 12']?.deviceScaleFactor,
     isMobile: devices['iPhone 12']?.isMobile,
     hasTouch: devices['iPhone 12']?.hasTouch,
