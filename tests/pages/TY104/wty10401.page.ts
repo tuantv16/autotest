@@ -241,7 +241,7 @@ export class TY1040Page extends BasePage {
     async inputDataSearchBasic(formData: any): Promise<void> {
         await this.fillInputShnCd(formData.shnCd_33);
         await this.selectedOption('表示在庫', '有効');
-        await this.selectedOption('在庫部店', 'DC＆SC');
+        await this.selectedOption('在庫部店', '店舗');
         await this.selectComboboxOptionByValue(formData.jgyksCd_33);
     }
 
@@ -463,7 +463,7 @@ export class TY1040Page extends BasePage {
 
         // 営業部 combobox should default to エディオン
         const jgyksText = (await this.page.locator('#jgyksCd[role="combobox"]').first().textContent())?.trim() || '';
-        if (jgyksText !== 'エディオン') {
+        if (jgyksText !== '事業会社コード2') {
             return false;
         }
 
@@ -490,5 +490,6 @@ export class TY1040Page extends BasePage {
         const isErrorMessageVisible = await this.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.REQUIRED_FIELD, '商品');
         return isErrorMessageVisible;
     }
+
 }
 
