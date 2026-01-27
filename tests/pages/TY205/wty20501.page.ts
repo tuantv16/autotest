@@ -24,6 +24,8 @@ export class TY2050Page extends BasePage {
     deliveryDateInput: 'input[name="nnyOtdkYoteiDate"]',
     summaryTextarea: '#tkyRn',
 
+    keishoKbnHidden: 'input[type="radio"][name="keishoKbn"]',
+    shHouHidden: 'input[type="radio"][name="shHou"]',
     // Buttons
     actionMenuButton: 'button:has-text("確定")',
     confirmButton: 'button:has-text("確定")',
@@ -32,6 +34,7 @@ export class TY2050Page extends BasePage {
     // Messages
     staffCode: '.text-xs.text-gray-500.text-right',
     errorDialog: '#wty20501-error-dialog',
+    headingTitle: '.text-heading-h5:has-text("摘要欄入力")',
   };
 
   constructor(page: Page) {
@@ -177,5 +180,38 @@ export class TY2050Page extends BasePage {
       state: 'visible',
       timeout: 10000,
     });
+  }
+
+  async isHeadingTitleVisible(): Promise<boolean> {
+      const locator = this.page.locator(this.selectors.headingTitle);
+      return await locator.isVisible({ timeout: 10000 }).catch(() => false);
+  }
+
+  async isCheckedKeishoKbn(labelText: string): Promise<boolean> {
+    const radio = this.page
+      .locator('label')
+      .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
+      .locator(this.selectors.keishoKbnHidden);
+
+    await radio.first().waitFor({ state: 'attached', timeout: 10000 });
+
+    return await radio.first().isChecked();
+  }
+
+  async isCheckedShHou(labelText: string): Promise<boolean> {
+    const radio = this.page
+      .locator('label')
+      .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
+      .locator(this.selectors.shHouHidden);
+
+    await radio.first().waitFor({ state: 'attached', timeout: 10000 });
+
+    return await radio.first().isChecked();
+  }
+
+  async isTextVisible(text: string, exact: boolean = true): Promise<boolean> {
+    console.log(`[TEST] Verifying text "${text}" is visible: ${exact}`);
+    const locator = this.page.getByText(text, { exact });
+    return await locator.first().isVisible({ timeout: 10000 }).catch(() => false);
   }
 }
