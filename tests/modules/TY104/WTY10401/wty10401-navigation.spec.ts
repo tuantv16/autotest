@@ -40,6 +40,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.focusShnCd();
+        await snapInput();
         await summaryPage.clickButtonSearchNumber();
 
         await page.waitForTimeout(1000);
@@ -97,10 +98,14 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         });
 
         await summaryPage.navigate();
+        await snapInput(1);
         await page.waitForTimeout(1000);
         await summaryPage.clickMoveDown();
+        await snapInput(2);
         await summaryPage.fillInputShnCd(testData.formData.shnCd_72);
+        await snapInput(3);
         await summaryPage.clickSearchButton();
+        await snapInput(4);
         await page.waitForTimeout(1000);
         await summaryPage.clickItemMenuColorVariation();
         await page.waitForTimeout(2000);
@@ -129,9 +134,9 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickMoveDown();
-        
+        await snapInput(1);
         await summaryPage.fillInputDataCondition(testData.formData);
-
+        await snapInput(2);
         await summaryPage.clickSearchButton();
 
         await summaryPage.clearData();
@@ -162,9 +167,9 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput(1);
         await summaryPage.clickMoveDown();
-
+        await snapInput(2);
         await summaryPage.fillInputDataCondition(testData.formData);
         await summaryPage.clearData();
 
@@ -195,10 +200,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput(1);
         await summaryPage.clickItemMenuProductBasic();
         await page.waitForTimeout(1000);
-        
+        await snapInput(2);
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY101');   
         
@@ -225,7 +230,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuProductPrice();
         await page.waitForTimeout(1000);
         
@@ -255,7 +260,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuOrder();
         await page.waitForTimeout(1000);
         
@@ -285,7 +290,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuArrivePlan();
         await page.waitForTimeout(1000);
         
@@ -315,7 +320,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuBarcode();
         await page.waitForTimeout(1000);
         
@@ -345,11 +350,11 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        
         await summaryPage.clickMoveDown();
         await summaryPage.fillInputShnCd(testData.formData.shnCd_standard);
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickSearchButton();
 
         await summaryPage.clickItemMenuCart();
@@ -383,7 +388,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clearInputShnCd();
-
+        await snapInput();
         await summaryPage.clickItemMenuCart();
         await page.waitForTimeout(1000);
 
@@ -412,7 +417,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.fillInputShnCd(testData.formData.shnCdInvalid);
         await summaryPage.clearData();
 
@@ -442,7 +447,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clearData();
 
         await summaryPage.fillInputShnCd(testData.formData.shnCd_standard);
@@ -475,7 +480,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
+        
         await summaryPage.clickMoveDown();
         await page.waitForTimeout(1000);
 
