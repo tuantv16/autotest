@@ -126,7 +126,13 @@
       ],
       "formData": {
         "deliveryLabel": "納入期日",
-        "deliveryDate": "2025/12/25"
+        "deliveryDate": "2025/12/25",
+        "guestNameKanjiLabel": "御客様名（漢字）",
+        "guestNameKanaLabel": "御客様名（ｶﾅ）",
+        "guestNameHonorificLabel": "御客様名（敬称）",
+        "paymentMethodLabel": "支払方法",
+        "cancelLabel": "クリア",
+        "confirmLabel": "確定"
       },
       "expectedMessages": {
         "success": "保存しました"
