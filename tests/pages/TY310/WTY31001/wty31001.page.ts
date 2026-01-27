@@ -188,6 +188,13 @@ export class WTY31001Page extends BasePage {
     });
   }
 
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+    await this.page.waitForTimeout(1000);
+  }
+
   async waitForAPIReady(expectedValue: string, timeout = 10000): Promise<void> {
     const input = this.page.locator(this.selectors.kataInput);
 

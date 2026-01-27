@@ -51,6 +51,12 @@
           }
         },
         {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
           "id": "screenId",
           "value": {
             "screenId": "WTY31001"
@@ -627,6 +633,12 @@
             "areaCd": "529",
             "blkCd": "520",
             "btenCd": "00102"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
           }
         },
         {
