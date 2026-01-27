@@ -38,7 +38,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         
         await summaryPage.navigate();
 
-        await snapExpect();
+        await page.waitForTimeout(1000);
         const isVisible = await summaryPage.isHeadingTitleVisible();
         expect(isVisible).toBe(true);
         

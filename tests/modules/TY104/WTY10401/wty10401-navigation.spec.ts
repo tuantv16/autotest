@@ -19,6 +19,36 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await takeScreenshotOnFailure(page, testInfo);
     });
 
+    test('WTY10401_65', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_06');
+        // Step 1: Go to base URL and wait for it to load
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+        // Step 2: Inject IndexedDB data AFTER page loaded
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await snapInput();
+        await summaryPage.clickItemMenuBarcode();
+
+        await page.waitForTimeout(1000);
+        const currentUrl = page.url();
+        expect(currentUrl).toContain('TZ121');
+        
+        await snapExpect();
+    });
+
     test('WTY10401_70', async ({
         page,
         baseUrl,
@@ -40,14 +70,13 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.focusShnCd();
-        await snapInput();
+
         await summaryPage.clickButtonSearchNumber();
 
         await page.waitForTimeout(1000);
         const currentUrl = page.url();
         expect(currentUrl).toContain('TZ101');
-        
-        await snapExpect();
+
     });
 
     test('WTY10401_71', async ({
@@ -320,14 +349,11 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-        await snapInput();
         await summaryPage.clickItemMenuBarcode();
         await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TZ121');   
-        
-        await snapExpect();
     });
 
     test('WTY10401_80', async ({
@@ -354,7 +380,6 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickMoveDown();
         await summaryPage.fillInputShnCd(testData.formData.shnCd_standard);
         await page.waitForTimeout(1000);
-        await snapInput();
         await summaryPage.clickSearchButton();
 
         await summaryPage.clickItemMenuCart();
@@ -362,8 +387,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY201');
-        
-        await snapExpect();
+        await page.waitForTimeout(1000);
     });
 
     test('WTY10401_81', async ({
@@ -481,7 +505,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
         await snapInput();
-        
+
         await summaryPage.clickMoveDown();
         await page.waitForTimeout(1000);
 

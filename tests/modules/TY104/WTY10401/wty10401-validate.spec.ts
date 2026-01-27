@@ -359,6 +359,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.focusShnCd();
+        await snapInput();
         await summaryPage.clickButtonSearchNumber();
 
         await page.waitForTimeout(1000);
