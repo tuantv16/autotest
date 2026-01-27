@@ -149,5 +149,33 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
        expect(isTextVisible).toBe(true);
         await snapExpect();
     });
+
+    test('WTY10401_12', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_04');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(500);
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(30000);
+
+       //verify text お届け予定日 tồn tại trong div body 
+       const isTextVisible = await summaryPage.isTextVisible(testData.formData.deliveryLabel);
+       expect(isTextVisible).toBe(true);
+        await snapExpect();
+    });
+
 });
     
