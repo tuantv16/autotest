@@ -10,7 +10,7 @@ import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 export class TY1040Page extends BasePage {
     // Selectors
     protected readonly selectors = {
-        headingTitle: '.text-heading-h5:has-text("店別在庫照会")',
+        headingTitle: '.text-heading-h5:has-text("店別在庫照会"), .text-heading-h6:has-text("店別在庫照会")',
         productInput: '#shnCd',
         productBarcodeButton: 'label[for="shnCd"] ~ div button[type="button"]:has(svg)',
         salesDepartmentCombobox: '#jgyksCd[role="combobox"], label[for="jgyksCd"] ~ div [role="combobox"]',

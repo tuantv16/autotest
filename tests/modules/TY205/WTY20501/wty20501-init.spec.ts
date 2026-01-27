@@ -42,7 +42,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         const isVisible = await summaryPage.isHeadingTitleVisible();
         expect(isVisible).toBe(true);
-        snapExpect();
+        await snapExpect();
     });
 
     test('WTY10401_08', async ({
@@ -285,7 +285,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         snapInput,
         snapExpect,
     }) => {
-        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_03');
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_01');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(500);
 
@@ -299,7 +299,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isTextVisible = await summaryPage.isTextVisible(testData.formData.summaryLabel);
+        const isTextVisible = await summaryPage.isTextVisible(testData.formData.estimateDeliveryLabel);
         expect(isTextVisible).toBe(true);
         await snapExpect();
     });
