@@ -92,7 +92,7 @@ test.describe('WTY20702Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20702_12 - Check field labels and data 最短お届け日全店', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20702_12', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
 
     // Initialize
@@ -223,7 +223,7 @@ test.describe('WTY20702Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20702_17, WTY20702_24 - Verify thiKbn display texts in multi-row-cell-item', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20702_17, WTY20702_24', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
 
     // Initialize
@@ -288,7 +288,7 @@ test.describe('WTY20702Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20702_19, WTY20702_25 - Verify zaiJt display texts in multi-row-cell-item', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20702_19', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
 
     // Initialize
@@ -388,6 +388,78 @@ test.describe('WTY20702Page - Arrage Plan Direct Delivery (手配予定照会(�
       const textDataSaiChiNhnDate = await testPage.verifyTextInCellOutput(response.outDS.rstHkatJsDT[0].saiChiNhnDate, 500);
       expect(textDataSaiChiNhnDate).toBe(true);
     }
+    await snapExpect();
+  });
+
+  test('WTY20702_24', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
+
+    // Initialize
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData
+    });
+
+    const apiResponsePromise = page.waitForResponse((res) => {
+      return (
+          res.request().method() === 'POST' &&
+          res.url().includes(API_ENDPOINTS.TY207_WTY20702GetThiJsBC)
+      );
+    }, { timeout: 15000 });
+
+    // Step 3: Navigate to target screen
+    const testPage = new WTY20702Page(page);
+    await testPage.navigate();
+
+    const apiResponse = await apiResponsePromise;
+    // Check response status
+    expect(apiResponse.status()).toBe(200);
+
+    const response = await apiResponse.json();
+    // Get unique thiKbn display texts from test data
+    const thiKbnTexts = testPage.getThiKbnDisplayTexts(response.outDS.rstHkatJsDT);
+
+    // Verify that all thiKbn texts are displayed in multi-row-cell-item divs
+    const allTextsFound = await testPage.verifyThiKbnTextsInMultiRowCells(thiKbnTexts);
+
+    expect(allTextsFound).toBe(true);
+    await snapExpect();
+  });
+
+  test('WTY20702_25', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
+
+    // Initialize
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData
+    });
+
+    const apiResponsePromise = page.waitForResponse((res) => {
+      return (
+          res.request().method() === 'POST' &&
+          res.url().includes(API_ENDPOINTS.TY207_WTY20702GetThiJsBC)
+      );
+    }, { timeout: 15000 });
+
+    // Step 3: Navigate to target screen
+    const testPage = new WTY20702Page(page);
+    await testPage.navigate();
+
+    const apiResponse = await apiResponsePromise;
+    // Check response status
+    expect(apiResponse.status()).toBe(200);
+
+    const response = await apiResponse.json();
+    // Get unique zaiJt display texts from test data
+    const zaiJtTexts = testPage.getZaiJtDisplayTexts(response.outDS.rstHkatJsDT);
+
+    // Verify that all zaiJt texts are displayed in multi-row-cell-item divs
+    const allTextsFound = await testPage.verifyZaiJtTextsInMultiRowCells(zaiJtTexts);
+
+    expect(allTextsFound).toBe(true);
     await snapExpect();
   });
 

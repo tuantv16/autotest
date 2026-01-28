@@ -13,7 +13,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test('WTY20701_20, WTY20701_21 - Check ag-pinned-left-cols-container has sequential row numbers', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_21', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -57,7 +57,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_19 - Verify red text color for rows with hkatFukaFlg = 1', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_19', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -93,7 +93,52 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_22 - Verify API error response with msgID TE5130 and no classCellOutput', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+
+  test('WTY20701_20', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+    const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
+
+    // Initialize
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData
+    });
+
+    const apiResponsePromise = page.waitForResponse((res) => {
+      return (
+          res.request().method() === 'POST' &&
+          res.url().includes(API_ENDPOINTS.TY207_WTY20701GetThiChBC)
+      );
+    }, { timeout: 15000 });
+    const testPage = new WTY20701Page(page);
+    await testPage.navigate();
+
+    const apiResponse = await apiResponsePromise;
+
+    // Check response status
+    expect(apiResponse.status()).toBe(200);
+
+    const response = await apiResponse.json();
+
+    // Check if rows in ag-pinned-left-cols-container have sequential numbers
+    const result = await testPage.checkPinnedLeftRowsSequential();
+
+    // Verify that rows have sequential numbers (1, 2, 3, ...)
+    expect(result.isSequential).toBe(true);
+    expect(result.rowNumbers.length).toBeGreaterThan(0);
+
+    //verify text headers
+    const textHeaders = ["型番", "数量", "引当", "ｵｰﾀﾞｰ", "発注", "発売日"];
+    const headersVisible = await testPage.verifyTextHeaders(textHeaders);
+    expect(headersVisible).toBe(true);
+
+    // Verify multi-row cell data
+    const verifyOutput = await testPage.verifyMultiRowCellData(response.outDS.rstHkatChDT);
+    expect(verifyOutput).toBe(true);
+    await snapExpect();
+  });
+
+  test('WTY20701_22', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_api');
 
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });

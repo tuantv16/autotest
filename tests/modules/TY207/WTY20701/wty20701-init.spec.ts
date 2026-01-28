@@ -14,7 +14,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test('WTY20701_07 - Check title 手配予定照会（直送） and red text "不可" for hkatFukaFlg = 1', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_07', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Step 1: Navigate to base URL
@@ -53,7 +53,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_11 - Check field labels and data 出庫店', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_11', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
     // Step 1: Navigate to base URL first to establish origin for localStorage
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -86,7 +86,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_12 - Check field labels and data 配送種類', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_12', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -118,7 +118,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_13 - Check field labels and data L/T', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_13', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -150,7 +150,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_14 - Check field labels and data 最短お届け日', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_14', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -177,7 +177,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_15 - Check input SaiBin_Lable contains text 便', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_15', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -198,7 +198,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_16 - Check ag-pinned-left-cols-container has sequential row numbers', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_16', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
@@ -241,7 +241,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
     await snapExpect();
   });
 
-  test('WTY20701_18 - Verify thiKbn display texts in multi-row-cell-item', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
+  test('WTY20701_18', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
     const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
 
     // Initialize
