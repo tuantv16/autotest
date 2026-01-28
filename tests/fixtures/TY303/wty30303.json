@@ -1,0 +1,191 @@
+{
+    "wty30303": {
+        "TC_01":{
+            "description":"Data init table",
+            "sessionData":[
+                {
+                    "key": "WTY30303_IN_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "",
+                                "janCd": "04904550580431",
+                                "hskkNo": "",
+                                "outYmd": "20251028",
+                                "sbnFlg": "0",
+                                "dsgnKbn": "",
+                                "jgksCd": "03"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "key": "WTY30303_OUT_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "4974019201234",
+                                "janCd": "4974019201234",
+                                "hskkNo": "KIKAKU_SUMMER_2025",
+                                "outYmd": "20251225"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [{
+                "id": "commonDT",
+                "value": {
+                    "unyoDate": "20251028",
+                    "storeCd": "04388",
+                    "syoriStoreCd": "04388",
+                    "userId": "70000",
+                    "clientId": "0438874190",
+                    "termNo": "419",
+                    "screenId": "WTY30303"
+                }
+            }]
+        },
+
+        "TC_02":{
+            "description":"No data init table",
+            "sessionData":[
+                {
+                    "key": "WTY30303_IN_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "",
+                                "janCd": "999999",
+                                "hskkNo": "",
+                                "outYmd": "20251028",
+                                "sbnFlg": "0",
+                                "dsgnKbn": "",
+                                "jgksCd": "03"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "key": "WTY30303_OUT_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "4974019201234",
+                                "janCd": "4974019201234",
+                                "hskkNo": "KIKAKU_SUMMER_2025",
+                                "outYmd": "20251225"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [{
+                "id": "commonDT",
+                "value": {
+                    "unyoDate": "20251028",
+                    "storeCd": "04388",
+                    "syoriStoreCd": "04388",
+                    "userId": "70000",
+                    "clientId": "0438874190",
+                    "termNo": "419",
+                    "screenId": "WTY30303"
+                }
+            }]
+        },
+
+        "TC_03":{
+            "description":"Call api error",
+            "sessionData":[
+                {
+                    "key": "WTY30303_IN_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "test_api_error",
+                                "janCd": "test_api_error",
+                                "hskkNo": "test_api_error",
+                                "outYmd": "test_api_error",
+                                "sbnFlg": "test_api_error",
+                                "dsgnKbn": "test_api_error",
+                                "jgksCd": "test_api_error"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "key": "WTY30303_OUT_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "4974019201234",
+                                "janCd": "4974019201234",
+                                "hskkNo": "KIKAKU_SUMMER_2025",
+                                "outYmd": "20251225"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [{
+                "id": "commonDT",
+                "value": {
+                    "unyoDate": "test_api_error",
+                    "storeCd": "test_api_error",
+                    "syoriStoreCd": "test_api_error",
+                    "userId": "test_api_error",
+                    "clientId": "test_api_error",
+                    "termNo": "test_api_error",
+                    "screenId": "test_api_error"
+                }
+            }]
+        },
+
+        "TC_04":{
+            "description":"Data printed table",
+            "sessionData":[
+                {
+                    "key": "WTY30303_IN_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "",
+                                "janCd": "04904550580431",
+                                "hskkNo": "",
+                                "outYmd": "",
+                                "sbnFlg": "0",
+                                "dsgnKbn": "",
+                                "jgksCd": "03"
+                            }
+                        ]
+                    }
+                }, 
+                {
+                    "key": "WTY30303_OUT_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "shnCd": "4974019201234",
+                                "janCd": "4974019201234",
+                                "hskkNo": "KIKAKU_SUMMER_2025",
+                                "outYmd": "20251225"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [{
+                "id": "commonDT",
+                "value": {
+                    "unyoDate": "20251028",
+                    "storeCd": "04388",
+                    "syoriStoreCd": "04388",
+                    "userId": "0596",
+                    "clientId": "0438874190",
+                    "termNo": "419",
+                    "screenId": "WTY30303"
+                }
+            }]
+        }
+    }
+}
