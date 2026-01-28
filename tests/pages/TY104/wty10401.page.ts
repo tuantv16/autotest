@@ -10,7 +10,7 @@ import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 export class TY1040Page extends BasePage {
     // Selectors
     protected readonly selectors = {
-        headingTitle: '.text-heading-h5:has-text("店別在庫照会")',
+        headingTitle: '.text-heading-h5:has-text("店別在庫照会"), .text-heading-h6:has-text("店別在庫照会")',
         productInput: '#shnCd',
         productBarcodeButton: 'label[for="shnCd"] ~ div button[type="button"]:has(svg)',
         salesDepartmentCombobox: '#jgyksCd[role="combobox"], label[for="jgyksCd"] ~ div [role="combobox"]',
@@ -210,11 +210,6 @@ export class TY1040Page extends BasePage {
     async isIconDisabled(): Promise<boolean> {
         const locator = this.page.locator(this.selectors.searchButton);
         return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
-    }
-
-    async isErrorMessageVisible(errorMessage: string, field: string): Promise<boolean> {
-        const locator = this.page.locator(`p.text-red-600:has-text("${errorMessage}")`);
-        return await locator.isVisible({ timeout: 10000 }).catch(() => false);
     }
 
     async hasErrorBorderShnCd(): Promise<boolean> {

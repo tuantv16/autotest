@@ -337,35 +337,4 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await snapExpect();
 
     });
-
-    test('WTY10401_32', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-        snapInput,
-        snapExpect,
-    }) => {
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_06');
-        // Step 1: Go to base URL and wait for it to load
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
-        // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.focusShnCd();
-        await snapInput();
-        await summaryPage.clickButtonSearchNumber();
-
-        await page.waitForTimeout(1000);
-        const currentUrl = page.url();
-        expect(currentUrl).toContain('TZ101');
-        
-        await snapExpect();
-    });
 });

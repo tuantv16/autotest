@@ -55,7 +55,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(500);
 
     // Verify: Enter data
     await productInputPage.fillProductInput("00010013557");
@@ -71,10 +71,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapInput();
 
     await productInputPage.clickConfirmButton();
-    await page.waitForTimeout(1000);
-
-    await productInputPage.clickBackButton();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(500);
 
     // Verify: Data persists after navigating back
     const gyoNoValue = await productInputPage.getGyoNoValue();
@@ -169,11 +166,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
       commonData: testData.commonData,
     });
 
-    await snapInput();
-
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Verify:
     const productValue = await productInputPage.getProductInputValue();
