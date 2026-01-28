@@ -50,3 +50,17 @@ export const WTY30302_COLUMN_NAMES = {
   SALE_NAME: 'セール名',
 } as const;
 
+export const WTY30303 = {
+  TITLE: 'セール選択',
+  CONFIRM: '確定',
+  NOTICE_PRINTED: '青色のセールは印刷指示済です',
+  NO_DATA: '該当データが存在しません。',
+  PARAM_ERROR: 'パラメータ不正（部店コード）が誤っています。',
+  MULTI_POP_TITLE: 'マルチＰＯＰ出力指示',
+
+  // Sale-specific texts used in tests
+  SALE_NEW_YEAR: '新春セール',
+  PERIOD_SAMPLE: '2026/01/01　～　2026/01/31',
+  MULTI_COMMENT_ZUBARI: 'ズバリ',
+  MULTI_COMMENT_INPRO: 'インプロ',
+} as const;

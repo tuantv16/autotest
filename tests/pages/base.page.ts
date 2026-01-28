@@ -683,4 +683,4 @@ export class BasePage {
         }
     }
 
-}   
+}
