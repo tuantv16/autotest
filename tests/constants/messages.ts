@@ -48,3 +48,7 @@ export const WTY30302_COLUMN_NAMES = {
   SALE_NAME: 'セール名',
 } as const;
 
+export const WTY30302_MESSAGES = {
+  CONFIRM_DELETE: '選択中の印刷指示を削除しますか？',
+} as const;
+
