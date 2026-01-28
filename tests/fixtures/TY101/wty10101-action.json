@@ -1,7 +1,7 @@
 {
     "wty10101": {
         "TC_14": {
-            "description": "TC14 - Verify menu buttons are hidden in inquiry mode",
+            "description": "TC14",
             "commonData": [
                 {
                     "id": "commonDT",
@@ -19,83 +19,15 @@
                 },
                 {
                     "id": "modeFlg",
-                    "value": "1"
-                }
-            ]
-        },
-        "TC_15": {
-            "description": "TC15 - Verify popup appears on search input focus",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ]
-        },
-        "TC_16": {
-            "description": "TC16 - Verify popup hides on blur",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20260119",
-                            "btenCd": "001",
-                            "tanCd": "001",
-                            "storeCd": "001",
-                            "syoriStoreCd": "001",
-                            "syoriStoreNmKnj": "テスト店舗",
-                            "userId": "001",
-                            "clientId": "client01",
-                            "termNo": "TERM01",
-                            "assetsNo": "ASSET01",
-                            "keepPeriod": "6"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
+                    "value": {
+                        "modeFlg": "1"
+                    }
                 }
             ]
         },
         "TC_17": {
-            "description": "TC17 - Search with 8-digit product code",
+            "description": "TC17",
             "searchCode": "00010013854",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ],
             "responseData": {
                 "outDS": {
                     "resultDT": [
@@ -119,28 +51,8 @@
             }
         },
         "TC_18": {
-            "description": "TC18 - Search with 11-digit product code",
+            "description": "TC18",
             "searchCode": "00010013854",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ],
             "responseData": {
                 "outDS": {
                     "resultDT": [
@@ -179,28 +91,8 @@
             }
         },
         "TC_19": {
-            "description": "TC19 - Search with 13-digit JAN code",
+            "description": "TC19",
             "searchCode": "4984824491830",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ],
             "responseData": {
                 "outDS": {
                     "resultDT": [
@@ -239,7 +131,7 @@
             }
         },
         "TC_20": {
-            "description": "TC20 - Check navigation to Model Search when 10-digit code is entered",
+            "description": "TC20",
             "commonData": [
                 {
                     "id": "commonDT",
@@ -276,98 +168,19 @@
         },
         "TC_21": {
             "description": "TC21",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ]
+            "menuItem": "カート"
         },
         "TC_22": {
             "description": "TC22",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ]
+            "searchCode": "00010013854"
         },
         "TC_24": {
             "description": "TC24",
-            "errorMessage": "スキャナーはFlutterアプリ内でのみ動作します",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ]
+            "errorMessage": "スキャナーはFlutterアプリ内でのみ動作します"
         },
         "TC_26": {
-            "description": "TC26 - Kiểm tra xóa dữ liệu bằng nút Clear",
-            "searchCode": "00010013854",
-            "commonData": [
-                {
-                    "id": "commonDT",
-                    "value": [
-                        {
-                            "unyoDate": "20250806",
-                            "storeCd": "00905",
-                            "syoriStoreCd": "00102",
-                            "userId": "10596T401",
-                            "clientId": "00905PD401",
-                            "termNo": "401",
-                            "screenId": "WTY10101"
-                        }
-                    ]
-                },
-                {
-                    "id": "modeFlg",
-                    "value": "0"
-                }
-            ]
+            "description": "TC26",
+            "searchCode": "00010013854"
         }
     }
 }
-

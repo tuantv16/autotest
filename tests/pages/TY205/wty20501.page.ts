@@ -3,8 +3,8 @@
  * Page Object for 摘要欄入力 screen
  */
 
-import { Page, Locator } from '@playwright/test';
-import { BasePage } from '../base.page';
+import { Page, Locator } from "@playwright/test";
+import { BasePage } from "../base.page";
 
 export interface WTY20501FormData {
   customerNameKanji: string;
@@ -14,24 +14,38 @@ export interface WTY20501FormData {
 }
 
 export class TY2050Page extends BasePage {
+  // Form field names (for POM pattern)
+  public readonly fieldNames = {
+    customerNameKanji: "kokKnj",
+    customerNameKana: "kokKn",
+    honorific: "keishoKbn",
+    paymentMethod: "shHou",
+    deliveryDate: "nnyOtdkYoteiDate",
+    summary: "tkyRn",
+  };
+
   // Selectors
   private readonly selectors = {
     // Form fields
-    customerNameKanji: '#kokKnj',
-    customerNameKana: '#kokKn',
+    customerNameKanji: "#kokKnj",
+    customerNameKana: "#kokKn",
     honorificRadio: (index: number) => `#keisho_${index}`,
     paymentMethodRadio: (index: number) => `#shirai_${index}`,
     deliveryDateInput: 'input[name="nnyOtdkYoteiDate"]',
-    summaryTextarea: '#tkyRn',
+    summaryTextarea: "#tkyRn",
 
+    keishoKbnHidden: 'input[type="radio"][name="keishoKbn"]',
+    shHouHidden: 'input[type="radio"][name="shHou"]',
     // Buttons
     actionMenuButton: 'button:has-text("確定")',
     confirmButton: 'button:has-text("確定")',
     clearButton: 'button:has-text("クリア")',
 
     // Messages
-    staffCode: '.text-xs.text-gray-500.text-right',
-    errorDialog: '#wty20501-error-dialog',
+    staffCode: ".text-xs.text-gray-500.text-right",
+    errorDialog: "#wty20501-error-dialog",
+    headingTitle:
+      '.text-heading-h5:has-text("摘要欄入力"), .text-heading-h6:has-text("摘要欄入力")',
   };
 
   constructor(page: Page) {
@@ -41,7 +55,7 @@ export class TY2050Page extends BasePage {
   /**
    * Navigate to WTY20501 Summary Input screen
    */
-  async navigate(pilotKey: string = 'prod'): Promise<void> {
+  async navigate(pilotKey: string = "prod"): Promise<void> {
     const url = `${this.baseUrl}/index.html?pilotkey=${pilotKey}#/WTY20501SummaryInput?token=G92U8I0NxKPkMQ_RkIH4CQvp9Qac3dJwpZLdElKIKB399ZCABTy_sN0Zqv-RmGA3eVv-DXH7PScUojvfb8i6hMgeQy0RFM3npXT_A-YXlotyY6bO7pv4DP3RDNAsh21mQZr_1f1AOJjkixs4OY9_o_NhqpQLJ0iqfHAgNaiEZgcGtzOb9aaS479ufkj-Wn6KmqaEDEU5JgdEuKw0RLfw9dAgKlEDyUf85QgDSwGbMpR3LF6uDXX-OKbpIZ7DIKxE&jznuridenNo=00102498010416&jznuridenHkkDate=20251022&unyoDate=20251022&cipher=LOCAL_DEV_DUMMY_KEY`;
     await this.goto(url);
     await this.page.waitForTimeout(1000);
@@ -96,7 +110,6 @@ export class TY2050Page extends BasePage {
       await this.clickWithRetry(locator);
     }
   }
-
   /**
    * Fill delivery date
    */
@@ -141,14 +154,14 @@ export class TY2050Page extends BasePage {
   async getStaffCode(): Promise<string> {
     const locator = this.page.locator(this.selectors.staffCode);
     const text = await locator.textContent();
-    return text?.replace('担：', '') || '';
+    return text?.replace("担：", "") || "";
   }
 
   /**
    * Check if error dialog is visible
    */
   async isErrorDialogVisible(): Promise<boolean> {
-    return await super.isErrorDialogVisible('wty20501-error-dialog');
+    return await super.isErrorDialogVisible("wty20501-error-dialog");
   }
 
   /**
@@ -157,16 +170,16 @@ export class TY2050Page extends BasePage {
   async getErrorMessage(): Promise<string> {
     const dialog = this.page.locator(this.selectors.errorDialog);
     if (await dialog.isVisible({ timeout: 2000 }).catch(() => false)) {
-      return (await dialog.textContent()) || '';
+      return (await dialog.textContent()) || "";
     }
-    return '';
+    return "";
   }
 
   /**
    * Dismiss error dialog
    */
   async dismissErrorDialog(): Promise<void> {
-    await super.dismissErrorDialog('wty20501-error-dialog');
+    await super.dismissErrorDialog("wty20501-error-dialog");
   }
 
   /**
@@ -174,8 +187,96 @@ export class TY2050Page extends BasePage {
    */
   async waitForFormReady(): Promise<void> {
     await this.page.waitForSelector(this.selectors.customerNameKanji, {
-      state: 'visible',
+      state: "visible",
       timeout: 10000,
     });
+  }
+
+  async isHeadingTitleVisible(): Promise<boolean> {
+    const locator = this.page.locator(this.selectors.headingTitle);
+    return await locator.isVisible({ timeout: 10000 }).catch(() => false);
+  }
+
+  async isCheckedKeishoKbn(labelText: string): Promise<boolean> {
+    const radio = this.page
+      .locator("label")
+      .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
+      .locator(this.selectors.keishoKbnHidden);
+
+    await radio.first().waitFor({ state: "attached", timeout: 10000 });
+
+    return await radio.first().isChecked();
+  }
+
+  async isCheckedShHou(labelText: string): Promise<boolean> {
+    const radio = this.page
+      .locator("label")
+      .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
+      .locator(this.selectors.shHouHidden);
+
+    await radio.first().waitFor({ state: "attached", timeout: 10000 });
+
+    return await radio.first().isChecked();
+  }
+
+  async isTextVisible(text: string, exact: boolean = true): Promise<boolean> {
+    console.log(`[TEST] Verifying text "${text}" is visible: ${exact}`);
+    const locator = this.page.getByText(text, { exact });
+    return await locator
+      .first()
+      .isVisible({ timeout: 10000 })
+      .catch(() => false);
+  }
+
+  async isInputDisabledByName(name: String): Promise<boolean> {
+    const locator = this.page.locator(`input[name="${name}"]`);
+    return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
+  }
+
+  async inputCustomerNameKanji(value: string): Promise<void> {
+    await this.fillCustomerNameKanji(value);
+  }
+
+  async getCustomerNameKanji(): Promise<string> {
+    const locator = this.page.locator(this.selectors.customerNameKanji);
+    const actualInput = (await locator.inputValue()) || "";
+    return actualInput;
+  }
+
+  async inputCustomerNameKana(value: string): Promise<void> {
+    await this.fillCustomerNameKana(value);
+  }
+
+  async verifyInputValue(
+    expectedStandard: string,
+    maxlength: number,
+    actualInput: string
+  ): Promise<boolean> {
+    console.log(`[TEST] Verifying input value. Expected: "${expectedStandard}", Actual: "${actualInput}", Maxlength: ${maxlength}`);    
+    return expectedStandard === actualInput && actualInput.length === maxlength;
+  }
+
+  async blurCustomerNameKanji(): Promise<void> {
+    await this.blurInputById(this.fieldNames.customerNameKanji);
+  }
+     
+  async focusCustomerNameKanji(): Promise<void> {
+    const locator = this.page.locator(this.selectors.customerNameKanji);
+    await this.waitForVisible(locator, 2000);
+    await locator.click({ timeout: 2000 });
+  }
+
+  async getCustomerNameKana(): Promise<string> {
+    return await this.getValueById(this.fieldNames.customerNameKana);
+  }
+
+  async blurCustomerNameKana(): Promise<void> {
+    await this.blurInputById(this.fieldNames.customerNameKana);
+  }
+
+  async focusCustomerNameKana(): Promise<void> {
+    const locator = this.page.locator(this.selectors.customerNameKana);
+    await this.waitForVisible(locator, 2000);
+    await locator.click({ timeout: 2000 });
   }
 }

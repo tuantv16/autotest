@@ -24,8 +24,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_01');
+        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
@@ -50,12 +52,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         const isErrorMessageVisible = await summaryPage.verifyErrorMessageInvalid(testData.formData.shnCd_24);
         expect(isErrorMessageVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_25', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         // Step 1: Go to base URL and wait for it to load
@@ -86,12 +92,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 7: Verify error message for invalid length
         const isErrorMessageVisible = await summaryPage.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.INVALID_LENGTH, '商品');
         expect(isErrorMessageVisible).toBe(true);
+        
+        await snapExpect();
     });
 
     test('WTY10401_26', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -110,6 +120,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.fillInputShnCd(testData.formData.shnCd_26);
         await page.waitForTimeout(1000);
 
+        await snapInput();
         // Wait for API response before clicking search button
         const apiResponsePromise = page.waitForResponse((res) => {
             return (
@@ -127,12 +138,16 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         // Wait a bit for UI to update after search
         await page.waitForTimeout(2000);
+        
+        await snapExpect();
     });
 
     test('WTY10401_27', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -153,7 +168,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         const jgyksCdValue = testData.formData.jgyksCd_27;
         await summaryPage.selectComboboxOptionByValue(jgyksCdValue);
-
+        await snapInput();
         // Wait for API response before clicking search button
         const apiResponsePromise = page.waitForResponse((res) => {
             return (
@@ -164,16 +179,23 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         // Click search button and wait for API response
         await summaryPage.clickSearchButton();
-
+        await page.waitForTimeout(1000);
+        await snapExpect(1);
         // Wait for API response to complete
         const apiResponse = await apiResponsePromise;
         expect(apiResponse.status()).toBe(200);
+
+        await summaryPage.scrollToBottom();
+        await page.waitForTimeout(1000);
+        await snapExpect(2);
     });
 
     test('WTY10401_28', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -202,16 +224,24 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         // Click search button and wait for API response
         await summaryPage.clickSearchButton();
+        await page.waitForTimeout(1000);
+        await snapExpect(1);
 
         // Wait for API response to complete
         const apiResponse = await apiResponsePromise;
         expect(apiResponse.status()).toBe(200);
+        
+        await summaryPage.scrollToBottom();
+        await page.waitForTimeout(1000);
+        await snapExpect(2);
     });
 
     test('WTY10401_29', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
@@ -229,18 +259,26 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickMoveDown();
-        await summaryPage.clickSearchButton();
-        // await summaryPage.blurInputById('shnCd');
 
+        await page.waitForTimeout(1000);
+        await snapExpect(1);
+
+        await summaryPage.clickSearchButton();
         const shnCdValue = await summaryPage.getValueById('shnCd');
         expect(shnCdValue).toBe( testData.formData.shnCd_29_expected);
-
+        
+        await snapExpect();
+        await summaryPage.scrollToBottom();
+        await page.waitForTimeout(1000);
+        await snapExpect(2);
     });
 
     test('WTY10401_30', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
@@ -259,10 +297,12 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         await summaryPage.fillInputShnCd(testData.formData.shnCd_30);
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.blurShnCd();
+       
         await page.waitForTimeout(500); // Wait for validation error to appear
         expect(await summaryPage.hasErrorBorderShnCd()).toBe(true);
+        await snapExpect();
 
     });
 
@@ -270,6 +310,8 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_04');
@@ -286,10 +328,13 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         await summaryPage.fillInputShnCd(testData.formData.shnCd_30);
         await page.waitForTimeout(1000);
+        await snapInput();
 
         await summaryPage.blurShnCd();
         await summaryPage.focusShnCd();
         expect(await summaryPage.hasErrorBorderShnCd()).toBe(false);
+        
+        await snapExpect();
 
     });
 });

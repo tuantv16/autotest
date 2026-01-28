@@ -303,7 +303,7 @@ export class BasePage {
      */
     protected async clickOptionInCombobox(optionSelectors: string[], errorMessage: string, comboboxSelector: string): Promise<void> {
         const comboboxLocator = this.page.locator(comboboxSelector);
-
+        
         await this.waitForVisible(comboboxLocator, 10000);
         await comboboxLocator.click({ timeout: 10000 });
         await this.page.waitForTimeout(500);
@@ -343,16 +343,16 @@ export class BasePage {
 
     async hasErrorBorderById(id: string): Promise<boolean> {
         const locator = this.page.locator(`#${id}`);
-
+        
         // Check if element exists and is visible
         const isVisible = await locator.isVisible({ timeout: 10000 }).catch(() => false);
         if (!isVisible) {
             return false;
         }
-
+      
         // Get error class - use fallback if not defined in child class
         const errorClass = this.selectors?.errorClass || '_error_cbu4e_24';
-
+      
         // Wait for error class to appear (class might be added asynchronously after validation)
         // Retry checking for the class with intervals
         const maxRetries = 6; // 6 retries * 500ms = 3 seconds
@@ -361,14 +361,14 @@ export class BasePage {
                 const classList = await locator
                     .evaluate((el: Element) => Array.from(el.classList) as string[])
                     .catch(() => [] as string[]);
-
+                
                 if (classList.includes(errorClass)) {
                     return true;
                 }
             } catch {
                 // Continue to next retry
             }
-
+            
             // Wait 500ms before next check (except on last iteration)
             if (i < maxRetries - 1) {
                 await this.page.waitForTimeout(500);
@@ -395,12 +395,12 @@ export class BasePage {
         // Since input is hidden, we need to click on the label or span containing the option text
         // Try multiple selectors to find the clickable element
         const selectors = [
-            // Click on label containing the option text
-            `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}")`,
-            // Click on span containing the option text
-            `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}") span`,
-            // Alternative: click on label by value attribute
-            `label:has-text("${groupLabel}") ~ div label:has(input[type="radio"][value="${optionValue}"])`,
+        // Click on label containing the option text
+        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}")`,
+        // Click on span containing the option text
+        `label:has-text("${groupLabel}") ~ div label:has-text("${optionValue}") span`,
+        // Alternative: click on label by value attribute
+        `label:has-text("${groupLabel}") ~ div label:has(input[type="radio"][value="${optionValue}"])`,
         ];
 
         let clicked = false;
@@ -429,55 +429,55 @@ export class BasePage {
 
     /**
      * Select option for Material UI Select (div role="combobox")
-     *
+     * 
      * @param selectLocator Locator of MUI select element
      * @param value value of option (data-value)
      */
     async selectMuiSelect(selectLocator: Locator, value: string): Promise<void> {
-        // Wait select visible
-        await this.waitForVisible(selectLocator, 20000);
+      // Wait select visible
+      await this.waitForVisible(selectLocator, 20000);
 
-        // Open dropdown
-        await selectLocator.click();
+      // Open dropdown
+      await selectLocator.click();
 
-        // Locate option by data-value
-        const option = this.page.locator(`li[data-value="${value}"]`);
-        await this.waitForVisible(option, 10000);
+      // Locate option by data-value
+      const option = this.page.locator(`li[data-value="${value}"]`);
+      await this.waitForVisible(option, 10000);
 
-        // Click option
-        await option.click();
+      // Click option
+      await option.click();
     }
 
     /**
      * Click action menu button
      */
     async clickMenuButton(): Promise<void> {
-        const locator = this.page.locator('button.MuiButtonBase-root[aria-haspopup="true"]');
-        await this.waitForVisible(locator);
-        await this.clickWithRetry(locator);
-        await this.page.waitForTimeout(1000);
+      const locator = this.page.locator('button.MuiButtonBase-root[aria-haspopup="true"]');
+      await this.waitForVisible(locator);
+      await this.clickWithRetry(locator);
+      await this.page.waitForTimeout(1000);
     }
 
     /**
      * Click button in action menu
-     *
+     * 
      * @param buttonText Text of the button to click
      */
     async clickButtonInMenuButton(buttonText: string): Promise<void> {
-        // 1. Open action menu dropdown
-        await this.clickMenuButton();
+      // 1. Open action menu dropdown
+      await this.clickMenuButton();
 
-        // 2. Wait for MUI menu to appear
-        const menu = this.page.locator('ul[role="menu"]');
-        await this.waitForVisible(menu);
+      // 2. Wait for MUI menu to appear
+      const menu = this.page.locator('ul[role="menu"]');
+      await this.waitForVisible(menu);
 
-        // 3. Click the specified button text
-        const button = menu.locator(`li[role="menuitem"]:has-text("${buttonText}")`);
-        await this.waitForVisible(button);
-        await button.click();
+      // 3. Click the specified button text
+      const button = menu.locator(`li[role="menuitem"]:has-text("${buttonText}")`);
+      await this.waitForVisible(button);
+      await button.click();
 
-        // 4. Wait UI settle
-        await this.page.waitForTimeout(500);
+      // 4. Wait UI settle
+      await this.page.waitForTimeout(500);
 
     }
 
@@ -494,7 +494,7 @@ export class BasePage {
         scrollDelay: number = 500
     ): Promise<void> {
         const endOfDataTexts = ['End of data', 'End Of Data', 'End of Data'];
-
+        
         for (let attempt = 0; attempt < maxScrollAttempts; attempt++) {
             // Check if "End of data" text exists
             // It's displayed in a div with class "mt-2" after the ag-grid component
@@ -507,20 +507,20 @@ export class BasePage {
                     `div.mt-2:has-text("${text}")`,
                     `text="${text}"`,
                 ];
-
+                
                 for (const selector of selectors) {
                     const endOfDataLocator = this.page.locator(selector).first();
                     const isVisible = await endOfDataLocator.isVisible({ timeout: 500 }).catch(() => false);
-
+                    
                     if (isVisible) {
                         found = true;
                         break;
                     }
                 }
-
+                
                 if (found) break;
             }
-
+            
             if (found) {
                 return; // Found "End of data", exit successfully
             }
@@ -649,12 +649,38 @@ export class BasePage {
     }
 
     async clickOutside(): Promise<void> {
-        await this.page.mouse.click(1, 1);
+      await this.page.mouse.click(1, 1);
     }
 
     async clickButtonByText(text: string): Promise<void> {
         const locator = this.page.locator(`button:has-text("${text}")`);
         await locator.click({ timeout: 10000 });
+    }
+
+    async isErrorMessageVisible(errorMessage: string, field: string): Promise<boolean> {
+        // Scope lookup to the form block that contains the given label text
+        const formBlock = this.page.locator(`div:has(label:text-is("${field}"))`).first();
+        const locator = formBlock.locator(`p.text-red-600:has-text("${errorMessage}")`).first();
+
+        try {
+            await locator.waitFor({ state: 'visible', timeout: 10000 });
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    async isErrorBorderVisible(field: string): Promise<boolean> {
+        // Scope lookup to the form block that contains the given label text
+        const formBlock = this.page.locator(`div:has(label:text-is("${field}"))`).first();
+        const locator = formBlock.locator('p.text-red-600').first();
+
+        try {
+            await locator.waitFor({ state: 'visible', timeout: 10000 });
+            return true;
+        } catch {
+            return false;
+        }
     }
 
 }

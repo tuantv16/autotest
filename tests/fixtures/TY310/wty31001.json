@@ -1,5 +1,265 @@
 {
   "wty31001": {
+    "TC_6": {
+      "description": "",
+      "sessionData": [],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "七丁目１丁目",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "23111043001",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "03000",
+            "ktKbn": "01",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "トウカゲイ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31001"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ01001"
+          }
+        }
+      ]
+    },
+    "TC_8": {
+      "description": "",
+      "sessionData": [
+        {
+          "key": "WTZ10101_OUT_SD",
+          "value": {
+            "shnInfoDT": [
+              {
+                "janCd": "04962458558440",
+                "shnCd": "00010013557"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "七丁目１丁目",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "23111043001",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "03000",
+            "ktKbn": "01",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "トウカゲイ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31001"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10101"
+          }
+        }
+      ],
+      "expected": {
+        "productInputValue": "04962458558440"
+      }
+    },
+    "TC_9": {
+      "description": "",
+      "sessionData": [
+        {
+          "key": "shnInfoDS",
+          "value": {
+            "shnInfoDT": [
+              {
+                "shnCd": "00010013557",
+                "janCd": "04962458558440",
+                "mkKata": "",
+                "canAddCart": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "七丁目１丁目",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "23111043001",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "03000",
+            "ktKbn": "01",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "トウカゲイ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31001"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY11001"
+          }
+        }
+      ],
+      "expected": {
+        "productInputValue": "04962458558440"
+      }
+    },
     "TC_24": {
       "description": "",
       "sessionData": [
@@ -45,15 +305,17 @@
         {
           "id": "commonDT",
           "value": {
-            "unyoDate": "20251022",
-            "storeCd": "C0001",
-            "syoriStoreCd": "C0001",
-            "syoriStoreNmKnj": "テスト店舗",
-            "userId": "testuser",
-            "clientId": "client01",
-            "termNo": "TERM01",
-            "assetsNo": "ASSET01",
-            "keepPeriod": "6"
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
           }
         },
         {
@@ -70,7 +332,9 @@
         },
         {
           "id": "preScreenId",
-          "value": "WTY31001"
+          "value": {
+            "preScreenId": "WTY31001"
+          }
         }
       ]
     },
@@ -119,15 +383,17 @@
         {
           "id": "commonDT",
           "value": {
-            "unyoDate": "20251022",
-            "storeCd": "C0001",
-            "syoriStoreCd": "C0001",
-            "syoriStoreNmKnj": "テスト店舗",
-            "userId": "testuser",
-            "clientId": "client01",
-            "termNo": "TERM01",
-            "assetsNo": "ASSET01",
-            "keepPeriod": "6"
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
           }
         },
         {
@@ -144,11 +410,13 @@
         },
         {
           "id": "preScreenId",
-          "value": "WTY31001"
+          "value": {
+            "preScreenId": "WTY31001"
+          }
         }
       ]
     },
-    "TC_51": {
+    "TC_53": {
       "description": "",
       "sessionData": [],
       "commonData": [
@@ -181,52 +449,257 @@
           }
         },
         {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31001"
+          }
+        },
+        {
           "id": "preScreenId",
-          "value": "WTZ01001"
+          "value": {
+            "preScreenId": "WTZ10101"
+          }
+        }
+      ],
+      "expected": {
+        "kata": "IHL-SLV4S？？？？4？？",
+        "mk": "ﾙﾐﾅｽ",
+        "rnk": "F ",
+        "bKbn": " ",
+        "shnNm": "ＡＶファニチャー",
+        "hbJsk4": "9,999",
+        "hbJsk3": "9,999",
+        "hbJsk2": "9,999",
+        "hbJsk1": "9,999"
+      }
+    },
+    "TC_64": {
+      "description": "Test data for 返品 mode - product search",
+      "formData": {
+        "shnCd": "00010013557"
+      },
+      "sessionData": [],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
         },
         {
           "id": "btnInfoDT",
           "value": {
             "areaCd": "529",
             "blkCd": "520",
-            "btenCd": "00102",
-            "btrktKbn": "",
-            "chainId": "1",
-            "csNmKn": "七丁目１丁目",
-            "fcFlg": "",
-            "fcKtkbn": "",
-            "jgybCd": "120",
-            "jgyksCd": "03",
-            "jusCd": "23111043001",
-            "kdoJt": "10",
-            "keepPeriod": "6",
-            "ksCd": "03000",
-            "ktKbn": "01",
-            "pstNo": "4550001",
-            "ryAbtknNmKn": "トウカゲイ",
-            "ryAbtknNmKnj": "東海通",
-            "skgCd": "23111",
-            "skgNmKn": "名古屋市 港区",
-            "tofNmKnj": "愛知県",
-            "termNo": "419",
-            "tsutayaFlg": "0",
-            "unyoYmd": "20251028",
-            "zoneCd": "520"
+            "btenCd": "00102"
           }
         },
         {
           "id": "screenDT",
-          "value": []
+          "value": {
+            "screenDT": []
+          }
         },
         {
           "id": "screenId",
-          "value": "WTY31001"
+          "value": {
+            "screenId": "WTY31001"
+          }
         },
         {
           "id": "preScreenId",
-          "value": "WTZ10101"
+          "value": {
+            "preScreenId": "WTZ10101"
+          }
+        }
+      ],
+      "expected": {
+        "kata": "IHL-SLV4S？？？？4？？",
+        "mk": "ﾙﾐﾅｽ",
+        "rnk": "F ",
+        "bKbn": " ",
+        "shnNm": "ＡＶファニチャー",
+        "hbJsk4": "9,999",
+        "hbJsk3": "9,999",
+        "hbJsk2": "9,999",
+        "hbJsk1": "9,999"
+      }
+    },
+    "TC_84": {
+      "description": "Test data for saving data to IndexDB in 返品 mode",
+      "sessionData": [
+        {
+          "key": "WTY31001_IN_SD",
+          "value": {
+            "kkyIriHeadDT": [
+              {
+                "shoriKbn": "1",
+                "iraiNo": "",
+                "iraiDate": "",
+                "teikeiCd": "",
+                "cmt": "",
+                "kkyHpn": "1"
+              }
+            ],
+            "kkyIriMsiDT": [
+              {
+                "mkNm": "ﾙﾐﾅｽ",
+                "kata": "IHL-SLV4S？？？？4？？",
+                "jan": "04962458558440",
+                "janCd": "04962458558440",
+                "shnCd": "04962458558440",
+                "shnNm": "ＡＶファニチャー",
+                "kyokyuIraiSu": 1,
+                "teisuDelete": false,
+                "cancel": "0"
+              }
+            ],
+            "inPutCommonDT": [
+              {
+                "index": 1
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31001"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10101"
+          }
         }
       ]
+    },
+    "TC_95": {
+      "description": "Test data for number formatting validation",
+      "sessionData": [],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "70000"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10101"
+          }
+        }
+      ],
+      "expected": {
+        "rHinIri": "99,999",
+        "tenjiIri": "88,888",
+        "tSuIri": "77,777",
+        "kisoIri": "66,666"
+      }
     }
   }
 }
