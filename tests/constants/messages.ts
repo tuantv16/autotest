@@ -61,8 +61,4 @@ export const WTY30303 = {
   PERIOD_SAMPLE: '2026/01/01　～　2026/01/31',
   MULTI_COMMENT_ZUBARI: 'ズバリ',
   MULTI_COMMENT_INPRO: 'インプロ',
-  TEST_MAX_SALE_TITLE: 'テスト_最大処理件数調査_特売',
 } as const;
-
-
-
