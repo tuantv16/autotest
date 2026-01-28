@@ -109,7 +109,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter number "10" into 良品依頼 field
-    await productInputPage.fillRHinIriInput("1000");
+    await productInputPage.fillRHinIriInput("10");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -119,7 +119,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: Value is formatted correctly
     const rHinIriValue = await productInputPage.getRHinIriInputValue();
-    expect(rHinIriValue).toBe("1,000");
+    expect(rHinIriValue).toBe("10");
 
     // Verify: No error message is displayed
     const isErrorVisible =
@@ -186,6 +186,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter "99999" into 良品依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillRHinIriInput("99999");
     await page.waitForTimeout(500);
     await snapInput();
@@ -200,16 +201,32 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapExpect();
   });
 
-  test("WTY31001_35", async ({ page, baseUrl, snapInput, snapExpect }) => {
+  test("WTY31001_35", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
 
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await productInputPage.fillProductInput(testData.formData.shnCd);
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(1000);
+
     // Step 3: Enter number with more than 5 digits "1000000" into 良品依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillRHinIriInput("1000000");
     await page.waitForTimeout(500);
     await snapInput();
@@ -223,9 +240,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible =
-      await productInputPage.getFieldErrorMessage("良品依頼");
-    expect(isErrorVisible).toBe("良品依頼は5桁以内で入力してください。");
+    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    expect(isErrorVisible).toContain("良品依頼は5桁以内で入力してください。");
     await snapExpect();
   });
 
@@ -239,6 +255,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter number "10" into 展示依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTenjiIriInput("10");
     await page.waitForTimeout(500);
     await snapInput();
@@ -267,6 +284,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Try to enter non-numeric characters into 展示依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTenjiIriInput("abc");
     await page.waitForTimeout(500);
     await snapInput();
@@ -291,6 +309,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter "0" into 展示依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTenjiIriInput("0");
     await page.waitForTimeout(500);
     await snapInput();
@@ -315,6 +334,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter "99999" into 展示依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTenjiIriInput("99999");
     await page.waitForTimeout(500);
     await snapInput();
@@ -329,16 +349,32 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapExpect();
   });
 
-  test("WTY31001_40", async ({ page, baseUrl, snapInput, snapExpect }) => {
+  test("WTY31001_40", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
 
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await productInputPage.fillProductInput(testData.formData.shnCd);
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(1000);
+
     // Step 3: Enter number with more than 5 digits "1000000" into 展示依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTenjiIriInput("1000000");
     await page.waitForTimeout(500);
     await snapInput();
@@ -352,9 +388,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible =
-      await productInputPage.getFieldErrorMessage("展示依頼");
-    expect(isErrorVisible).toBe("展示依頼は5桁以内で入力してください。");
+    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    expect(isErrorVisible).toContain("展示依頼は5桁以内で入力してください。");
     await snapExpect();
   });
 
@@ -368,6 +403,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter number "10" into 定数依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTSuIriInput("10");
     await page.waitForTimeout(500);
     await snapInput();
@@ -397,6 +433,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Try to enter non-numeric characters into 定数依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTSuIriInput("abc");
     await page.waitForTimeout(500);
     await snapInput();
@@ -421,6 +458,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter "0" into 定数依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTSuIriInput("0");
     await page.waitForTimeout(500);
     await snapInput();
@@ -445,6 +483,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter "99999" into 定数依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTSuIriInput("99999");
     await page.waitForTimeout(500);
     await snapInput();
@@ -459,16 +498,32 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapExpect();
   });
 
-  test("WTY31001_45", async ({ page, baseUrl, snapInput, snapExpect }) => {
+  test("WTY31001_45", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
 
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await productInputPage.fillProductInput(testData.formData.shnCd);
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(1000);
+
     // Step 3: Enter number with more than 5 digits "1000000" into 定数依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTSuIriInput("1000000");
     await page.waitForTimeout(500);
     await snapInput();
@@ -482,9 +537,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible =
-      await productInputPage.getFieldErrorMessage("定数依頼");
-    expect(isErrorVisible).toBe("定数依頼は5桁以内で入力してください。");
+    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    expect(isErrorVisible).toContain("定数依頼は5桁以内で入力してください。");
     await snapExpect();
   });
 
@@ -498,6 +552,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter number "10" into 基礎依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillKisoIriInput("10");
     await page.waitForTimeout(500);
     await snapInput();
@@ -527,6 +582,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Try to enter non-numeric characters into 基礎依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillKisoIriInput("abc");
     await page.waitForTimeout(500);
     await snapInput();
@@ -551,6 +607,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter "0" into 基礎依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillKisoIriInput("0");
     await page.waitForTimeout(500);
     await snapInput();
@@ -575,6 +632,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter "99999" into 基礎依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillKisoIriInput("99999");
     await page.waitForTimeout(500);
     await snapInput();
@@ -589,16 +647,32 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapExpect();
   });
 
-  test("WTY31001_50", async ({ page, baseUrl, snapInput, snapExpect }) => {
+  test("WTY31001_50", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_64");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
 
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await productInputPage.fillProductInput(testData.formData.shnCd);
+    await productInputPage.clickSearchButton();
+    await page.waitForTimeout(1000);
+
     // Step 3: Enter number with more than 5 digits "1000000" into 基礎依頼 field
+    await productInputPage.scrollToBottom();
     await productInputPage.fillKisoIriInput("1000000");
     await page.waitForTimeout(500);
 
@@ -612,9 +686,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible =
-      await productInputPage.getFieldErrorMessage("基礎依頼");
-    expect(isErrorVisible).toBe("基礎依頼は5桁以内で入力してください。");
+    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    expect(isErrorVisible).toContain("基礎依頼は5桁以内で入力してください。");
     await snapExpect();
   });
 });

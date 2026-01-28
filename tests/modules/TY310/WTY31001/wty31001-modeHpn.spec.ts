@@ -258,6 +258,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await productInputPage.scrollToBottom();
     await productInputPage.clickHpnRadio();
     await page.waitForTimeout(1000);
 
@@ -265,6 +266,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
     await productInputPage.fillTSuIriInput("100");
     await productInputPage.fillKisoIriInput("200");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 3: Toggle 定数削除 = ON
     const initialState = await productInputPage.getTsuDelToggleState();
@@ -272,7 +274,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
       await productInputPage.clickTsuDelToggle();
     }
     await page.waitForTimeout(1000);
-    await snapInput();
 
     // Verify: 定数削除 is ON
     const toggleState = await productInputPage.getTsuDelToggleState();
@@ -310,11 +311,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
       await productInputPage.clickTsuDelToggle();
       await page.waitForTimeout(500);
     }
+    await snapInput();
 
     // Step 3: Toggle 定数削除 = OFF
     await productInputPage.clickTsuDelToggle();
     await page.waitForTimeout(500);
-    await snapInput();
 
     // Verify: 定数削除 is OFF
     const toggleState = await productInputPage.getTsuDelToggleState();
@@ -365,10 +366,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
     await productInputPage.clickConfirmButton();
     await page.waitForTimeout(1000);
 
-    // Step 4: Redirect to WTY31002 and click back to return to WTY31001
-    await productInputPage.clickBackButton();
-    await page.waitForTimeout(1000);
-
     const gyoNoValue = await productInputPage.getGyoNoValue();
     expect(gyoNoValue).toBe("002");
     await snapExpect();
@@ -411,10 +408,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
     // Step 3: Click clear button
     await productInputPage.fillTSuIriInput("1");
     await productInputPage.clickConfirmButton();
-    await page.waitForTimeout(1000);
-
-    // Step 4: Redirect to WTY31002 and click back to return to WTY31001
-    await productInputPage.clickBackButton();
     await page.waitForTimeout(1000);
 
     const gyoNoValue = await productInputPage.getGyoNoValue();
@@ -460,6 +453,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
 
     // Verify: New tab is opened with WTZ10101
     await newPage.waitForLoadState("domcontentloaded");
+    await page.waitForTimeout(1000);
     expect(newPage.url()).toContain("WTZ10101");
     await snapExpect();
   });
@@ -504,6 +498,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
 
     // Verify: New tab is opened with WTZ10101
     await newPage.waitForLoadState("domcontentloaded");
+    await page.waitForTimeout(1000);
     expect(newPage.url()).toContain("WTZ10101");
     await snapExpect();
   });
