@@ -328,7 +328,12 @@
         "guestNameKanjiLabel": "御客様名（漢字）",
         "guestNameKanaLabel": "御客様名（ｶﾅ）",
         "guestNameHonorificLabel": "御客様名（敬称）",
+        "honorificMrLabel": "様",
+        "paymentMethodTranferLabel": "振込",
+        "honorificYourHonorLabel": "御中",
         "paymentMethodLabel": "支払方法",
+        "estimateDeliveryDateLabel": "お届け予定日",
+        "abstractColumnLabel": "摘要欄",
         "cancelLabel": "クリア",
         "confirmLabel": "確定",
         "errorMessage_34": "全角で入力してください。",
@@ -336,6 +341,12 @@
           "customerNameKanji": 20,
           "customerNameKana": 20,
           "summaryText": 120
+        },
+        "inputData": {
+          "customerNameKanji": "佐藤花子",
+          "customerNameKana": "ｻﾄｳﾊﾅｺ",
+          "deliveryDate": "2025/12/31",
+          "summaryText": "別のテストデータです。"
         },
         "customerNameKanjiStandard": "ジャナ",
         "customerNameKanji_32" : "あいうえおかきくけこさしすせそたちつてとな",
@@ -345,7 +356,14 @@
         "customerNameKanaStandard_37" : "ﾕｳﾀｻﾏﾀｶｼｻﾏﾚｵｻﾏﾊﾕｳﾀｻﾏ",
         "customerNameKanaStandard_38": "ﾔﾏﾀﾞﾀﾛｳ",
         "customerNameKanaError_39" : "あいうえお",
-        "customerNameKana_41" : "ﾕｳﾀｻﾏﾀｶｼｻﾏﾚ"
+        "customerNameKana_41" : "ﾕｳﾀｻﾏﾀｶｼｻﾏﾚ",
+        "estimateDeliveryDate_42" : "2025/08/05",
+        "estimateDeliveryDate_43" : "2088/10/10",
+        "abstractColumn_45": "山川田口本木林森石岩砂土金銀銅鉄水火風空海雲雨雪雷電光影心力体魂命道徳義礼智信仁勇忠孝和愛平安幸福繁栄発展未来希望努力成長挑戦成功達成完成最後勇忠孝和愛平安幸福繁栄発展未来希望努力成長挑戦成功達成完成最後勇忠孝和愛平安幸福展未功達成完山山山異",
+        "abstractColumnStandard_45": "山川田口本木林森石岩砂土金銀銅鉄水火風空海雲雨雪雷電光影心力体魂命道徳義礼智信仁勇忠孝和愛平安幸福繁栄発展未来希望努力成長挑戦成功達成完成最後勇忠孝和愛平安幸福繁栄発展未来希望努力成長挑戦成功達成完成最後勇忠孝和愛平安幸福展未功達成完山山山",
+        "abstractColumn_46": "テスト内容です",
+        "abstractColumn_47": "ｶﾅｶﾅ",
+        "abstractColumn_48": "あいうえおかき\nくけこさしすせそたちつてとな\nあいうえおかき\nくけこさしすせそたちつてとな\nあ\nあ\nあ\nあ"
       }
     }
   }

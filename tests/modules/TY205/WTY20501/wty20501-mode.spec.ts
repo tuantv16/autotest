@@ -92,7 +92,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isDisabled = await summaryPage.isInputDisabledByName(summaryPage.fieldNames.honorific);
+        const isDisabled = await summaryPage.isInputRadioDisabled(summaryPage.fieldNames.honorific);
         expect(isDisabled).toBe(true);
         await snapExpect();
     });
@@ -118,7 +118,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isDisabled = await summaryPage.isInputDisabledByName(summaryPage.fieldNames.paymentMethod);
+        const isDisabled = await summaryPage.isInputRadioDisabled(summaryPage.fieldNames.paymentMethod);
         expect(isDisabled).toBe(true);
         await snapExpect();
     });
@@ -170,7 +170,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isDisabled = await summaryPage.isInputDisabledByName(summaryPage.fieldNames.summary);
+        const isDisabled = await summaryPage.isTextareaDisabledByName(summaryPage.fieldNames.summary);
         expect(isDisabled).toBe(true);
         await snapExpect();
     });
