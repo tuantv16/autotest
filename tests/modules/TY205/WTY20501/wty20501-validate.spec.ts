@@ -394,7 +394,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         });
         
         await page.waitForTimeout(500);
-
+        
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
         await snapInput();

@@ -416,4 +416,34 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         expect(successMessageFound).toBe(true);
         await snapExpect();
     });
+
+    test('WTY20501_80', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_09');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(500);
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.fillFormEmptyDate(testData.formData.inputData);
+
+        await snapInput();
+        await summaryPage.clickConfirm();
+        
+        const successMessageFound = await summaryPage.waitForTextInBody(COMMON_MESSAGES.REGISTRATION_COMPLETED, 5000);
+        expect(successMessageFound).toBe(true);
+        await snapExpect();
+    });
 });
