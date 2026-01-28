@@ -323,8 +323,15 @@
         }
       ],
       "formData": {
+        "deliveryLabel": "納入期日",
+        "deliveryDate": "2025/12/25",
+        "guestNameKanjiLabel": "御客様名（漢字）",
+        "guestNameKanaLabel": "御客様名（ｶﾅ）",
+        "guestNameHonorificLabel": "御客様名（敬称）",
+        "paymentMethodLabel": "支払方法",
         "cancelLabel": "クリア",
         "confirmLabel": "確定",
+        "errorMessage_34": "全角で入力してください。",
         "maxlength" : {
           "customerNameKanji": 20,
           "customerNameKana": 20,
@@ -332,7 +339,13 @@
         },
         "customerNameKanjiStandard": "ジャナ",
         "customerNameKanji_32" : "あいうえおかきくけこさしすせそたちつてとな",
-        "customerNameKanjiStandard_32" : "あいうえおかきくけこさしすせそたちつてと"
+        "customerNameKanjiStandard_32" : "あいうえおかきくけこさしすせそたちつてと",
+        "customerNameKanji_34" : "ﾕｳﾀｻﾏ",
+        "customerNameKana_37" : "ﾕｳﾀｻﾏﾀｶｼｻﾏﾚｵｻﾏﾊﾕｳﾀｻﾏﾊ",
+        "customerNameKanaStandard_37" : "ﾕｳﾀｻﾏﾀｶｼｻﾏﾚｵｻﾏﾊﾕｳﾀｻﾏ",
+        "customerNameKanaStandard_38": "ﾔﾏﾀﾞﾀﾛｳ",
+        "customerNameKanaError_39" : "あいうえお",
+        "customerNameKana_41" : "ﾕｳﾀｻﾏﾀｶｼｻﾏﾚ"
       }
     }
   }

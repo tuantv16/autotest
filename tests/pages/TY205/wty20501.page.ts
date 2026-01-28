@@ -243,19 +243,40 @@ export class TY2050Page extends BasePage {
     return actualInput;
   }
 
+  async inputCustomerNameKana(value: string): Promise<void> {
+    await this.fillCustomerNameKana(value);
+  }
+
   async verifyInputValue(
     expectedStandard: string,
     maxlength: number,
+    actualInput: string
   ): Promise<boolean> {
-    const locator = this.page.locator(this.selectors.customerNameKanji);
-    const actualInput = (await locator.inputValue()) || "";
-    
     console.log(`[TEST] Verifying input value. Expected: "${expectedStandard}", Actual: "${actualInput}", Maxlength: ${maxlength}`);    
+    return expectedStandard === actualInput && actualInput.length === maxlength;
+  }
 
-    return (
-      expectedStandard === actualInput &&
-      actualInput.length === maxlength
-    );
+  async blurCustomerNameKanji(): Promise<void> {
+    await this.blurInputById(this.fieldNames.customerNameKanji);
   }
      
+  async focusCustomerNameKanji(): Promise<void> {
+    const locator = this.page.locator(this.selectors.customerNameKanji);
+    await this.waitForVisible(locator, 2000);
+    await locator.click({ timeout: 2000 });
+  }
+
+  async getCustomerNameKana(): Promise<string> {
+    return await this.getValueById(this.fieldNames.customerNameKana);
+  }
+
+  async blurCustomerNameKana(): Promise<void> {
+    await this.blurInputById(this.fieldNames.customerNameKana);
+  }
+
+  async focusCustomerNameKana(): Promise<void> {
+    const locator = this.page.locator(this.selectors.customerNameKana);
+    await this.waitForVisible(locator, 2000);
+    await locator.click({ timeout: 2000 });
+  }
 }
