@@ -7,7 +7,7 @@ export class TY30303Page extends BasePage {
     private readonly selectorsTY30303 = {
         backButton: 'button.w-full.font-family.relative.flex.cursor-pointer.appearance-none.items-center.justify-center',
         saleTitleHeading: '.text-heading-h5:has-text("セール選択")',
-        
+
         // Buttons menu Ul text
         confirmUlButton: 'ul.MuiList-root:has-text("確定")',
 
@@ -121,7 +121,7 @@ export class TY30303Page extends BasePage {
      *
      * @param rowIndex Index of row (0-based)
      */
-        async verifyMultiCommentIsBlank(rowIndex: number): Promise<void> {
+    async verifyMultiCommentIsBlank(rowIndex: number): Promise<void> {
         const row = this.getRowByIndex(rowIndex);
         const items = row.locator(this.selectorsTY30303.multiRowCellItem);
         const count = await items.count();
@@ -169,7 +169,7 @@ export class TY30303Page extends BasePage {
      * @param rowIndex Index of row (0-based)
      * @param isBlue Expected color state
      */
-        async verifySaleTextColor(
+    async verifySaleTextColor(
         rowIndex: number,
         isBlue: boolean
     ): Promise<void> {
@@ -197,7 +197,7 @@ export class TY30303Page extends BasePage {
      * Check if sale image (pict) is visible for a given row.
      * It looks for an <img> inside the row and verifies computed style + size + src.
      */
-            // Check if preview sale image (img[alt="セールヘッダー"]) is visible.
+    // Check if preview sale image (img[alt="セールヘッダー"]) is visible.
     // The rowIndex parameter is kept for backward compatibility but is ignored because
     // the preview image is outside the row.
     async isSaleImageVisible(_rowIndex?: number): Promise<boolean> {
@@ -233,7 +233,7 @@ export class TY30303Page extends BasePage {
     /**
      * Check whether a given row is highlighted (selected)
      */
-        async isRowHighlighted(rowIndex: number): Promise<boolean> {
+    async isRowHighlighted(rowIndex: number): Promise<boolean> {
         const row = this.getRowByIndex(rowIndex);
         const classAttr = (await row.getAttribute('class')) ?? '';
         return /bg|selected|active|row-printed/.test(classAttr);
@@ -272,7 +272,7 @@ export class TY30303Page extends BasePage {
      * Returns true if a 'Pict' image (secondary pict) is visible on the page.
      * It searches by alt, class or src patterns that commonly indicate pict images.
      */
-        async isPictImageVisible(): Promise<boolean> {
+    async isPictImageVisible(): Promise<boolean> {
         const locator = this.page.locator('img[alt="ピクト"]').first();
         const count = await this.page.locator('img[alt="ピクト"]').count();
         if (count === 0) return false;
@@ -361,7 +361,7 @@ export class TY30303Page extends BasePage {
      * Make sure the footer buttons are visible.
      * @param buttonText ボタン表示文言
      */
-        async verifyFooterButtonVisible(buttonText: string): Promise<void> {
+    async verifyFooterButtonVisible(buttonText: string): Promise<void> {
         const button = this.page.locator(
             `div.fixed.bottom-0 button:has-text("${buttonText}")`
         );

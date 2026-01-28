@@ -1,6 +1,7 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { TY30303Page } from "../../../pages/TY303/wty30303.page";
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
+import { WTY30303 } from '../../../constants/messages';
 
 test.describe('WTY30301 - (セール選択)', () => {
     let summaryPage: TY30303Page;
@@ -21,7 +22,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         snapExpect
     }) => {
         const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
-        
+
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(1000);
@@ -39,7 +40,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify セール is displayed as「新春セール」
-        await summaryPage.verifyMultiCommentText(0, '新春セール');
+        await summaryPage.verifyMultiCommentText(0, WTY30303.SALE_NEW_YEAR);
         await snapExpect();
     });
 
@@ -51,7 +52,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         snapExpect
     }) => {
         const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
-        
+
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(1000);
@@ -69,7 +70,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify 期間 is displayed as「2026/01/01　～　2026/01/31」
-        await summaryPage.verifyMultiCommentText(0, '2026/01/01　～　2026/01/31');
+        await summaryPage.verifyMultiCommentText(0, WTY30303.PERIOD_SAMPLE);
         await snapExpect();
     });
 
@@ -81,7 +82,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         snapExpect
     }) => {
         const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
-        
+
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(1000);
@@ -99,7 +100,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify マルチコメント is displayed as「ズバリ」
-        await summaryPage.verifyMultiCommentText(0, 'ズバリ');
+        await summaryPage.verifyMultiCommentText(0, WTY30303.MULTI_COMMENT_ZUBARI);
         await snapExpect();
     });
 
@@ -111,7 +112,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         snapExpect
     }) => {
         const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
-        
+
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(1000);
@@ -129,7 +130,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify マルチコメント is displayed as「インプロ」
-        await summaryPage.verifyMultiCommentText(1, 'インプロ');
+        await summaryPage.verifyMultiCommentText(1, WTY30303.MULTI_COMMENT_INPRO);
         await snapExpect();
     });
 
@@ -249,7 +250,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify preview notice for printed (blue) sales is displayed
-        const notice = await summaryPage.waitForTextInBody('青色のセールは印刷指示済です', 5000);
+        const notice = await summaryPage.waitForTextInBody(WTY30303.NOTICE_PRINTED, 5000);
         expect(notice).toBe(true);
         await snapExpect();
     });
@@ -285,7 +286,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 5: Verify selected sale & confirm button
         await summaryPage.verifySaleHighlighted(0);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         await snapExpect();
     });
 
@@ -295,7 +296,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         indexedDBHelper,
         snapInput,
         snapExpect
-        }) => {
+    }) => {
         const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
 
         // Step 1: Open base URL
@@ -326,7 +327,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await summaryPage.verifySaleHighlighted(0);
         const imgVisible = await summaryPage.isSaleImageVisible(0);
         expect(imgVisible).toBe(true);
-                await snapExpect();
+        await snapExpect();
     });
 
     test('WTY30303_18', async ({
@@ -454,7 +455,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 5: Click footer confirm and verify navigation returns to previous screen
         await summaryPage.verifySaleHighlighted(0);
-        await summaryPage.clickFooterConfirm('確定');
+        await summaryPage.clickFooterConfirm(WTY30303.CONFIRM);
         await page.waitForTimeout(1500);
 
         const isSaleTitleVisibleAfter = await summaryPage.isSaleTitleVisible();
@@ -470,7 +471,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         snapExpect
     }) => {
         const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
-        
+
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(1000);
@@ -609,7 +610,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 6: Verify the sale row is highlighted, confirm button is visible and enabled, and preview image is visible
         await summaryPage.verifySaleHighlighted(0);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         const imgVisible = await summaryPage.isSaleImageVisible(0);
         expect(imgVisible).toBe(true);
         // Ensure preview src updated and is same as last captured
@@ -691,7 +692,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 6: Verify that the clicked sale is highlighted, footer confirm displayed, and preview image visible
         await summaryPage.verifySaleHighlighted(midIndex);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         const imgVisible = await summaryPage.isSaleImageVisible(midIndex);
         expect(imgVisible).toBe(true);
 
@@ -733,7 +734,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // verify selection present before reload
         await summaryPage.verifySaleHighlighted(0);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         const imgVisibleBefore = await summaryPage.isSaleImageVisible(0);
         expect(imgVisibleBefore).toBe(true);
         await snapInput();
@@ -747,7 +748,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await summaryPage.waitForVisible(summaryPage.getRowByIndex(0), 5000);
 
         // Confirm button should not be visible
-        const confirmVisible = await summaryPage.isFooterButtonVisible('確定');
+        const confirmVisible = await summaryPage.isFooterButtonVisible(WTY30303.CONFIRM);
         expect(confirmVisible).toBe(false);
 
         // Preview image should not be visible
@@ -875,7 +876,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 5: Verify footer confirm button visible and positioned at bottom
         await summaryPage.verifySaleHighlighted(0);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         const imgVisible = await summaryPage.isSaleImageVisible(0);
         expect(imgVisible).toBe(true);
         const previewSrc = await summaryPage.getPreviewImageSrc();
@@ -921,7 +922,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 5: Verify footer confirm button visible and positioned at bottom, and image preview shows
         await summaryPage.verifySaleHighlighted(lastIndex);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         const imgVisible = await summaryPage.isSaleImageVisible(lastIndex);
         expect(imgVisible).toBe(true);
         const previewSrc = await summaryPage.getPreviewImageSrc();
@@ -1002,7 +1003,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 5: Verify selected sale is highlighted, confirm button and image visible
         await summaryPage.verifySaleHighlighted(0);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         const imgVisibleBefore = await summaryPage.isSaleImageVisible(0);
         expect(imgVisibleBefore).toBe(true);
 
@@ -1012,7 +1013,7 @@ test.describe('WTY30301 - (セール選択)', () => {
 
         // Step 7: Verify selection remains, confirm button and image still visible
         await summaryPage.verifySaleHighlighted(0);
-        await summaryPage.verifyFooterButtonVisible('確定');
+        await summaryPage.verifyFooterButtonVisible(WTY30303.CONFIRM);
         const imgVisibleAfter = await summaryPage.isSaleImageVisible(0);
         expect(imgVisibleAfter).toBe(true);
         await snapExpect();
@@ -1044,7 +1045,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify no data message
-        const noDataMessageFound = await summaryPage.waitForTextInBody('該当データが存在しません。', 5000);
+        const noDataMessageFound = await summaryPage.waitForTextInBody(WTY30303.NO_DATA, 5000);
         expect(noDataMessageFound).toBe(true);
         await snapExpect();
     });
@@ -1114,7 +1115,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await page.waitForTimeout(500);
 
         // Step 5: Click 確定 to navigate to WTY30301 (マルチＰＯＰ出力指示)
-        await summaryPage.clickFooterConfirm('確定');
+        await summaryPage.clickFooterConfirm(WTY30303.CONFIRM);
 
         // Step 6: Verify navigation to WTY30301
         await page.waitForTimeout(1000);
@@ -1122,7 +1123,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         expect(currentUrl).toContain('WTY30301SalesInAdvanceCorrection');
 
         // Also verify title on page
-        const titleFound = await summaryPage.waitForTextInBody('マルチＰＯＰ出力指示', 5000);
+        const titleFound = await summaryPage.waitForTextInBody(WTY30303.MULTI_POP_TITLE, 5000);
         expect(titleFound).toBe(true);
         await snapExpect();
     });
@@ -1153,7 +1154,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify message error api response
-        const noDataMessageFound = await summaryPage.waitForTextInBody('パラメータ不正（部店コード）が誤っています。', 5000);
+        const noDataMessageFound = await summaryPage.waitForTextInBody(WTY30303.PARAM_ERROR, 5000);
         expect(noDataMessageFound).toBe(true);
         await snapExpect();
     });
