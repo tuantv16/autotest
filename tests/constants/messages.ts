@@ -13,8 +13,6 @@ export const COMMON_MESSAGES = {
   // Error messages
   VALIDATION_ERROR: '入力内容に誤りがあります',
   REQUIRED_FIELD: '必須項目です',
-  HALF_WIDTH_REQUIRED: '半角で入力してください。',
-
   // Confirmation messages
   CONFIRM_SAVE: '保存しますか？',
   CONFIRM_DELETE: '削除しますか？',
@@ -35,6 +33,8 @@ export const BUTTON_LABELS = {
 export const VALIDATION_ERROR_MESSAGES = {
   REQUIRED_FIELD: '必須入力エラー',
   INVALID_LENGTH: '商品の桁数が正しくありません',
+  HALF_WIDTH_REQUIRED: '半角で入力してください。',
+  FULL_WIDTH_REQUIRED: '全角で入力してください。',
 } as const;
 
 /**

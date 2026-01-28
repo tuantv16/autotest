@@ -212,11 +212,6 @@ export class TY1040Page extends BasePage {
         return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
     }
 
-    async isErrorMessageVisible(errorMessage: string, field: string): Promise<boolean> {
-        const locator = this.page.locator(`p.text-red-600:has-text("${errorMessage}")`);
-        return await locator.isVisible({ timeout: 10000 }).catch(() => false);
-    }
-
     async hasErrorBorderShnCd(): Promise<boolean> {
         return await this.hasErrorBorderById('shnCd');
     }
