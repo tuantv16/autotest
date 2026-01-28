@@ -70,6 +70,8 @@ export class TY2050Page extends BasePage {
   async fillForm(formData: WTY20501FormData): Promise<void> {
     await this.fillCustomerNameKanji(formData.customerNameKanji);
     await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
     await this.fillDeliveryDate(formData.deliveryDate);
     await this.fillSummary(formData.summaryText);
   }
@@ -78,6 +80,30 @@ export class TY2050Page extends BasePage {
     await this.fillCustomerNameKanji(formData.customerNameKanji);
     await this.fillCustomerNameKana(formData.customerNameKana);
     await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    await this.fillSummary(formData.summaryText);
+  }
+
+  async fillFormEmptyCustomerNameKanji(formData: WTY20501FormData): Promise<void> {
+    // await this.fillCustomerNameKanji(formData.customerNameKanji);
+    await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    await this.fillSummary(formData.summaryText);
+  }
+
+  async fillFormEmptyCustomerNameKana(formData: WTY20501FormData): Promise<void> {
+    await this.fillCustomerNameKanji(formData.customerNameKanji);
+    //await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    await this.fillSummary(formData.summaryText);
+  }
+
+  async fillFormEmptyHonorific(formData: WTY20501FormData): Promise<void> {
+    await this.fillCustomerNameKanji(formData.customerNameKanji);
+    await this.fillCustomerNameKana(formData.customerNameKana);
+    //await this.selectHonorific(2);
     await this.selectPaymentMethod(2);
     await this.fillSummary(formData.summaryText);
   }

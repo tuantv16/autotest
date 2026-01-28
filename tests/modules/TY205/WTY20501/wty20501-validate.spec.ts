@@ -39,6 +39,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
+        await snapInput();
 
         await summaryPage.inputCustomerNameKanji(testData.formData.customerNameKanji_32);
         const actualInput = await summaryPage.getCustomerNameKanji();
@@ -48,7 +49,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             actualInput
         );
         expect(verifyInputMaxLength).toBe(true);
-        await snapInput();
+        await snapExpect();
     });
 
     test('WTY20501_33', async ({
@@ -107,7 +108,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             testData.formData.guestNameKanjiLabel
         );
         expect(isErrorMessageVisible).toBe(true);
-        
         await snapExpect();
     });
 
@@ -176,7 +176,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             testData.formData.guestNameKanjiLabel
         );
         expect(isErrorMessageVisible).toBe(false);
-        
         await snapExpect();
     });
 
@@ -200,8 +199,8 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
         await summaryPage.inputCustomerNameKana(testData.formData.customerNameKana_37);
+        await snapInput();
         const actualInput = await summaryPage.getCustomerNameKana();
         const verifyInputMaxLength = await summaryPage.verifyInputValue(
             testData.formData.customerNameKanaStandard_37,
@@ -209,7 +208,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             actualInput
         );
         expect(verifyInputMaxLength).toBe(true);
-        await snapInput();
+        await snapExpect();
     });
 
     test('WTY20501_38', async ({
@@ -268,7 +267,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             testData.formData.guestNameKanaLabel
         );
         expect(isErrorMessageVisible).toBe(true);
-        
         await snapExpect();
     });
 
@@ -303,7 +301,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             testData.formData.guestNameKanaLabel
         );
         expect(isErrorMessageVisible).toBe(false);
-        
         await snapExpect();
     });
 
@@ -334,14 +331,12 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         await summaryPage.clickConfirm();
         await page.waitForTimeout(1000);
-        await snapExpect();
         const isErrorMessageVisible = await summaryPage.isErrorMessageVisible(
             VALIDATION_ERROR_MESSAGES.INVALID_LATER_DATE,
             testData.formData.estimateDeliveryDateLabel
         );
 
         expect(isErrorMessageVisible).toBe(true);
-        
         await snapExpect();
     });
 
@@ -379,7 +374,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         );
         
         expect(isErrorMessageVisible).toBe(true);
-        
         await snapExpect();
     });
 
@@ -445,7 +439,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             actualInput
         );
         expect(verifyInputMaxLength).toBe(true);
-        await snapInput();
+        await snapExpect();
     });
 
     test('WTY20501_46', async ({

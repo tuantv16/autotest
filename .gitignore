@@ -5,3 +5,4 @@ test-results/
 logs/
 screenshots/
 .env.test
+.env
