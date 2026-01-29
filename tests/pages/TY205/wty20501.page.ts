@@ -107,6 +107,16 @@ export class TY2050Page extends BasePage {
     await this.selectPaymentMethod(2);
     await this.fillSummary(formData.summaryText);
   }
+
+  async fillFormEmptyAbstractColumn(formData: WTY20501FormData): Promise<void> {
+    await this.fillCustomerNameKanji(formData.customerNameKanji);
+    await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    // await this.fillSummary(formData.summaryText);
+  }
+  
+
   /**
    * Fill customer name (Kanji)
    */
@@ -445,5 +455,43 @@ export class TY2050Page extends BasePage {
 
     return hasBgWhite;
   }
+
+  async clearData(): Promise<void> {
+      await this.clickButtonByText('クリア');
+  }
+
+  async verifyDefaultData(): Promise<boolean> {
+    // verify customer name kanji is empty
+    const customerNameKanji = await this.getCustomerNameKanji();
+    if (customerNameKanji.trim() !== '') {
+      return false;
+    }
+    
+    // verify customer name kana is empty
+    const customerNameKana = await this.getCustomerNameKana();
+    if (customerNameKana.trim() !== '') {
+      return false;
+    }
+    
+    // verify honorific is selected
+    const honorific = await this.isOptionHonorificVisible('様');
+    if (!honorific) {
+      return false;
+    }
+    
+    // verify payment method is selected
+    const paymentMethod = await this.isOptionPaymentMethodVisible('現金');
+    if (!paymentMethod) {
+      return false;
+    }
+    
+    // verify summary is empty
+    const summary = await this.getSummaryText();
+    if (summary.trim() !== '') {
+      return false;
+    }
+
+    return true;
+  } 
 
 }
