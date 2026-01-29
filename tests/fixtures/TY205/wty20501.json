@@ -580,6 +580,12 @@
           "customerNameKana": "ｺｺｺｻﾄｳﾊﾅ",
           "deliveryDate": "2025/11/30",
           "summaryText": "別ののテストデータです。"
+        },
+        "inputData_82": {
+          "customerNameKanji": "花花花花",
+          "customerNameKana": "ﾅﾅﾅﾅﾅ",
+          "deliveryDate": "",
+          "summaryText": "別のの"
         }
       }
     }
