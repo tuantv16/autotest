@@ -331,6 +331,20 @@
           }
         },
         {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
           "id": "preScreenId",
           "value": {
             "preScreenId": "WTY31001"
@@ -406,6 +420,20 @@
             "jnrurNbnthanKbn": "2",
             "pntKyotenIds": "0",
             "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
           }
         },
         {
