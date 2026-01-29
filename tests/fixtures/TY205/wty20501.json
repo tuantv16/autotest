@@ -588,6 +588,375 @@
           "summaryText": "別のの"
         }
       }
+    },
+    "TC_10": {
+      "description": "Load data mode view",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498011231",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "FF0020011563",
+              "uesamaFlg": "0",
+              "hbKbn": "1"
+            }
+          ],
+          "searchDT": [
+            {
+              "jznuridenNo": "00102498011231",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "FF0020011563"
+            }
+          ]
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "00102PD498",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "498",
+            "unyoDate": "20250806",
+            "userId": "0015400907",
+            "screenId": "WTY20501"
+          }
+        },
+        {
+          "id": "modeFlg",
+          "value": {
+            "modeFlg": "0"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        }
+      ],
+      "formData": {
+        "outputData": {
+          "customerNameKanji": "山田太郎",
+          "customerNameKana": "ｱﾔｰ",
+          "keishoKbnText": "様",
+          "shHouText": "現金",
+          "deliveryDate": "2024/12/31",
+          "summaryText": "冷蔵庫納品"
+        },
+        "label": {
+          "male": "様",
+          "cash": "現金"
+        }
+      }
+
+    },
+    "TC_11": {
+      "description": "Load data mode view with hbKbn = 2",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498011231",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "FF0020011563",
+              "uesamaFlg": "0",
+              "hbKbn": "2"
+            }
+          ],
+          "searchDT": [
+            {
+              "jznuridenNo": "00102498011231",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "FF0020011563"
+            }
+          ]
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "00102PD498",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "498",
+            "unyoDate": "20250806",
+            "userId": "0015400907",
+            "screenId": "WTY20501"
+          }
+        },
+        {
+          "id": "modeFlg",
+          "value": {
+            "modeFlg": "0"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        }
+      ],
+      "formData": {
+        "outputData": {
+          "customerNameKanji": "山田太郎",
+          "customerNameKana": "ｱﾔｰ",
+          "keishoKbnText": "様",
+          "shHouText": "現金",
+          "deliveryDate": "2024/12/31",
+          "summaryText": "冷蔵庫納品"
+        }
+      }
+    },
+    "TC_11_01": {
+      "description": "Load data mode view with hbKbn = 0",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498011231",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "FF0020011563",
+              "uesamaFlg": "0",
+              "hbKbn": "0"
+            }
+          ],
+          "searchDT": [
+            {
+              "jznuridenNo": "00102498011231",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "FF0020011563"
+            }
+          ]
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "00102PD498",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "498",
+            "unyoDate": "20250806",
+            "userId": "0015400907",
+            "screenId": "WTY20501"
+          }
+        },
+        {
+          "id": "modeFlg",
+          "value": {
+            "modeFlg": "0"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        }
+      ],
+      "formData": {
+        "outputData": {
+          "customerNameKanji": "山田太郎",
+          "customerNameKana": "ｱﾔｰ",
+          "keishoKbnText": "様",
+          "shHouText": "現金",
+          "deliveryDate": "2024/12/31",
+          "summaryText": "冷蔵庫納品"
+        }
+      }
+    },
+    "TC_12": {
+      "description": "API error- ",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "",
+              "jznuridenHkkDate": "",
+              "kokCd": "",
+              "uesamaFlg": "0",
+              "hbKbn": "2"
+            }
+          ],
+          "searchDT": [
+            {
+              "jznuridenNo": "00102498011231",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "FF0020011563"
+            }
+          ]
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "00102PD498",
+            "keepPeriod": "6",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "498",
+            "unyoDate": "20250806",
+            "userId": "0015400907",
+            "screenId": "WTY20501"
+          }
+        },
+        {
+          "id": "modeFlg",
+          "value": {
+            "modeFlg": "0"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        }
+      ],
+      "formData": {
+        "outputData": {
+          "customerNameKanji": "山田太郎",
+          "customerNameKana": "ｱﾔｰ",
+          "keishoKbnText": "様",
+          "shHouText": "現金",
+          "deliveryDate": "2024/12/31",
+          "summaryText": "冷蔵庫納品"
+        }
+      }
+    },
+    "TC_13": {
+      "description": "API success - Empty data",
+      "sessionData": {
+        "key": "WTY20501_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498023111",
+              "jznuridenHkkDate": "20250209",
+              "kokCd": "",
+              "uesamaFlg": "0",
+              "hbKbn": "1"
+            }
+          ],
+          "searchDT": [
+            {
+              "jznuridenNo": "00102498023111",
+              "jznuridenHkkDate": "20250209",
+              "kokCd": "FF0020012334"
+            }
+          ]
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+              "assetsNo": "EF7096380",
+              "clientId": "00102PD498",
+              "keepPeriod": "6",
+              "storeCd": "00102",
+              "syoriStoreCd": "00102",
+              "syoriStoreNmKnJ": "東海通",
+              "syoriStoreNmKn": "トウカゲイ",
+              "syoriStoreNmKnj": "東海通",
+              "termNo": "498",
+              "unyoDate": "20250806",
+              "userId": "0015400907",
+              "screenId": "WTY20501"
+          }
+        },
+        {
+          "id": "modeFlg",
+          "value": {
+            "modeFlg": "0"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        }
+      ],
+      "formData": {
+        "outputData": {
+          "customerNameKanji": "山田太郎",
+          "customerNameKana": "ｱﾔｰ",
+          "keishoKbnText": "様",
+          "shHouText": "現金",
+          "deliveryDate": "2024/12/31",
+          "summaryText": "冷蔵庫納品"
+        },
+        "label": {
+          "summary": "摘要欄",
+          "customerNameKanji": "御客様名（漢字）",
+          "customerNameKana": "御客様名（ｶﾅ）",
+          "honorific": "御客様名（敬称）",
+          "paymentMethod": "支払方法",
+          "male": "様",
+          "cash": "現金"
+        }
+      }
     }
   }
 }

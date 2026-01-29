@@ -116,7 +116,6 @@ export class TY2050Page extends BasePage {
     // await this.fillSummary(formData.summaryText);
   }
   
-
   /**
    * Fill customer name (Kanji)
    */
@@ -282,6 +281,11 @@ export class TY2050Page extends BasePage {
   }
 
   async isCheckedKeishoKbn(labelText: string): Promise<boolean> {
+    // If labelText is not provided, immediately return false to avoid timeouts
+    if (!labelText) {
+      return false;
+    }
+
     const radio = this.page
       .locator("label")
       .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
@@ -293,6 +297,11 @@ export class TY2050Page extends BasePage {
   }
 
   async isCheckedShHou(labelText: string): Promise<boolean> {
+    // If labelText is not provided, immediately return false to avoid timeouts
+    if (!labelText) {
+      return false;
+    }
+
     const radio = this.page
       .locator("label")
       .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
@@ -304,7 +313,6 @@ export class TY2050Page extends BasePage {
   }
 
   async isTextVisible(text: string, exact: boolean = true): Promise<boolean> {
-    console.log(`[TEST] Verifying text "${text}" is visible: ${exact}`);
     const locator = this.page.getByText(text, { exact });
     return await locator
       .first()
@@ -341,7 +349,6 @@ export class TY2050Page extends BasePage {
     maxlength: number,
     actualInput: string
   ): Promise<boolean> {
-    console.log(`[TEST] Verifying input value. Expected: "${expectedStandard}", Actual: "${actualInput}", Maxlength: ${maxlength}`);    
     return expectedStandard === actualInput && actualInput.length === maxlength;
   }
 
@@ -374,21 +381,27 @@ export class TY2050Page extends BasePage {
   }
 
   async isInputRadioDisabled(name: string): Promise<boolean> {
-    const input = this.page.locator(`input[name="${name}"]`).first();
-    const blockDiv = input.locator('xpath=ancestor::div[contains(@class,"mb-3")][1]');
-  
-    const optionsDiv = blockDiv.locator('xpath=./div[1]');
-  
-    const optionLabel = optionsDiv.locator(
-      `label:has(input[name="${name}"]:checked)`
-    );
-  
-    const targetLabel = (await optionLabel.count())
-      ? optionLabel.first()
-      : optionsDiv.locator(`label:has(input[name="${name}"])`).first();
-  
-    const hasBgWhite = await targetLabel.evaluate(el => el.classList.contains('bg-white'));
-    return !hasBgWhite;
+    // Radio group is treated as disabled when **all** its radio inputs are disabled.
+    const radios = this.page.locator(`input[type="radio"][name="${name}"]`);
+
+    // Wait for at least one radio to be attached to avoid timeouts
+    await radios.first().waitFor({ state: 'attached', timeout: 10000 });
+
+    const count = await radios.count();
+    if (count === 0) {
+      // If for some reason nothing is found, treat as not disabled (and avoid throwing)
+      return false;
+    }
+
+    for (let i = 0; i < count; i++) {
+      const radio = radios.nth(i);
+      const isDisabled = await radio.isDisabled().catch(() => false);
+      if (!isDisabled) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   async getSummaryText(): Promise<string> {
@@ -404,7 +417,6 @@ export class TY2050Page extends BasePage {
    */
   async isOptionHonorificVisible(labelText?: string): Promise<boolean> {
     if (!labelText) {
-      console.warn('[TEST] isOptionHonorificVisible: labelText is undefined');
       return false;
     }
 
@@ -417,7 +429,6 @@ export class TY2050Page extends BasePage {
     // Check if element exists and is visible
     const count = await locator.count();
     if (count === 0) {
-      console.warn(`[TEST] isOptionHonorificVisible: Option "${labelText}" not found`);
       return false;
     }
 
@@ -431,7 +442,6 @@ export class TY2050Page extends BasePage {
   
   async isOptionPaymentMethodVisible(labelText?: string): Promise<boolean> {
     if (!labelText) {
-      console.warn('[TEST] isOptionPaymentMethodVisible: labelText is undefined');
       return false;
     }
 
@@ -444,7 +454,6 @@ export class TY2050Page extends BasePage {
     // Check if element exists and is visible
     const count = await locator.count();
     if (count === 0) {
-      console.warn(`[TEST] isOptionPaymentMethodVisible: Option "${labelText}" not found`);
       return false;
     }
 
@@ -494,4 +503,56 @@ export class TY2050Page extends BasePage {
     return true;
   } 
 
+  async clickOK(): Promise<void> {
+    const locator = this.page.locator('button:has-text("OK")');
+    await this.waitForVisible(locator);
+    await this.clickWithRetry(locator);
+    await this.page.waitForTimeout(1000);
+  }
+
+  async getDeliveryDate(): Promise<string> {
+    const locator = this.page.locator(this.selectors.deliveryDateInput);
+    const actualInput = (await locator.inputValue()) || "";
+    return actualInput;
+  }
+
+  /**
+   * Verify initial data loaded on the form
+   * @param expectedData Expected output data to verify
+   * @returns void - throws assertion errors if any mismatch
+   */
+  async verifyInitData(expectedData: {
+    customerNameKanji: string;
+    customerNameKana: string;
+    deliveryDate: string;
+    keishoKbnText: string;
+    shHouText: string;
+    summaryText: string;
+  }): Promise<void> {
+    const { expect } = await import('@playwright/test');
+    
+    // Verify customer name kanji
+    const customerNameKanji = await this.getCustomerNameKanji();
+    expect(customerNameKanji).toBe(expectedData.customerNameKanji);
+    
+    // Verify customer name kana
+    const customerNameKana = await this.getCustomerNameKana();
+    expect(customerNameKana).toBe(expectedData.customerNameKana);
+    
+    // Verify delivery date
+    const deliveryDate = await this.getDeliveryDate();
+    expect(deliveryDate).toBe(expectedData.deliveryDate);
+    
+    // Verify honorific (keishoKbn)
+    const keishoKbn = await this.isCheckedKeishoKbn(expectedData.keishoKbnText);
+    expect(keishoKbn).toBe(true);
+    
+    // Verify payment method (shHou)
+    const shHou = await this.isCheckedShHou(expectedData.shHouText);
+    expect(shHou).toBe(true);
+    
+    // Verify summary text
+    const summaryText = await this.getSummaryText();
+    expect(summaryText).toBe(expectedData.summaryText);
+  }
 }
