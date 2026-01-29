@@ -6,11 +6,6 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { TY2050Page } from '../../../pages/TY205/wty20501.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
-import { COMMON_MESSAGES, VALIDATION_ERROR_MESSAGES } from '../../../constants/messages';
-import { executeOracleNonQuery } from '../../../utils/oracle-db';
-import { buildDeleteRcJmtrSql } from '../../../utils/db/sql/rc-jmtr-sql';
-import { deleteRcJmtrTestRecord } from '../../../utils/db/rcJmtr.helper';
-import { deleteRcJurzTestRecord } from '../../../utils/db/rcJurz.helper';
 
 test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
     let summaryPage: TY2050Page;
@@ -78,6 +73,35 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         const verifyDefaultData = await summaryPage.verifyDefaultData();
         expect(verifyDefaultData).toBe(true);
         await snapExpect(); 
+    });
+
+    test('WTY20501_91', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_07');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(500);
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.fillForm(testData.formData.inputData);
+        await snapInput();
+        await summaryPage.clickConfirm();
+        await snapExpect(); 
+        await page.waitForTimeout(1000);
+        await summaryPage.clickOK();
     });
 
 });

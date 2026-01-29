@@ -497,7 +497,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.inputAbstractColumn(testData.formData.abstractColumn_47);
-        await snapInput();
 
         await summaryPage.clickConfirm();
         const isErrorMessageVisible = await summaryPage.isErrorMessageVisible(
@@ -527,7 +526,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await page.waitForTimeout(500);
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-        await snapInput();
 
         await summaryPage.selectHonorific(2); // 御中
         await page.waitForTimeout(1000);
@@ -557,7 +555,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await page.waitForTimeout(500);
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-        await snapInput();
 
         await summaryPage.selectPaymentMethod(2); // 振込
         await page.waitForTimeout(1000);
