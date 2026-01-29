@@ -27,7 +27,7 @@ export class WTY11001Page extends BasePage {
         rootKbnSelector: '#rootKbn',
         arriveReasonSelector: '#arriveReason',
         startDateInput: 'input[name=startDate]',
-        endDateInput: 'input[name=startDate_second]',
+        endDateInput: 'input[name=endDate]',
         mkKataInput: '#mkKata',
         brNmInput: '#brNm',
         slipNoInput: '#slipNo',
@@ -40,6 +40,8 @@ export class WTY11001Page extends BasePage {
         clearSlipNoButton: '#slipNo+img[role=button]',
         clearShnCdButton: '#shnCd+div+img[role=button]',
         clearBrCdButton: '#brCd+img[role=button]',
+        clearStartDateButton: '#startDate div div span[data-testid="ClearButtonIcon"]',
+        clearEndDateButton: '#endDate div div span[data-testid="ClearButtonIcon"]',
         barCodeButton: 'div.right-2.absolute.top-1\\/2.-translate-y-1\\/2.transform button.cursor-pointer[type="button"]',
 
     };
@@ -68,6 +70,8 @@ export class WTY11001Page extends BasePage {
         clearShnCdButton: this.page.locator(this.selectors.clearShnCdButton),
         clearBrCdButton: this.page.locator(this.selectors.clearBrCdButton),
         barCodeButton: this.page.locator(this.selectors.barCodeButton),
+        clearStartDateButton: this.page.locator(this.selectors.clearStartDateButton),
+        clearEndDateButton: this.page.locator(this.selectors.clearEndDateButton),
       };
     }
     /**
@@ -89,6 +93,14 @@ export class WTY11001Page extends BasePage {
 
     async clickMenuButton(): Promise<void> {
       await this.openActionMenu(this.selectors.actionMenuButton);
+    }
+
+    async clickClearStartDateButton(): Promise<void> {
+      await this.page.locator(this.selectors.clearStartDateButton).click();
+    }
+
+    async clickClearEndDateButton(): Promise<void> {
+      await this.page.locator(this.selectors.clearEndDateButton).click();
     }
 
     async clickClearSlipNoButton(): Promise<void> {

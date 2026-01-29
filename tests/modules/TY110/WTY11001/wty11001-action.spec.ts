@@ -144,6 +144,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
         await schedulePage.waitForFormReady();
 
         await page.waitForTimeout(500);
+        await schedulePage.clickClearStartDateButton();
         await schedulePage.fillStartDate(testData.formData.startDate_40);
         await schedulePage.fillEndDate(testData.formData.endDate_40);
         await page.waitForTimeout(500);
