@@ -9,6 +9,28 @@ import { BasePage } from "../../base.page";
 export class WTY31002Page extends BasePage {
   private readonly selectors = {
     pageTitle: "text=供給移動依頼登録",
+    templateSelectorTitle: 'label[for="tk_comment"]:has-text("定型ｺﾒﾝﾄ")',
+    templateSelectBox: "#tk_comment",
+    commentTextArea: "#comment_TextArea",
+
+    // Items table
+    noColumnHeader: 'div.multi-row-header-cell:has-text("No.")',
+    mkNmColumnHeader: 'div.multi-row-header-cell:has-text("メーカ名")',
+    kataCodeColumnHeader: 'div.multi-row-header-cell:has-text("型番")',
+    janColumnHeader: 'div.multi-row-header-cell:has-text("JAN")',
+    shnNmColumnHeader: 'div.multi-row-header-cell:has-text("商品名")',
+    ryoIraiColumnHeader: 'div.multi-row-header-cell:has-text("良品")',
+    tenjiIraiColumnHeader: 'div.multi-row-header-cell:has-text("展示")',
+    kaikonIraiColumnHeader: 'div.multi-row-header-cell:has-text("開梱")',
+    tSuIraiColumnHeader: 'div.multi-row-header-cell:has-text("定数")',
+    kisoIraiColumnHeader: 'div.multi-row-header-cell:has-text("基礎")',
+
+    rowTable: '.ag-pinned-left-cols-container div[role="row"]',
+    rowNoTable: '.ag-pinned-left-cols-container .multi-row-cell-item',
+
+    // Buttona popup
+    buttonCancelPro: 'button:has-text("商品取消")',
+    buttonEditPro: 'button:has-text("商品修正")',
 
     // Menu
     actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
@@ -26,6 +48,10 @@ export class WTY31002Page extends BasePage {
     // Input Fields
     iriNoInput: 'input[id="iriNo_Label"]',
     iriDateInput: 'input[id="iriDate_Label"]',
+
+    // Buttons Dialog
+    confirmDialogButton: "button#ok_button",
+    cancelDialogButton: "button#cancel_button"
   };
 
   async navigate(pilotKey: string = "prod"): Promise<void> {
@@ -49,6 +75,13 @@ export class WTY31002Page extends BasePage {
     }
   }
 
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+    await this.page.waitForTimeout(1000);
+  }
+
   async getPageTitle(): Promise<boolean> {
     return await this.page
       .locator(this.selectors.pageTitle)
@@ -60,7 +93,6 @@ export class WTY31002Page extends BasePage {
     const btns = [
       this.selectors.btnEdit,
       this.selectors.btnProductInput,
-      this.selectors.btnModelNumSearch,
       this.selectors.btnProductCancel,
       this.selectors.btnRequestCancel,
     ];
@@ -91,5 +123,140 @@ export class WTY31002Page extends BasePage {
 
   async isIriDateInputReadonly(): Promise<boolean> {
     return await this.page.locator(this.selectors.iriDateInput).isDisabled();
+  }
+
+  async areGridColumnsVisible(): Promise<boolean> {
+    const columnSelectors = [
+      this.selectors.noColumnHeader,
+      this.selectors.mkNmColumnHeader,
+      this.selectors.kataCodeColumnHeader,
+      this.selectors.janColumnHeader,
+      this.selectors.shnNmColumnHeader,
+      this.selectors.ryoIraiColumnHeader,
+      this.selectors.tenjiIraiColumnHeader,
+      this.selectors.tSuIraiColumnHeader,
+      this.selectors.kisoIraiColumnHeader,
+    ];
+
+    for (const selector of columnSelectors) {
+      const isVisible = await this.page.locator(selector).isVisible();
+      if (!isVisible) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  async selectTemplateCommentVisible(): Promise<void> {
+    await expect(
+      this.page.locator(this.selectors.templateSelectBox),
+    ).toBeVisible();
+  }
+
+  async selectTemplateCommentClick(): Promise<void> {
+    const selectBox = this.page.locator(this.selectors.templateSelectBox);
+
+    await expect(selectBox).toBeEnabled();
+    await selectBox.click();
+  }
+
+  async commentTextAreaVisible(): Promise<boolean> {
+    const textArea = this.page.locator(this.selectors.commentTextArea);
+    return await textArea.isVisible();
+  }
+
+  async fillValueInCommentTextArea(value: string): Promise<void> {
+    const textArea = this.page.locator(this.selectors.commentTextArea);
+    await textArea.fill(value);
+  }
+
+  async getValueCommentTextArea(): Promise<string> {
+    const textArea = this.page.locator(this.selectors.commentTextArea);
+    return await textArea.inputValue();
+  }
+
+  async clickBtnEdit(): Promise<void> {
+    const btnEdit = this.page.locator(this.selectors.btnEdit);
+    await btnEdit.click();
+  }
+
+  async clickBtnProductCancel(): Promise<void> {
+    const btnEdit = this.page.locator(this.selectors.btnProductCancel);
+    await btnEdit.click();
+  }
+
+  async getErrorMessageDialog(): Promise<string> {
+    const dialog = this.page.locator("#wty31002-error-dialog");
+    if ((await dialog.count()) === 0) {
+      return "";
+    }
+    const message = dialog.locator("p").first();
+    return await message.innerText();
+  }
+
+  async clickConfirmDialogButton(): Promise<void> {
+    await this.page.locator(this.selectors.confirmDialogButton).first().click();
+  }
+
+  async clickCancelDialogButton(): Promise<void> {
+    await this.page.locator(this.selectors.cancelDialogButton).first().click();
+  }
+
+  async clickFirstRow(): Promise<void> {
+    const firstRow = this.page.locator(this.selectors.rowTable).first();
+
+    await expect(firstRow).toBeVisible();
+    await firstRow.click();
+  }
+
+  async getIriNoInputValue(): Promise<string> {
+    return await this.page.locator(this.selectors.iriNoInput).inputValue();
+  }
+
+  async clickConfirmButton(): Promise<void> {
+    const confirmButton = this.page.locator(this.selectors.confirmButton);
+    await confirmButton.click();
+  }
+
+  async getRowNoValues(): Promise<number[]> {
+    const cells = this.page.locator(this.selectors.rowNoTable);
+
+    const count = await cells.count();
+    const values: number[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const text = await cells.nth(i).innerText();
+      values.push(Number(text.trim()));
+    }
+
+    return values;
+  }
+
+  async isButtonCancelProVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.buttonCancelPro).isVisible();
+  }
+
+  async isButtonEditProVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.buttonEditPro).isVisible();
+  }
+
+  async clickButtonCancelPro(): Promise<void> {
+    const button = this.page.locator(this.selectors.buttonCancelPro);
+    await button.click();
+  }
+
+  async clickButtonEditPro(): Promise<void> {
+    const button = this.page.locator(this.selectors.buttonEditPro);
+    await button.click();
+  }
+
+  async clickButtonProductInput(): Promise<void> {
+    const button = this.page.locator(this.selectors.btnProductInput);
+    await button.click();
+  }
+
+  async clickButtonRequestCancel(): Promise<void> {
+    const button = this.page.locator(this.selectors.btnRequestCancel);
+    await button.click();
   }
 }
