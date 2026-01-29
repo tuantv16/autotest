@@ -657,4 +657,30 @@ export class BasePage {
         await locator.click({ timeout: 10000 });
     }
 
-}   
+    async isErrorMessageVisible(errorMessage: string, field: string): Promise<boolean> {
+        // Scope lookup to the form block that contains the given label text
+        const formBlock = this.page.locator(`div:has(label:text-is("${field}"))`).first();
+        const locator = formBlock.locator(`p.text-red-600:has-text("${errorMessage}")`).first();
+
+        try {
+            await locator.waitFor({ state: 'visible', timeout: 10000 });
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    async isErrorBorderVisible(field: string): Promise<boolean> {
+        // Scope lookup to the form block that contains the given label text
+        const formBlock = this.page.locator(`div:has(label:text-is("${field}"))`).first();
+        const locator = formBlock.locator('p.text-red-600').first();
+
+        try {
+            await locator.waitFor({ state: 'visible', timeout: 10000 });
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+}

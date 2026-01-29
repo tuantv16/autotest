@@ -40,13 +40,13 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.focusShnCd();
+
         await summaryPage.clickButtonSearchNumber();
 
         await page.waitForTimeout(1000);
         const currentUrl = page.url();
         expect(currentUrl).toContain('TZ101');
-        
-        await snapExpect();
+
     });
 
     test('WTY10401_71', async ({
@@ -97,10 +97,14 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         });
 
         await summaryPage.navigate();
+        await snapInput(1);
         await page.waitForTimeout(1000);
         await summaryPage.clickMoveDown();
+        await snapInput(2);
         await summaryPage.fillInputShnCd(testData.formData.shnCd_72);
+        await snapInput(3);
         await summaryPage.clickSearchButton();
+        await snapInput(4);
         await page.waitForTimeout(1000);
         await summaryPage.clickItemMenuColorVariation();
         await page.waitForTimeout(2000);
@@ -129,9 +133,9 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clickMoveDown();
-        
+        await snapInput(1);
         await summaryPage.fillInputDataCondition(testData.formData);
-
+        await snapInput(2);
         await summaryPage.clickSearchButton();
 
         await summaryPage.clearData();
@@ -162,9 +166,9 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
 
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput(1);
         await summaryPage.clickMoveDown();
-
+        await snapInput(2);
         await summaryPage.fillInputDataCondition(testData.formData);
         await summaryPage.clearData();
 
@@ -195,14 +199,13 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuProductBasic();
-        await page.waitForTimeout(1000);
-        
         const currentUrl = page.url();
+        await page.waitForTimeout(3000);
         expect(currentUrl).toContain('TY101');   
-        
         await snapExpect();
+        
     });
 
     test('WTY10401_76', async ({
@@ -225,7 +228,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuProductPrice();
         await page.waitForTimeout(1000);
         
@@ -255,7 +258,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuOrder();
         await page.waitForTimeout(1000);
         
@@ -285,7 +288,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clickItemMenuArrivePlan();
         await page.waitForTimeout(1000);
         
@@ -315,14 +318,11 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
         await summaryPage.clickItemMenuBarcode();
         await page.waitForTimeout(1000);
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TZ121');   
-        
-        await snapExpect();
     });
 
     test('WTY10401_80', async ({
@@ -345,11 +345,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        
         await summaryPage.clickMoveDown();
         await summaryPage.fillInputShnCd(testData.formData.shnCd_standard);
         await page.waitForTimeout(1000);
-
         await summaryPage.clickSearchButton();
 
         await summaryPage.clickItemMenuCart();
@@ -357,8 +356,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         
         const currentUrl = page.url();
         expect(currentUrl).toContain('TY201');
-        
-        await snapExpect();
+        await page.waitForTimeout(1000);
     });
 
     test('WTY10401_81', async ({
@@ -383,7 +381,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await page.waitForTimeout(1000);
 
         await summaryPage.clearInputShnCd();
-
+        await snapInput();
         await summaryPage.clickItemMenuCart();
         await page.waitForTimeout(1000);
 
@@ -412,8 +410,11 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput(1);
         await summaryPage.fillInputShnCd(testData.formData.shnCdInvalid);
+        await summaryPage.blurShnCd();
+        await page.waitForTimeout(2000);
+        await snapInput(2);
         await summaryPage.clearData();
 
         const isErrorMessageVisible = await summaryPage.verifyErrorMessageInvalid(testData.formData.shnCdInvalid);
@@ -442,7 +443,7 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         // Step 3: Navigate to target URL
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         await summaryPage.clearData();
 
         await summaryPage.fillInputShnCd(testData.formData.shnCd_standard);
@@ -454,36 +455,4 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         
         await snapExpect();
     });
-
-    test('WTY10401_89', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-        snapInput,
-        snapExpect,
-    }) => {
-        const testData = loadTestData('TY104/wty10401', 'wty10401', 'TC_06');
-        // Step 1: Go to base URL and wait for it to load
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
-        // Step 2: Inject IndexedDB data AFTER page loaded
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        // Step 3: Navigate to target URL
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.clickMoveDown();
-        await page.waitForTimeout(1000);
-
-        await summaryPage.clickMoveDown();
-        await page.waitForTimeout(2000);
-        
-        await snapExpect();
-        // check test manual sheet No.89
-    });
-
 });

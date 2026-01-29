@@ -1,0 +1,109 @@
+{
+  "wty20701": {
+    "TC_init": {
+      "description": "wty20701 TC_init",
+      "sessionData": [{
+        "key": "WTY20701_SD",
+        "value": {
+          "searchJknChDT": [
+            {
+              "jchtenCd": "03001",
+              "shkobtenCd": "12107",
+              "chikiCd": "10411133",
+              "chikiNm": "ChikiNm3",
+              "pstNo": "0430504",
+              "haisgsKbn": "02",
+              "unyoDate": "20250608",
+              "capaShtkFlg": "0",
+              "capaBtrKtenCd": "",
+              "capaShtkDate": "",
+              "capaHaisSteiSbt": "",
+              "jznUriDenNo": "20120402000808",
+              "jznUriDenHkkDate": "20250214"
+            }
+          ],
+          "shnChDT": [
+            {
+              "shnCd": "00010520727",
+              "jchSu": 1,
+              "zaiJt": "1",
+              "thiKbn": "0",
+              "thibtenCd": "00102",
+              "jznUriGyoNo": "001",
+              "jznUriSetgyoNo": "02"
+            }
+          ]
+        }
+      }],
+      "commonData": [{
+        "id": "commonDT",
+        "value": {
+          "unyoDate": "20230303",
+          "storeCd": "00256",
+          "syoriStoreCd": "00256",
+          "userId": "0001",
+          "clientId": "00256PD581",
+          "termNo": "581",
+          "screenId": "WTY10401"
+        }
+      }]
+    },
+    "TC_api": {
+      "description": "wty20701 TC_api",
+      "sessionData": [{
+        "key": "WTY20701_SD",
+        "value": {
+          "searchJknChDT": [
+            {
+              "jchtenCd": "test_api_fail",
+              "shkobtenCd": "test_api_fail",
+              "chikiCd": "test_api_fail",
+              "chikiNm": "test_api_fail",
+              "pstNo": "test_api_fail",
+              "haisgsKbn": "test_api_fail",
+              "unyoDate": "test_api_fail",
+              "capaShtkFlg": "test_api_fail",
+              "capaBtrKtenCd": "",
+              "capaShtkDate": "",
+              "capaHaisSteiSbt": "",
+              "jznUriDenNo": "test_api_fail",
+              "jznUriDenHkkDate": "test_api_fail"
+            }
+          ],
+          "shnChDT": [
+            {
+              "shnCd": "00010006467",
+              "jchSu": 3,
+              "zaiJt": "1",
+              "thiKbn": "0",
+              "thibtenCd": "00102",
+              "jznUriGyoNo": "001",
+              "jznUriSetgyoNo": "02"
+            },
+            {
+              "shnCd": "00010006467",
+              "jchSu": 4,
+              "zaiJt": "1",
+              "thiKbn": "0",
+              "thibtenCd": "00102",
+              "jznUriGyoNo": "001",
+              "jznUriSetgyoNo": "02"
+            }
+          ]
+        }
+      }],
+      "commonData": [{
+        "id": "commonDT",
+        "value": {
+          "clientId": "0438874190",
+          "screenId": "WTY20701",
+          "storeCd": "04388",
+          "syoriStoreCd": "04388",
+          "termNo": "419",
+          "unyoDate": "20251028",
+          "userId": "70000"
+        }
+      }]
+    }
+  }
+}

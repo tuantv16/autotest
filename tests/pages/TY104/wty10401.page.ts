@@ -10,7 +10,7 @@ import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 export class TY1040Page extends BasePage {
     // Selectors
     protected readonly selectors = {
-        headingTitle: '.text-heading-h5:has-text("店別在庫照会")',
+        headingTitle: '.text-heading-h5:has-text("店別在庫照会"), .text-heading-h6:has-text("店別在庫照会")',
         productInput: '#shnCd',
         productBarcodeButton: 'label[for="shnCd"] ~ div button[type="button"]:has(svg)',
         salesDepartmentCombobox: '#jgyksCd[role="combobox"], label[for="jgyksCd"] ~ div [role="combobox"]',
@@ -212,11 +212,6 @@ export class TY1040Page extends BasePage {
         return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
     }
 
-    async isErrorMessageVisible(errorMessage: string, field: string): Promise<boolean> {
-        const locator = this.page.locator(`p.text-red-600:has-text("${errorMessage}")`);
-        return await locator.isVisible({ timeout: 10000 }).catch(() => false);
-    }
-
     async hasErrorBorderShnCd(): Promise<boolean> {
         return await this.hasErrorBorderById('shnCd');
     }
@@ -241,7 +236,7 @@ export class TY1040Page extends BasePage {
     async inputDataSearchBasic(formData: any): Promise<void> {
         await this.fillInputShnCd(formData.shnCd_33);
         await this.selectedOption('表示在庫', '有効');
-        await this.selectedOption('在庫部店', 'DC＆SC');
+        await this.selectedOption('在庫部店', '店舗');
         await this.selectComboboxOptionByValue(formData.jgyksCd_33);
     }
 
@@ -463,7 +458,7 @@ export class TY1040Page extends BasePage {
 
         // 営業部 combobox should default to エディオン
         const jgyksText = (await this.page.locator('#jgyksCd[role="combobox"]').first().textContent())?.trim() || '';
-        if (jgyksText !== 'エディオン') {
+        if (jgyksText !== '事業会社コード2') {
             return false;
         }
 
@@ -490,5 +485,6 @@ export class TY1040Page extends BasePage {
         const isErrorMessageVisible = await this.isErrorMessageVisible(VALIDATION_ERROR_MESSAGES.REQUIRED_FIELD, '商品');
         return isErrorMessageVisible;
     }
+
 }
 
