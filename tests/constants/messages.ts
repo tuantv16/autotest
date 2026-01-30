@@ -35,20 +35,38 @@ export const VALIDATION_ERROR_MESSAGES = {
   INVALID_LENGTH: '商品の桁数が正しくありません',
   HALF_WIDTH_REQUIRED: '半角で入力してください。',
   FULL_WIDTH_REQUIRED: '全角で入力してください。',
+  INVALID_LATER_DATE: '以降の日付を入力してください。',
+  INVALID_DATE_AFTER_REIWA_70 : '令和70年以降になるため入力できません',
 } as const;
 
 /**
- * Column name constants for WTY30302 (マルチPOP出力指示一覧)
+ * constants for WTY30302 (マルチPOP出力指示一覧)
  */
-export const WTY30302_COLUMN_NAMES = {
-  MODEL_NUMBER: '型番',
-  SIZE: 'サイズ',
-  QUANTITY: '枚数',
-  MULTI_COMMENT: 'マルチコメント',
-  SALE_NAME: 'セール名',
+export const WTY30302 = {
+  COLUMN_NAMES: {
+    MODEL_NUMBER: '型番',
+    SIZE: 'サイズ',
+    QUANTITY: '枚数',
+    MULTI_COMMENT: 'マルチコメント',
+    SALE_NAME: 'セール名',
+  },
+  MESSAGES: {
+    CONFIRM_DELETE: '選択中の印刷指示を削除しますか？',
+  },
 } as const;
 
-export const WTY30302_MESSAGES = {
-  CONFIRM_DELETE: '選択中の印刷指示を削除しますか？',
+export const WTY30303 = {
+  TITLE: 'セール選択',
+  CONFIRM: '確定',
+  NOTICE_PRINTED: '青色のセールは印刷指示済です',
+  NO_DATA: '該当データが存在しません。',
+  PARAM_ERROR: 'パラメータ不正（部店コード）が誤っています。',
+  MULTI_POP_TITLE: 'マルチＰＯＰ出力指示',
+
+  // Sale-specific texts used in tests
+  SALE_NEW_YEAR: '新春セール',
+  PERIOD_SAMPLE: '2026/01/01　～　2026/01/31',
+  MULTI_COMMENT_ZUBARI: 'ズバリ',
+  MULTI_COMMENT_INPRO: 'インプロ',
 } as const;
 

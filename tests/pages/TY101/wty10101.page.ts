@@ -40,6 +40,8 @@ export class TY10101Page extends BasePage {
         rankInput: 'input[name="shnRnk"]',
         objectTypeInput: 'input[name="btrKbn"]',
         setTypeInput: 'input[name="setKbn"]',
+        releaseDateInput: 'input[name="htbDate"]',
+        limitedInput: 'input[id="nykaskGntShnFlg"]',
 
         // Product details section
         detailDisclosure: 'button:has-text("詳細")',
@@ -52,7 +54,7 @@ export class TY10101Page extends BasePage {
         memberButton: 'label:has-text("正会員")',
         anshinButton: 'label:has-text("あんしん会員")',
         normalPointButton: 'button:has-text("通常P")',
-        limitedPointButton: 'button:has-text("期間限定P")',
+        limitedPointButton: 'label:has-text("期間限定P")',
         dmDisplayToggleButton: 'button:has-text("ＤＭ・展示売価表示")',
 
         // Stock table
@@ -63,6 +65,7 @@ export class TY10101Page extends BasePage {
         anshinWarrantyInput: '#ansn',
         extendedWarrantyInput: '#enchohshKkn',
         guaranteeRateInput: '#guarantee',
+        warrantyLabel: 'label[for="warranty"]',
 
         // Electronic price benefit section (電子プライス特典表記)
         electronicPriceConcentratedSaleInput: '#monthConcentrationItem',
@@ -92,6 +95,8 @@ export class TY10101Page extends BasePage {
         productColorLabels: 'div.product-color div[class*="ecLabel"]',
         productColorJanLink: 'div.product-color div[class*="ecLabel"].underline',
 
+        productMakerAccordionButton: 'div.product-maker-option button:has-text("メーカー純正オプション")',
+        relatedProductAccordionButton: 'div.related-product button:has-text("関連商品・工事コード")',
         // Menu buttons
         menuPopup: 'ul[role="menu"]',
         productPriceMenuItem: 'ul[role="menu"] li:has-text("商品価格")',
@@ -109,6 +114,31 @@ export class TY10101Page extends BasePage {
         // Dialogs
         errorDialog: '#ty101-error-dialog',
         functionPopup: 'div[data-function-popup="true"]',
+
+        supplierName: 'input[name="shiirerykKnj"]',
+        supplierCode: 'input[name="shiireCd"]',
+        supplierCodeLabel: 'label[for="shiireCd"]',
+        // Related product section
+        relatedProductTakeAwayButton: 'div.related-product label:has-text("持帰り")',
+        relatedProductDeliveryButton: 'div.related-product label:has-text("配達")',
+        relatedProductAllButton: 'div.related-product label:has-text("全て")',
+
+        // Set product table
+        setProductTable: '#ty101-set-product-table',
+
+        // Product recommend info section
+        productRecommendInfoWrapper: 'div.product-recommend-info',
+        productRecommendInfoLabel: 'div.product-recommend-info label:has-text("おすすめ")',
+
+        taxIncludedButton: 'label:has-text("税込")',
+        taxExcludedButton: 'label:has-text("税別")',
+        guaranteeRateLabel: 'label[for="guarantee"]',
+
+        buttonDeliveryInfo: 'button:has-text("納期情報")',
+
+        recommendDataWrapper: 'div.recommend-data',
+
+        endOfDataLabel: 'p:has-text("End Of Data")',
     };
 
     constructor(page: Page) {
@@ -136,6 +166,7 @@ export class TY10101Page extends BasePage {
             state: 'visible',
             timeout: 10000,
         });
+        await this.page.waitForTimeout(1000);
     }
 
     /**
@@ -199,6 +230,7 @@ export class TY10101Page extends BasePage {
     async searchProduct(productCode: string): Promise<void> {
         await this.fillSearchInput(productCode);
         await this.clickSearch();
+        await this.page.waitForTimeout(2500);
     }
 
     /**
@@ -324,7 +356,14 @@ export class TY10101Page extends BasePage {
     }
 
     getLimitedPointModeLabel(): Locator {
-        return this.page.locator('label:has-text("期間限定P")').first();
+        return this.page.locator(this.selectors.limitedPointButton).first();
+    }
+
+    async clickLimitedPointModeLabel(): Promise<void> {
+        const locator = this.page.locator(this.selectors.limitedPointButton).first();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+        return;
     }
 
     getDmDisplayToggleButton(): Locator {
@@ -377,6 +416,31 @@ export class TY10101Page extends BasePage {
     }
 
     /**
+     * Get price table cell value by row and column
+     * @param row - Row index (1=一般, 2=正会員/DM, 3=あんしん会員/展示)
+     * @param col - Column index (-1=Label, 0=Price, 1=Normal P率, 2=Normal P額, 3=Limited P率, 4=Limited P額, 5=Profit)
+     */
+    async getPriceTableValue(row: 1 | 2 | 3, col: -1 | 0 | 1 | 2 | 3 | 4 | 5): Promise<string> {
+        const rowLocator = this.page.locator(`div[class*="priceRow${row}"]`);
+        if (col === -1) {
+            // Get label cell (first cell without priceValueCell)
+            const labelCell = rowLocator.locator('div[class*="colSpan5"]').first();
+            return (await labelCell.textContent() || '').trim();
+        } else {
+            // Get value cell (with priceValueCell)
+            const cell = rowLocator.locator('div[class*="priceValueCell"]').nth(col);
+            return (await cell.textContent() || '').trim();
+        }
+    }
+
+    /**
+     * Calculate tax included price: taxExcluded × 1.1 (rounded)
+     */
+    calculateTaxIncludedPrice(taxExcludedPrice: string): string {
+        return Math.round(parseInt(taxExcludedPrice.replace(/,/g, ''), 10) * 1.1).toLocaleString('en-US');
+    }
+
+    /**
      * Stock table helpers
      */
     getStockGrid(): Locator {
@@ -402,6 +466,10 @@ export class TY10101Page extends BasePage {
         return this.page.inputValue(this.selectors.extendedWarrantyInput);
     }
 
+    getGuaranteeRateInput(): Locator {
+        return this.page.locator(this.selectors.guaranteeRateInput).first();
+    }
+
     async getGuaranteeRateValue(): Promise<string> {
         return this.page.inputValue(this.selectors.guaranteeRateInput);
     }
@@ -411,6 +479,10 @@ export class TY10101Page extends BasePage {
      */
     async getElectronicPriceConcentratedSaleValue(): Promise<string> {
         return this.page.inputValue(this.selectors.electronicPriceConcentratedSaleInput);
+    }
+
+    getElectronicPriceConcentratedSaleInput(): Locator {
+        return this.page.locator(this.selectors.electronicPriceConcentratedSaleInput).first();
     }
 
     async getElectronicPricePriceSpecifyValue(): Promise<string> {
@@ -522,11 +594,37 @@ export class TY10101Page extends BasePage {
     }
 
     getProductColorLabels(): Locator {
-        return this.page.locator(this.selectors.productColorLabels).first();
+        return this.page.locator(this.selectors.productColorLabels);
     }
 
     getProductColorJanLink(janCode: string): Locator {
         return this.page.locator(this.selectors.productColorJanLink).filter({ hasText: `JAN: ${janCode}` }).first();
+    }
+
+    getProductJanLinkBySection(parentClassName: string, janCode: string): Locator {
+        return this.page.locator(
+            `.${parentClassName} >> text=JAN: ${janCode}`
+        );
+    }
+
+    getProductMakerAccordionButton(): Locator {
+        return this.page.locator(this.selectors.productMakerAccordionButton).first();
+    }
+
+    async clickProductMakerAccordion(): Promise<void> {
+        const button = this.page.locator(this.selectors.productMakerAccordionButton).first();
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(500);
+    }
+
+    async clickRelatedProductAccordion(): Promise<void> {
+        const button = this.getRelatedProductAccordionButton();
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(500);
+    }
+
+    getRelatedProductAccordionButton(): Locator {
+        return this.page.locator(this.selectors.relatedProductAccordionButton).first();
     }
 
     async clickProductColorAccordion(): Promise<void> {
@@ -628,9 +726,9 @@ export class TY10101Page extends BasePage {
         return await locator.isVisible({ timeout: 1000 }).catch(() => false);
     }
 
-    async getClearMenuItem(): Promise<boolean> {
+    async getClearMenuItem(): Promise<Locator> {
         const locator = this.page.locator(this.selectors.clearMenuItem).first();
-        return await locator.isVisible({ timeout: 1000 }).catch(() => false);
+        return locator;
     }
 
     async focusSearchInput(): Promise<void> {
@@ -661,6 +759,293 @@ export class TY10101Page extends BasePage {
         const locator = this.page.locator(this.selectors.iconBack).first();
         await this.clickWithRetry(locator);
     }
+
+    getLabelByFor(forValue: string): Locator {
+        return this.page.locator(`label[for="${forValue}"]`).first();
+    }
+    getLabelSupplierCode(): Locator {
+        return this.page.locator(this.selectors.supplierCodeLabel).first();
+    }
+
+    async getSupplierNameValue(): Promise<string> {
+        return await this.page.inputValue(this.selectors.supplierName);
+    }
+
+    async getSupplierCodeValue(): Promise<string> {
+        return await this.page.inputValue(this.selectors.supplierCode);
+    }
+
+    getRelatedProductTakeAwayButton(): Locator {
+        return this.page.locator(this.selectors.relatedProductTakeAwayButton).first();
+    }
+
+    getRelatedProductDeliveryButton(): Locator {
+        return this.page.locator(this.selectors.relatedProductDeliveryButton).first();
+    }
+    getRelatedProductAllButton(): Locator {
+        return this.page.locator(this.selectors.relatedProductAllButton).first();
+    }
+
+    async isRelatedProductTakeAwayButtonVisible(): Promise<boolean> {
+        const locator = this.getRelatedProductTakeAwayButton();
+        return await locator.isVisible({ timeout: 5000 }).catch(() => false);
+    }
+
+    async isRelatedProductDeliveryButtonVisible(): Promise<boolean> {
+        const locator = this.getRelatedProductDeliveryButton();
+        return await locator.isVisible({ timeout: 5000 }).catch(() => false);
+    }
+
+    async isRelatedProductAllButtonVisible(): Promise<boolean> {
+        const locator = this.getRelatedProductAllButton();
+        return await locator.isVisible({ timeout: 5000 }).catch(() => false);
+    }
+
+    async clickRelatedProductTakeAwayButton(): Promise<void> {
+        const locator = this.getRelatedProductTakeAwayButton();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+    }
+
+    async clickRelatedProductDeliveryButton(): Promise<void> {
+        const locator = this.getRelatedProductDeliveryButton();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+    }
+
+    async clickRelatedProductAllButton(): Promise<void> {
+        const locator = this.getRelatedProductAllButton();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+    }
+
+    async isInputWithValueVisible(value: string, timeout: number = 5000): Promise<boolean> {
+        const locator = this.page.locator(`input[value="${value}"]`).first();
+        return await locator.isVisible({ timeout }).catch(() => false);
+    }
+
+    getReleaseDateInput(): Locator {
+        return this.page.locator(this.selectors.releaseDateInput).first();
+    }
+
+    async getReleaseDateInputValue(): Promise<string> {
+        return await this.page.inputValue(this.selectors.releaseDateInput);
+    }
+
+    async clickDetailDisclosure(): Promise<void> {
+        const locator = this.getDetailDisclosureButton();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+    }
+
+    getDetailDisclosureButton(): Locator {
+        return this.page.locator(this.selectors.detailDisclosure).first();
+    }
+
+    async isSetProductTableVisible(): Promise<boolean> {
+        const locator = this.page.locator(this.selectors.setProductTable);
+        return await locator.isVisible({ timeout: 5000 }).catch(() => false);
+    }
+
+    /**
+     * Click a row in set product table by filter text and return the number of API requests made
+     * @param filterText - Text to filter the row in the table
+     * @returns Number of API requests made after clicking the row
+     */
+    async clickSetProductTableRowAndCountApiRequests(filterText: string): Promise<number> {
+        const setProductTable = this.page.locator(this.selectors.setProductTable);
+        await setProductTable.waitFor({ state: 'visible', timeout: 5000 });
+
+        let apiRequestCount = 0;
+        let shouldTrack = false;
+        const requestListener = (request: any) => {
+            if (!shouldTrack) return;
+            const url = request.url();
+            if (url.includes('/WebAP/') || url.includes('TY')) {
+                apiRequestCount++;
+            }
+        };
+        this.page.on('request', requestListener);
+
+        const dataRows = setProductTable.locator('[role="row"][row-index]');
+        const rowCount = await dataRows.count();
+        if (rowCount === 0) {
+            this.page.off('request', requestListener);
+            return 0;
+        }
+
+        const targetRow = dataRows.filter({ hasText: filterText }).first();
+        await targetRow.waitFor({ state: 'visible', timeout: 5000 });
+
+        shouldTrack = true;
+        await targetRow.click();
+        await this.page.waitForTimeout(1000);
+        shouldTrack = false;
+
+        this.page.off('request', requestListener);
+
+        return apiRequestCount;
+    }
+
+    getProductRecommendInfoLabel(): Locator {
+        return this.page.locator(this.selectors.productRecommendInfoLabel).first();
+    }
+
+    getProductRecommendInfo(): Locator {
+        return this.page.locator(this.selectors.productRecommendInfoWrapper).first();
+    }
+
+    /**
+     * Capture API responses matching the URL pattern
+     * @param urlPatterns - Array of URL patterns to match (default: ['/WebAP/', '/api/', 'TY101'])
+     * @returns Object with responses array and cleanup function
+     */
+    startCapturingApiResponses(urlPatterns: string[] = ['/WebAP/', '/api/']): {
+        responses: Array<{ url: string; status: number; timestamp: string; body: any }>;
+        stop: () => void;
+    } {
+        const capturedResponses: Array<{ url: string; status: number; timestamp: string; body: any }> = [];
+
+        const responseListener = async (response: any) => {
+            const url = response.url();
+            const matchesPattern = urlPatterns.some(pattern => url.includes(pattern));
+
+            if (matchesPattern) {
+                try {
+                    const responseBody = await response.json();
+                    capturedResponses.push({
+                        url: url,
+                        status: response.status(),
+                        timestamp: new Date().toISOString(),
+                        body: responseBody
+                    });
+                } catch (e) {
+                    // Response might not be JSON
+                    try {
+                        const text = await response.text();
+                        capturedResponses.push({
+                            url: url,
+                            status: response.status(),
+                            timestamp: new Date().toISOString(),
+                            body: text
+                        });
+                    } catch (e2) {
+                        // Ignore if can't read response
+                    }
+                }
+            }
+        };
+
+        this.page.on('response', responseListener);
+
+        return {
+            responses: capturedResponses,
+            stop: () => {
+                this.page.off('response', responseListener);
+            }
+        };
+    }
+
+    async clickTaxIncludedModeLabel(): Promise<void> {
+        const locator = this.page.locator(this.selectors.taxIncludedButton).first();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+        return;
+    }
+
+    async clickTaxExcludedModeLabel(): Promise<void> {
+        const locator = this.page.locator(this.selectors.taxExcludedButton).first();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+        return;
+    }
+
+    getLimitedPointButton(): Locator {
+        return this.page.locator(this.selectors.limitedPointButton).first();
+    }
+
+    async clickLimitedPointButton(): Promise<void> {
+        const locator = this.page.locator(this.selectors.limitedPointButton).first();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+        return;
+    }
+
+    /**
+     * Check if button has plum background color
+     */
+    async hasPlumBackground(locator: Locator): Promise<boolean> {
+        const bgColor = await locator.evaluate((el) => {
+            const style = window.getComputedStyle(el);
+            return style.backgroundColor;
+        });
+        // Plum color: rgb(221, 160, 221) or #DDA0DD
+        return bgColor.includes('221, 160, 221') || bgColor.includes('221,160,221') || bgColor.toLowerCase() === '#dda0dd';
+    }
+
+    getButtonDeliveryInfo(): Locator {
+        return this.page.locator(this.selectors.buttonDeliveryInfo).first();
+    }
+
+    async clickButtonDeliveryInfo(): Promise<void> {
+        const locator = this.page.locator(this.selectors.buttonDeliveryInfo).first();
+        await this.clickWithRetry(locator);
+        await this.page.waitForTimeout(500);
+        return;
+    }
+
+    getErrorDialog(): Locator {
+        return this.page.locator(this.selectors.errorDialog).first();
+    }
+
+    getWarrantyLabel(): Locator {
+        return this.page.locator(this.selectors.warrantyLabel).first();
+    }
+
+    getGuaranteeRateLabel(): Locator {
+        return this.page.locator(this.selectors.guaranteeRateLabel).first();
+    }
+
+    getRecommendDataWrapper(): Locator {
+        return this.page.locator(this.selectors.recommendDataWrapper).first();
+    }
+
+    getLimitedInput(): Locator {
+        return this.page.locator(this.selectors.limitedInput).first();
+    }
+
+    async getLimitedInputValue(): Promise<string> {
+        return await this.page.inputValue(this.selectors.limitedInput);
+    }
+
+    /**
+     * Scroll element to center of viewport
+     */
+    async scrollToCenter(locator: Locator): Promise<void> {
+        await locator.evaluate((element) => {
+            element.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+        });
+        await this.page.waitForTimeout(300); // Wait for scroll animation
+    }
+
+    /**
+     * Scroll page to top
+     */
+    async scrollToTop(): Promise<void> {
+        await this.page.evaluate(() => {
+            window.scrollTo(0, 0);
+        });
+        await this.page.waitForTimeout(300); // Wait for scroll animation
+    }
+
+    getSetProductTable(): Locator {
+        return this.page.locator(this.selectors.setProductTable).first();
+    }
+    getEndOfDataLabel(): Locator {
+        return this.page.locator(this.selectors.endOfDataLabel).first();
+    }
+
+    getMemberButton(): Locator {
+        return this.page.locator(this.selectors.memberButton).first();
+    }
 }
-
-

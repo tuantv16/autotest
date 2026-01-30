@@ -25,12 +25,15 @@ export class TY2050Page extends BasePage {
   };
 
   // Selectors
-  private readonly selectors = {
+  public readonly selectors = {
+    errorClass: '_error_cbu4e_24',
     // Form fields
     customerNameKanji: "#kokKnj",
     customerNameKana: "#kokKn",
-    honorificRadio: (index: number) => `#keisho_${index}`,
-    paymentMethodRadio: (index: number) => `#shirai_${index}`,
+    honorificRadio: (value: string | number) =>
+  `input[type="radio"][name="keishoKbn"][value="${value}"]`,
+    paymentMethodRadio: (value: string | number) =>
+  `input[type="radio"][name="shHou"][value="${value}"]`,
     deliveryDateInput: 'input[name="nnyOtdkYoteiDate"]',
     summaryTextarea: "#tkyRn",
 
@@ -67,10 +70,52 @@ export class TY2050Page extends BasePage {
   async fillForm(formData: WTY20501FormData): Promise<void> {
     await this.fillCustomerNameKanji(formData.customerNameKanji);
     await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
     await this.fillDeliveryDate(formData.deliveryDate);
     await this.fillSummary(formData.summaryText);
   }
 
+  async fillFormEmptyDate(formData: WTY20501FormData): Promise<void> {
+    await this.fillCustomerNameKanji(formData.customerNameKanji);
+    await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    await this.fillSummary(formData.summaryText);
+  }
+
+  async fillFormEmptyCustomerNameKanji(formData: WTY20501FormData): Promise<void> {
+    // await this.fillCustomerNameKanji(formData.customerNameKanji);
+    await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    await this.fillSummary(formData.summaryText);
+  }
+
+  async fillFormEmptyCustomerNameKana(formData: WTY20501FormData): Promise<void> {
+    await this.fillCustomerNameKanji(formData.customerNameKanji);
+    //await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    await this.fillSummary(formData.summaryText);
+  }
+
+  async fillFormEmptyHonorific(formData: WTY20501FormData): Promise<void> {
+    await this.fillCustomerNameKanji(formData.customerNameKanji);
+    await this.fillCustomerNameKana(formData.customerNameKana);
+    //await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    await this.fillSummary(formData.summaryText);
+  }
+
+  async fillFormEmptyAbstractColumn(formData: WTY20501FormData): Promise<void> {
+    await this.fillCustomerNameKanji(formData.customerNameKanji);
+    await this.fillCustomerNameKana(formData.customerNameKana);
+    await this.selectHonorific(2);
+    await this.selectPaymentMethod(2);
+    // await this.fillSummary(formData.summaryText);
+  }
+  
   /**
    * Fill customer name (Kanji)
    */
@@ -90,24 +135,62 @@ export class TY2050Page extends BasePage {
   }
 
   /**
-   * Select honorific (0: 様, 1: 御中)
+   * Select honorific by text label or value
+   * @param option Text label ("様", "御中") or value ("1", "2", 1, 2
    */
-  async selectHonorific(index: number = 0): Promise<void> {
-    const locator = this.page.locator(this.selectors.honorificRadio(index));
-    const isChecked = await locator.isChecked();
+  async selectHonorific(option: string | number): Promise<void> {
+    const name = this.fieldNames.honorific;
+    let labelLocator: Locator;
+
+    // Check if option is a text label (様, 御中)
+    if (typeof option === 'string') {
+      // Find label containing span with the text
+      labelLocator = this.page.locator(`label:has(span:has-text("${option}")):has(input[name="${name}"])`);
+    } else {
+      // Option is a value (1, 2, "1", "2")
+      const value = String(option);
+      // Find label containing input with the value
+      labelLocator = this.page.locator(`label:has(input[type="radio"][name="${name}"][value="${value}"])`);
+    }
+
+    await this.waitForVisible(labelLocator, 10000);
+    
+    // Check if already selected by checking the radio input inside
+    const radioInput = labelLocator.locator(`input[type="radio"][name="${name}"]`);
+    const isChecked = await radioInput.isChecked().catch(() => false);
+    
     if (!isChecked) {
-      await this.clickWithRetry(locator);
+      await this.clickWithRetry(labelLocator);
     }
   }
 
   /**
-   * Select payment method (0: 現金, 1: 振込)
+   * Select payment method by text label or value
+   * @param option Text label ("現金", "振込") or value ("1", "2", 1, 2)
    */
-  async selectPaymentMethod(index: number = 0): Promise<void> {
-    const locator = this.page.locator(this.selectors.paymentMethodRadio(index));
-    const isChecked = await locator.isChecked();
+  async selectPaymentMethod(option: string | number): Promise<void> {
+    const name = this.fieldNames.paymentMethod;
+    let labelLocator: Locator;
+
+    // Check if option is a text label (現金, 振込)
+    if (typeof option === 'string') {
+      // Find label containing span with the text
+      labelLocator = this.page.locator(`label:has(span:has-text("${option}")):has(input[name="${name}"])`);
+    } else {
+      // Option is a value (1, 2, "1", "2")
+      const value = String(option);
+      // Find label containing input with the value
+      labelLocator = this.page.locator(`label:has(input[type="radio"][name="${name}"][value="${value}"])`);
+    }
+
+    await this.waitForVisible(labelLocator, 10000);
+    
+    // Check if already selected by checking the radio input inside
+    const radioInput = labelLocator.locator(`input[type="radio"][name="${name}"]`);
+    const isChecked = await radioInput.isChecked().catch(() => false);
+    
     if (!isChecked) {
-      await this.clickWithRetry(locator);
+      await this.clickWithRetry(labelLocator);
     }
   }
   /**
@@ -198,6 +281,11 @@ export class TY2050Page extends BasePage {
   }
 
   async isCheckedKeishoKbn(labelText: string): Promise<boolean> {
+    // If labelText is not provided, immediately return false to avoid timeouts
+    if (!labelText) {
+      return false;
+    }
+
     const radio = this.page
       .locator("label")
       .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
@@ -209,6 +297,11 @@ export class TY2050Page extends BasePage {
   }
 
   async isCheckedShHou(labelText: string): Promise<boolean> {
+    // If labelText is not provided, immediately return false to avoid timeouts
+    if (!labelText) {
+      return false;
+    }
+
     const radio = this.page
       .locator("label")
       .filter({ has: this.page.locator(`span:has-text("${labelText}")`) })
@@ -220,7 +313,6 @@ export class TY2050Page extends BasePage {
   }
 
   async isTextVisible(text: string, exact: boolean = true): Promise<boolean> {
-    console.log(`[TEST] Verifying text "${text}" is visible: ${exact}`);
     const locator = this.page.getByText(text, { exact });
     return await locator
       .first()
@@ -230,6 +322,11 @@ export class TY2050Page extends BasePage {
 
   async isInputDisabledByName(name: String): Promise<boolean> {
     const locator = this.page.locator(`input[name="${name}"]`);
+    return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
+  }
+
+  async isTextareaDisabledByName(name: String): Promise<boolean> {
+    const locator = this.page.locator(`textarea[name="${name}"]`);
     return await locator.isDisabled({ timeout: 10000 }).catch(() => false);
   }
 
@@ -252,7 +349,6 @@ export class TY2050Page extends BasePage {
     maxlength: number,
     actualInput: string
   ): Promise<boolean> {
-    console.log(`[TEST] Verifying input value. Expected: "${expectedStandard}", Actual: "${actualInput}", Maxlength: ${maxlength}`);    
     return expectedStandard === actualInput && actualInput.length === maxlength;
   }
 
@@ -270,6 +366,10 @@ export class TY2050Page extends BasePage {
     return await this.getValueById(this.fieldNames.customerNameKana);
   }
 
+  async inputAbstractColumn(value: string): Promise<void> {
+    await this.fillSummary(value);
+  }
+  
   async blurCustomerNameKana(): Promise<void> {
     await this.blurInputById(this.fieldNames.customerNameKana);
   }
@@ -278,5 +378,181 @@ export class TY2050Page extends BasePage {
     const locator = this.page.locator(this.selectors.customerNameKana);
     await this.waitForVisible(locator, 2000);
     await locator.click({ timeout: 2000 });
+  }
+
+  async isInputRadioDisabled(name: string): Promise<boolean> {
+    // Radio group is treated as disabled when **all** its radio inputs are disabled.
+    const radios = this.page.locator(`input[type="radio"][name="${name}"]`);
+
+    // Wait for at least one radio to be attached to avoid timeouts
+    await radios.first().waitFor({ state: 'attached', timeout: 10000 });
+
+    const count = await radios.count();
+    if (count === 0) {
+      // If for some reason nothing is found, treat as not disabled (and avoid throwing)
+      return false;
+    }
+
+    for (let i = 0; i < count; i++) {
+      const radio = radios.nth(i);
+      const isDisabled = await radio.isDisabled().catch(() => false);
+      if (!isDisabled) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  async getSummaryText(): Promise<string> {
+    const locator = this.page.locator(this.selectors.summaryTextarea);
+    const actualInput = (await locator.inputValue()) || "";
+    return actualInput;
+  }
+
+  /**
+   * Check if honorific option is selected (visible with bg-white class)
+   * @param labelText Text label ("様", "御中") or undefined
+   * @returns true if option is selected, false otherwise
+   */
+  async isOptionHonorificVisible(labelText?: string): Promise<boolean> {
+    if (!labelText) {
+      return false;
+    }
+
+    const name = this.fieldNames.honorific;
+    // Find label containing span with the text and input with name="keishoKbn"
+    const locator = this.page.locator(
+      `label:has(span:has-text("${labelText}")):has(input[type="radio"][name="${name}"])`
+    );
+
+    // Check if element exists and is visible
+    const count = await locator.count();
+    if (count === 0) {
+      return false;
+    }
+
+    // Check if the label has bg-white class (selected state)
+    const hasBgWhite = await locator.first().evaluate((el) => {
+      return el.classList.contains('bg-white');
+    }).catch(() => false);
+
+    return hasBgWhite;
+  }
+  
+  async isOptionPaymentMethodVisible(labelText?: string): Promise<boolean> {
+    if (!labelText) {
+      return false;
+    }
+
+    const name = this.fieldNames.paymentMethod;
+    // Find label containing span with the text and input with name="shHou"
+    const locator = this.page.locator(
+      `label:has(span:has-text("${labelText}")):has(input[type="radio"][name="${name}"])` 
+    );
+
+    // Check if element exists and is visible
+    const count = await locator.count();
+    if (count === 0) {
+      return false;
+    }
+
+    // Check if the label has bg-white class (selected state)
+    const hasBgWhite = await locator.first().evaluate((el) => {   
+      return el.classList.contains('bg-white');
+    }).catch(() => false);
+
+    return hasBgWhite;
+  }
+
+  async clearData(): Promise<void> {
+      await this.clickButtonByText('クリア');
+  }
+
+  async verifyDefaultData(): Promise<boolean> {
+    // verify customer name kanji is empty
+    const customerNameKanji = await this.getCustomerNameKanji();
+    if (customerNameKanji.trim() !== '') {
+      return false;
+    }
+    
+    // verify customer name kana is empty
+    const customerNameKana = await this.getCustomerNameKana();
+    if (customerNameKana.trim() !== '') {
+      return false;
+    }
+    
+    // verify honorific is selected
+    const honorific = await this.isOptionHonorificVisible('様');
+    if (!honorific) {
+      return false;
+    }
+    
+    // verify payment method is selected
+    const paymentMethod = await this.isOptionPaymentMethodVisible('現金');
+    if (!paymentMethod) {
+      return false;
+    }
+    
+    // verify summary is empty
+    const summary = await this.getSummaryText();
+    if (summary.trim() !== '') {
+      return false;
+    }
+
+    return true;
+  } 
+
+  async clickOK(): Promise<void> {
+    const locator = this.page.locator('button:has-text("OK")');
+    await this.waitForVisible(locator);
+    await this.clickWithRetry(locator);
+    await this.page.waitForTimeout(1000);
+  }
+
+  async getDeliveryDate(): Promise<string> {
+    const locator = this.page.locator(this.selectors.deliveryDateInput);
+    const actualInput = (await locator.inputValue()) || "";
+    return actualInput;
+  }
+
+  /**
+   * Verify initial data loaded on the form
+   * @param expectedData Expected output data to verify
+   * @returns void - throws assertion errors if any mismatch
+   */
+  async verifyInitData(expectedData: {
+    customerNameKanji: string;
+    customerNameKana: string;
+    deliveryDate: string;
+    keishoKbnText: string;
+    shHouText: string;
+    summaryText: string;
+  }): Promise<void> {
+    const { expect } = await import('@playwright/test');
+    
+    // Verify customer name kanji
+    const customerNameKanji = await this.getCustomerNameKanji();
+    expect(customerNameKanji).toBe(expectedData.customerNameKanji);
+    
+    // Verify customer name kana
+    const customerNameKana = await this.getCustomerNameKana();
+    expect(customerNameKana).toBe(expectedData.customerNameKana);
+    
+    // Verify delivery date
+    const deliveryDate = await this.getDeliveryDate();
+    expect(deliveryDate).toBe(expectedData.deliveryDate);
+    
+    // Verify honorific (keishoKbn)
+    const keishoKbn = await this.isCheckedKeishoKbn(expectedData.keishoKbnText);
+    expect(keishoKbn).toBe(true);
+    
+    // Verify payment method (shHou)
+    const shHou = await this.isCheckedShHou(expectedData.shHouText);
+    expect(shHou).toBe(true);
+    
+    // Verify summary text
+    const summaryText = await this.getSummaryText();
+    expect(summaryText).toBe(expectedData.summaryText);
   }
 }

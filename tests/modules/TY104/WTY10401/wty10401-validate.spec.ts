@@ -261,13 +261,13 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await summaryPage.clickMoveDown();
 
         await page.waitForTimeout(1000);
-        await snapExpect(1);
+        await snapInput();
 
         await summaryPage.clickSearchButton();
         const shnCdValue = await summaryPage.getValueById('shnCd');
         expect(shnCdValue).toBe( testData.formData.shnCd_29_expected);
         
-        await snapExpect();
+        await snapExpect(1);
         await summaryPage.scrollToBottom();
         await page.waitForTimeout(1000);
         await snapExpect(2);
@@ -331,9 +331,10 @@ test.describe('WTY10401 - (店別在庫照会)', () => {
         await snapInput();
 
         await summaryPage.blurShnCd();
-        await summaryPage.focusShnCd();
-        expect(await summaryPage.hasErrorBorderShnCd()).toBe(false);
         
+        await summaryPage.focusShnCd();
+        await page.waitForTimeout(2000);
+        expect(await summaryPage.hasErrorBorderShnCd()).toBe(false);
         await snapExpect();
 
     });

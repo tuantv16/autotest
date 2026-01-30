@@ -1,0 +1,44 @@
+{
+  "wty11001": {
+    "TC_22": {
+      "description": "format value 基準日 successfully",
+      "sessionData": [{
+        "key": "WTY11001_IN_SD",
+        "value": {
+            
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+              "assetsNo": "EF7096380",
+              "clientId": "0438874190",
+              "keepPeriod": "6",
+              "storeCd": "04388",
+              "syoriStoreCd": "04388",
+              "syoriStoreNmKnJ": "東海通",
+              "syoriStoreNmKn": "トウカゲイ",
+              "syoriStoreNmKnj": "東海通",
+              "termNo": "419",
+              "unyoDate": "20251028",
+              "userId": "70000"
+          }
+        }
+      ],
+      "formData": {
+        "startDate_22": "2026/01/02",
+        "endDate_22": "2026/01/01",
+        "startDate_23": "2026/01/01",
+        "endDate_23": "2026/01/02",
+        "slipNo_23": "1331",
+        "rootKbn_23": "3",
+        "shnCd_25": "12345678909876543212345678",
+        "slipNo_26": "12345678909876",
+        "brCd_27": "1",
+        "startDate_40": "20260101",
+        "endDate_40": "20260102"
+      }
+    }
+}
+}
