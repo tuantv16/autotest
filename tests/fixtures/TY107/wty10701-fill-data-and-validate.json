@@ -1,0 +1,58 @@
+{
+    "wty10701": {
+        "commonData": [
+            {
+                "id": "commonDT",
+                "value": [
+                    {
+                      "unyoDate": "20250806",
+                      "storeCd": "00905",
+                      "syoriStoreCd": "00905",
+                      "userId": "10596T401",
+                      "clientId": "00905PD401",
+                      "termNo": "401",
+                      "screenId": "WTY10701"
+                    }
+                ]
+            }
+        ],
+        "TC_17": {
+            "description": "TC17",
+            "storeCd": "00115",
+            "expectedResults": {
+                "storeName": "廿日市"
+            }
+        },
+        "TC_18": {
+            "storeCd": "88899"
+        },
+        "TC_20": {
+            "description": "TC20",
+            "form":{
+                "btenCd": "ABCDE",
+                "btenCD_TC_21": "123",
+                "btenCD_TC_22": "１２３４５"
+            },
+            "expectedResults": {
+                "errorLabel": "数値で入力してください。",
+                "errorLabel_TC_21": "部店コードが誤っています。",
+                "errorLabel_TC_22": "半角で入力してください。"
+            }
+        },
+        "TC_23": {
+            "description": "TC23",
+            "form":{
+                "shnCd": "00010011645",
+                "shnCD_TC_24": "11171670",
+                "shnCD_TC_25": "0000011171670",
+                "shnCD_TC_27": "０００１００１１６４５"
+            },
+            "expectedResults": {
+                "mkKata": "LSK-300-K",
+                "mkKata_TC_24": "ディン・バ・クエット",
+                "mkKata_TC_25": "ディン・バ・クエット",
+                "mkKata_TC_27": "LSK-300-K"
+            }
+        }
+    }
+}
