@@ -184,7 +184,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Step 4: Click search button
     await productInputPage.clickSearchButton();
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1000);
 
     // Verify: Search works with JAN code
     // Verify: Product information is displayed
@@ -271,7 +271,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Enter product code
     await productInputPage.fillProductInput("00579159611");
     await page.waitForTimeout(500);
-    await snapInput();
+    await productInputPage.scrollToBottom();
 
     // Step 5: Click search button
     await productInputPage.clickSearchButton();
@@ -283,6 +283,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.fillTSuIriInput("0");
     await productInputPage.fillKisoIriInput("0");
     await page.waitForTimeout(500);
+    await snapInput();
 
     // Step 7: Click confirm button
     await productInputPage.clickConfirmButton();
@@ -305,6 +306,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Enter some data in 定数依頼 and 基礎依頼
+    await productInputPage.scrollToBottom();
     await productInputPage.fillTSuIriInput("100");
     await productInputPage.fillKisoIriInput("200");
     await page.waitForTimeout(500);
@@ -345,6 +347,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Step 3: Toggle 定数削除 = ON first
+    await productInputPage.scrollToBottom();
     const initialState = await productInputPage.getTsuDelToggleState();
     if (!initialState) {
       await productInputPage.clickTsuDelToggle();
@@ -398,15 +401,11 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(500);
     const gyoNoValueBefore = await productInputPage.getGyoNoValue();
     expect(gyoNoValueBefore).toBe("001");
+    await snapInput();
 
     // Step 3: Click clear button
     await productInputPage.fillTSuIriInput("1");
     await productInputPage.clickConfirmButton();
-    await page.waitForTimeout(1000);
-    await snapInput();
-
-    // Step 4: Redirect to WTY31002 and click back to return to WTY31001
-    await productInputPage.clickBackButton();
     await page.waitForTimeout(1000);
 
     const gyoNoValue = await productInputPage.getGyoNoValue();
@@ -452,17 +451,19 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.clickConfirmButton();
     await page.waitForTimeout(1000);
 
-    // Step 4: Redirect to WTY31002 and click back to return to WTY31001
-    await productInputPage.clickBackButton();
-    await page.waitForTimeout(1000);
-
     const gyoNoValue = await productInputPage.getGyoNoValue();
     expect(gyoNoValue).toBe("002");
     expect(gyoNoValue.length).toBe(3);
     await snapExpect(2);
   });
 
-  test("WTY31001_62", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
+  test("WTY31001_62", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -490,11 +491,18 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: New tab is opened with WTZ10101
     await newPage.waitForLoadState("domcontentloaded");
+    await page.waitForTimeout(3000);
     expect(newPage.url()).toContain("WTZ10101");
     await snapExpect();
   });
 
-  test("WTY31001_63", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
+  test("WTY31001_63", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     const testData = loadTestData("TY310/wty31001", "wty31001", "TC_53");
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
@@ -524,6 +532,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: New tab is opened with WTZ10101
     await newPage.waitForLoadState("domcontentloaded");
+    await page.waitForTimeout(3000);
     expect(newPage.url()).toContain("WTZ10101");
     await snapExpect();
   });

@@ -13,8 +13,6 @@ export const COMMON_MESSAGES = {
   // Error messages
   VALIDATION_ERROR: '入力内容に誤りがあります',
   REQUIRED_FIELD: '必須項目です',
-  HALF_WIDTH_REQUIRED: '半角で入力してください。',
-
   // Confirmation messages
   CONFIRM_SAVE: '保存しますか？',
   CONFIRM_DELETE: '削除しますか？',
@@ -37,6 +35,11 @@ export const VALIDATION_ERROR_MESSAGES = {
   REQUIRED_FIELD: '必須入力エラー',
   INVALID_LENGTH: '商品の桁数が正しくありません',
   START_DATE_AFTER_END_DATE: '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
+
+  HALF_WIDTH_REQUIRED: '半角で入力してください。',
+  FULL_WIDTH_REQUIRED: '全角で入力してください。',
+  INVALID_LATER_DATE: '以降の日付を入力してください。',
+  INVALID_DATE_AFTER_REIWA_70 : '令和70年以降になるため入力できません',
 } as const;
 
 /**
@@ -70,3 +73,19 @@ export const WTY11001_ERROR_MESSAGES = {
   DATA_NOT_FOUND: '該当データが存在しません。',
   DETAIL_NOT_SELECTED: '入荷予定を選択してください。',
 } as const;
+
+export const WTY30303 = {
+  TITLE: 'セール選択',
+  CONFIRM: '確定',
+  NOTICE_PRINTED: '青色のセールは印刷指示済です',
+  NO_DATA: '該当データが存在しません。',
+  PARAM_ERROR: 'パラメータ不正（部店コード）が誤っています。',
+  MULTI_POP_TITLE: 'マルチＰＯＰ出力指示',
+
+  // Sale-specific texts used in tests
+  SALE_NEW_YEAR: '新春セール',
+  PERIOD_SAMPLE: '2026/01/01　～　2026/01/31',
+  MULTI_COMMENT_ZUBARI: 'ズバリ',
+  MULTI_COMMENT_INPRO: 'インプロ',
+} as const;
+

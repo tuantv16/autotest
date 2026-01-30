@@ -10,7 +10,7 @@ test.describe('WTY32101 Operations Tests', () => {
         PageTY32101 = new TY32101Page(page);
     });
 
-    test('WTY32101_20 - Verify Inventory Date options presence', async ({ page, baseUrl, indexedDBHelper }) => {
+    test('WTY32101_20 ', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Inject IndexedDB data AFTER page loaded
@@ -20,23 +20,25 @@ test.describe('WTY32101 Operations Tests', () => {
 
         // Navigate to target URL
         await PageTY32101.navigate();
+        await snapInput();
 
         const selectedInventoryDate = await PageTY32101.getTextByLocator(page.locator(PageTY32101.selectors.inventoryGuideText));
         const InventoryClassificationText = await PageTY32101.getValueByName('tnorsKbn');
 
+        await snapExpect(1);
         await expect(selectedInventoryDate).toBe(PageTY32101.INVENTORY_GUIDES.JANUARY_REGULAR);
         await expect(InventoryClassificationText).toBe(PageTY32101.INVENTORY_CLASSIFICATIONS.SAME_DAY_WITH_TOTAL);
 
         await PageTY32101.selectComboboxOptionByText(PageTY32101.INVENTORY_DATES.DECEMBER_15_2024, PageTY32101.selectors.inventoryDateCombobox);
-
         const selectedInventoryDate2 = await PageTY32101.getTextByLocator(page.locator(PageTY32101.selectors.inventoryGuideText));
         const InventoryClassificationText2 = await PageTY32101.getValueByName('tnorsKbn');
 
+        await snapExpect(2);
         await expect(selectedInventoryDate2).toBe(PageTY32101.INVENTORY_GUIDES.DECEMBER_CYCLE);
         await expect(InventoryClassificationText2).toBe(PageTY32101.INVENTORY_CLASSIFICATIONS.NEXT_DAY);
     }); 
 
-    test('WTY32101_21 - Verify Inventory Date options absence', async ({ page, baseUrl, indexedDBHelper }) => {
+    test('WTY32101_21', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Inject IndexedDB data AFTER page loaded
@@ -46,10 +48,12 @@ test.describe('WTY32101 Operations Tests', () => {
 
         // Navigate to target URL
         await PageTY32101.navigate();
+        await snapInput();
 
         const inventoryDate = await PageTY32101.getTextByLocator(page.locator(PageTY32101.selectors.inventoryDateText));
         const InventoryClassificationText = await PageTY32101.getValueByName('tnorsKbn');
-
+        
+        await snapExpect(1);
         await expect(inventoryDate).toBe(PageTY32101.INVENTORY_DATES.JANUARY_20_2025);
         await expect(InventoryClassificationText).toBe(PageTY32101.INVENTORY_CLASSIFICATIONS.SAME_DAY_WITH_TOTAL);
 
@@ -58,6 +62,7 @@ test.describe('WTY32101 Operations Tests', () => {
         const inventoryDate2 = await PageTY32101.getTextByLocator(page.locator(PageTY32101.selectors.inventoryDateText));
         const InventoryClassificationText2 = await PageTY32101.getValueByName('tnorsKbn');
 
+        await snapExpect(2);
         await expect(inventoryDate2).toBe(PageTY32101.INVENTORY_DATES.DECEMBER_15_2024);
         await expect(InventoryClassificationText2).toBe(PageTY32101.INVENTORY_CLASSIFICATIONS.NEXT_DAY);
     }); 

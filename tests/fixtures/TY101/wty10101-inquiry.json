@@ -1,0 +1,61 @@
+{
+    "wty10101": {
+        "WTY10101_93": {
+            "sessionData": [
+                {
+                    "key": "WTY10101_IN_SD",
+                    "value": {
+                        "searchJknDT": [
+                            {
+                                "shnCd": "00010013854"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "expectedResults": {
+                "janCode": "497985011110-4",
+                "mkKata": "DIA100",
+                "rykmkrNmKnj": "八木アンテナ",
+                "parentClassName": "product-maker-option"
+            }
+        },
+        "WTY10101_92": {
+            "sessionData": [
+                {
+                    "key": "WTY10101_IN_SD",
+                    "value": {
+                        "searchJknDT": [
+                            {
+                                "shnCd": "00010013854"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "expectedResults": {
+                "janCode": "497985011110-4",
+                "mkKata": "DIA100",
+                "rykmkrNmKnj": "八木アンテナ",
+                "parentClassName": "product-color"
+            }
+        },
+        "WTY10101_91": {
+            "sessionData": [
+                {
+                    "key": "WTY10101_IN_SD",
+                    "value": {
+                        "searchJknDT": [
+                            {
+                                "shnCd": "00010013854"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "expectedResults": {
+                "filterText": "LSK-300-K"
+            }
+        }
+    }
+}

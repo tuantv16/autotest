@@ -22,6 +22,7 @@ export class TY32101Page extends BasePage {
 
     public readonly selectors = {
       tnorsKbn: 'tnorsKbn',
+      confirmButtonModal: '#ok_only_button',
       errorDialog: '#wty32101-error-dialog',
       inventoryGuideText: '#tnorsShiji span',
       inventoryDateText: '#tnorsDate span',

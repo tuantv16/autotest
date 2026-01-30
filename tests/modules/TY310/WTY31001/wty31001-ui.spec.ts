@@ -62,7 +62,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapExpect();
   });
 
-  test("WTY301001_14", async ({ page, baseUrl, snapInput, snapExpect }) => {
+  test("WTY31001_14", async ({ page, baseUrl, snapInput, snapExpect }) => {
     // Step 1: Setup
     await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(500);
@@ -513,7 +513,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     const kisoIriInputEnabled = await productInputPage.kisoIriInputIsEditable();
     expect(kisoIriInputEnabled).toBe(true);
 
-    // await snapExpect();
+    await snapExpect();
   });
 
   test("WTY31001_25", async ({ page, baseUrl, snapInput, snapExpect }) => {

@@ -1,0 +1,68 @@
+{
+    "wty10701": {
+        "commonData": [
+            {
+                "id": "commonDT",
+                "value": [
+                    {
+                      "unyoDate": "20250806",
+                      "storeCd": "00905",
+                      "syoriStoreCd": "00905",
+                      "userId": "10596T401",
+                      "clientId": "00905PD401",
+                      "termNo": "401",
+                      "screenId": "WTY10701"
+                    }
+                ]
+            }
+        ],
+        "TC_08": {
+            "description": "TC08",
+            "storeCd": "00115",
+            "searchCode": "00010011645"
+        },
+        "TC_09": {
+            "description": "TC09",
+            "expectedResults": {
+                "popupContent": "部店検索"
+            }
+        },
+        "TC_10": {
+            "description": "TC10",
+            "expectedResults": {
+                "popupContent": "型番検索"
+            }
+        },
+        "TC_13": {
+            "description": "TC13",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                        "unyoDate": "20250806",
+                        "storeCd": "00905",
+                        "syoriStoreCd": "00905",
+                        "userId": "10596T401",
+                        "clientId": "00905PD401",
+                        "termNo": "401",
+                        "screenId": "WTY10701"
+                        }
+                    ]
+                },
+                {
+                    "id": "modeFlg",
+                    "value": {
+                        "modeFlg": "1"
+                    }
+                }
+            ]
+        },
+        "TC_14": {
+            "description": "TC14",
+            "expectedResults": {
+                "errorMessage": "スキャナーはFlutterアプリ内でのみ動作します"
+            }
+        }
+    }
+}

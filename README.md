@@ -42,3 +42,7 @@ tests/
     │   # Common helper functions
     └── indexeddb-helper.ts
         # IndexedDB setup & encrypted data handling
+
+
+#install Oracle DB
+npm install oracledb --save-dev

@@ -14,11 +14,14 @@ test.describe('WTY10101 - Show product info', () => {
     });
 
     const commonData = CommonHelper.loadTestData('TY101/wty10101-common-data').commonData;
+    const searchCodeDefault = CommonHelper.loadTestData('TY101/wty10101-show-product-info').wty10101.searchCodeList.default;
 
     test('WTY10101_27', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_27');
 
@@ -33,6 +36,8 @@ test.describe('WTY10101 - Show product info', () => {
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
 
+        await snapInput();
+
         const expected = testData.responseData.outDS.shnKhnInfoDT[0];
 
         expect(await productInquiryPage.getModelNumber()).toContain(expected.mkKata);
@@ -40,12 +45,15 @@ test.describe('WTY10101 - Show product info', () => {
         expect(await productInquiryPage.getProductName()).toContain(expected.rykchuNmKnj);
         expect(await productInquiryPage.getClassificationCode()).toBe(`${expected.daiCd}${expected.chuCd}`);
 
+        await snapExpect();
     });
 
     test('WTY10101_28', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_28');
 
@@ -60,6 +68,8 @@ test.describe('WTY10101 - Show product info', () => {
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
 
+        await snapInput();
+
         const expected = testData.responseData.outDS.shnKhnInfoDT[0];
 
         expect(await productInquiryPage.getRankValue()).toBe(`${expected.shnRnk}${expected.shnRnk2}`);
@@ -69,12 +79,15 @@ test.describe('WTY10101 - Show product info', () => {
         const expectedSetLabel = expected.setKbn === 'S' ? '親' : expected.setKbn === 'K' ? '子' : '';
         expect(setValue).toBe(expectedSetLabel);
 
+        await snapExpect();
     });
 
     test('WTY10101_29', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_29');
         const expectedDetail = testData.expectedResults.detail;
@@ -93,6 +106,8 @@ test.describe('WTY10101 - Show product info', () => {
         const detailButton = page.locator('button:has-text("詳細")').first();
         await detailButton.click();
 
+        await snapInput();
+
         expect((await page.inputValue('#tenJchKahiFlg')).trim()).toBe(expectedDetail.storeOrder);
         expect((await page.inputValue('#htbDate')).trim()).toBe(expectedDetail.htbDate);
         expect((await page.inputValue('#thKbn')).trim()).toBe(expectedDetail.thKbn);
@@ -103,12 +118,15 @@ test.describe('WTY10101 - Show product info', () => {
         expect((await page.inputValue('#ktenNm2')).trim()).toBe(expectedDetail.ktenNm2);
         expect((await page.inputValue('#ktenNm3')).trim()).toBe(expectedDetail.ktenNm3);
 
+        await snapExpect();
     });
 
     test('WTY10101_30', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_30');
 
@@ -132,6 +150,8 @@ test.describe('WTY10101 - Show product info', () => {
         const detailButton = page.locator('button:has-text("詳細")').first();
         await detailButton.click();
 
+        await snapInput();
+
         await expect(page.locator('#tenJchKahiFlg')).toBeVisible();
         await expect(page.locator('#htbDate')).toBeVisible();
         await expect(page.locator('#thKbn')).toBeVisible();
@@ -142,12 +162,15 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(page.locator('#ktenNm2')).toBeVisible();
         await expect(page.locator('#ktenNm3')).toBeVisible();
 
+        await snapExpect();
     });
 
     test('WTY10101_32', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_32');
 
@@ -162,6 +185,8 @@ test.describe('WTY10101 - Show product info', () => {
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
 
+        await snapInput();
+
         const generalLabel = productInquiryPage.getGeneralPriceModeLabel();
         const memberLabel = productInquiryPage.getMemberPriceModeLabel();
         const anshinLabel = productInquiryPage.getAnshinPriceModeLabel();
@@ -171,12 +196,16 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(generalLabel).toHaveClass(/bg-white/);
         await expect(memberLabel).not.toHaveClass(/bg-white/);
         await expect(anshinLabel).not.toHaveClass(/bg-white/);
+
+        await snapExpect();
     });
 
     test('WTY10101_33', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_33');
 
@@ -191,6 +220,8 @@ test.describe('WTY10101 - Show product info', () => {
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
 
+        await snapInput();
+
         const generalLabel = productInquiryPage.getGeneralPriceModeLabel();
         const memberLabel = productInquiryPage.getMemberPriceModeLabel();
         const anshinLabel = productInquiryPage.getAnshinPriceModeLabel();
@@ -200,12 +231,16 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(memberLabel).toHaveClass(/bg-white/);
         await expect(generalLabel).not.toHaveClass(/bg-white/);
         await expect(anshinLabel).not.toHaveClass(/bg-white/);
+
+        await snapExpect();
     });
 
     test('WTY10101_34', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_34');
 
@@ -220,6 +255,8 @@ test.describe('WTY10101 - Show product info', () => {
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
 
+        await snapInput();
+
         const generalLabel = productInquiryPage.getGeneralPriceModeLabel();
         const memberLabel = productInquiryPage.getMemberPriceModeLabel();
         const anshinLabel = productInquiryPage.getAnshinPriceModeLabel();
@@ -229,12 +266,16 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(anshinLabel).toHaveClass(/bg-white/);
         await expect(generalLabel).not.toHaveClass(/bg-white/);
         await expect(memberLabel).not.toHaveClass(/bg-white/);
+
+        await snapExpect();
     });
 
     test('WTY10101_35', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_35');
 
@@ -248,6 +289,8 @@ test.describe('WTY10101 - Show product info', () => {
 
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
+
+        await snapInput();
 
         const taxIncludedLabel = productInquiryPage.getTaxIncludedModeLabel();
         const taxExcludedLabel = productInquiryPage.getTaxExcludedModeLabel();
@@ -265,18 +308,22 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(row1PriceCell).toHaveText(testData.expectedResults.priceTable.row1.price);
         await expect(row2PriceCell).toHaveText(testData.expectedResults.priceTable.row2.price);
         await expect(row3PriceCell).toHaveText(testData.expectedResults.priceTable.row3.price);
+
+        await snapExpect();
     });
 
     test('WTY10101_36', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_36');
 
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
-        await indexedDBHelper.initializeDB({ commonData: testData.commonData });
+        await indexedDBHelper.initializeDB({ commonData: commonData });
         await page.waitForTimeout(200);
 
         await productInquiryPage.navigate();
@@ -284,6 +331,8 @@ test.describe('WTY10101 - Show product info', () => {
 
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
+
+        await snapInput();
 
         const taxIncludedLabel = productInquiryPage.getTaxIncludedModeLabel();
         const taxExcludedLabel = productInquiryPage.getTaxExcludedModeLabel();
@@ -301,12 +350,16 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(row1PriceCell).toHaveText(testData.expectedResults.priceTable.row1.price);
         await expect(row2PriceCell).toHaveText(testData.expectedResults.priceTable.row2.price);
         await expect(row3PriceCell).toHaveText(testData.expectedResults.priceTable.row3.price);
+
+        await snapExpect();
     });
 
     test('WTY10101_37', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_37');
 
@@ -320,6 +373,8 @@ test.describe('WTY10101 - Show product info', () => {
 
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
+
+        await snapInput();
 
         const normalPointLabel = productInquiryPage.getNormalPointModeLabel();
         const limitedPointLabel = productInquiryPage.getLimitedPointModeLabel();
@@ -344,12 +399,16 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(row2Amount).toHaveText(testData.expectedResults.pointTable.row2.amount);
         await expect(row3Rate).toHaveText(testData.expectedResults.pointTable.row3.rate);
         await expect(row3Amount).toHaveText(testData.expectedResults.pointTable.row3.amount);
+
+        await snapExpect();
     });
 
     test('WTY10101_38', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_38');
 
@@ -363,6 +422,8 @@ test.describe('WTY10101 - Show product info', () => {
 
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
+
+        await snapInput();
 
         const normalPointLabel = productInquiryPage.getNormalPointModeLabel();
         const limitedPointLabel = productInquiryPage.getLimitedPointModeLabel();
@@ -387,25 +448,28 @@ test.describe('WTY10101 - Show product info', () => {
         await expect(row2Amount).toHaveText(testData.expectedResults.pointTable.row2.amount);
         await expect(row3Rate).toHaveText(testData.expectedResults.pointTable.row3.rate);
         await expect(row3Amount).toHaveText(testData.expectedResults.pointTable.row3.amount);
+
+        await snapExpect();
     });
 
     test('WTY10101_39', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_39');
 
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
         await indexedDBHelper.initializeDB({ commonData: commonData });
         await page.waitForTimeout(200);
-
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
-
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
+
+        await snapInput();
 
         const dmToggleButton = productInquiryPage.getDmDisplayToggleButton();
         await dmToggleButton.click();
@@ -416,40 +480,85 @@ test.describe('WTY10101 - Show product info', () => {
 
         await expect(row2).toBeVisible();
         await expect(row3).toBeVisible();
+
+        await snapExpect();
     });
 
     test('WTY10101_40', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_40');
 
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-
         await indexedDBHelper.initializeDB({ commonData: commonData });
         await page.waitForTimeout(200);
-
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
 
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1500);
 
+        await snapInput();
+
         const stockGrid = productInquiryPage.getStockGrid();
+        await stockGrid.scrollIntoViewIfNeeded();
         await expect(stockGrid).toBeVisible();
 
         const stockRows = await productInquiryPage.getStockRows().count();
         expect(stockRows).toBeGreaterThan(0);
+
+        await snapExpect();
     });
 
     test('WTY10101_41', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_41');
         const expectedWarranty = testData.expectedResults.warranty;
+
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({ commonData: commonData });
+        await page.waitForTimeout(200);
+        await productInquiryPage.navigate();
+        await productInquiryPage.waitForPageReady();
+
+        await productInquiryPage.searchProduct(testData.searchCode);
+        await page.waitForTimeout(1500);
+
+        await snapInput();
+
+        const makerWarranty = await productInquiryPage.getMakerWarrantyValue();
+        const anshinWarranty = await productInquiryPage.getAnshinWarrantyValue();
+        const extendedWarranty = await productInquiryPage.getExtendedWarrantyValue();
+        const warrantyRateLabel = productInquiryPage.getLabelByFor('guarantee');
+
+        const guaranteeRateInput = productInquiryPage.getGuaranteeRateInput();
+        await guaranteeRateInput.scrollIntoViewIfNeeded();
+
+        expect(makerWarranty.trim()).toBe(expectedWarranty.makerWarranty);
+        expect(anshinWarranty.trim()).toBe(expectedWarranty.anshin);
+        expect(extendedWarranty.trim()).toBe(expectedWarranty.extendedWarranty);
+        expect(await warrantyRateLabel.textContent()).toBe(expectedWarranty.guaranteeRateLabel);
+
+        await snapExpect();
+    });
+
+    test('WTY10101_42', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_42');
 
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
@@ -459,20 +568,137 @@ test.describe('WTY10101 - Show product info', () => {
         await productInquiryPage.navigate();
         await productInquiryPage.waitForPageReady();
 
+        await productInquiryPage.searchProduct(searchCodeDefault);
+        await page.waitForTimeout(1500);
+
+        await snapInput();
+
+        const warrantyRateLabel = productInquiryPage.getLabelByFor('guarantee');
+        const guaranteeRateInput = productInquiryPage.getGuaranteeRateInput();
+        await guaranteeRateInput.scrollIntoViewIfNeeded();
+        const warrantyRate = productInquiryPage.getGuaranteeRateValue();
+        expect(await warrantyRateLabel.textContent()).toBe(testData.expectedResults.warranty.guaranteeRateLabel);
+        expect(await warrantyRate).toBe(testData.expectedResults.warranty.guaranteeRate);
+
+        await snapExpect();
+    });
+
+    test('WTY10101_43', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_43');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({ commonData: testData.commonData });
+        await page.waitForTimeout(200);
+        await productInquiryPage.navigate();
+        await productInquiryPage.waitForPageReady();
+
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1500);
 
-        const makerWarranty = await productInquiryPage.getMakerWarrantyValue();
-        const anshinWarranty = await productInquiryPage.getAnshinWarrantyValue();
-        const extendedWarranty = await productInquiryPage.getExtendedWarrantyValue();
-        const guaranteeRate = await productInquiryPage.getGuaranteeRateValue();
+        await snapInput();
+        const guaranteeRateInput = productInquiryPage.getGuaranteeRateInput();
+        await guaranteeRateInput.scrollIntoViewIfNeeded();
 
-        expect(makerWarranty.trim()).toBe(expectedWarranty.makerWarranty);
-        expect(anshinWarranty.trim()).toBe(expectedWarranty.anshin);
-        expect(extendedWarranty.trim()).toBe(expectedWarranty.extendedWarranty);
-        expect(guaranteeRate.trim()).toBe(expectedWarranty.guaranteeRate);
+        const warrantyLabel = productInquiryPage.getLabelByFor('guarantee');
+        const warrantyFee = productInquiryPage.getGuaranteeRateValue();
+        expect(await warrantyLabel.textContent()).toBe(testData.expectedResults.warranty.guaranteeAmountLabel);
+        expect(await warrantyFee).toBe(testData.expectedResults.warranty.guaranteeAmount);
+
+        await snapExpect();
     });
 
-    //TODO: Add test cases for TC_42 -> TC_50
+    test('WTY10101_44', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_44');
 
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+        await indexedDBHelper.initializeDB({ commonData: testData.commonData });
+        await page.waitForTimeout(200);
+
+        await productInquiryPage.navigate();
+        await productInquiryPage.waitForPageReady();
+
+        await productInquiryPage.searchProduct(searchCodeDefault);
+
+        await snapInput();
+
+        const supplierName = await productInquiryPage.getSupplierNameValue();
+        const supplierCode = await productInquiryPage.getSupplierCodeValue();
+        expect(supplierName).toBe(testData.expectedResults.shiirerykKnj);
+        expect(supplierCode).toBe(testData.expectedResults.shiireCd);
+
+        const supplierCodeLabel = productInquiryPage.getLabelSupplierCode();
+        await productInquiryPage.scrollToCenter(supplierCodeLabel);
+
+        await snapExpect();
+    });
+    test('WTY10101_45', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_45');
+
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({ commonData: testData.commonData });
+        await page.waitForTimeout(200);
+        await productInquiryPage.navigate();
+        await productInquiryPage.waitForPageReady();
+        await productInquiryPage.searchProduct(testData.searchCode);
+
+        await snapInput();
+
+        const isSetProductTableVisible = await productInquiryPage.isSetProductTableVisible();
+        expect(isSetProductTableVisible).toBe(true);
+
+        const apiRequestCount = await productInquiryPage.clickSetProductTableRowAndCountApiRequests(testData.expectedResults.filterText);
+        await page.waitForTimeout(1000);
+        expect(apiRequestCount).toBe(1);
+
+        await snapExpect();
+    });
+
+    test('WTY10101_46', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY101/wty10101-show-product-info', 'wty10101', 'TC_46');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({ commonData: testData.commonData });
+        await page.waitForTimeout(200);
+
+        await productInquiryPage.navigate();
+        await productInquiryPage.waitForPageReady();
+        await productInquiryPage.searchProduct(testData.searchCode);
+
+        await snapInput();
+
+        const isSetProductTableVisible = await productInquiryPage.isSetProductTableVisible();
+        expect(isSetProductTableVisible).toBe(true);
+        await productInquiryPage.scrollToCenter(productInquiryPage.getSetProductTable());
+
+        await snapInput(2);
+
+        const apiRequestCount = await productInquiryPage.clickSetProductTableRowAndCountApiRequests(testData.expectedResults.filterText);
+        await page.waitForTimeout(1000);
+        expect(apiRequestCount).toBe(1);
+
+        await snapExpect();
+    });
 });

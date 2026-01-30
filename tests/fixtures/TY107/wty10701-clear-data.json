@@ -1,0 +1,37 @@
+{
+    "wty10701": {
+        "commonData": [
+            {
+                "id": "commonDT",
+                "value": [
+                    {
+                      "unyoDate": "20250806",
+                      "storeCd": "00905",
+                      "syoriStoreCd": "00905",
+                      "userId": "10596T401",
+                      "clientId": "00905PD401",
+                      "termNo": "401",
+                      "screenId": "WTY10701"
+                    }
+                ]
+            }
+        ],
+        "data": {
+            "form": {
+                "TC_36": {
+                    "btenCd": "00905"
+                },
+                "TC_37": {
+                    "shnCd": "00010011645"
+                },
+                "TC_38": {
+                    "btenCd": "01080",
+                    "shnCd": "4905959334496"
+                }
+            },
+            "expectedResults": {
+
+            }
+        }
+    }
+}
