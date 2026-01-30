@@ -6,7 +6,7 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
 import { TY30302Page } from '../../../pages/TY303/wty30302.page';
-import { WTY30302_COLUMN_NAMES, WTY30302_MESSAGES } from '../../../constants/messages';
+import { WTY30302 } from '../../../constants/messages';
 
 test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
     let summaryPage: TY30302Page;
@@ -109,7 +109,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
 
         // Verify confirmation message
         const confirmMessage = await summaryPage.getConfirmationMessage();
-        expect(confirmMessage).toContain(WTY30302_MESSAGES.CONFIRM_DELETE);
+        expect(confirmMessage).toContain(WTY30302.MESSAGES.CONFIRM_DELETE);
 
         await snapExpect();
     });
@@ -344,7 +344,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         const dataRowCount = await summaryPage.getRowCount();
         expect(dataRowCount).toBeGreaterThan(0);
 
-        const isEmptyValue = await summaryPage.isTableCellHaveValue("", WTY30302_COLUMN_NAMES.SIZE);
+        const isEmptyValue = await summaryPage.isTableCellHaveValue("", WTY30302.COLUMN_NAMES.SIZE);
         expect(isEmptyValue).toBe(true);
 
         await snapExpect();
@@ -375,7 +375,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         const dataRowCount = await summaryPage.getRowCount();
         expect(dataRowCount).toBeGreaterThan(0);
 
-        const isEmptyValue = await summaryPage.isTableCellHaveValue("", WTY30302_COLUMN_NAMES.MULTI_COMMENT);
+        const isEmptyValue = await summaryPage.isTableCellHaveValue("", WTY30302.COLUMN_NAMES.MULTI_COMMENT);
         expect(isEmptyValue).toBe(true);
 
         await snapExpect();
@@ -450,7 +450,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         const dataRowCount = await summaryPage.getRowCount();
         expect(dataRowCount).toBeGreaterThan(0);
 
-        const isEmptyValue = await summaryPage.isTableCellHaveValue("0", WTY30302_COLUMN_NAMES.QUANTITY);
+        const isEmptyValue = await summaryPage.isTableCellHaveValue("0", WTY30302.COLUMN_NAMES.QUANTITY);
         expect(isEmptyValue).toBe(true);
 
         await snapExpect();
