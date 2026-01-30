@@ -6,7 +6,7 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { WTY11001Page } from '../../../pages/TY110/wty11001.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
-import { COMMON_MESSAGES } from '../../../constants/messages';
+import { COMMON_MESSAGES, WTY11001_headerTables } from '../../../constants/messages';
 
 test.describe('WTY11001 - Check arrival schedule information (入荷予定情報照会)', () => {
     let schedulePage: WTY11001Page;
@@ -201,7 +201,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await schedulePage.waitForFormReady();
 
-        const headerTable = [ 'No', 'JANコード', '発注数', '予定数', '入予定日', '型番', '入荷状態区分', 'メーカ名', '発注/指示番号'];
+        const headerTable = WTY11001_headerTables;
 
         for (const headText of headerTable) {
             const isHeaderVisible = await schedulePage.waitForTextInBody(headText);
