@@ -1,0 +1,102 @@
+{
+    "wty10901":{
+        "TC_01":{
+            "description":"Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "assetsNo": "EF7096380",
+                        "clientId": "04388PD401",
+                        "keepPeriod": "6",
+                        "storeCd": "04388",
+                        "syoriStoreCd": "04388",
+                        "syoriStoreNmKnJ": "東海通",
+                        "syoriStoreNmKn": "トウカゲイ",
+                        "syoriStoreNmKnj": "東海通",
+                        "termNo": "401",
+                        "unyoDate": "20250806",
+                        "userId": "10596T401",
+                        "defaultPortrait": "1"
+                    }
+                },
+                {
+                    "id": "tanInfoDT",
+                    "value": {
+                        "btenCd": "04388",
+                        "cKngnKbn1": "0005",
+                        "shaGyoshaCd": "000048696",
+                        "shoriBtenCd": "04388",
+                        "tKngnKbn1": "0101",
+                        "tanCd": "0001"
+                    }
+                }
+            ]
+        }, 
+        "TC_02":{
+            "description":"",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "unyoDate": "20250806",
+                        "storeCd": "10596",
+                        "syoriStoreCd": "10596",
+                        "userId": "10596T401",
+                        "clientId": "04388PD401",
+                        "termNo": "401"
+                    }
+                },
+                {
+                    "id": "tanInfoDT",
+                    "value": {
+                        "btenCd": "04388",
+                        "cKngnKbn1": "0005",
+                        "shaGyoshaCd": "000048696",
+                        "shoriBtenCd": "04388",
+                        "tKngnKbn1": "0101",
+                        "tanCd": "0001"
+                    }
+                }
+            ]
+        },
+        "TC_03":{
+            "description":"",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "unyoDate": "20250219",
+                        "storeCd": "00102",
+                        "syoriStoreCd": "00102",
+                        "userId": "10487T401",
+                        "clientId": "04388PD401",
+                        "termNo": "401"
+                    }
+                },
+                {
+                    "id": "tanInfoDT",
+                    "value": {
+                        "btenCd": "04388",
+                        "cKngnKbn1": "0005",
+                        "shaGyoshaCd": "000048696",
+                        "shoriBtenCd": "04388",
+                        "tKngnKbn1": "0101",
+                        "tanCd": "0001"
+                    }
+                },
+                {
+                    "id": "tanInfoDT",
+                    "value": {
+                        "btenCd": "04388",
+                        "cKngnKbn1": "0005",
+                        "shaGyoshaCd": "000048696",
+                        "shoriBtenCd": "04388",
+                        "tKngnKbn1": "0101",
+                        "tanCd": "0001"
+                    }
+                }
+            ]
+        }
+    }
+}
