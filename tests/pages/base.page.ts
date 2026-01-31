@@ -683,4 +683,10 @@ export class BasePage {
         }
     }
 
+    async getContentById(id: string): Promise<string> {
+        const content = this.page.locator(`#${id}`);
+        await this.waitForVisible(content, 10000);
+        const text = await content.textContent();
+        return text?.trim() || '';      
+    }
 }
