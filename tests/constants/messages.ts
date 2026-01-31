@@ -52,7 +52,7 @@ export const WTY30303 = {
   TITLE: 'セール選択',
   CONFIRM: '確定',
   NOTICE_PRINTED: '青色のセールは印刷指示済です',
-  NO_DATA: '該当データが存在しません。',
+  NO_DATA: 'セールが存在しません。',
   PARAM_ERROR: 'パラメータ不正（部店コード）が誤っています。',
   MULTI_POP_TITLE: 'マルチＰＯＰ出力指示',
 
