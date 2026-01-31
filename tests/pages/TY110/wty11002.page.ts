@@ -7,41 +7,28 @@ import { Locator, Page } from '@playwright/test';
 import { BasePage } from '../base.page';
 import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 
-export interface WTY10301FormData {
-  rootKbn: string;
-  arriveReason: string;
-  startDate: string;
-  endDate: string;
-  mkKata: string;
-  brNm: string;
-  slipNo: string;
-  shnCd: string;
-  brCd: string;
-}
 
 export class WTY11002Page extends BasePage {
     // Selectors
     protected readonly selectors = {
         headingTitle: '.text-heading-h6:has-text("入荷予定情報詳細")',
-        actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
-        rootKbnSelector: '#rootKbn',
-        arriveReasonSelector: '#arriveReason',
-        startDateInput: 'input[name=startDate]',
-        endDateInput: 'input[name=startDate_second]',
-        mkKataInput: '#mkKata',
-        brNmInput: '#brNm',
+        rootKbnInput: '#rootKbn',
+        arriveReasonInput: '#arriveReason',
+        orderNoInput: '#orderNo',
         slipNoInput: '#slipNo',
-        shnCdInput: '#shnCd',
-        brCdInput: '#brCd',
-
-        searchButton: 'button:has-text("検索")[type="submit"]',
-        toggleDetailButton: 'button:has(svg path.stroke-text-sub)',
-        clearButton: 'button:has-text("クリア")',
-        clearSlipNoButton: '#slipNo+img[role=button]',
-        clearShnCdButton: '#shnCd+div+img[role=button]',
-        clearBrCdButton: '#brCd+img[role=button]',
-        barCodeButton: 'div.right-2.absolute.top-1\\/2.-translate-y-1\\/2.transform button.cursor-pointer[type="button"]',
-
+        tanCdInput: '#tanCd',
+        tanNmInput: '#tanNm',
+        janCdInput: '#janCd',
+        typeNoInput: '#typeNo',
+        shnNmInput: '#shnNm',
+        mkNmInput: '#mkNm',
+        torihikiNmInput: '#torihikiNm',
+        orderCntInput: '#orderCnt',
+        arriveCntInput: '#arriveCnt',
+        arriveDateInput: '#arriveDate',
+        arriveTypeInput: '#arriveType',
+        kokCdInput: '#kokCd',
+        kokNmInput: 'textarea[name=kokNm]',
     };
 
     constructor(page: Page) {
@@ -51,23 +38,23 @@ export class WTY11002Page extends BasePage {
     get selectorsObj() {
       return {
         headingTitle: this.page.locator(this.selectors.headingTitle),
-        actionMenuButton: this.page.locator(this.selectors.actionMenuButton),
-        rootKbnSelector: this.page.locator(this.selectors.rootKbnSelector),
-        arriveReasonSelector: this.page.locator(this.selectors.arriveReasonSelector),
-        startDateInput: this.page.locator(this.selectors.startDateInput),
-        endDateInput: this.page.locator(this.selectors.endDateInput),
-        mkKataInput: this.page.locator(this.selectors.mkKataInput),
-        brNmInput: this.page.locator(this.selectors.brNmInput),
+        rootKbnInput: this.page.locator(this.selectors.rootKbnInput),
+        arriveReasonInput: this.page.locator(this.selectors.arriveReasonInput),
+        orderNoInput: this.page.locator(this.selectors.orderNoInput),
         slipNoInput: this.page.locator(this.selectors.slipNoInput),
-        shnCdInput: this.page.locator(this.selectors.shnCdInput),
-        brCdInput: this.page.locator(this.selectors.brCdInput),
-        searchButton: this.page.locator(this.selectors.searchButton),
-        toggleDetailButton: this.page.locator(this.selectors.toggleDetailButton),
-        clearButton: this.page.locator(this.selectors.clearButton),
-        clearSlipNoButton: this.page.locator(this.selectors.clearSlipNoButton),
-        clearShnCdButton: this.page.locator(this.selectors.clearShnCdButton),
-        clearBrCdButton: this.page.locator(this.selectors.clearBrCdButton),
-        barCodeButton: this.page.locator(this.selectors.barCodeButton),
+        tanCdInput: this.page.locator(this.selectors.tanCdInput),
+        tanNmInput: this.page.locator(this.selectors.tanNmInput),
+        janCdInput: this.page.locator(this.selectors.janCdInput),
+        typeNoInput: this.page.locator(this.selectors.typeNoInput),
+        shnNmInput: this.page.locator(this.selectors.shnNmInput),
+        mkNmInput: this.page.locator(this.selectors.mkNmInput),
+        torihikiNmInput: this.page.locator(this.selectors.torihikiNmInput),
+        orderCntInput: this.page.locator(this.selectors.orderCntInput),
+        arriveCntInput: this.page.locator(this.selectors.arriveCntInput),
+        arriveDateInput: this.page.locator(this.selectors.arriveDateInput),
+        arriveTypeInput: this.page.locator(this.selectors.arriveTypeInput),
+        kokCdInput: this.page.locator(this.selectors.kokCdInput),
+        kokNmInput: this.page.locator(this.selectors.kokNmInput),
       };
     }
     /**
@@ -87,98 +74,11 @@ export class WTY11002Page extends BasePage {
         await this.waitForVisible(locator, 10000);
     }
 
-    async clickMenuButton(): Promise<void> {
-      await this.openActionMenu(this.selectors.actionMenuButton);
-    }
-
-    async clickClearSlipNoButton(): Promise<void> {
-      await this.page.locator(this.selectors.clearSlipNoButton).click();
-    }
-
-    async clickBarCodeButton(): Promise<void> {
-      await this.page.locator(this.selectors.barCodeButton).click();
-    }
-
-    async clickClearBrCdButton(): Promise<void> {
-      await this.page.locator(this.selectors.clearBrCdButton).click();
-    }
-
-    async clickClearShnCdButton(): Promise<void> {
-      await this.page.locator(this.selectors.clearShnCdButton).click();
-    }
-
-    async clickClearButton(): Promise<void> {
-      await this.page.locator(this.selectors.clearButton).click();
-    }
-
-    async clickToggleDetailButton(): Promise<void> {
-      await this.page.locator(this.selectors.toggleDetailButton).click();
-    }
-
-    async clickRootKbnSelector(): Promise<void> {
-      await this.page.locator(this.selectors.rootKbnSelector).click();
-    }
-
-    async clickArriveReasonSelector(): Promise<void> {
-      await this.page.locator(this.selectors.arriveReasonSelector).click();
-    }
-
-    async fillStartDate(value: string): Promise<void> {
-      await this.fillInput(this.page.locator(this.selectors.startDateInput), value);
-    }
-
-    async fillEndDate(value: string): Promise<void> {
-      await this.fillInput(this.page.locator(this.selectors.endDateInput), value);
-    }
-
-    async fillSlipNo(value: string): Promise<void> {
-      await this.fillInput(this.page.locator(this.selectors.slipNoInput), value);
-    }
-
-    async fillShnCd(value: string): Promise<void> {
-      await this.fillInput(this.page.locator(this.selectors.shnCdInput), value);
-    }
-
-    async fillBrCd(value: string): Promise<void> {
-      await this.fillInput(this.page.locator(this.selectors.brCdInput), value);
-    }
-
-    async selectCombobox(value: string): Promise<void> {
-      await this.page.locator(`div.MuiPaper-root ul.MuiList-root[role="listbox"] li:has-text("${value}")`).click();
-    }
-
-    async selectArriveReason(value: string): Promise<void> {
-      await this.clickOptionInCombobox(
-          [this.selectors.arriveReasonSelector + ` >> text=${value}`],
-            '',
-            this.selectors.arriveReasonSelector
-        );
-    }
-
-    async fillForm(formData: WTY10301FormData): Promise<void> {
-        await this.fillStartDate(formData.startDate);
-        await this.fillEndDate(formData.endDate);
-        await this.clickOptionInCombobox(
-            [this.selectors.rootKbnSelector + ` >> text=${formData.rootKbn}`],
-            '',
-            this.selectors.rootKbnSelector
-        );
-        await this.clickOptionInCombobox(
-            [this.selectors.arriveReasonSelector + ` >> text=${formData.arriveReason}`],
-            '',
-            this.selectors.arriveReasonSelector
-        );
-        await this.fillSlipNo(formData.slipNo);
-        await this.fillShnCd(formData.shnCd);
-        await this.fillBrCd(formData.brCd);
-    }
-
-    async clickSearchButton(): Promise<void> {
-      await this.page.locator(this.selectors.searchButton).click();
-    }
-
-    async clickItemMenuByText(itemText: string): Promise<void> {
-      await this.page.getByRole('menuitem', { name: itemText }).click();
+    async scrollToBottom(): Promise<void> {
+      await this.page.evaluate(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      
+    });
     }
 }
 

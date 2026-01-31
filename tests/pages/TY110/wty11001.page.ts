@@ -7,7 +7,7 @@ import { Locator, Page } from '@playwright/test';
 import { BasePage } from '../base.page';
 import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 
-export interface WTY10301FormData {
+export interface WTY11001FormData {
   rootKbn: string;
   arriveReason: string;
   startDate: string;
@@ -167,7 +167,7 @@ export class WTY11001Page extends BasePage {
         );
     }
 
-    async fillForm(formData: WTY10301FormData): Promise<void> {
+    async fillForm(formData: WTY11001FormData): Promise<void> {
         await this.fillStartDate(formData.startDate);
         await this.fillEndDate(formData.endDate);
         await this.clickOptionInCombobox(
