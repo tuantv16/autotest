@@ -1,0 +1,66 @@
+{
+    "wty10701": {
+        "commonData": [
+            {
+                "id": "commonDT",
+                "value": [
+                    {
+                      "unyoDate": "20250806",
+                      "storeCd": "00905",
+                      "syoriStoreCd": "00905",
+                      "userId": "10596T401",
+                      "clientId": "00905PD401",
+                      "termNo": "401",
+                      "screenId": "WTY10701"
+                    }
+                ]
+            }
+        ],
+        "data": {
+            "form": {
+                "TC_28": {
+                    "btenCd": "00905",
+                    "shnCd": "00010011645"
+                },
+                "TC_29": {
+                    "btenCd": "01080",
+                    "shnCd": "4905959334496"
+                },
+                "TC_31": {
+                    "btenCd": "00115",
+                    "shnCd": "99999999999"
+                },
+                "TC_32": {
+                   "btenCd": "00102"
+                },
+                "TC_33": {
+                    "btenCd": "01080",
+                    "shnCd": "4905959334496"
+                }
+            },
+            "expectedResults": {
+                "TC_28": {
+                    "storeName": "熊本本",
+                    "mkKata": "LSK-300-K",
+                    "manufacturerName": "小泉",
+                    "set1": "IVR1000",
+                    "set2": "ADD-CB40H？？？？？？？？？？",
+                    "rank": "B"
+                },
+                "TC_29": {
+                    "availableQuantity": "200"
+                },
+                "TC_30": {
+                    "date": "08月06日",
+                    "quantity": "200"
+                },
+                "TC_31": {
+                    "errorMessage": "該当する商品が存在しません。"
+                },
+                "TC_32": {
+                    "btenName": "サワチカ・小松島"
+                }
+            }
+        }
+    }
+}

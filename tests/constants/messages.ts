@@ -35,6 +35,8 @@ export const VALIDATION_ERROR_MESSAGES = {
   INVALID_LENGTH: '商品の桁数が正しくありません',
   HALF_WIDTH_REQUIRED: '半角で入力してください。',
   FULL_WIDTH_REQUIRED: '全角で入力してください。',
+  INVALID_LATER_DATE: '以降の日付を入力してください。',
+  INVALID_DATE_AFTER_REIWA_70 : '令和70年以降になるため入力できません',
 } as const;
 
 /**

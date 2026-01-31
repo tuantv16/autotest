@@ -1,5 +1,8 @@
 {
     "wty10101": {
+        "searchCodeList": {
+            "default": "00010013854"
+        },
         "TC_27": {
             "description": "TC27",
             "searchCode": "00010013854",
@@ -245,15 +248,15 @@
             "expectedResults": {
                 "pointTable": {
                     "row1": {
-                        "rate": "1.00%",
+                        "rate": "0.50%",
                         "amount": "0"
                     },
                     "row2": {
-                        "rate": "1.00%",
+                        "rate": "0.50%",
                         "amount": "0"
                     },
                     "row3": {
-                        "rate": "1.00%",
+                        "rate": "0.50%",
                         "amount": "0"
                     }
                 },
@@ -297,9 +300,147 @@
                     "makerWarranty": "1年",
                     "anshin": "無",
                     "extendedWarranty": "",
-                    "guaranteeRate": ""
+                    "guaranteeRateLabel": "保証料率"
                 }
             }
+        },
+        "TC_42": {
+            "expectedResults": {
+                "warranty": {
+                    "guaranteeRateLabel": "保証料率",
+                    "guaranteeRate": "5.00%"
+                }
+            }
+        },
+        "TC_43": {
+            "searchCode": "00011398158",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "0001",
+                            "clientId": "0001",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "warranty": {
+                    "guaranteeAmountLabel": "保証料金",
+                    "guaranteeAmount": "41,035"
+                }
+            }
+        },
+        "TC_44": {
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "shiirerykKnj": "㈱中村電機商会",
+                "shiireCd": "C000057299"
+            }
+        },
+        "TC_45": {
+            "searchCode": "00010011645",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY30201"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "filterText": "IVR1000"
+            }
+        },
+        "TC_46": {
+            "searchCode": "00010011645",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY30201"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "filterText": "SAN-37J2"
+            }
+        },
+        "TC_47": {
+            "searchCode": "00010013854",
+            "searchCode_TC_48": "00010004005",
+            "searchCode_TC_49": "00010006726",
+            "expectedResults": {
+                "endOfData": "End Of Data"
+            }
+        },
+        "TC_48": {
+            "searchCode": "00010011645",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "endOfData": "End Of Data"
+            }
+        },
+        "TC_49": {
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "endOfData": "End Of Data"
+            }
+        },
+        "TC_50": {
+            "searchCode": "00011398158"
         },
         "TC_51": {
             "description": "TC51",
@@ -310,6 +451,75 @@
                     "priceSpecify": "-",
                     "couponDiscount": "0円",
                     "noInterestTimes": "10回"
+                }
+            }
+        },
+        "TC_52": {
+            "description": "TC52",
+            "searchCode": "00010013854",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ]
+        },
+        "TC_53": {
+            "description": "TC53",
+            "searchCode": "00010006344",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "10596",
+                            "userId": "0001",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "deliveryType": {
+                    "janCd": "4974019588506",
+                    "mkKata": "LC46EX5",
+                    "registrationType": "1：持帰り"
+                }
+            }
+        },
+        "TC_54": {
+            "description": "TC54",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "deliveryType": {
+                    "janCd": "4984824764866",
+                    "mkKata": "TH-15LD70",
+                    "registrationType": "2：配達"
+                }
+            }
+        },
+        "TC_55": {
+            "description": "TC55",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "deliveryType": {
+                    "janCd": "4984824764866",
+                    "mkKata": "TH-15LD70",
+                    "registrationType": "2：配達"
                 }
             }
         },
@@ -359,6 +569,16 @@
                 "rykmkrNmKnj": "八木アンテナ"
             }
         },
+        "TC_63": {
+            "description": "TC63",
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "janCode": "497985011110-4",
+                "mkKata": "DIA100",
+                "rykmkrNmKnj": "八木アンテナ"
+            },
+            "parentClassName": "product-maker-option"
+        },
         "TC_64": {
             "description": "TC64",
             "searchCode": "00010013854",
@@ -366,6 +586,154 @@
                 "janCode": "497985011110-4",
                 "mkKata": "DIA100",
                 "rykmkrNmKnj": "八木アンテナ"
+            },
+            "parentClassName": "product-maker-option"
+        },
+        "TC_65": {
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "normalLabel": "一般",
+                "regularLabel": "正会員",
+                "anshinLabel": "あ会員"
+            }
+        },
+        "TC_66": {
+            "searchCode": "00010013854",
+            "expectedResults": {
+                "normalPriceRateR1": "0.50%",
+                "normalPriceRateR2": "0.50%",
+                "normalPriceRateR3": "0.50%",
+                "normalPriceAmountR1": "0",
+                "normalPriceAmountR2": "0",
+                "normalPriceAmountR3": "0",
+                "limitPriceAmountR1": "0",
+                "limitPriceAmountR2": "0",
+                "limitPriceAmountR3": "0"
+            }
+        },
+        "TC_69": {
+            "searchCode": "00010013724",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "0001",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ]
+        },
+        "TC_70": {
+            "searchCode": "4560119538758",
+            "expectedResults": {
+                "limitedPrice1": "0",
+                "limitedPrice2": "0",
+                "limitedPrice3": "0"
+            }
+        },
+        "TC_71": {
+            "searchCode": "00010007068"
+        },
+        "TC_72": {
+            "searchCode": "00010359075"
+        },
+        "TC_73": {
+            "searchCode": "00010007068",
+            "expectedResults": {
+                "message": "〒343-0024 埼玉県越谷市2788-1"
+            }
+        },
+        "TC_74": {
+            "searchCode": "4560119538758",
+            "expectedResults": {
+                "errorMessage": "納期情報が設定されていません。"
+            }
+        },
+        "TC_75": {
+            "searchCode": "4560119538758",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "0001",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                },
+                {
+                    "id": "btnInfoDT",
+                    "value": {
+                        "areaCd": "529",
+                        "blkCd": "520",
+                        "btenCd": "04388",
+                        "btrktKbn": "1",
+                        "chainId": "1",
+                        "csNmKn": "七丁目 1丁目",
+                        "fcFlg": "0",
+                        "fcKtkbn": "0",
+                        "jgybCd": "120",
+                        "jgyksCd": "03",
+                        "jusCd": "231101403001",
+                        "kdoJt": "10",
+                        "keepPeriod": "99991231",
+                        "ksCd": "0300",
+                        "ktKbn": "6",
+                        "pstNo": "4550001",
+                        "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+                        "ryAbtknNmKnj": "東海通",
+                        "skgCd": "23111",
+                        "skgNmKn": "名古屋市 港区",
+                        "tofNmKnj": "愛知県",
+                        "termNo": "419",
+                        "tsutayaFlg": "1",
+                        "unyoYmd": "20251028",
+                        "zoneCd": "520"
+                    }
+                }
+            ]
+        },
+        "TC_76": {
+            "searchCode": "4560119538758",
+            "expectedResults": {
+                "warrantyLabel": "メーカ保証"
+            }
+        },
+        "TC_77": {
+            "searchCode": "00010013854",
+            "searchCode_TC_78": "00010004005",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "guaranteeRate": "5.00%",
+                "guaranteeRate_TC_78": "固定料金",
+                "guaranteeRateLabel": "保証料率"
             }
         }
     }

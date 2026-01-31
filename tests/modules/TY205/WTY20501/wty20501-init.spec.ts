@@ -19,7 +19,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await takeScreenshotOnFailure(page, testInfo);
     });
 
-    test('WTY10401_06', async ({
+    test('WTY20501_06', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -45,14 +45,14 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_08', async ({
+    test('WTY20501_08', async ({
         page,
         baseUrl,
         indexedDBHelper,
         snapInput,
         snapExpect,
     }) => {
-        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_01');
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_10');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(500);
 
@@ -66,19 +66,19 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isChecked = await summaryPage.isCheckedKeishoKbn(testData.formData.honorific);
+        const isChecked = await summaryPage.isCheckedKeishoKbn(testData.formData.label.male);
         expect(isChecked).toBe(true);
         await snapExpect();
     });
 
-    test('WTY10401_09', async ({
+    test('WTY20501_09', async ({
         page,
         baseUrl,
         indexedDBHelper,
         snapInput,
         snapExpect,
     }) => {
-        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_01');
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_10');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(500);
 
@@ -92,12 +92,12 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isChecked = await summaryPage.isCheckedShHou(testData.formData.paymentMethod);
+        const isChecked = await summaryPage.isCheckedShHou(testData.formData.label.cash);
         expect(isChecked).toBe(true);
         await snapExpect();
     });
 
-    test('WTY10401_10', async ({
+    test('WTY20501_10', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -123,7 +123,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_11', async ({
+    test('WTY20501_11', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -148,7 +148,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_14', async ({
+    test('WTY20501_14', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -174,7 +174,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_15', async ({
+    test('WTY20501_15', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -200,7 +200,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_16', async ({
+    test('WTY20501_16', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -226,7 +226,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_17', async ({
+    test('WTY20501_17', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -252,7 +252,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_18', async ({
+    test('WTY20501_18', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -278,7 +278,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_19', async ({
+    test('WTY20501_19', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -304,7 +304,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_20', async ({
+    test('WTY20501_20', async ({
         page,
         baseUrl,
         indexedDBHelper,

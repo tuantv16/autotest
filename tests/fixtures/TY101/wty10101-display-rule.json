@@ -1,0 +1,23 @@
+{
+    "wty10101": {
+        "TC_94": {
+            "searchCode": "00010007068",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

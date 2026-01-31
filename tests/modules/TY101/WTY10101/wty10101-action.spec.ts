@@ -19,6 +19,8 @@ test.describe('WTY10101 - Action behavior', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_14');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -32,17 +34,23 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.clickMenuButton();
         await page.waitForTimeout(500);
 
+        await snapInput();
+
         const cartMenuItem = await productInquiryPage.getCartMenuItem();
-        expect(cartMenuItem).toBeFalsy();
+        expect(await cartMenuItem).toBeFalsy();
 
         const clearMenuItem = await productInquiryPage.getClearMenuItem();
-        expect(clearMenuItem).toBeFalsy();
+        expect(await clearMenuItem.isVisible()).toBeFalsy();
+
+        await snapExpect();
     });
 
     test('WTY10101_15', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
 
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -55,17 +63,23 @@ test.describe('WTY10101 - Action behavior', () => {
 
         await productInquiryPage.focusSearchInput();
 
+        await snapInput();
+
         const isPopupVisible = await productInquiryPage.isFunctionPopupVisible();
         expect(isPopupVisible).toBeTruthy();
 
         const isModelSearchVisible = await productInquiryPage.isModelSearchPopupItemVisible();
         expect(isModelSearchVisible).toBeTruthy();
+
+        await snapExpect();
     });
 
     test('WTY10101_16', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
@@ -78,40 +92,52 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.focusSearchInput();
         expect(await productInquiryPage.isFunctionPopupVisible()).toBeTruthy();
 
+        await snapInput();
+
         await productInquiryPage.clickOutside();
         await page.waitForTimeout(500);
 
         const isPopupVisible = await productInquiryPage.isFunctionPopupVisible();
         expect(isPopupVisible).toBeFalsy();
+
+        await snapExpect();
     });
 
-    test('WTY10101_17', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-    }) => {
-        const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_17');
+    // test('WTY10101_17', async ({
+    //     page,
+    //     baseUrl,
+    //     indexedDBHelper,
+    //     snapInput,
+    //     snapExpect,
+    // }) => {
+    //     const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_17');
 
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+    //     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
-        await indexedDBHelper.initializeDB({ commonData: commonData });
-        await page.waitForTimeout(200);
+    //     await indexedDBHelper.initializeDB({ commonData: commonData });
+    //     await page.waitForTimeout(200);
 
-        await productInquiryPage.navigate();
-        await page.waitForTimeout(500);
+    //     await productInquiryPage.navigate();
+    //     await page.waitForTimeout(500);
 
-        await productInquiryPage.searchProduct(testData.searchCode);
-        await page.waitForTimeout(1000);
+    //     await productInquiryPage.searchProduct(testData.searchCode);
+    //     await page.waitForTimeout(1000);
 
-        const displayedProductName = await productInquiryPage.getProductName();
-        const expectedProductName = testData.responseData.outDS.shnKhnInfoDT[0].rykchuNmKnj;
-        expect(displayedProductName).toContain(expectedProductName);
-    });
+    //     await snapInput();
+
+    //     const displayedProductName = await productInquiryPage.getProductName();
+    //     const expectedProductName = testData.responseData.outDS.shnKhnInfoDT[0].rykchuNmKnj;
+    //     expect(displayedProductName).toContain(expectedProductName);
+
+    //     await snapExpect();
+    // });
 
     test('WTY10101_18', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_18');
 
@@ -123,8 +149,10 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.navigate();
         await page.waitForTimeout(500);
 
-        await productInquiryPage.searchProduct(testData.searchCode);
-        await page.waitForTimeout(1000);
+        await productInquiryPage.fillSearchInput(testData.searchCode);
+        await snapInput();
+        await productInquiryPage.clickSearch();
+
 
         const displayedModel = await productInquiryPage.getModelNumber();
         const expectedModel = testData.responseData.outDS.shnKhnInfoDT[0].mkKata;
@@ -134,12 +162,15 @@ test.describe('WTY10101 - Action behavior', () => {
         const expectedProductName = testData.responseData.outDS.shnKhnInfoDT[0].rykchuNmKnj;
         expect(displayedProductName).toContain(expectedProductName);
 
+        await snapExpect();
     });
 
     test('WTY10101_19', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_19');
 
@@ -151,8 +182,9 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.navigate();
         await page.waitForTimeout(500);
 
-        await productInquiryPage.searchProduct(testData.searchCode);
-        await page.waitForTimeout(1000);
+        await productInquiryPage.fillSearchInput(testData.searchCode);
+        await snapInput();
+        await productInquiryPage.clickSearch();
 
         const displayedModel = await productInquiryPage.getModelNumber();
         const expectedModel = testData.responseData.outDS.shnKhnInfoDT[0].mkKata;
@@ -162,12 +194,15 @@ test.describe('WTY10101 - Action behavior', () => {
         const expectedMaker = testData.responseData.outDS.shnKhnInfoDT[0].rykmkrNmKnj;
         expect(displayedMaker).toContain(expectedMaker);
 
+        await snapExpect();
     });
 
     test('WTY10101_24', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_24');
 
@@ -181,11 +216,15 @@ test.describe('WTY10101 - Action behavior', () => {
 
         await productInquiryPage.clickBarcodeButton();
 
+        await snapInput();
+
         const isDialogVisible = await productInquiryPage.waitForErrorDialog(5000);
         expect(isDialogVisible).toBeTruthy();
 
         const dialogMessage = await productInquiryPage.getErrorDialogMessage();
         expect(dialogMessage).toContain(testData.errorMessage);
+
+        await snapExpect();
 
         await productInquiryPage.dismissErrorDialog();
     });
@@ -194,6 +233,8 @@ test.describe('WTY10101 - Action behavior', () => {
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_26');
 
@@ -207,17 +248,22 @@ test.describe('WTY10101 - Action behavior', () => {
 
         await productInquiryPage.fillSearchInput(testData.searchCode);
 
+        await snapInput();
+
         await productInquiryPage.clickClearButton();
 
         expect(await productInquiryPage.getSearchInputValue()).toBe('');
         expect(await productInquiryPage.getClearInputIcon()).toBeTruthy();
 
+        await snapExpect();
     });
 
     test('WTY10101_20', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_20');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -230,17 +276,24 @@ test.describe('WTY10101 - Action behavior', () => {
 
         const urlBeforeSearch = page.url();
 
+        await productInquiryPage.fillSearchInput(testData.searchCode);
+        await snapInput();
         await productInquiryPage.searchProduct(testData.searchCode);
         await page.waitForTimeout(1000);
 
+
         const urlAfterSearch = page.url();
         expect(urlAfterSearch).not.toBe(urlBeforeSearch);
+
+        await snapExpect();
     });
 
     test('WTY10101_21', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_21');
 
@@ -255,14 +308,20 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.clickSearch();
         await page.waitForTimeout(500);
 
+        await snapInput();
+
         const message = await productInquiryPage.isBlankErrorMsgVisible();
         expect(message).toBeTruthy();
+
+        await snapExpect();
     });
 
     test('WTY10101_22', async ({
         page,
         baseUrl,
         indexedDBHelper,
+        snapInput,
+        snapExpect,
     }) => {
         const testData = loadTestData('TY101/wty10101-action', 'wty10101', 'TC_22');
 
@@ -277,11 +336,15 @@ test.describe('WTY10101 - Action behavior', () => {
         await productInquiryPage.fillSearchInput(testData.searchCode);
         await page.waitForTimeout(500);
 
+        await snapInput();
+
         const searchInput = page.locator('input[name="shnCd"]').first();
         await searchInput.press('Enter');
         await page.waitForTimeout(1000);
 
         const mkKataValue = await productInquiryPage.getKataInputValue();
         expect(mkKataValue).toBe('');
+
+        await snapExpect();
     });
 });

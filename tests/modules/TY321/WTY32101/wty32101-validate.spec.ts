@@ -20,7 +20,7 @@ test.describe('WTY32101 Validation Tests', () => {
         PageTY32101 = new TY32101Page(page);
     });
 
-    test('WTY32101_25 - Validate required fields', async ({ page, baseUrl, indexedDBHelper }) => {
+    test('WTY32101_25', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Inject IndexedDB data AFTER page loaded
@@ -29,6 +29,7 @@ test.describe('WTY32101 Validation Tests', () => {
         });
 
         await PageTY32101.navigate();
+        await snapInput();
 
         // Clear Inventory Date selection to trigger validation
         await PageTY32101.selectComboboxOptionByText('', PageTY32101.selectors.inventoryDateCombobox);
@@ -36,10 +37,11 @@ test.describe('WTY32101 Validation Tests', () => {
         // Click Confirm button to trigger validation
         await page.locator(PageTY32101.selectors.confirmButton).click();
 
+        await snapExpect();
         await PageTY32101.verifyValidateMessageByLabel(Label.INVENTORY_DATE, ErrorMessage.INVENTORY_DATE_REQUIRED);
     }); 
 
-    test('WTY32101_26 - Validate no error when required fields are filled', async ({ page, baseUrl, indexedDBHelper }) => {
+    test('WTY32101_26', async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
         // Inject IndexedDB data AFTER page loaded
@@ -48,13 +50,15 @@ test.describe('WTY32101 Validation Tests', () => {
         });
 
         await PageTY32101.navigate();
-
+        await snapInput();
+        
         // Ensure Inventory Date has a valid selection
         await PageTY32101.selectComboboxOptionByText('', PageTY32101.selectors.inventoryGuideText);
 
         // Click Confirm button to trigger validation
         await page.locator(PageTY32101.selectors.confirmButton).click();
 
+        await snapExpect();
         await PageTY32101.verifyValidateMessageByLabel(Label.INVENTORY_GUIDE, ErrorMessage.INVENTORY_GUIDE_INVALID);
     });
 });

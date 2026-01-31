@@ -31,6 +31,23 @@
                     }
                 }
             ]
+        },
+        "TC_03":{
+            "description":"Confirm successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "unyoDate": "20251205",
+                        "storeCd": "00644",
+                        "syoriStoreCd": "00644",
+                        "userId": "0015400907",
+                        "clientId": "00102PD498",
+                        "termNo": "498",
+                        "screenId": "WTY32101"
+                    }
+                }
+            ]
         }
     }
 }

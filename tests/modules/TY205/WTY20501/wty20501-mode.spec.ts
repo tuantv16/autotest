@@ -19,7 +19,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await takeScreenshotOnFailure(page, testInfo);
     });
 
-    test('WTY10401_23', async ({
+    test('WTY20501_23', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -45,7 +45,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_24', async ({
+    test('WTY20501_24', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -71,7 +71,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_25', async ({
+    test('WTY20501_25', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -92,12 +92,12 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isDisabled = await summaryPage.isInputDisabledByName(summaryPage.fieldNames.honorific);
+        const isDisabled = await summaryPage.isInputRadioDisabled(summaryPage.fieldNames.honorific);
         expect(isDisabled).toBe(true);
         await snapExpect();
     });
 
-    test('WTY10401_26', async ({
+    test('WTY20501_26', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -118,12 +118,12 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isDisabled = await summaryPage.isInputDisabledByName(summaryPage.fieldNames.paymentMethod);
+        const isDisabled = await summaryPage.isInputRadioDisabled(summaryPage.fieldNames.paymentMethod);
         expect(isDisabled).toBe(true);
         await snapExpect();
     });
 
-    test('WTY10401_27', async ({
+    test('WTY20501_27', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -149,7 +149,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_28', async ({
+    test('WTY20501_28', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -170,12 +170,12 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
 
-        const isDisabled = await summaryPage.isInputDisabledByName(summaryPage.fieldNames.summary);
+        const isDisabled = await summaryPage.isTextareaDisabledByName(summaryPage.fieldNames.summary);
         expect(isDisabled).toBe(true);
         await snapExpect();
     });
 
-    test('WTY10401_29', async ({
+    test('WTY20501_29', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -201,7 +201,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         await snapExpect();
     });
 
-    test('WTY10401_30', async ({
+    test('WTY20501_30', async ({
         page,
         baseUrl,
         indexedDBHelper,

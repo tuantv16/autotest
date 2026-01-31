@@ -1,0 +1,29 @@
+{
+    "wty10101": {
+        "TC_105": {
+            "searchCode": "00010007068",
+            "searchCode_TC_106": "4560119538758",
+            "searchCode_TC_107": "00010013939",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": [
+                        {
+                            "unyoDate": "20250806",
+                            "storeCd": "00905",
+                            "syoriStoreCd": "00905",
+                            "userId": "10596T401",
+                            "clientId": "00905PD401",
+                            "termNo": "401",
+                            "screenId": "WTY10101"
+                        }
+                    ]
+                }
+            ],
+            "expectedResults": {
+                "limitedInputValue_TC_106": "無",
+                "limitedInputValue_TC_107": "有"
+            }
+        }
+    }
+}
