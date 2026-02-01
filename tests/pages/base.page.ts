@@ -689,4 +689,20 @@ export class BasePage {
         const text = await content.textContent();
         return text?.trim() || '';      
     }
+    
+    async clickClearByInput(
+        inputIdSelector: string 
+    ) {
+        const field = this.page.locator(inputIdSelector);
+        await expect(field).toBeVisible();
+
+        const container = field.locator(
+            'xpath=ancestor::div[contains(@class,"_textBoxContainer")]'
+        );
+
+        const clearBtn = container.locator('[data-testid="ClearButton"]');
+
+        await expect(clearBtn).toBeVisible();
+        await clearBtn.click();
+    }
 }
