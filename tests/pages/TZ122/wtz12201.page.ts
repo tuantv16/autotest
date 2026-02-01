@@ -150,7 +150,7 @@ export class WTZ12201Page extends BasePage {
     }
 
     async isButtonZoomOutNotExistsDisabled(): Promise<boolean> {
-        const locator = this.page.locator(`button:has-text("-")`);
+        const locator = this.page.locator(`button:has-text("－")`);
         return (await locator.getAttribute('disabled')) !== null;
     }
 
