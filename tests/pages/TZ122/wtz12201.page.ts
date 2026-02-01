@@ -150,8 +150,33 @@ export class WTZ12201Page extends BasePage {
     }
 
     async isButtonZoomOutNotExistsDisabled(): Promise<boolean> {
-        const locator = this.page.locator(`button:has-text("-")`);
+        const locator = this.page.locator(`button:has-text("－")`);
         return (await locator.getAttribute('disabled')) !== null;
     }
 
+    async clickOverlayBackground(): Promise<void> {
+        // Actual DOM has a separate overlay element: <div class="fixed inset-0" style="... z-index: 40"></div>
+        // The modal root itself is pointer-events-auto and above it (z-index: 50).
+        // So we click the overlay (z-index: 40) instead of a MUI backdrop.
+        const overlay = this.page.locator('div.fixed.inset-0').filter({ hasNot: this.page.locator('#wtz12201-preview-modal') }).first();
+
+        if (await overlay.isVisible().catch(() => false)) {
+            await overlay.click({ force: true });
+            return;
+        }
+
+        // Fallback: click just outside the modal box.
+        const modal = this.page.locator('#wtz12201-preview-modal');
+        await modal.waitFor({ state: 'visible', timeout: 15000 });
+
+        const box = await modal.boundingBox();
+        if (!box) {
+            await this.page.mouse.click(1, 1);
+            return;
+        }
+
+        const x = Math.max(1, Math.floor(box.x - 5));
+        const y = Math.max(1, Math.floor(box.y - 5));
+        await this.page.mouse.click(x, y);
+    }
 }

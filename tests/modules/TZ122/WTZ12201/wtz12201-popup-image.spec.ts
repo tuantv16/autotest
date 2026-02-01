@@ -254,23 +254,143 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput(1);
         await pageRecommendation.clickRowTableRecommend(0);
-        await snapInput();
+       
         // Nút Zoom In (+)
         await pageRecommendation.clickButtonZoomIn();
+        await snapInput(2);
         await pageRecommendation.clickButtonZoomIn();
+        await snapInput(3);
         await pageRecommendation.clickButtonZoomIn();
+        await snapInput(4);
+        await pageRecommendation.clickButtonZoomOut();
+        await snapInput(5);
+        await pageRecommendation.clickButtonZoomOut();
+        await snapInput(6);
+        await pageRecommendation.clickButtonZoomOut();
+        await snapInput(7);
 
-        await pageRecommendation.clickButtonZoomOut();
-        await pageRecommendation.clickButtonZoomOut();
-        await pageRecommendation.clickButtonZoomOut();
-
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(1000);
         const verifyButtonZoomOutDisabled = await pageRecommendation.isButtonZoomOutNotExistsDisabled();
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(1000);
         expect(verifyButtonZoomOutDisabled).toBe(true);
+        await snapExpect();
+    });
+
+    test('WTZ12201_44', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TZ122/wtz12201', 'wtz12201', 'TC_01');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(500);
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
         
+        await page.waitForTimeout(500);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+        await pageRecommendation.navigate();
+        await page.waitForTimeout(1000);
+
+        await pageRecommendation.clickRowTable(1);
+        await snapInput();
+        const verifyModalTitle = await pageRecommendation.checkTitlePreviewModal();
+        expect(verifyModalTitle).toBe(testData.outputData.titlePopup_44);
+        await page.waitForTimeout(1000);
+        await snapExpect();
+    });
+
+    test('WTZ12201_45', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TZ122/wtz12201', 'wtz12201', 'TC_01');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(500);
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+        await pageRecommendation.navigate();
+        await page.waitForTimeout(1000);
+
+        await pageRecommendation.clickRowTableRecommend(1);
+        await snapInput();
+        const verifyModalTitle = await pageRecommendation.checkTitlePreviewModal();
+        expect(verifyModalTitle).toBe(testData.outputData.titlePopup_44);
+        await page.waitForTimeout(1000);
+        await snapExpect();
+    });
+
+    test('WTZ12201_46', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TZ122/wtz12201', 'wtz12201', 'TC_01');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(500);
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+        await pageRecommendation.navigate();
+        await page.waitForTimeout(1000);
+
+        await snapInput(1);
+        await pageRecommendation.clickRowTableRecommend(0);
+        await page.waitForTimeout(1000);
+        const verifyModalVisible = await pageRecommendation.isPreviewModalVisible();
+        expect(verifyModalVisible).toBe(true);
+        await snapInput(2);
+
+        await pageRecommendation.clickButtonClosePreviewModal();
+        await page.waitForTimeout(1000);
+        const verifyModalVisible2 = await pageRecommendation.isPreviewModalVisible();
+        expect(verifyModalVisible2).toBe(false);
+
+        await snapInput(3);
+        await pageRecommendation.clickRowTableRecommend(1);
+        await page.waitForTimeout(1000);
+        const verifyModalVisible3 = await pageRecommendation.isPreviewModalVisible();
+        expect(verifyModalVisible3).toBe(true);
+
+        await page.waitForTimeout(1000);
         await snapExpect();
     });
     
