@@ -5,7 +5,6 @@
 
 import { Locator, Page } from '@playwright/test';
 import { BasePage } from '../base.page';
-import { VALIDATION_ERROR_MESSAGES } from '../../constants/messages';
 
 
 export class WTY11002Page extends BasePage {

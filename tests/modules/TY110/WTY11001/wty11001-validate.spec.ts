@@ -6,7 +6,8 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { WTY11001Page } from '../../../pages/TY110/wty11001.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
-import { COMMON_MESSAGES, VALIDATION_ERROR_MESSAGES, WTY11001_ERROR_MESSAGES } from '../../../constants/messages';
+import { COMMON_MESSAGES, VALIDATION_ERROR_MESSAGES } from '../../../constants/messages';
+import { WTY11001_ERROR_MESSAGES } from '../../../pages/TY110/const/const-wty110';
 
 test.describe('WTY11001 - Check arrival schedule information (入荷予定情報照会)', () => {
     let schedulePage: WTY11001Page;

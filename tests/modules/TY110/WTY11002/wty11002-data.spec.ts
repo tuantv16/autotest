@@ -6,7 +6,8 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { WTY11002Page } from '../../../pages/TY110/wty11002.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
-import { COMMON_MESSAGES, WTY11001_headerTables, WTY11002_INPUT_LABELS } from '../../../constants/messages';
+import { COMMON_MESSAGES } from '../../../constants/messages';
+import { WTY11001_headerTables, WTY11002_INPUT_LABELS } from '../../../pages/TY110/const/const-wty110';
 
 test.describe('WTY11002 - Check arrival detail information (入荷予定情報詳細)', () => {
     let arriveDetailPage: WTY11002Page;
