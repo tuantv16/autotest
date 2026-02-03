@@ -1,0 +1,62 @@
+{
+    "wtz10401": {
+        "TC_01": {
+            "description": "Initialize WTZ10401 page successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "unyoDate": "20240615",
+                        "storeCd": "12345",
+                        "syoriStoreCd": "12345",
+                        "userId": "0015400001",
+                        "clientId": "00102PD123",
+                        "termNo": "123",
+                        "screenId": "WTZ10401"
+                    }
+                }
+            ], 
+            "sessionData": [
+                {
+                    "key": "WTZ10401_IN_SD", 
+                    "value": {
+                        "searchJknDT": {
+                            "getDelDataFlg": "0",
+                            "searchKbn": "0",
+                            "searchKn": "ア"
+                        }
+                    }
+                }
+            ]
+        },
+        "TC_02": {
+            "description": "Initialize WTZ10401 page with deletion data flag",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "unyoDate": "20240615",
+                        "storeCd": "12345",
+                        "syoriStoreCd": "12345",
+                        "userId": "0015400001",
+                        "clientId": "00102PD123",
+                        "termNo": "123",
+                        "screenId": "WTZ10401"
+                    }
+                }
+            ], 
+            "sessionData": [
+                {
+                    "key": "WTZ10401_IN_SD", 
+                    "value": {
+                        "searchJknDT": {
+                            "getDelDataFlg": "1",
+                            "searchKbn": "1",
+                            "searchKn": "01020"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

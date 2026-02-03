@@ -117,6 +117,7 @@ test.describe('WTY10901 Validation Tests', () => {
         
         const inputValue = await page.inputValue(PageTY10901.selectors.uriNoInput);
         expect(inputValue).toBe(TestData.SPECIAL_CHARS);
+        await PageTY10901.clickOutside();
         await snapExpect();
     });
 
