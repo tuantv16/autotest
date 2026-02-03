@@ -750,7 +750,7 @@ test.describe('WTY20702Page - Arrage Plan Direct Delivery (手配予定照会(�
   });
 
   test('WTY20702_35', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
-    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
+    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_35_36');
     // Step 1: Navigate to base URL first to establish origin for localStorage
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
@@ -811,7 +811,7 @@ test.describe('WTY20702Page - Arrage Plan Direct Delivery (手配予定照会(�
   });
 
   test('WTY20702_36', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
-    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
+    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_35_36');
     // Step 1: Navigate to base URL first to establish origin for localStorage
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
@@ -873,7 +873,7 @@ test.describe('WTY20702Page - Arrage Plan Direct Delivery (手配予定照会(�
   });
 
   test('WTY20702_37', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
-    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_init');
+    const testData = loadTestData('TY207/wty20702', 'wty20702', 'TC_37');
     // Step 1: Navigate to base URL first to establish origin for localStorage
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
 
