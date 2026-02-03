@@ -20,7 +20,7 @@ test.describe('WTY11002 - Check arrival detail information (入荷予定情報�
         await takeScreenshotOnFailure(page, testInfo);
     });
 
-    test('WTY11001_06', async ({
+    test('WTY11002_06', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -45,7 +45,7 @@ test.describe('WTY11002 - Check arrival detail information (入荷予定情報�
         await snapExpect();
     });
 
-    test('WTY11001_08', async ({
+    test('WTY11002_08', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -74,7 +74,7 @@ test.describe('WTY11002 - Check arrival detail information (入荷予定情報�
         await snapExpect();
     });
 
-    test('WTY11001_09', async ({
+    test('WTY11002_09', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -103,7 +103,7 @@ test.describe('WTY11002 - Check arrival detail information (入荷予定情報�
         await snapExpect();
     });
 
-    test('WTY11001_10', async ({
+    test('WTY11002_10', async ({
         page,
         baseUrl,
         indexedDBHelper,

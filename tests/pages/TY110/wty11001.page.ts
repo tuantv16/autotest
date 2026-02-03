@@ -44,6 +44,8 @@ export class WTY11001Page extends BasePage {
         clearEndDateButton: '#endDate div div span[data-testid="ClearButtonIcon"]',
         barCodeButton: 'div.right-2.absolute.top-1\\/2.-translate-y-1\\/2.transform button.cursor-pointer[type="button"]',
 
+        calendarButton: 'input[name="startDate"] + div button',
+
     };
 
     constructor(page: Page) {
@@ -72,6 +74,7 @@ export class WTY11001Page extends BasePage {
         barCodeButton: this.page.locator(this.selectors.barCodeButton),
         clearStartDateButton: this.page.locator(this.selectors.clearStartDateButton),
         clearEndDateButton: this.page.locator(this.selectors.clearEndDateButton),
+        calendarButton: this.page.locator(this.selectors.calendarButton),
       };
     }
     /**
