@@ -195,12 +195,12 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(isKaikonIriVisible).toBe(false);
 
     // Verify: Label colors are default when 供給 is selected
-    await productInputPage.expectAllLabelsNotRed({
+    await productInputPage.expectAllLabelsNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
 
     // Verify: Input border colors are defaultwhen 供給 is selected
-    await productInputPage.expectAllInputBordersNotRed({
+    await productInputPage.expectAllInputBordersNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
 
@@ -232,12 +232,12 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(isKaikonIriVisible).toBe(true);
 
     // Verify: Label colors are red when 返品 is selected
-    await productInputPage.expectAllLabelsRed({
+    await productInputPage.expectAllLabelsColor({
       exclude: ["mode", "tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
 
     // Verify: Input border colors are red when 返品 is selected
-    await productInputPage.expectAllInputBordersRed({
+    await productInputPage.expectAllInputBordersColor({
       exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
 
@@ -557,10 +557,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapInput(2);
 
     // Verify: When selecting 供給, labels and borders display default colors (NOT red)
-    await productInputPage.expectAllLabelsNotRed({
+    await productInputPage.expectAllLabelsNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
-    await productInputPage.expectAllInputBordersNotRed({
+    await productInputPage.expectAllInputBordersNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
 
@@ -573,10 +573,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapInput(3);
 
     // Verify: When selecting 返品, labels and borders display red color
-    await productInputPage.expectAllLabelsRed({
+    await productInputPage.expectAllLabelsColor({
       exclude: ["mode", "tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
-    await productInputPage.expectAllInputBordersRed({
+    await productInputPage.expectAllInputBordersColor({
       exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
 

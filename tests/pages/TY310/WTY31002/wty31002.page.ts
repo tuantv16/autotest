@@ -26,7 +26,7 @@ export class WTY31002Page extends BasePage {
     kisoIraiColumnHeader: 'div.multi-row-header-cell:has-text("基礎")',
 
     rowTable: '.ag-pinned-left-cols-container div[role="row"]',
-    rowNoTable: '.ag-pinned-left-cols-container .multi-row-cell-item',
+    rowNoTable: ".ag-pinned-left-cols-container .multi-row-cell-item",
 
     // Buttona popup
     buttonCancelPro: 'button:has-text("商品取消")',
@@ -51,7 +51,7 @@ export class WTY31002Page extends BasePage {
 
     // Buttons Dialog
     confirmDialogButton: "button#ok_button",
-    cancelDialogButton: "button#cancel_button"
+    cancelDialogButton: "button#cancel_button",
   };
 
   async navigate(pilotKey: string = "prod"): Promise<void> {
@@ -153,16 +153,31 @@ export class WTY31002Page extends BasePage {
     ).toBeVisible();
   }
 
+  async selectTemplateCommentDisable(): Promise<void> {
+    await expect(
+      this.page.locator(this.selectors.templateSelectBox),
+    ).toBeDisabled();
+  }
+
   async selectTemplateCommentClick(): Promise<void> {
     const selectBox = this.page.locator(this.selectors.templateSelectBox);
 
     await expect(selectBox).toBeEnabled();
     await selectBox.click();
+    const option = this.page.locator(
+      'ul[role="listbox"] li[role="option"][data-value="05"]',
+    );
+    await option.click();
   }
 
   async commentTextAreaVisible(): Promise<boolean> {
     const textArea = this.page.locator(this.selectors.commentTextArea);
     return await textArea.isVisible();
+  }
+
+  async commentTextAreaDisabled(): Promise<boolean> {
+    const textArea = this.page.locator(this.selectors.commentTextArea);
+    return await textArea.isDisabled();
   }
 
   async fillValueInCommentTextArea(value: string): Promise<void> {
@@ -192,6 +207,14 @@ export class WTY31002Page extends BasePage {
     }
     const message = dialog.locator("p").first();
     return await message.innerText();
+  }
+
+  async getFieldErrorMessage(fieldLabel: string): Promise<string> {
+    const labelLocator = this.page.locator(`label:has-text("${fieldLabel}")`);
+    const parentContainer = labelLocator.locator("..");
+    const errorMessage = parentContainer.locator("p.text-red-600");
+    const text = await errorMessage.textContent().catch(() => null);
+    return text || "";
   }
 
   async clickConfirmDialogButton(): Promise<void> {

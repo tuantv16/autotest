@@ -273,6 +273,7 @@ test.describe("WTY31002 - 供給移動依頼登録 Test Suite", () => {
 
     await productInputPage.openMenu();
     await productInputPage.clickBtnEdit();
+    await page.waitForTimeout(1000);
 
     const msg = await productInputPage.getErrorMessageDialog();
     expect(msg).toContain("TE5175");
@@ -302,14 +303,14 @@ test.describe("WTY31002 - 供給移動依頼登録 Test Suite", () => {
     // Step 2: Open WTY31001 screen
     await productInputPage.navigate();
     await page.waitForTimeout(500);
-    await snapInput();
 
     await productInputPage.clickFirstRow();
     await page.waitForTimeout(500);
 
     await productInputPage.openMenu();
+    await snapInput();
     await productInputPage.clickBtnEdit();
-
+    await page.waitForTimeout(500);
     await snapExpect();
   });
 
@@ -338,6 +339,7 @@ test.describe("WTY31002 - 供給移動依頼登録 Test Suite", () => {
 
     await productInputPage.openMenu();
     await productInputPage.clickBtnProductCancel();
+    await page.waitForTimeout(1000);
 
     const msg = await productInputPage.getErrorMessageDialog();
     expect(msg).toContain("TE5175");
@@ -408,13 +410,79 @@ test.describe("WTY31002 - 供給移動依頼登録 Test Suite", () => {
 
     // Verify: Input 依頼番号 = ''
     const iriNoInputValue = await productInputPage.getIriNoInputValue();
-    expect(iriNoInputValue).toBe('');
-    await snapExpect(1);
+    expect(iriNoInputValue).toBe("");
 
-    await productInputPage.scrollToBottom();
     await productInputPage.selectTemplateCommentVisible();
-    const commentTextAreaVisible= await productInputPage.commentTextAreaVisible();
+    const commentTextAreaVisible =
+      await productInputPage.commentTextAreaVisible();
     expect(commentTextAreaVisible).toBe(true);
-    await snapExpect(2);
+    await snapExpect();
+  });
+
+  test("WTY31002_24", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31002", "wty31002", "TC_24");
+
+    // Step 1: Login to system
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Open WTY31001 screen
+    await productInputPage.navigate();
+    await page.waitForTimeout(500);
+    await snapInput();
+
+    // Verify: Input 依頼番号 = ''
+    const iriNoInputValue = await productInputPage.getIriNoInputValue();
+    expect(iriNoInputValue).not.toBe("");
+
+    await productInputPage.selectTemplateCommentVisible();
+    const commentTextAreaVisible =
+      await productInputPage.commentTextAreaVisible();
+    expect(commentTextAreaVisible).toBe(true);
+    await snapExpect();
+  });
+
+  test("WTY31002_25", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31002", "wty31002", "TC_25");
+
+    // Step 1: Login to system
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Open WTY31001 screen
+    await productInputPage.navigate();
+    await page.waitForTimeout(500);
+    await snapInput();
+
+    // Verify: Input 依頼番号 = ''
+    const iriNoInputValue = await productInputPage.getIriNoInputValue();
+    expect(iriNoInputValue).not.toBe("");
+
+    const commentTextAreaDisabled =
+      await productInputPage.commentTextAreaDisabled();
+    expect(commentTextAreaDisabled).toBe(true);
+    await snapExpect();
   });
 });

@@ -107,9 +107,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+    await productInputPage.scrollToBottom();
 
-    // Step 3: Enter number "10" into 良品依頼 field
-    await productInputPage.fillRHinIriInput("10");
+    // Step 3: Enter number "1234" into 良品依頼 field
+    await productInputPage.fillRHinIriInput("1234");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -119,7 +120,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: Value is formatted correctly
     const rHinIriValue = await productInputPage.getRHinIriInputValue();
-    expect(rHinIriValue).toBe("10");
+    expect(rHinIriValue).toBe("1,234");
 
     // Verify: No error message is displayed
     const isErrorVisible =
@@ -136,6 +137,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+    await productInputPage.scrollToBottom();
 
     // Step 3: Try to enter non-numeric characters into 良品依頼 field
     await productInputPage.fillRHinIriInput("abc");
@@ -160,6 +162,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+    await productInputPage.scrollToBottom();
 
     // Step 3: Enter "0" into 良品依頼 field
     await productInputPage.fillRHinIriInput("0");
@@ -225,9 +228,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.clickSearchButton();
     await page.waitForTimeout(1000);
 
-    // Step 3: Enter number with more than 5 digits "1000000" into 良品依頼 field
+    // Step 3: Enter number with more than 5 digits "100000" into 良品依頼 field
     await productInputPage.scrollToBottom();
-    await productInputPage.fillRHinIriInput("1000000");
+    await productInputPage.fillRHinIriInput("100000");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -240,7 +243,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("良品依頼");
     expect(isErrorVisible).toContain("良品依頼は5桁以内で入力してください。");
     await snapExpect();
   });
@@ -254,9 +258,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
-    // Step 3: Enter number "10" into 展示依頼 field
+    // Step 3: Enter number "1234" into 展示依頼 field
     await productInputPage.scrollToBottom();
-    await productInputPage.fillTenjiIriInput("10");
+    await productInputPage.fillTenjiIriInput("1234");
     await page.waitForTimeout(500);
     await snapInput();
     // Step 4: Blur the field
@@ -265,7 +269,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: Value is formatted correctly
     const tenjiIriValue = await productInputPage.getTenjiIriInputValue();
-    expect(tenjiIriValue).toBe("10");
+    expect(tenjiIriValue).toBe("1,234");
 
     // Verify: No error message is displayed
     const isErrorVisible =
@@ -373,9 +377,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.clickSearchButton();
     await page.waitForTimeout(1000);
 
-    // Step 3: Enter number with more than 5 digits "1000000" into 展示依頼 field
+    // Step 3: Enter number with more than 5 digits "100000" into 展示依頼 field
     await productInputPage.scrollToBottom();
-    await productInputPage.fillTenjiIriInput("1000000");
+    await productInputPage.fillTenjiIriInput("100000");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -388,7 +392,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("展示依頼");
     expect(isErrorVisible).toContain("展示依頼は5桁以内で入力してください。");
     await snapExpect();
   });
@@ -402,9 +407,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
-    // Step 3: Enter number "10" into 定数依頼 field
+    // Step 3: Enter number "1234" into 定数依頼 field
     await productInputPage.scrollToBottom();
-    await productInputPage.fillTSuIriInput("10");
+    await productInputPage.fillTSuIriInput("1234");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -414,7 +419,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: Value is formatted correctly
     const tSuIriValue = await productInputPage.getTSuIriInputValue();
-    expect(tSuIriValue).toBe("10");
+    expect(tSuIriValue).toBe("1,234");
 
     // Verify: No error message is displayed
     const isErrorVisible =
@@ -522,9 +527,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.clickSearchButton();
     await page.waitForTimeout(1000);
 
-    // Step 3: Enter number with more than 5 digits "1000000" into 定数依頼 field
+    // Step 3: Enter number with more than 5 digits "100000" into 定数依頼 field
     await productInputPage.scrollToBottom();
-    await productInputPage.fillTSuIriInput("1000000");
+    await productInputPage.fillTSuIriInput("100000");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -537,7 +542,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("定数依頼");
     expect(isErrorVisible).toContain("定数依頼は5桁以内で入力してください。");
     await snapExpect();
   });
@@ -551,9 +557,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
-    // Step 3: Enter number "10" into 基礎依頼 field
+    // Step 3: Enter number "1234" into 基礎依頼 field
     await productInputPage.scrollToBottom();
-    await productInputPage.fillKisoIriInput("10");
+    await productInputPage.fillKisoIriInput("1234");
     await page.waitForTimeout(500);
     await snapInput();
 
@@ -562,8 +568,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(500);
 
     // Verify: Value is formatted correctly
+    await productInputPage.scrollToBottom();
     const kisoIriValue = await productInputPage.getKisoIriInputValue();
-    expect(kisoIriValue).toBe("10");
+    expect(kisoIriValue).toBe("1,234");
 
     // Verify: No error message is displayed
     const isErrorVisible =
@@ -671,9 +678,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.clickSearchButton();
     await page.waitForTimeout(1000);
 
-    // Step 3: Enter number with more than 5 digits "1000000" into 基礎依頼 field
+    // Step 3: Enter number with more than 5 digits "100000" into 基礎依頼 field
     await productInputPage.scrollToBottom();
-    await productInputPage.fillKisoIriInput("1000000");
+    await productInputPage.fillKisoIriInput("100000");
     await page.waitForTimeout(500);
 
     // Step 4: Blur the field
@@ -686,7 +693,8 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await page.waitForTimeout(1000);
 
     // Verify: Error message is displayed
-    const isErrorVisible = await productInputPage.getErrorMessageDialog();
+    const isErrorVisible =
+      await productInputPage.getFieldErrorMessage("基礎依頼");
     expect(isErrorVisible).toContain("基礎依頼は5桁以内で入力してください。");
     await snapExpect();
   });
