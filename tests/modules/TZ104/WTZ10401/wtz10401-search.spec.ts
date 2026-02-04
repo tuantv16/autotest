@@ -18,7 +18,8 @@ test.describe('WTZ10401 Search Tests', () => {
         await page.waitForTimeout(1000);
 
         await snapExpect();
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 5)).toBe(true);
+        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 6)).toBe(true);
+        await page.waitForTimeout(1000);
         expect(page.locator('input[name="searchKey"]')).toBeFocused();
     });
 
@@ -43,7 +44,7 @@ test.describe('WTZ10401 Search Tests', () => {
         await page.locator('label:has(span:text("カナ"))').click();
         await page.waitForTimeout(1000);
 
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 10)).toBe(true);
+        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 15)).toBe(true);
         await snapExpect();
     });
 

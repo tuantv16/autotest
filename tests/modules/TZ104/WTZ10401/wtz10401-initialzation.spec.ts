@@ -63,7 +63,7 @@ test.describe('WTZ10401 Initialzation Tests', () => {
 
         expect(await PageWTZ10401.isRadioChecked('searchKbn', 'コード')).toBe(false);
         expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(true);
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 10)).toBe(true);
+        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 15)).toBe(true);
         await snapExpect();
     });
 
@@ -87,7 +87,7 @@ test.describe('WTZ10401 Initialzation Tests', () => {
 
         expect(await PageWTZ10401.isRadioChecked('searchKbn', 'コード')).toBe(true);
         expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(false);
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 5)).toBe(true);
+        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 6)).toBe(true);
         await snapExpect();
     });
 
@@ -110,7 +110,7 @@ test.describe('WTZ10401 Initialzation Tests', () => {
 
         expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(true);
         expect(await PageWTZ10401.isRadioChecked('searchKbn', 'コード')).toBe(false);
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 10)).toBe(true);
+        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 15)).toBe(true);
         await snapExpect();
     });
 

@@ -33,9 +33,9 @@ test.describe('WTZ10401 Validate Tests', () => {
 
         await page.locator('label:has(span:text("コード"))').click();
 
+        await snapInput();
         await page.locator(PageWTZ10401.selectors.searchButton).click();
         await page.waitForTimeout(500);
-        await snapInput();
 
         await PageWTZ10401.expectErrorByInputName('searchKey', '必須入力項目です。');
 
@@ -91,6 +91,8 @@ test.describe('WTZ10401 Validate Tests', () => {
         await PageWTZ10401.navigate();
 
         await page.locator('label:has(span:text("コード"))').click();
+        await page.waitForTimeout(1000);
+        
         await page.locator('input[name="searchKey"]').fill('１２３'); 
 
         await page.locator(PageWTZ10401.selectors.searchButton).click();
