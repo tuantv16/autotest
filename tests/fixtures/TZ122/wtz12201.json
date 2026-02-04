@@ -69,7 +69,9 @@
       ],
       "formData": {},
       "outputData": {
-        "titlePopup": "テスト販促"
+        "titlePopup": "テスト販促",
+        "titlePopup_44": "MAXSIZE_XXXXXXXXXXXXXXXXXXXXXXXXX_VARCHAR2(60)",
+        "titlePopup_45": "POPUP背景青白パターン_エアコン"
       },
       "expectedMessages": {}
     },
