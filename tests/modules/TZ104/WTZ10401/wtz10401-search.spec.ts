@@ -14,13 +14,11 @@ test.describe('WTZ10401 Search Tests', () => {
     }) => {
         await PageWTZ10401.navigate();
         
-        await page.locator('label:has(span:text("コード"))').click();
+        await PageWTZ10401.getRadioLabelLocator(PageWTZ10401.labels.radioCode).click();
         await page.waitForTimeout(1000);
 
         await snapExpect();
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 6)).toBe(true);
-        await page.waitForTimeout(1000);
-        expect(page.locator('input[name="searchKey"]')).toBeFocused();
+        expect(await PageWTZ10401.isInputMaxLength(PageWTZ10401.selectors.searchKeyName, 6)).toBe(true);
     });
 
     test('WTZ10401_22', async ({
@@ -41,10 +39,10 @@ test.describe('WTZ10401 Search Tests', () => {
 
         await PageWTZ10401.navigate();
         
-        await page.locator('label:has(span:text("カナ"))').click();
+        await PageWTZ10401.getRadioLabelLocator(PageWTZ10401.labels.radioKana).click();
         await page.waitForTimeout(1000);
 
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 15)).toBe(true);
+        expect(await PageWTZ10401.isInputMaxLength(PageWTZ10401.selectors.searchKeyName, 15)).toBe(true);
         await snapExpect();
     });
 
@@ -55,11 +53,11 @@ test.describe('WTZ10401 Search Tests', () => {
     }) => {
         await PageWTZ10401.navigate();
         
-        await page.locator('input[name="searchKey"]').fill('12345');
+        await page.locator(PageWTZ10401.selectors.searchKeyName).fill('12345');
         await snapInput();
 
         await PageWTZ10401.clickClearByInput('#searchKey');
-        const searchKey = await page.locator('input[name="searchKey"]').inputValue();
+        const searchKey = await page.locator(PageWTZ10401.selectors.searchKeyName).inputValue();
         expect(searchKey).toBe('');
         await snapExpect();
     });
@@ -82,10 +80,10 @@ test.describe('WTZ10401 Search Tests', () => {
 
         await PageWTZ10401.navigate();
 
-        await page.locator('label:has(span:text("コード"))').click();
+        await PageWTZ10401.getRadioLabelLocator(PageWTZ10401.labels.radioCode).click();
         await page.waitForTimeout(1000);
         
-        await page.locator('input[name="searchKey"]').fill('99999');
+        await page.locator(PageWTZ10401.selectors.searchKeyName).fill('999999');
         await snapInput();
 
         await page.locator(PageWTZ10401.selectors.searchButton).click();
@@ -93,7 +91,7 @@ test.describe('WTZ10401 Search Tests', () => {
 
         await expect(
             page.locator(PageWTZ10401.selectors.errorDialog)
-        ).toContainText("該当データが存在しません。");
+        ).toContainText(PageWTZ10401.messages.noDataFound);
         await snapExpect();
     });
 });

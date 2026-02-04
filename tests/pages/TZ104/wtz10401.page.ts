@@ -11,12 +11,31 @@ export class WTZ10401Page extends BasePage {
     public readonly selectors = {
         backButton: 'button.w-full.font-family.relative.flex.cursor-pointer.appearance-none.items-center.justify-center',
         searchKeyInput: 'input[name="searchkey"]',
+        searchKeyName: 'input[name="searchKey"]',
 
         errorDialog: '#tz104-error-dialog',
 
         confirmButton: 'button:has-text("確定")',
         searchButton: 'button:has-text("検索")',
     };
+
+    public readonly labels = {
+        screenTitle: '小分類検索',
+        radioCode: 'コード',
+        radioKana: 'カナ',
+    };
+
+    public readonly messages = {
+        noDataFound: '該当データが存在しません。',
+        requiredField: '必須入力項目です。',
+        numericOnly: '数値で入力してください。',
+        halfWidthOnly: '半角で入力してください。',
+        selectCategory: '小分類名を選択してください。',
+    };
+
+    getRadioLabelLocator(text: string) {
+        return this.page.locator(`label:has(span:text("${text}"))`);
+    }
     /**
      * Check if back button is visible on the header
      */

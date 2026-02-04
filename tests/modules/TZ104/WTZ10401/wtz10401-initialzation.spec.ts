@@ -59,11 +59,10 @@ test.describe('WTZ10401 Initialzation Tests', () => {
         });
 
         await PageWTZ10401.navigate();
-        await page.waitForTimeout(2000); 
 
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'コード')).toBe(false);
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(true);
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 15)).toBe(true);
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioCode)).toBe(false);
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioKana)).toBe(true);
+        expect(await PageWTZ10401.isInputMaxLength(PageWTZ10401.selectors.searchKeyName, 15)).toBe(true);
         await snapExpect();
     });
 
@@ -85,9 +84,9 @@ test.describe('WTZ10401 Initialzation Tests', () => {
 
         await PageWTZ10401.navigate();
 
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'コード')).toBe(true);
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(false);
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 6)).toBe(true);
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioCode)).toBe(true);
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioKana)).toBe(false);
+        expect(await PageWTZ10401.isInputMaxLength(PageWTZ10401.selectors.searchKeyName, 6)).toBe(true);
         await snapExpect();
     });
 
@@ -108,9 +107,9 @@ test.describe('WTZ10401 Initialzation Tests', () => {
 
         await PageWTZ10401.navigate();
 
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(true);
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'コード')).toBe(false);
-        expect(await PageWTZ10401.isInputMaxLength('input[name="searchKey"]', 15)).toBe(true);
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioKana)).toBe(true);
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioCode)).toBe(false);
+        expect(await PageWTZ10401.isInputMaxLength(PageWTZ10401.selectors.searchKeyName, 15)).toBe(true);
         await snapExpect();
     });
 
@@ -132,8 +131,8 @@ test.describe('WTZ10401 Initialzation Tests', () => {
 
         await PageWTZ10401.navigate();
 
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(true);
-        const searchKey = await page.locator('input[name="searchKey"]').inputValue();
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioKana)).toBe(true);
+        const searchKey = await page.locator(PageWTZ10401.selectors.searchKeyName).inputValue();
         expect(searchKey).toBe('ア');
         
         const hasData = await PageWTZ10401.hasAgGridData('div[role="presentation"]');
@@ -159,8 +158,8 @@ test.describe('WTZ10401 Initialzation Tests', () => {
 
         await PageWTZ10401.navigate();
 
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'コード')).toBe(true);
-        const searchKey = await page.locator('input[name="searchKey"]').inputValue();
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioCode)).toBe(true);
+        const searchKey = await page.locator(PageWTZ10401.selectors.searchKeyName).inputValue();
         expect(searchKey).toBe('01020');
         
         const hasData = await PageWTZ10401.hasAgGridData('div[role="presentation"]');
@@ -174,8 +173,8 @@ test.describe('WTZ10401 Initialzation Tests', () => {
     }) => {
         await PageWTZ10401.navigate();
 
-        expect(await PageWTZ10401.isRadioChecked('searchKbn', 'カナ')).toBe(true);
-        const searchKey = await page.locator('input[name="searchKey"]').inputValue();
+        expect(await PageWTZ10401.isRadioChecked('searchKbn', PageWTZ10401.labels.radioKana)).toBe(true);
+        const searchKey = await page.locator(PageWTZ10401.selectors.searchKeyName).inputValue();
         expect(searchKey).toBe('');
         
         const hasData = await PageWTZ10401.hasAgGridData('div[role="presentation"]');
