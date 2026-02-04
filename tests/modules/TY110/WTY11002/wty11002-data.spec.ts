@@ -124,6 +124,32 @@ test.describe('WTY11002 - Check arrival detail information (入荷予定情報�
         await snapExpect();
     });
 
+    test('WTY11002_18', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+       const testData = loadTestData('TY110/wty11002', 'wty11002', 'TC_18');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        await page.waitForTimeout(500);
+
+        await arriveDetailPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await arriveDetailPage.waitForFormReady();
+
+        const rootKbnValue = await arriveDetailPage.selectorsObj.rootKbnInput.inputValue();
+        expect(rootKbnValue).toBe('全て');
+
+        await snapExpect();
+    });
+
     test('WTY11002_19', async ({
         page,
         baseUrl,
