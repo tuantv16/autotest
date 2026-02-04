@@ -3,7 +3,7 @@
         "TC_01":{
             "description":"Verify clear form functionality",
             "sessionData": [{
-                "key": "WTZ11203_IN_SD",
+                "key": "WTY30301_IN_SD",
                 "value": {
                     "wty10401InfoDT": [
                         {
@@ -44,18 +44,92 @@
                 {
                     "id": "commonDT",
                     "value": {
-                        "outYmd": "20251201",
-                        "cmtKbn": "1",
-                        "mpopSiz": "1",
-                        "prtMsu": "1",
-                        "keisaiKk": "227333",
-                        "lbk": "227333"
+                        "unyoDate": "20251028",
+                        "storeCd": "04388",
+                        "syoriStoreCd": "04388",
+                        "userId": "0596",
+                        "clientId": "0438874190",
+                        "termNo": "419",
+                        "screenId": "WTY30301"
                     }
                 }
             ],
             "formData": {
                 "outputDateInput": "2025/12/01",
                 "merchandiseCdInput": "00010004456",
+                "multiCmmentInput": "1",
+                "sizeInput": "C",
+                "numberSheetsInput": "1",
+                "listedPriceInput": "227333",
+                "finalSellingPriceInput": "227333"
+            }
+        },
+
+        "TC_02":{
+            "description":"Verify search product",
+            "sessionData": [{
+                "key": "WTY30301_IN_SD",
+                "value": {
+                    "shnChkInDT": [
+                        {
+                            "shnCd": "00010006962",
+                            "janCd": "",
+                            "hskkNo": "",
+                            "outYmd": "20251028",
+                            "sbnFlg": "0",
+                            "dsgnKbn": "",
+                            "jgksCd": "03"
+                        }
+                    ]
+                }
+            }],
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "unyoDate": "20251028",
+                        "storeCd": "04388",
+                        "syoriStoreCd": "04388",
+                        "userId": "0596",
+                        "clientId": "0438874190",
+                        "termNo": "419",
+                        "screenId": "WTY30301"
+                    }
+                },
+                {
+                    "id": "btnInfoDT",
+                    "value": {
+                        "areaCd": "529",
+                        "blkCd": "520",
+                        "btenCd": "04388",
+                        "btrktKbn": "",
+                        "chainId": "1",
+                        "csNmKn": "七丁目１丁目",
+                        "fcFlg": "",
+                        "fcKtkbn": "",
+                        "jgybCd": "120",
+                        "jgyksCd": "03",
+                        "jusCd": "23111043001",
+                        "kdoJt": "10",
+                        "keepPeriod": "6",
+                        "ksCd": "03000",
+                        "ktKbn": "01",
+                        "pstNo": "4550001",
+                        "ryAbtknNmKn": "トウカゲイ",
+                        "ryAbtknNmKnj": "東海通",
+                        "skgCd": "23111",
+                        "skgNmKn": "名古屋市 港区",
+                        "tofNmKnj": "愛知県",
+                        "termNo": "419",
+                        "tsutayaFlg": "0",
+                        "unyoYmd": "20251028",
+                        "zoneCd": "520"
+                    }
+                }
+            ],
+            "formData": {
+                "outputDateInput": "2025/12/01",
+                "merchandiseCdInput": "00010006962",
                 "multiCmmentInput": "1",
                 "sizeInput": "C",
                 "numberSheetsInput": "1",
