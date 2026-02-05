@@ -27,6 +27,7 @@ export const COMMON_MESSAGES = {
   CONFIRM_CANCEL: 'キャンセルしますか？',
 
   ERROR_MESSAGE_ADD_CART: '商品が指定されていません。商品を指定してください',
+  ERROR_FLUTTER_DEVICE: 'スキャナーはFlutterアプリ内でのみ動作します',
 } as const;
 
 export const BUTTON_LABELS = {
@@ -41,6 +42,8 @@ export const BUTTON_LABELS = {
 export const VALIDATION_ERROR_MESSAGES = {
   REQUIRED_FIELD: '必須入力エラー',
   INVALID_LENGTH: '商品の桁数が正しくありません',
+  START_DATE_AFTER_END_DATE: '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
+
   HALF_WIDTH_REQUIRED: '半角で入力してください。',
   FULL_WIDTH_REQUIRED: '全角で入力してください。',
   INVALID_LATER_DATE: '以降の日付を入力してください。',
