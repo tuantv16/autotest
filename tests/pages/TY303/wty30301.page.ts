@@ -51,6 +51,7 @@ export class TY30301Page extends BasePage {
 
         // Buttons image
         clearMerchandiseCdInput: 'img[aria-label="clear"]',
+        backButton: 'button.w-full.font-family.relative.flex.cursor-pointer.appearance-none.items-center.justify-center',
 
         // AG Grid
         agRows: '.ag-center-cols-container .ag-row',
@@ -371,6 +372,16 @@ export class TY30301Page extends BasePage {
     }
 
     /**
+     * Click footer clear button (e.g., クリア)
+     */
+    async clickFooterClear(buttonText: string = 'クリア'): Promise<void> {
+        const button = this.page.locator(`div.fixed.bottom-0 button:has-text("${buttonText}")`).first();
+        await this.waitForVisible(button, 10000);
+        await this.clickWithRetry(button);
+        await this.page.waitForTimeout(1000);
+    }
+
+    /**
      * Click footer confirm button (e.g., 確定)
      */
     async clickFooterConfirm(buttonText: string = '確定'): Promise<void> {
@@ -417,5 +428,31 @@ export class TY30301Page extends BasePage {
         if (!ok) {
             throw new Error(`Value for input[name="${name}"] is not thousand-separated: "${v}"`)
         }
+    }
+
+    /**
+     * Make sure the footer buttons are visible.
+     * @param buttonText ボタン表示文言
+     */
+    async verifyFooterButtonVisible(buttonText: string): Promise<void> {
+        const button = this.page.locator(
+            `div.fixed.bottom-0 button:has-text("${buttonText}")`
+        );
+
+        await expect(button).toBeVisible();
+        await expect(button).toBeEnabled();
+    }
+
+    /**
+     * Check if back button is visible on the header
+     */
+    async isBackButtonVisible(): Promise<boolean> {
+        const backButton = this.page
+            .locator(this.selectorsTY30301.backButton)
+            .first();
+
+        return await backButton
+            .isVisible({ timeout: 10000 })
+            .catch(() => false);
     }
 }
