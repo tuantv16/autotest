@@ -58,7 +58,7 @@ test.describe('WTY20701Page - Arrage Plan Direct Delivery (手配予定照会(�
   });
 
   test('WTY20701_19', async ({ page, baseUrl, indexedDBHelper, snapExpect }) => {
-    const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_init');
+    const testData = loadTestData('TY207/wty20701', 'wty20701', 'TC_api_pass');
 
     // Initialize
     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
