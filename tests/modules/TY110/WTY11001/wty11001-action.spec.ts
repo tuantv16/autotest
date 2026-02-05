@@ -7,6 +7,7 @@ import { test, expect, loadTestData } from '../../../base/base-test';
 import { WTY11001Page } from '../../../pages/TY110/wty11001.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
 import { COMMON_MESSAGES } from '../../../constants/messages';
+import { WTY11001_ERROR_MESSAGES } from '../../../pages/TY110/const/const-wty110';
 
 test.describe('WTY11001 - Check arrival schedule information (入荷予定情報照会)', () => {
     let schedulePage: WTY11001Page;
@@ -88,7 +89,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await schedulePage.clickBarCodeButton();
 
-        const messageValidate = await schedulePage.waitForTextInBody("スキャナーはFlutterアプリ内でのみ動作します", 5000);
+        const messageValidate = await schedulePage.waitForTextInBody(COMMON_MESSAGES.ERROR_FLUTTER_DEVICE, 5000);
         expect(messageValidate).toBe(true);
 
         await snapExpect();
@@ -117,7 +118,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
         await page.waitForTimeout(500);
         await schedulePage.clickSearchButton();
 
-        const isValidateMessageVisible = await schedulePage.waitForTextInBody("該当データが存在しません。", 5000);
+        const isValidateMessageVisible = await schedulePage.waitForTextInBody(WTY11001_ERROR_MESSAGES.DATA_NOT_FOUND, 5000);
 
         expect(isValidateMessageVisible).toBe(true);
         await snapExpect();
@@ -317,7 +318,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
         await schedulePage.clickMenuButton();
         await schedulePage.clickItemMenuByText('詳細');
 
-        const messageValidate = await schedulePage.waitForTextInBody("入荷予定", 5000);
+        const messageValidate = await schedulePage.waitForTextInBody(WTY11001_ERROR_MESSAGES.DETAIL_NOT_SELECTED, 5000);
         expect(messageValidate).toBe(true);
 
         await snapExpect();

@@ -1,0 +1,2467 @@
+{
+  "wty23001": {
+    "TC_05": {
+      "description": "init screen data from WTY23002",
+      "sessionData": [
+        {
+          "key": "WTY23002_OUT_SD",
+          "value": {
+            "mikomiKokInfoDT": [
+              {
+                "btenCd": "00102",
+                "kokCd": "AA1010163895",
+                "kanNm": "正",
+                "jusyo": "25-22",
+                "telNo": "0828787206",
+                "mikomiKbn": "1",
+                "daiCd": "99",
+                "chuCd": "99",
+                "shoCd": "  ",
+                "mkmTsoCd": "9999",
+                "shodanFlg": "0",
+                "entryDate": "20251028",
+                "cycleNo": "1",
+                "kokNm": "古あ　ああ",
+                "mkmNaiyo": "1",
+                "mkmNaiyoNm": "新規",
+                "rank": "1",
+                "rankNm": "購入意思はあるが購入日未定",
+                "tantoNm": "担当者名漢字テスト",
+                "mkmTsoNm": "売上合計",
+                "tantoCd": "0001",
+                "followDate": "20260124",
+                "followKsu": 99,
+                "shushuCd": "1",
+                "shushuNm": "一声",
+                "shnNm": "",
+                "cmt": "init screen data from WTY23002"
+              }
+            ],
+            "transitionDT": [
+              {
+                "transitKbn": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "followKsu": "20",
+        "cmt": "WTY23001 UPDATE TEST"
+      }
+    },
+    "TC_07": {
+      "description": "return from WTZ10401",
+      "sessionData": [
+        {
+          "key": "WTZ10401_OUT_SD",
+          "value": {
+            "sbrInfoDT": [
+              {
+                "daiCd": "11",
+                "chuCd": "22",
+                "shoCd": "33",
+                "rykshoNmKnj": "テスト小分類名"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10401"
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "112233"
+      }
+    },
+    "TC_07_01": {
+      "description": "return from WTZ10301",
+      "sessionData": [
+        {
+          "key": "WTZ10301_OUT_SD",
+          "value": {
+            "cbrInfoDT": [
+              {
+                "daiCd": "11",
+                "chuCd": "22",
+                "rykchuNmKnj": "テスト中分類名"
+              }
+            ]
+          }
+        },
+        {
+          "key": "WTY23001_IN_SD",
+          "value": {
+            "screenInfoDT": [
+              {
+                "btenCd": "00102",
+                "kokCd": "AA1010163895",
+                "kanNm": "正",
+                "jusyo": "25-22",
+                "telNo": "0828787206",
+                "mikomiKbn": "1",
+                "daiCd": "99",
+                "chuCd": "99",
+                "shoCd": "  ",
+                "mkmTsoCd": "9999",
+                "shodanFlg": "0",
+                "entryDate": "20251028",
+                "cycleNo": "1",
+                "kokNm": "古あ　ああ",
+                "mkmNaiyo": "1",
+                "mkmNaiyoNm": "",
+                "mkmcstmKbn": "0",
+                "rank": "1",
+                "rankNm": "1",
+                "tantoNm": "担当者名漢字テスト",
+                "mkmTsoNm": "売上合計",
+                "tantoCd": "0001",
+                "followDate": "2026124",
+                "followKsu": 99,
+                "shushuCd": "1",
+                "shushuNm": "",
+                "shnNm": "",
+                "cmt": "WTY23001 register test",
+                "mkiMkmcstmUriFlg": "0",
+                "mkiMkmyoteiDate": ""
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10301"
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "1122"
+      }
+    },
+    "TC_08": {
+      "description": "return from WTZ10801",
+      "sessionData": [
+        {
+          "key": "WTZ10801_OUT_SD",
+          "value": {
+            "tanInfoDT": [
+              {
+                "tanTanCd": "0001",
+                "tanTanNmKnj": "担当者名漢字テスト"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10801"
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "9999",
+        "tantoNm": "Test Tanto Name"
+      }
+    },
+    "TC_34": {
+      "description": "Save customer summary successfully",
+      "sessionData": [
+        {
+          "key": "WTY10401_IN_SD",
+          "value": {
+            "wty10401InfoDT": [
+              {
+                "shnCd": "4974019201234",
+                "mkKata": "SJ-PD28H-T",
+                "shnZhlv": "　",
+                "tnpJch": "可",
+                "thKbn": "大物",
+                "ckS": "可",
+                "ykBri": "在庫有可",
+                "hjZai": "1",
+                "zaiBten": "2",
+                "jgyksCd": "02",
+                "jgybCd": "10",
+                "zoneCd": "G1",
+                "blkCd": "A101",
+                "areaCd": "13"
+              }
+            ],
+            "searchJknDT": [
+              {
+                "shnCd": "00004974019201",
+                "hjZai": "1",
+                "zaiBten": "2",
+                "jiJgyksCd": "02",
+                "jgyksCd": "02",
+                "jgybCd": "10",
+                "zoneCd": "G1",
+                "blkCd": "A101",
+                "areaCd": "13",
+                "fromNo": 1,
+                "toNo": 100
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "screenDT",
+          "value": []
+        },
+        {
+          "id": "screenId",
+          "value": "WTY23001"
+        },
+        {
+          "id": "preScreenId",
+          "value": "WTY23001"
+        }
+      ]
+    },
+    "TC_24": {
+      "description": "nhập mã Người phụ trách để lấy tên hiển thị",
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251205",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "userId": "0015400907",
+            "clientId": "00102PD498",
+            "termNo": "498",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "0001",
+        "pmtKbn": "0",
+        "pmtBtenKbn": "0",
+        "pmtBtenCd": "00102",
+        "pmtKey": "0",
+        "pmtKana": "タントウシャメ",
+        "pmtCd": "0001",
+        "pmtSelno": 5,
+        "pmtExist": "",
+        "pmtFromNo": 1,
+        "pmtToNo": 10,
+        "getDelDataFlg": "0",
+        "pmtServiceTanFlg": "1"
+      },
+      "formData_TC25": {
+        "tantoCd": "ABCD",
+        "mkmTsoCd": "0001",
+        "pmtKbn": "0"
+      },
+      "formData_TC26": {
+        "tantoCd": "5555",
+        "mkmTsoCd": "0001",
+        "pmtKbn": "0"
+      },
+      "TZ108_WTZ10801TanInfoBC_RESPONSE": {
+        "outDS": {
+          "paramDT": [
+            {
+              "pmtKbn": "0",
+              "pmtBtenKbn": "0",
+              "pmtBtenCd": "00102",
+              "pmtKey": "0",
+              "pmtKana": "",
+              "pmtCd": "0001",
+              "pmtExist": "0",
+              "pmtFromNo": 1,
+              "pmtToNo": 10,
+              "pmtSelno": 5,
+              "pmtServiceTanFlg": "1",
+              "getDelDataFlg": "0"
+            }
+          ],
+          "resultDT": [
+            {
+              "resultKbn": "0",
+              "msgID": "",
+              "msgArg1": "",
+              "msgArg2": "",
+              "msgArg3": "",
+              "msgArg4": "",
+              "msgArg5": ""
+            }
+          ],
+          "tanInfoDT": [
+            {
+              "tanBtenCd": "00102",
+              "tanTanCd": "0010",
+              "tanTanNmKnj": "担当者名漢字テスト",
+              "tanTanNmKn": "タントウシャメイカナテスト",
+              "tanEmail": "test.user@example.com",
+              "tanTelNo": "080-1111-2222",
+              "tanEntDate": "20230101",
+              "tanTanYukoKkn": "20291231",
+              "tanTanMukoFlg": "0",
+              "tanShaFlg": "1",
+              "tanServiceTanFlg": "0"
+            }
+          ]
+        }
+      },
+      "TZ108_WTZ10801TanInfoBC_RESPONSE_NULL": {
+        "outDS": {
+          "tanInfoDT": null
+        }
+      }
+    },
+    "TC_27": {
+      "description": "nhập mã Người phụ trách để lấy tên hiển thị",
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251205",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "userId": "0015400907",
+            "clientId": "00102PD498",
+            "termNo": "498",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "mkmTsoCd_false": "1234",
+        "mkmTsoCd_27": "999999",
+        "mkmTsoCd_32": "310808",
+        "mkmTsoCd_27_false": "123456",
+        "comment_special": "SELECT * FROM users WHERE user_id = 'admin' OR '1'='1'; <div><b>Hello</b> <span >World</span></div>",
+        "cmt_100": "ああああああああああああああああああああああああああああああああああああああああああああああああああ",
+        "cmt_122": "あああああああああああああああああああああああああああああああああああああああああああああああああああA"
+      },
+      "TZ203_TZCbrFindCallBC_RESPONSE": {
+        "outDS": {
+          "cbrInfoDT": [
+            {
+              "bmonCd": "07",
+              "chuCd": "99",
+              "chuNmKn": "ｳﾘｱｹﾞｺﾞｳｹｲ",
+              "chuNmKnj": "売上合計",
+              "daiCd": "99",
+              "entDate": "19820421",
+              "entTan": "EDION   ",
+              "hnkDate": "20090217",
+              "hnkTan": "00940254",
+              "htcycNo": 2,
+              "htcycNoInt": 2,
+              "koushinMdhm": 1234888676040,
+              "koushinPgId": "WMC00102",
+              "koushinTermId": "JP0103",
+              "kskmFlg": "0",
+              "mntKbn": "2",
+              "rykchuNmKn": "ｳﾘｱｹﾞｺﾞｳｹｲ",
+              "rykchuNmKnj": "売上合計",
+              "setKbn": " "
+            }
+          ]
+        }
+      },
+      "TZ204_TZSbrFindCallBC_RESPONSE": {
+        "outDS": {
+          "sbrInfoDT": [
+            {
+              "daiCd": "31",
+              "chuCd": "08",
+              "shoCd": "08",
+              "shoNmKnj": "その他⑧",
+              "shoNmKn": "ｿﾉﾀﾊﾁ",
+              "rykshoNmKnj": "その他⑧",
+              "rykshoNmKn": "ｿﾉﾀﾊﾁ",
+              "mntKbn": "1",
+              "entDate": "20180711",
+              "entTan": "07700011",
+              "hnkDate": "20180711",
+              "hnkTan": "07700011",
+              "htcycNo": 1,
+              "koushinMdhm": 1531321153222,
+              "koushinTermId": "ED8354A",
+              "koushinPgId": "WMC00103",
+              "kskmFlg": "0",
+              "htcycNoInt": 1
+            }
+          ]
+        }
+      }
+    },
+    "TC_29": {
+      "description": "nhập mã Người phụ trách để lấy tên hiển thị",
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20251205",
+            "storeCd": "00102",
+            "syoriStoreCd": "00102",
+            "userId": "0015400907",
+            "clientId": "00102PD498",
+            "termNo": "498",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "pmtKana": "ﾃﾃ",
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "0001",
+        "pmtKbn": "0",
+        "pmtBtenKbn": "0",
+        "pmtBtenCd": "00102",
+        "pmtKey": "0",
+        "pmtKana": "タントウシャメ",
+        "pmtCd": "0001",
+        "pmtSelno": 5,
+        "pmtExist": "",
+        "pmtFromNo": 1,
+        "pmtToNo": 10,
+        "getDelDataFlg": "0",
+        "pmtServiceTanFlg": "1"
+      },
+      "formData_TC25": {
+        "tantoCd": "ABCD",
+        "mkmTsoCd": "0001",
+        "pmtKbn": "0"
+      },
+      "formData_TC26": {
+        "tantoCd": "5555",
+        "mkmTsoCd": "0001",
+        "pmtKbn": "0"
+      },
+      "TZ108_WTZ10801TanInfoBC_RESPONSE": {
+        "outDS": {
+          "paramDT": [
+            {
+              "pmtKbn": "0",
+              "pmtBtenKbn": "0",
+              "pmtBtenCd": "00102",
+              "pmtKey": "0",
+              "pmtKana": "",
+              "pmtCd": "0001",
+              "pmtExist": "0",
+              "pmtFromNo": 1,
+              "pmtToNo": 10,
+              "pmtSelno": 5,
+              "pmtServiceTanFlg": "1",
+              "getDelDataFlg": "0"
+            }
+          ],
+          "resultDT": [
+            {
+              "resultKbn": "0",
+              "msgID": "",
+              "msgArg1": "",
+              "msgArg2": "",
+              "msgArg3": "",
+              "msgArg4": "",
+              "msgArg5": ""
+            }
+          ],
+          "tanInfoDT": [
+            {
+              "tanBtenCd": "00102",
+              "tanTanCd": "0010",
+              "tanTanNmKnj": "担当者名漢字テスト",
+              "tanTanNmKn": "タントウシャメイカナテスト",
+              "tanEmail": "test.user@example.com",
+              "tanTelNo": "080-1111-2222",
+              "tanEntDate": "20230101",
+              "tanTanYukoKkn": "20291231",
+              "tanTanMukoFlg": "0",
+              "tanShaFlg": "1",
+              "tanServiceTanFlg": "0"
+            }
+          ]
+        }
+      },
+      "TZ108_WTZ10801TanInfoBC_RESPONSE_NULL": {
+        "outDS": {
+          "tanInfoDT": null
+        }
+      }
+    },
+    "TC_47": {
+      "description": "goback",
+      "commonData": [
+        {
+          "id": "screenDT",
+          "value": [
+            {
+              "preScreenId": "WTZ01001",
+              "screenId": "WTZ01001",
+              "nextScreenId": "/menu"
+            }
+          ]
+        }
+      ]
+    },
+    "TC_48": {
+      "description": "register Potential Customers",
+      "sessionData": [
+        {
+          "key": "WTZ11201_OUT_SD",
+          "value": {
+            "kokDetailInfoDT": [
+              {
+                "gaibujohoKbn": "02",
+                "jgyksCd": "02",
+                "kokCd": "AA1010163895",
+                "nendo": "2025",
+                "syoriKbn": "1"
+              }
+            ]
+          }
+        },
+        {
+          "key": "cartInfoDS",
+          "value": {
+            "cartHeaderDT": [
+              {
+                "jznuridenNo": "00102498009649",
+                "jznuridenHkkDate": "20250306",
+                "jznuridenFlg": "0",
+                "kokCd": "AA1010163895",
+                "kokNm": "山田 太郎",
+                "kokMientKbn": "0",
+                "uesamaFlg": "0",
+                "kokKanKbn": "1",
+                "kanNo": "MEM12345678901234567890",
+                "cdSbt": "1001",
+                "riyoKPnt": 500.0,
+                "oyaKokCd": "",
+                "oyaKokKanKbn": "0",
+                "pstNo": "1000001",
+                "knjJus": "東京都千代田区千代田1-1",
+                "haikojiDate": "20251201",
+                "haiTimetNm": "午前中",
+                "binNo": "03",
+                "wakuKbn": "0",
+                "wakuNm": "通常枠",
+                "shkoHou": "1",
+                "haiKbn": "1",
+                "haiSbt": "1",
+                "chikiCd": "10304365",
+                "chikiNm": "東京エリア",
+                "shkobtenCd": "00102",
+                "shkobtenNm": "新宿店",
+                "rnrkMcFlg": "0",
+                "rnrkyoteiDate": "20251130",
+                "cmtCd1": "01",
+                "cmtCd2": "02",
+                "cmtCd3": "",
+                "cmtCd4": "",
+                "rnrkjikou": "配送前に連絡希望",
+                "hbKbn": "1",
+                "posKanSnsi": "0",
+                "telflwum": "1",
+                "dmFlg": "0",
+                "uriTtlKin": 15000.0,
+                "uriZei": 1500.0,
+                "pntTtl": 150.0,
+                "uriTtlSu": 3.0,
+                "shoritanFlg": "1",
+                "pntKyseiTs": "1",
+                "jznuriStatus": "10",
+                "jznuriNo": "00001",
+                "htcycNo": 51,
+                "kokKanjtKbnNm": "通常会員",
+                "hjKokTelNo": "09012345678",
+                "iriuriKbn": "0",
+                "irikokMientKbn": "0",
+                "irikokCd": "",
+                "irikokNm": "鈴木 次郎",
+                "irikokKanKbn": "0",
+                "iriOyaKokCd": "",
+                "iriOyaKokKanKbn": "",
+                "irikokKanjtKbnNm": "",
+                "mmrYukoKkn": "20251231",
+                "tknbkKin": 0,
+                "mmrTanCd": "00012",
+                "cksFlg": "0",
+                "shkaKtenCd": "0003",
+                "otdksYoteiDate": "20251202",
+                "otdksYoteiTime": "1400",
+                "ldtmNsu": "02",
+                "haisgsKbn": "01",
+                "haisSvKbn": "01",
+                "haisYmdStiKbn": "1",
+                "haiSteiSbt": "1",
+                "sgyoWakuNo": "01",
+                "konpoKahi": "1",
+                "cardboardId": "BOX0000001",
+                "mmrHkkDate": "20251120",
+                "riyoKPntKbp": 100,
+                "pntTtlKbp": 100
+              }
+            ],
+            "cartUriMeiDT": [
+              {
+                "jznuridenNo": "00102498009649",
+                "jznuridenHkkDate": "20250306",
+                "jznurigyoNo": "001",
+                "jznurisetgyoNo": "00",
+                "shnCd": "00010006344",
+                "setKbn": "0",
+                "janCd": "04905524474862",
+                "daiCd": "11",
+                "chuCd": "10",
+                "shoCd": "32",
+                "clsbrCd": "65",
+                "shnRnk": "F",
+                "shnRnk2": "",
+                "btrKbn": "1",
+                "mkKata": "MODEL-X-2025",
+                "hjMkKata": "MODEL-X-2025",
+                "rykmkrNmKnj": "Sony",
+                "shnNm": "Sony Bravia 55 Inch 4K TV",
+                "uritkZeik": 150000,
+                "uritkZein": 136364,
+                "bkhskkNo": "PROMO2025-001",
+                "shudonbkCd1": "01",
+                "nbkstKbnSd1": "1",
+                "nbkKinSd1Zeik": 5000,
+                "nbkKinSd1Zein": 4545,
+                "nbkRtSd1": 3.5,
+                "shudonbkCd2": "",
+                "nbkstKbnSd2": "0",
+                "nbkKinSd2Zeik": 0,
+                "nbkKinSd2Zein": 0,
+                "nbkRtSd2": 0.0,
+                "mnbkCd": "05",
+                "nbkstKbnM": "1",
+                "nbkKinMZeik": 1000,
+                "nbkKinMZein": 909,
+                "nbkRtM": 0.0,
+                "isknbkCd": "",
+                "nbkstKbnIsk": "0",
+                "nbkKinIskZeik": 0,
+                "nbkKinIskZein": 0,
+                "nbkRtIsk": 0.0,
+                "bkKeiTtlGaku": 144000,
+                "bkKeiZein": 130909,
+                "suryo": 1,
+                "thiKbn": "1",
+                "thibtenCd": "00123",
+                "thibtenNm": "新宿本店",
+                "zaiBasho": "1",
+                "zaiJt": "1",
+                "icbMckrFlg": "1",
+                "hkwtbFlg": "1",
+                "mkhshKkn": "012",
+                "hshKkn": "036",
+                "hjHshKkn": "3年",
+                "asHshKkn": "000",
+                "hjAsHshKkn": "",
+                "yukoBrnbkRt": 0.0,
+                "yukoBrnbkGk": 0,
+                "yukoBrnbkKbn": "00",
+                "pntFuyoKbn": "1",
+                "pntnbkSntkKbn": "0",
+                "pntStKbn": "1",
+                "pnttkbknbkKbn": "0",
+                "pntGaku": 1440,
+                "pntBrt": 1.0,
+                "pnthskkNo": "POINT-CP-2025",
+                "pntnbkRt": 0.0,
+                "pntnbkGaku": 0,
+                "pntnbkKbn": "00",
+                "tkpntstKbn": "0",
+                "tkpntTkbknbkKbn": "0",
+                "tkpntKin": 100,
+                "tkpntBrt": 1.0,
+                "tkpnthskkNo": "SP-PROMO-001",
+                "tkpntnbkRt": 0.0,
+                "tkpntnbkKin": 0,
+                "tkpntnbkKbn": "00",
+                "pntKei": 1540,
+                "nbkhskkNo": "DISC-PROMO-99",
+                "tkHnkNgFlg": "0",
+                "hkwtbBtnSeiFlg": "1",
+                "thiSeiFlg": "0",
+                "zaiZokuSeiFlg": "1",
+                "nbkBtnSeiFlg": "0",
+                "kihonPntRt": 1.0,
+                "kanBaikaFlg": "1",
+                "lastBkZeik": 150000,
+                "zeiKbn": "1",
+                "zeiRt": 10.0,
+                "koshnSu": 0,
+                "hjThi": "AUTO",
+                "hjZaiZoku": "1",
+                "tknbkKbnSd1": "0",
+                "tknbkKbnSd2": "0",
+                "thKbn": "2",
+                "htbDate": "20251101",
+                "htbDateHjKbn": "1",
+                "tentrKahiFlg": "1",
+                "chksKahiFlg": "1",
+                "shnChotsuKbn": "1",
+                "ykbrKahiFlg": "1",
+                "nykaskGntShnFlg": "0",
+                "gntLecBtenCd1": "",
+                "gntLecBtenCd2": "",
+                "gntLecBtenCd3": "",
+                "kkngntHskkNo": "TIME-SALE-2025",
+                "kkngntRiyoStrDate": "20251201",
+                "kkngntRiyoEndDate": "20251231",
+                "kkngntpntStKbn": "1",
+                "kkngntPntGaku": 500,
+                "kkngntPntBrt": 5.0,
+                "kkngntPntKei": 500,
+                "autonbkOutKbn": "0",
+                "autoAddTsogyoNo": "",
+                "entKbn": "0",
+                "nbkKnrNo": "0",
+                "nbkSeiChkFlg": "1",
+                "autoNbkCd": ""
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ11201"
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "mkmTsoCd_false": "1234",
+        "mkmTsoCd_27": "999999",
+        "mkmTsoCd_27_false": "123456",
+        "cmt": "WTY23001 register test",
+        "followKsu": "99"
+      }
+    },
+    "TC_49": {
+      "description": "update Potential Customers",
+      "sessionData": [
+        {
+          "key": "WTY23002_OUT_SD",
+          "value": {
+            "mikomiKokInfoDT": [
+              {
+                "btenCd": "00102",
+                "kokCd": "AA1010163895",
+                "kanNm": "正",
+                "jusyo": "25-22",
+                "telNo": "0828-787206",
+                "mikomiKbn": "1",
+                "daiCd": "99",
+                "chuCd": "99",
+                "shoCd": "  ",
+                "mkmTsoCd": "9999",
+                "shodanFlg": "0",
+                "entryDate": "20251028",
+                "cycleNo": "1",
+                "kokNm": "古あ　ああ",
+                "mkmNaiyo": "1",
+                "mkmNaiyoNm": "",
+                "rank": "1",
+                "rankNm": "1",
+                "tantoNm": "担当者名漢字テスト",
+                "mkmTsoNm": "売上合計",
+                "tantoCd": "0001",
+                "followDate": "20260124",
+                "followKsu": 99,
+                "shushuCd": "1",
+                "shushuNm": "",
+                "shnNm": "",
+                "cmt": "WTY23001 register test",
+                "mkiMkmcstmUriFlg": "0",
+                "mkiMkmyoteiDate": ""
+              }
+            ],
+            "transitionDT": [
+              {
+                "transitKbn": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "followKsu": "20",
+        "cmt": "WTY23001 UPDATE TEST"
+      }
+    },
+    "TC_50": {
+      "description": "delete Potential Customers",
+      "sessionData": [
+        {
+          "key": "WTY23002_OUT_SD",
+          "value": {
+            "mikomiKokInfoDT": [
+              {
+                "btenCd": "00102",
+                "kokCd": "AA1010163895",
+                "kanNm": "正",
+                "jusyo": "25-22",
+                "telNo": "0828787206",
+                "mikomiKbn": "1",
+                "daiCd": "99",
+                "chuCd": "99",
+                "shoCd": "  ",
+                "mkmTsoCd": "9999",
+                "shodanFlg": "0",
+                "entryDate": "20251028",
+                "cycleNo": "1",
+                "kokNm": "古あ　ああ",
+                "mkmNaiyo": "1",
+                "mkmNaiyoNm": "",
+                "mkmcstmKbn": "0",
+                "rank": "1",
+                "rankNm": "1",
+                "tantoNm": "担当者名漢字テスト",
+                "mkmTsoNm": "売上合計",
+                "tantoCd": "0001",
+                "followDate": "20260124",
+                "followKsu": 99,
+                "shushuCd": "1",
+                "shushuNm": "",
+                "shnNm": "",
+                "cmt": "WTY23001 register test"
+              }
+            ],
+            "transitionDT": [
+              {
+                "transitKbn": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "mkmTsoCd_false": "1234",
+        "mkmTsoCd_27": "999999",
+        "mkmTsoCd_27_false": "123456",
+        "cmt": "WTY23001 register test"
+      }
+    },
+    "TC_51": {
+      "description": "register Potential Customers error",
+      "sessionData": [
+        {
+          "key": "WTZ11201_OUT_SD",
+          "value": {
+            "kokDetailInfoDT": [
+              {
+                "gaibujohoKbn": "999",
+                "jgyksCd": "9999",
+                "kokCd": "AA1010163895",
+                "nendo": "2025",
+                "syoriKbn": "1"
+              }
+            ]
+          }
+        },
+        {
+          "key": "cartInfoDS",
+          "value": {
+            "cartHeaderDT": [
+              {
+                "jznuridenNo": "00102498009649",
+                "jznuridenHkkDate": "20250306",
+                "jznuridenFlg": "0",
+                "kokCd": "AA1010163895",
+                "kokNm": "山田 太郎",
+                "kokMientKbn": "0",
+                "uesamaFlg": "0",
+                "kokKanKbn": "1",
+                "kanNo": "MEM12345678901234567890",
+                "cdSbt": "1001",
+                "riyoKPnt": 500.0,
+                "oyaKokCd": "",
+                "oyaKokKanKbn": "0",
+                "pstNo": "1000001",
+                "knjJus": "東京都千代田区千代田1-1",
+                "haikojiDate": "20251201",
+                "haiTimetNm": "午前中",
+                "binNo": "03",
+                "wakuKbn": "0",
+                "wakuNm": "通常枠",
+                "shkoHou": "1",
+                "haiKbn": "1",
+                "haiSbt": "1",
+                "chikiCd": "10304365",
+                "chikiNm": "東京エリア",
+                "shkobtenCd": "00102",
+                "shkobtenNm": "新宿店",
+                "rnrkMcFlg": "0",
+                "rnrkyoteiDate": "20251130",
+                "cmtCd1": "01",
+                "cmtCd2": "02",
+                "cmtCd3": "",
+                "cmtCd4": "",
+                "rnrkjikou": "配送前に連絡希望",
+                "hbKbn": "1",
+                "posKanSnsi": "0",
+                "telflwum": "1",
+                "dmFlg": "0",
+                "uriTtlKin": 15000.0,
+                "uriZei": 1500.0,
+                "pntTtl": 150.0,
+                "uriTtlSu": 3.0,
+                "shoritanFlg": "1",
+                "pntKyseiTs": "1",
+                "jznuriStatus": "10",
+                "jznuriNo": "00001",
+                "htcycNo": 51,
+                "kokKanjtKbnNm": "通常会員",
+                "hjKokTelNo": "09012345678",
+                "iriuriKbn": "0",
+                "irikokMientKbn": "0",
+                "irikokCd": "",
+                "irikokNm": "鈴木 次郎",
+                "irikokKanKbn": "0",
+                "iriOyaKokCd": "",
+                "iriOyaKokKanKbn": "",
+                "irikokKanjtKbnNm": "",
+                "mmrYukoKkn": "20251231",
+                "tknbkKin": 0,
+                "mmrTanCd": "00012",
+                "cksFlg": "0",
+                "shkaKtenCd": "0003",
+                "otdksYoteiDate": "20251202",
+                "otdksYoteiTime": "1400",
+                "ldtmNsu": "02",
+                "haisgsKbn": "01",
+                "haisSvKbn": "01",
+                "haisYmdStiKbn": "1",
+                "haiSteiSbt": "1",
+                "sgyoWakuNo": "01",
+                "konpoKahi": "1",
+                "cardboardId": "BOX0000001",
+                "mmrHkkDate": "20251120",
+                "riyoKPntKbp": 100,
+                "pntTtlKbp": 100
+              }
+            ],
+            "cartUriMeiDT": [
+              {
+                "jznuridenNo": "00102498009649",
+                "jznuridenHkkDate": "20250306",
+                "jznurigyoNo": "001",
+                "jznurisetgyoNo": "00",
+                "shnCd": "00010006344",
+                "setKbn": "0",
+                "janCd": "04905524474862",
+                "daiCd": "11",
+                "chuCd": "10",
+                "shoCd": "32",
+                "clsbrCd": "65",
+                "shnRnk": "F",
+                "shnRnk2": "",
+                "btrKbn": "1",
+                "mkKata": "MODEL-X-2025",
+                "hjMkKata": "MODEL-X-2025",
+                "rykmkrNmKnj": "Sony",
+                "shnNm": "Sony Bravia 55 Inch 4K TV",
+                "uritkZeik": 150000,
+                "uritkZein": 136364,
+                "bkhskkNo": "PROMO2025-001",
+                "shudonbkCd1": "01",
+                "nbkstKbnSd1": "1",
+                "nbkKinSd1Zeik": 5000,
+                "nbkKinSd1Zein": 4545,
+                "nbkRtSd1": 3.5,
+                "shudonbkCd2": "",
+                "nbkstKbnSd2": "0",
+                "nbkKinSd2Zeik": 0,
+                "nbkKinSd2Zein": 0,
+                "nbkRtSd2": 0.0,
+                "mnbkCd": "05",
+                "nbkstKbnM": "1",
+                "nbkKinMZeik": 1000,
+                "nbkKinMZein": 909,
+                "nbkRtM": 0.0,
+                "isknbkCd": "",
+                "nbkstKbnIsk": "0",
+                "nbkKinIskZeik": 0,
+                "nbkKinIskZein": 0,
+                "nbkRtIsk": 0.0,
+                "bkKeiTtlGaku": 144000,
+                "bkKeiZein": 130909,
+                "suryo": 1,
+                "thiKbn": "1",
+                "thibtenCd": "00123",
+                "thibtenNm": "新宿本店",
+                "zaiBasho": "1",
+                "zaiJt": "1",
+                "icbMckrFlg": "1",
+                "hkwtbFlg": "1",
+                "mkhshKkn": "012",
+                "hshKkn": "036",
+                "hjHshKkn": "3年",
+                "asHshKkn": "000",
+                "hjAsHshKkn": "",
+                "yukoBrnbkRt": 0.0,
+                "yukoBrnbkGk": 0,
+                "yukoBrnbkKbn": "00",
+                "pntFuyoKbn": "1",
+                "pntnbkSntkKbn": "0",
+                "pntStKbn": "1",
+                "pnttkbknbkKbn": "0",
+                "pntGaku": 1440,
+                "pntBrt": 1.0,
+                "pnthskkNo": "POINT-CP-2025",
+                "pntnbkRt": 0.0,
+                "pntnbkGaku": 0,
+                "pntnbkKbn": "00",
+                "tkpntstKbn": "0",
+                "tkpntTkbknbkKbn": "0",
+                "tkpntKin": 100,
+                "tkpntBrt": 1.0,
+                "tkpnthskkNo": "SP-PROMO-001",
+                "tkpntnbkRt": 0.0,
+                "tkpntnbkKin": 0,
+                "tkpntnbkKbn": "00",
+                "pntKei": 1540,
+                "nbkhskkNo": "DISC-PROMO-99",
+                "tkHnkNgFlg": "0",
+                "hkwtbBtnSeiFlg": "1",
+                "thiSeiFlg": "0",
+                "zaiZokuSeiFlg": "1",
+                "nbkBtnSeiFlg": "0",
+                "kihonPntRt": 1.0,
+                "kanBaikaFlg": "1",
+                "lastBkZeik": 150000,
+                "zeiKbn": "1",
+                "zeiRt": 10.0,
+                "koshnSu": 0,
+                "hjThi": "AUTO",
+                "hjZaiZoku": "1",
+                "tknbkKbnSd1": "0",
+                "tknbkKbnSd2": "0",
+                "thKbn": "2",
+                "htbDate": "20251101",
+                "htbDateHjKbn": "1",
+                "tentrKahiFlg": "1",
+                "chksKahiFlg": "1",
+                "shnChotsuKbn": "1",
+                "ykbrKahiFlg": "1",
+                "nykaskGntShnFlg": "0",
+                "gntLecBtenCd1": "",
+                "gntLecBtenCd2": "",
+                "gntLecBtenCd3": "",
+                "kkngntHskkNo": "TIME-SALE-2025",
+                "kkngntRiyoStrDate": "20251201",
+                "kkngntRiyoEndDate": "20251231",
+                "kkngntpntStKbn": "1",
+                "kkngntPntGaku": 500,
+                "kkngntPntBrt": 5.0,
+                "kkngntPntKei": 500,
+                "autonbkOutKbn": "0",
+                "autoAddTsogyoNo": "",
+                "entKbn": "0",
+                "nbkKnrNo": "0",
+                "nbkSeiChkFlg": "1",
+                "autoNbkCd": ""
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "",
+            "blkCd": "",
+            "btenCd": "",
+            "btrktKbn": "",
+            "chainId": "",
+            "csNmKn": "",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "",
+            "tanCd": "",
+            "tanNmKnj": "",
+            "tanNmKn": "",
+            "shaGyoshaCd": " ",
+            "shaFlg": "3",
+            "shoribtenCd": "",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ11201"
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "mkmTsoCd_false": "1234",
+        "mkmTsoCd_27": "999999",
+        "mkmTsoCd_27_false": "123456",
+        "cmt": "WTY23001 register fail",
+        "followKsu": "10"
+      }
+    },
+    "TC_52": {
+      "description": "update Potential Customers",
+      "sessionData": [
+        {
+          "key": "WTY23002_OUT_SD",
+          "value": {
+            "mikomiKokInfoDT": [
+              {
+                "btenCd": "9999",
+                "kokCd": "AA1010163895",
+                "kanNm": "正",
+                "jusyo": "25-22",
+                "telNo": "0828-787206",
+                "mikomiKbn": "1",
+                "daiCd": "99",
+                "chuCd": "99",
+                "shoCd": "  ",
+                "mkmTsoCd": "9999",
+                "shodanFlg": "0",
+                "entryDate": "20251028",
+                "cycleNo": "1",
+                "kokNm": "古あ　ああ",
+                "mkmNaiyo": "1",
+                "mkmNaiyoNm": "",
+                "rank": "1",
+                "rankNm": "1",
+                "tantoNm": "担当者名漢字テスト",
+                "mkmTsoNm": "売上合計",
+                "tantoCd": "9999",
+                "followDate": "20260124",
+                "followKsu": 99,
+                "shushuCd": "1",
+                "shushuNm": "",
+                "shnNm": "",
+                "cmt": "WTY23001 register test"
+              }
+            ],
+            "transitionDT": [
+              {
+                "transitKbn": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "followKsu": "20",
+        "cmt": "WTY23001 UPDATE"
+      }
+    },
+    "TC_53": {
+      "description": "delete Potential Customers",
+      "sessionData": [
+        {
+          "key": "WTY23002_OUT_SD",
+          "value": {
+            "mikomiKokInfoDT": [
+              {
+                "btenCd": "",
+                "kokCd": "AA1010163895",
+                "kanNm": "正",
+                "jusyo": "25-22",
+                "telNo": "0828-787206",
+                "mikomiKbn": "1",
+                "daiCd": "99",
+                "chuCd": "99",
+                "shoCd": "  ",
+                "mkmTsoCd": "9999",
+                "shodanFlg": "",
+                "entryDate": "",
+                "cycleNo": "1",
+                "kokNm": "古あ　ああ",
+                "mkmNaiyo": "1",
+                "mkmNaiyoNm": "",
+                "mkmcstmKbn": "0",
+                "rank": "1",
+                "rankNm": "1",
+                "tantoNm": "担当者名漢字テスト",
+                "mkmTsoNm": "売上合計",
+                "tantoCd": "0001",
+                "followDate": "20260124",
+                "followKsu": 99,
+                "shushuCd": "1",
+                "shushuNm": "",
+                "shnNm": "",
+                "cmt": "WTY23001 register test"
+              }
+            ],
+            "transitionDT": [
+              {
+                "transitKbn": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "tantoCd": "001",
+        "mkmTsoCd": "9999",
+        "mkmTsoCd_false": "1234",
+        "mkmTsoCd_27": "999999",
+        "mkmTsoCd_27_false": "123456",
+        "cmt": "WTY23001 register test"
+      }
+    }
+  }
+}
