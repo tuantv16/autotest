@@ -3,7 +3,7 @@ import { TY10901Page } from '../../../pages/TY109/wty10901.page';
 
 // Constants
 const Messages = {
-    INPUT_REQUIRED: '事前売上番号、担当者、顧客のいずれかを入力',
+    INPUT_REQUIRED: '事前売上番号、担当者、顧客のいずれかを入力してください。',
     NO_PRESALE_INFO: '該当する事前売上情報が存在しません。',
     CUSTOMER_NOT_FOUND: '顧客情報が存在しません。',
     NUMERIC_INPUT_REQUIRED: '数値で入力してください。',
@@ -232,4 +232,25 @@ test.describe('WTY10901 Search Tests', () => {
         ).toContainText(Messages.CUSTOMER_NOT_FOUND);
         await snapExpect();
     }); 
+
+    test('WTY10901_64', async ({
+      page,
+      baseUrl,
+      snapInput,
+      snapExpect,
+    }) => {
+      await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(500);
+    
+      await PageTY10901.navigate();
+      await page.waitForTimeout(1000);
+      await snapInput();
+
+      await PageTY10901.clickBarcodeByLabel("番号");
+      await page.waitForTimeout(500);
+      await snapExpect();
+      
+      const resultFound = await PageTY10901.waitForTextInBody('スキャナーはFlutterアプリ内でのみ動作します', 10000);
+      expect(resultFound).toBe(true);
+    });
 });
