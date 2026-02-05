@@ -1,0 +1,293 @@
+{
+  "wty23002": {
+    "TC_26": {
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23003"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "tanCd": "12345",
+        "tanCd_false": "123",
+        "mikomiKbn": "1",
+        "mkmCd": "9999",
+        "mkmCd_12345": "12345",
+        "mkmCd_123": "123",
+        "mkmCd_false": "123",
+        "rank": "1",
+        "followDate": "20241301",
+        "followDate_31": "12",
+        "fromDate_second_32": "20240104"
+      }
+    },
+    "TC_44": {
+      "sessionData": [
+        {
+          "key": "WTZ11201_OUT_SD",
+          "value": {
+            "kokDetailInfoDT": [
+              {
+                "gaibujohoKbn": "02",
+                "jgyksCd": "02",
+                "kokCd": "AA1010163895",
+                "nendo": "2025",
+                "syoriKbn": "1"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23002"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "tanCd": "0001",
+        "mikomiKbn": "1",
+        "mkmTsoCd": "1110",
+        "tyusDateFromFrom": "20250101",
+        "tyusDateFromTo": "20251231",
+        "rank": "1"
+      }
+    },
+    "TC_Search_From_WTY23001": {
+      "sessionData": [
+        {
+          "key": "WTY23002_IN_SD",
+          "value": {
+            "mkmSearchCtrlDT": [
+              {
+                "kokFixKbn": "0",
+                "kokCd": "",
+                "kokShimeiKnj": "",
+                "mkiTanCd": "0001",
+                "tanTanNmKnj": "テスト担当者",
+                "mikomiKbn": "1",
+                "tantoCd": "0001",
+                "mkmTsoCd": "1110",
+                "mkmTsoSelect": "",
+                "fromDate": "20250101",
+                "toDate": "20251231",
+                "rank": "1",
+                "kokNm": ""
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23002"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY23001"
+          }
+        }
+      ]
+    }
+  }
+}
