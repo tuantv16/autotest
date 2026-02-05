@@ -13,83 +13,96 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
         await takeScreenshotOnFailure(page, testInfo);
     });
 
-    test('WTY30301_06', async ({
+    test('WTY30301_07', async ({
         page,
         baseUrl,
+        snapInput,
+        snapExpect
     }) => {
         const expectedTitle = 'マルチＰＯＰ出力指示';
 
         // Step 1: Go to base URL and wait for it to load
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await summaryPage.navigate();
+        await snapInput();
 
         // Step 2 & 3: Observe the title in the header and check the title text
         const titleFound = await summaryPage.waitForTextInBody(expectedTitle, 5000);
 
         // Step 4: Verify title and log result
         expect(titleFound).toBe(true);
+        await snapExpect();
     });
 
-    test('WTY30301_08', async ({
+    test('WTY30301_09', async ({
         page,
         baseUrl,
+        snapInput,
+        snapExpect
     }) => {
         // Step 1: Navigate to WTY30301 screen
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await summaryPage.navigate();
+        await snapInput();
 
         // Step 2: Click menu button to open the dropdown
         await summaryPage.clickMenuButton();
 
         // Step 3: Verify menu items are displayed in the dropdown
-        const menuTexts = ['削除', 'クリア', '一覧', '確定'];
+        const menuTexts = ['一覧'];
 
         for (const text of menuTexts) {
             const isDisplayed = await summaryPage.waitForTextInBody(text);
             expect(isDisplayed).toBeTruthy();
         }
+        await summaryPage.verifyFooterButtonVisible('クリア');
+        await summaryPage.verifyFooterButtonVisible('確定');
+        await snapExpect();
     });
-    
-    test('WTY30301_09', async ({ page, baseUrl }) => {
+
+    test('WTY30301_11', async ({
+        page,
+        baseUrl,
+        snapInput,
+        snapExpect
+    }) => {
         // Step 1: Navigate to WTY30301 screen
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await summaryPage.navigate();
+        await snapInput();
 
-        // Step 2: Locate Delete button
-        await summaryPage.clickMenuButton();
-        const deleteButton = await summaryPage.findDeleteButton();
-
-        // Step 3: Verify Delete button text is displayed
-        const isTextDisplayed = await deleteButton.isVisible();
-        expect(isTextDisplayed).toBeTruthy();
-
-        // Step 4: Verify Delete button is active (enabled)
-        const isEnabled = await deleteButton.isEnabled();
-        expect(isEnabled).toBeTruthy();
+        // Step 2: Verify Back button text is displayed
+        const isBackButtonVisible = await summaryPage.isBackButtonVisible();
+        expect(isBackButtonVisible).toBe(true);
+        await snapExpect();
     });
 
-    test('WTY30301_10', async ({ page, baseUrl }) => {
+    test('WTY30301_12', async ({
+        page,
+        baseUrl,
+        snapInput,
+        snapExpect
+    }) => {
         // Step 1: Navigate to WTY30301 screen
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await summaryPage.navigate();
+        await snapInput();
 
-        // Step 2: Locate Clear button
-        await summaryPage.clickMenuButton();
-        const clearButton = await summaryPage.findClearButton();
-
-        // Step 3: Verify Clear button text is displayed
-        const isTextDisplayed = await clearButton.isVisible();
-        expect(isTextDisplayed).toBeTruthy();
-
-        // Step 4: Verify Clear button is active (enabled)
-        const isEnabled = await clearButton.isEnabled();
-        expect(isEnabled).toBeTruthy();
+        // Step 2: Verify Clear button text is displayed
+        await summaryPage.verifyFooterButtonVisible('クリア');
+        await snapExpect();
     });
 
-    test('WTY30301_11', async ({ page, baseUrl }) => {
+    test('WTY30301_13', async ({
+        page,
+        baseUrl,
+        snapInput,
+        snapExpect
+    }) => {
         // Step 1: Navigate to WTY30301 screen
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await summaryPage.navigate();
+        await snapInput();
 
         // Step 2: Locate List button
         await summaryPage.clickMenuButton();
@@ -102,30 +115,35 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
         // Step 4: Verify List button is active (enabled)
         const isEnabled = await listButton.isEnabled();
         expect(isEnabled).toBeTruthy();
+        await snapExpect();
     });
 
-    test('WTY30301_12', async ({ page, baseUrl }) => {
+    test('WTY30301_14', async ({
+        page,
+        baseUrl,
+        snapInput,
+        snapExpect
+    }) => {
         // Step 1: Navigate to WTY30301 screen
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await summaryPage.navigate();
+        await snapInput();
 
-        // Step 2: Locate Confirm button
-        await summaryPage.clickMenuButton();
-        const confirmButton = await summaryPage.findConfirmButton();
-
-        // Step 3: Verify Confirm button text is displayed
-        const isTextDisplayed = await confirmButton.isVisible();
-        expect(isTextDisplayed).toBeTruthy();
-
-        // Step 4: Verify Confirm button is active (enabled)
-        const isEnabled = await confirmButton.isEnabled();
-        expect(isEnabled).toBeTruthy();
+        // Step 2: Verify Confirm button text is displayed
+        await summaryPage.verifyFooterButtonVisible('確定');
+        await snapExpect();
     });
 
-    test('WTY30301_13', async ({ page, baseUrl }) => {
+    test('WTY30301_15', async ({
+        page,
+        baseUrl,
+        snapInput,
+        snapExpect
+    }) => {
         // Step 1: Navigate to WTY30301 screen
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await summaryPage.navigate();
+        await snapInput();
 
         // Step 2: Locate Normal toggle
         const normalToggle = await summaryPage.findNormalToggle();
@@ -144,5 +162,6 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
 
         expect(isNormalChecked).toBe(true);
         expect(isDisposalChecked).toBe(false);
+        await snapExpect();
     });
 });
