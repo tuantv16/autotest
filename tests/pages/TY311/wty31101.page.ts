@@ -17,7 +17,7 @@ export class TY31101Page extends BasePage {
       'button:has(svg path[d^="M2 9V7C2 4 4 2 7 2H17C20 2 22 4 22 7V9"])',
     modal: 'div[class*="_modal_"]',
     errorClass: '_error_cbu4e_24', // From BasePage
-    errorDialog: '#error-dialog',
+    errorDialog: '#wty31101-message-dialog',
   };
 
   public readonly ty311path = 'WTY31101InventoryAttributeChange';
@@ -30,6 +30,7 @@ export class TY31101Page extends BasePage {
     radioDiff: '差異',
     slipNoMenu: '型番検索',
     supplierMenu: '仕入先検索',
+    search: '検索',
   };
   public readonly menuItems = [
     { key: '', text: '商品基本' },
@@ -171,6 +172,32 @@ export class TY31101Page extends BasePage {
     }
     return true;
   }
+
+  /**
+   * Verify that all radio button labels do not have bg-white class
+   * @returns true if none have bg-white class, false otherwise
+   */
+  async verifyRadioLabelsNoBgWhite(): Promise<boolean> {
+    const labels = this.page
+      .locator('label')
+      .filter({ has: this.page.locator('input[type="radio"]') });
+
+    const count = await labels.count();
+    if (count === 0) {
+      return false;
+    }
+
+    for (let i = 0; i < count; i++) {
+      const label = labels.nth(i);
+      const classAttr = await label.getAttribute('class');
+
+      if (classAttr && classAttr.includes('bg-white')) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /**
    * Verify all radio button
    */
@@ -194,9 +221,6 @@ export class TY31101Page extends BasePage {
   }
   async getInputByName(fieldName: string): Promise<Locator> {
     return this.page.locator(`[name="${fieldName}"]`);
-  }
-  async getSupplierName(): Promise<Locator> {
-    return this.page.locator(`[name="supplierName"]`);
   }
 
   /**
@@ -265,7 +289,18 @@ export class TY31101Page extends BasePage {
   async getQuantity(): Promise<string> {
     return await this.getValueByName('quantity');
   }
-
+  async fillSupplierCode(value: string, snapInput?: any): Promise<void> {
+    await this.focusInput('supplierCode', true);
+    await snapInput?.();
+    await this.fillInputByName('supplierCode', value);
+    await this.blurInput('supplierCode', true);
+  }
+  async getSupplierCode(): Promise<string> {
+    return await this.getValueByName('supplierCode');
+  }
+  async getSupplierName(): Promise<string> {
+    return await this.getValueByName('supplierName');
+  }
   async clickButton(text: string): Promise<void> {
     const locator = this.page.locator(`button:has-text("${text}")`);
     await locator.click();
@@ -275,5 +310,67 @@ export class TY31101Page extends BasePage {
 
   async clear(): Promise<void> {
     await this.clickButton(this.labels.clear);
+  }
+  async clickSearch(): Promise<void> {
+    await this.clickButton(this.labels.search);
+  }
+
+  /**
+   * Click Confirm button from the action menu
+   */
+  async clickConfirmMenu(): Promise<void> {
+    await this.clickButton(this.labels.confirm);
+  }
+
+  /**
+   * Verify multiple input fields are not empty
+   */
+  async verifyInputsNotEmpty(formFields: { key: string }[]): Promise<boolean> {
+    for (const { key } of formFields) {
+      const value = await this.getValueByName(key);
+      if (!value.toString()) return false;
+    }
+    return true;
+  }
+
+  /**
+   * Check if error dialog is visible
+   */
+  async isErrorDialogVisible(
+    selector: string = this.selectors.errorDialog,
+  ): Promise<boolean> {
+    const dialog = this.page.locator(selector);
+    return await dialog.isVisible({ timeout: 1000 }).catch(() => false);
+  }
+  /**
+   * Click the OK button on the error dialog
+   */
+  async clickConfirmErrorDialog(
+    selector: string = this.selectors.errorDialog,
+  ): Promise<void> {
+    const dialog = this.page.locator(selector);
+    const okButton = dialog.locator('button').last();
+    await okButton.click().catch(() => {});
+    await this.page.waitForTimeout(500);
+  }
+  /**
+   * Click the cancel button on the error dialog
+   */
+  async clickCancelErrorDialog(
+    selector: string = this.selectors.errorDialog,
+  ): Promise<void> {
+    const dialog = this.page.locator(selector);
+    const okButton = dialog.locator('button').first();
+    await okButton.click().catch(() => {});
+    await this.page.waitForTimeout(500);
+  }
+  async confirmErrorDialog(
+    selector: string = this.selectors.errorDialog,
+  ): Promise<boolean> {
+    if (await this.isErrorDialogVisible(selector)) {
+      await this.clickConfirmErrorDialog(selector);
+      return true;
+    }
+    return false;
   }
 }

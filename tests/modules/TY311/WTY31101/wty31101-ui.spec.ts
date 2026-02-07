@@ -51,7 +51,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
   });
   test('WTY31101_10', async ({ page, indexedDBHelper, snapExpect }) => {
     // verify 差異 is disabled
-    const testData = loadTestData('TY311/wty31101', 'wty31101', 'TC_11');
+    const testData = loadTestData('TY311/wty31101', 'wty31101', 'INIT_DATA');
     await indexedDBHelper.initializeDB({
       sessionData: testData.sessionData,
       commonData: testData.commonData,

@@ -1,6 +1,6 @@
 {
   "wty31101": {
-    "TC_11": {
+    "INIT_DATA": {
       "description": "init session data",
       "sessionData": [],
       "commonData": [
@@ -116,7 +116,24 @@
             "preScreenId": null
           }
         }
-      ]
+      ],
+      "formData": {
+        "slipNo_13": "0000011171670",
+        "slipNo_13_2": "4974019533247",
+        "slipNo_8": "11171670",
+        "slipNo_11": "00010539118",
+        "fullWidth": "１２３４５６７８９０１２３",
+        "quantity": "100",
+        "quantity_5": "-5",
+        "quantity_zero": "0",
+        "quantity_10000": "10000",
+        "supplierCode": "C000047993",
+        "supplierCode_9": "C00004799",
+        "supplierCodeTypeV": "V000999001",
+        "supplierTypeH": "H999900023",
+        "supplierCodeNotFound": "C100047993",
+        "quantityGreaterThan": "150"
+      }
     },
     "TC_18": {
       "description": "init session data",
