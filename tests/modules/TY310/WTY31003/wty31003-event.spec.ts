@@ -38,6 +38,7 @@ test.describe("WTY31003 - 供給移動依頼登録 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await productInputPage.fillInputTanCd(testData.formData.tanCd_52);
     await productInputPage.fillValueIraiDateFrom(
       testData.formData.iraiDateFrom_31,
     );
@@ -45,7 +46,7 @@ test.describe("WTY31003 - 供給移動依頼登録 Test Suite", () => {
     await productInputPage.fillBnrCdInput(testData.formData.bnrCd_52);
     await productInputPage.fillInputShnCd(testData.formData.shnCd_52);
     await productInputPage.blurInputShnCd();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
     await snapInput();
 
     await productInputPage.clickClearButton();
