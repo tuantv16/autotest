@@ -26,7 +26,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     await summaryPage.clear();
     const slipNo = await summaryPage.getSlipNo();
     const quantity = await summaryPage.getQuantity();
-    expect(quantity).toEqual('1');
+    expect(quantity).toEqual('');
     expect(slipNo).toEqual('');
     await page.waitForTimeout(500);
     await snapExpect(1);

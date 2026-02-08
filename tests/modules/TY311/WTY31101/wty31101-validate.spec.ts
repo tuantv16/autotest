@@ -314,7 +314,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     expect(quantity).toBe('1000');
     await snapExpect(1);
   });
-  test('WTY31101_38_57_58', async ({
+  test('WTY31101_38', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -373,7 +373,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     expect(supplierName).toBe('');
     await snapExpect(1);
   });
-  test('WTY31101_40_59', async ({
+  test('WTY31101_40', async ({
     page,
     indexedDBHelper,
     snapInput,
