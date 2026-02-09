@@ -130,15 +130,54 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         indexedDBHelper,
         snapExpect,
     }) => {
-        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_not_data');
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_full_data');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
             commonData: testData.commonData,
         });
         await testPage.navigate();
-        const classTable = await testPage.hasChildElements(testPage.Locators.classTable);
-        expect(classTable).toBe(false);
+
+        const amountOfProducts = testData.sessionData?.[0]?.value?.cartUriMeiDT?.length ?? 0;
+        const amountOfRows = await testPage.countTableRows();
+        expect(amountOfRows).toEqual(amountOfProducts - 1);
+
+        for (let i = 1; i < amountOfRows; i++) {
+            const row = await testPage.getRowByIndex(i - 1);
+            const textInRows = testPage.Input.inputTable.map(key =>
+                testData.sessionData?.[0]?.value?.cartUriMeiDT?.[i]?.[key] ?? ''
+            );
+
+            expect(await testPage.verifyTextsInRow(row, textInRows)).toBe(true);
+        }
+
+        const index = Number(testData.sessionData?.[0]?.value?.indexDT?.[0]?.index ?? 0) + 1
+
+        expect(await testPage.getInputValue(testPage.Selectors.productNo)).toEqual((index).toString());
+        await snapExpect();
+
+        const productKata = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.mkKata;
+        expect (await testPage.getInputValue(testPage.Selectors.productKata)).toEqual(productKata)
+
+        const thKbn = await testPage.getThKbnName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thKbn);
+        expect (await testPage.getInputValue(testPage.Selectors.thKbn)).toEqual(thKbn);
+
+        const chksKahiFlg = await testPage.getCksKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.chksKahiFlg);
+        expect (await testPage.getInputValue(testPage.Selectors.chksKahiFlg)).toEqual(chksKahiFlg);
+
+        const ykbrKahiFlg = await testPage.getYbKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.ykbrKahiFlg);
+        expect (await testPage.getInputValue(testPage.Selectors.ykbrKahiFlg)).toEqual(ykbrKahiFlg);
+
+        const thibtenNm = await testPage.emptyToSpace(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thibtenNm);
+        expect (await testPage.getInputValue(testPage.Selectors.thibtenNm)).toEqual(thibtenNm);
+
+        const zaiZokuSeiFlg = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.zaiZokuSeiFlg;
+        if (!zaiZokuSeiFlg) {
+            const zaiJt = testData.sessionData?.[0]?.value?.cartUriMeiDT?.[index]?.zaiJt;
+            const zaiJtName = await testPage.getZaiJtName(zaiJt);
+            expect (await testPage.hasParentLabelWithBgWhite(zaiJtName)).toBe(true);
+        }
+
         await snapExpect();
     });
 
@@ -253,4 +292,134 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         }
     });
 
+    test('WTY20601_16', async ({
+       page,
+       baseUrl,
+       indexedDBHelper,
+       snapExpect,
+   }) => {
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_btnTextbox');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY206_WTY20601InitBC)
+            );
+        }, { timeout: 15000 });
+
+        await testPage.navigate();
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+        await testPage.fillBtnTextBox("test_error_msg");
+        await testPage.blurInputById(testPage.Locators.idBtnTextBox);
+        const messageError = await testPage.waitForTextInBody(testPage.Texts.errorBtnTextBox);
+        expect(messageError).toBe(true);
+        await snapExpect();
+    });
+
+    test('WTY20601_17', async ({
+       page,
+       baseUrl,
+       indexedDBHelper,
+       snapExpect,
+   }) => {
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_btnTextbox');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY206_WTY20601InitBC)
+            );
+        }, { timeout: 15000 });
+
+        await testPage.navigate();
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+        await testPage.selectedOption(testPage.Texts.zaiJt, testPage.ZAI_JT_NM.NEW);
+        await testPage.selectedOption(testPage.Texts.thiKbn, testPage.THI_KBN_NM.AUTO);
+        expect(await testPage.isBtnTextBoxDisabled()).toBe(true);
+
+        await testPage.selectedOption(testPage.Texts.thiKbn, testPage.THI_KBN_NM.JITEN);
+        expect(await testPage.isBtnTextBoxDisabled()).toBe(true);
+
+        await testPage.selectedOption(testPage.Texts.thiKbn, testPage.THI_KBN_NM.TATEN);
+        expect(await testPage.isBtnTextBoxDisabled()).toBe(false);
+
+        await testPage.selectedOption(testPage.Texts.thiKbn, testPage.THI_KBN_NM.SUMI);
+        expect(await testPage.isBtnTextBoxDisabled()).toBe(true);
+
+        await snapExpect();
+    });
+
+    test('WTY20601_18', async ({
+       page,
+       baseUrl,
+       indexedDBHelper,
+       snapExpect,
+   }) => {
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_18');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY206_WTY20601InitBC)
+            );
+        }, { timeout: 15000 });
+
+        await testPage.navigate();
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+        const deliveryPlaceSection = await testPage.waitForTextInBody(testPage.Texts.deliveryPlaceSection);
+        expect(deliveryPlaceSection).toBe(true);
+
+        await snapExpect();
+    });
+
+    test('WTY20601_19', async ({
+       page,
+       baseUrl,
+       indexedDBHelper,
+       snapExpect,
+   }) => {
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_btnTextbox');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY206_WTY20601InitBC)
+            );
+        }, { timeout: 15000 });
+
+        await testPage.navigate();
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+        await testPage.fillBtnTextBox("test");
+        const departmentStore = await testPage.waitForTextInBody(testPage.Texts.departmentStore);
+        expect(departmentStore).toBe(true);
+        await snapExpect();
+    });
 });
