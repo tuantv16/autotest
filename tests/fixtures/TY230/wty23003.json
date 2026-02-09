@@ -1,0 +1,119 @@
+{
+  "wty23003": {
+    "TC_04": {
+      "description": "WTY23003 - View prospect detail",
+      "sessionData": [
+        {
+          "key": "WTY23003_IN_SD",
+          "value": {
+            "mikomiKokInfoDT": [
+              {
+                "btenCd": "9999",
+                "kokCd": "AA1010163895",
+                "kanNm": "正",
+                "jusyo": "25-22",
+                "telNo": "0828-787206",
+                "mikomiKbn": "1",
+                "daiCd": "99",
+                "chuCd": "99",
+                "shoCd": "  ",
+                "mkmTsoCd": "9999",
+                "shodanFlg": "0",
+                "entryDate": "20251028",
+                "cycleNo": "1",
+                "kokNm": "古あ　ああ",
+                "mkmNaiyo": "1",
+                "mkmNaiyoNm": "新規",
+                "rank": "1",
+                "rankNm": "購入意思決定、購入日決定",
+                "tantoNm": "担当者名漢字テスト",
+                "mkmTsoNm": "売上合計",
+                "tantoCd": "9999",
+                "followDate": "20260124",
+                "followKsu": "99",
+                "shushuCd": "1",
+                "shushuNm": "一声",
+                "shnNm": "",
+                "cmt": "WTY23001 register test"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23003"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY23002"
+          }
+        }
+      ]
+    }
+  }
+}

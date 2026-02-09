@@ -618,9 +618,9 @@ export class WTY31001Page extends BasePage {
     await this.page.locator(this.selectors.tSuDelToggle).click();
   }
 
-  async expectAllLabelsNotRed(
+  async expectAllLabelsNotColor(
     options?: ExcludeKeys<typeof this.labelSelectors>,
-    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -635,9 +635,9 @@ export class WTY31001Page extends BasePage {
     }
   }
 
-  async expectAllLabelsRed(
+  async expectAllLabelsColor(
     options?: ExcludeKeys<typeof this.labelSelectors>,
-    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -652,9 +652,9 @@ export class WTY31001Page extends BasePage {
     }
   }
 
-  async expectAllInputBordersNotRed(
+  async expectAllInputBordersNotColor(
     options?: ExcludeKeys<typeof this.inputSelectors>,
-    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -669,9 +669,9 @@ export class WTY31001Page extends BasePage {
     }
   }
 
-  async expectAllInputBordersRed(
+  async expectAllInputBordersColor(
     options?: ExcludeKeys<typeof this.inputSelectors>,
-    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)/,
+    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 

@@ -13,12 +13,21 @@ export const COMMON_MESSAGES = {
   // Error messages
   VALIDATION_ERROR: '入力内容に誤りがあります',
   REQUIRED_FIELD: '必須項目です',
+  REQUIRED_FIELDS_MISSING: '必須項目が未入力です',
+  HALF_WIDTH_REQUIRED: '半角で入力してください。',
+  PLEASE_ENTER_FOLLOW_DATE: 'フォロー日を入力してください',
+  FOLLOW_DATE_MUST_BE_BEFORE_OPERATION_DATE:
+    'フォロー日は運用日以前の日付を入力してください',
+  FOLLOW_COUNT_MUST_BE_1_OR_MORE: 'フォロー回数は1以上で入力してください',
+  COMMENT_LENGTH_EXCEEDED: 'コメントは100バイト以内で入力してください',
+
   // Confirmation messages
   CONFIRM_SAVE: '保存しますか？',
   CONFIRM_DELETE: '削除しますか？',
   CONFIRM_CANCEL: 'キャンセルしますか？',
 
   ERROR_MESSAGE_ADD_CART: '商品が指定されていません。商品を指定してください',
+  ERROR_FLUTTER_DEVICE: 'スキャナーはFlutterアプリ内でのみ動作します',
 } as const;
 
 export const BUTTON_LABELS = {
@@ -33,10 +42,12 @@ export const BUTTON_LABELS = {
 export const VALIDATION_ERROR_MESSAGES = {
   REQUIRED_FIELD: '必須入力エラー',
   INVALID_LENGTH: '商品の桁数が正しくありません',
+  START_DATE_AFTER_END_DATE: '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
+
   HALF_WIDTH_REQUIRED: '半角で入力してください。',
   FULL_WIDTH_REQUIRED: '全角で入力してください。',
   INVALID_LATER_DATE: '以降の日付を入力してください。',
-  INVALID_DATE_AFTER_REIWA_70 : '令和70年以降になるため入力できません',
+  INVALID_DATE_AFTER_REIWA_70: '令和70年以降になるため入力できません',
 } as const;
 
 /**
@@ -55,11 +66,23 @@ export const WTY30302 = {
   },
 } as const;
 
+/**
+ * WTY23002 (見込み客照会) validation messages
+ */
+export const WTY23002_MESSAGES = {
+  PROSPECT_TARGET_CODE_REQUIRED_4_DIGITS:
+    '見込対象コードは4桁で入力してください',
+  PROSPECT_TARGET_CODE_REQUIRED_6_DIGITS:
+    '見込対象コードは6桁で入力してください',
+  NO_DATA_FOUND: '該当データが存在しません。',
+  INVALID_DATE_FORMAT: '日付の形式が正しくありません',
+  INVALID_DATE_RANGE: '抽出期間の開始日は終了日以前を入力してください',
+} as const;
 export const WTY30303 = {
   TITLE: 'セール選択',
   CONFIRM: '確定',
   NOTICE_PRINTED: '青色のセールは印刷指示済です',
-  NO_DATA: '該当データが存在しません。',
+  NO_DATA: 'セールが存在しません。',
   PARAM_ERROR: 'パラメータ不正（部店コード）が誤っています。',
   MULTI_POP_TITLE: 'マルチＰＯＰ出力指示',
 
@@ -69,4 +92,3 @@ export const WTY30303 = {
   MULTI_COMMENT_ZUBARI: 'ズバリ',
   MULTI_COMMENT_INPRO: 'インプロ',
 } as const;
-

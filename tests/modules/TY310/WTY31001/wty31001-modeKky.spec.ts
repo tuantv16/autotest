@@ -29,11 +29,13 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 3: Initially in 返品 mode, click 供給 radio
     await productInputPage.clickHpnRadio();
     await page.waitForTimeout(500);
+    await snapInput(1);
+    await productInputPage.scrollToBottom();
+    await snapInput(2);
 
     // Step 4: Switch to 供給 mode
     await productInputPage.clickKkyRadio();
     await page.waitForTimeout(1000);
-    await snapInput();
 
     // Verify: Check title page
     const titlePage = await productInputPage.getTitlePage();
@@ -48,13 +50,15 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(isKaikonIriVisible).toBe(false);
 
     // Verify: Labels and input borders are default color
-    await productInputPage.expectAllLabelsNotRed({
+    await productInputPage.expectAllLabelsNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
-    await productInputPage.expectAllInputBordersNotRed({
+    await productInputPage.expectAllInputBordersNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
-    await snapExpect();
+    await snapExpect(1);
+    await productInputPage.scrollToBottom();
+    await snapExpect(2);
   });
 
   test("WTY31001_52", async ({ page, baseUrl, snapInput, snapExpect }) => {

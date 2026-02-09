@@ -1,0 +1,305 @@
+{
+  "wtz12201": {
+    "TC_01": {
+      "description": "Init data",
+      "sessionData": {
+        "key": "WTZ12201_IN_SD",
+        "value": {
+          "resultSet": {
+            "setSetNbkSResultDT": {
+              "applySskDT": [
+                {
+                  "sskNbkNm": "テスト販促",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://cdn4.vieclam24h.vn/promotion_la_gi_03_dcca392dc1.jpeg"
+                },
+                {
+                  "sskNbkNm": "MAXSIZE_XXXXXXXXXXXXXXXXXXXXXXXXX_VARCHAR2(60)",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://www.pace.edu.vn/uploads/news/2024/08/2-cac-thuat-ngu-lien-quan-den-promotion.jpg"
+                },
+                {
+                  "sskNbkNm": "あいうえおかきくけこしすせそたちつてとなにぬねのはひふへほ",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://prodima.vn/wp-content/uploads/2022/01/5-yeu-to-quan-trong-giup-chien-dich-promotion-mix-cua-doanh-nghiep-thanh-cong.jpg"
+                }
+              ],
+              "rcmndSskDT": [
+                {
+                  "sskNbkNm": "POPUP背景青パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": "https://blog.topcv.vn/wp-content/uploads/2024/05/sales-promotion-la-gi-topcv-07.jpg"
+                },
+                {
+                  "sskNbkNm": "POPUP背景青白パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": "https://cdn2.fptshop.com.vn/unsafe/promotion_la_gi_4_4d1df7979f.png"
+                },
+                {
+                  "sskNbkNm": "POPUP背景色白_TOPBOTTOM白パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": ""
+                }
+              ]
+            }
+          }
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "formData": {},
+      "outputData": {
+        "titlePopup": "テスト販促",
+        "titlePopup_44": "MAXSIZE_XXXXXXXXXXXXXXXXXXXXXXXXX_VARCHAR2(60)",
+        "titlePopup_45": "POPUP背景青白パターン_エアコン"
+      },
+      "expectedMessages": {}
+    },
+    "TC_02": {
+      "description": "Handle data",
+      "sessionData": {
+        "key": "WTZ12201_IN_SD",
+        "value": {
+          "resultSet": {
+            "setSetNbkSResultDT": {
+              "applySskDT": [
+                {
+                  "sskNbkNm": "春のセール",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://cdn4.vieclam24h.vn/promotion_la_gi_03_dcca392dc1.jpeg"
+                },
+                {
+                  "sskNbkNm": "MAXSIZE_XXXXXXXXXXXXXXXXXXXXXXXXX_VARCHAR2(60)",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://www.pace.edu.vn/uploads/news/2024/08/2-cac-thuat-ngu-lien-quan-den-promotion.jpg"
+                },
+                {
+                  "sskNbkNm": "あいうえおかきくけこしすせそたちつてとなにぬねのはひふへほ",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://prodima.vn/wp-content/uploads/2022/01/5-yeu-to-quan-trong-giup-chien-dich-promotion-mix-cua-doanh-nghiep-thanh-cong.jpg"
+                }
+              ],
+              "rcmndSskDT": [
+                {
+                  "sskNbkNm": "POPUP背景青パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": "https://blog.topcv.vn/wp-content/uploads/2024/05/sales-promotion-la-gi-topcv-07.jpg"
+                },
+                {
+                  "sskNbkNm": "POPUP背景青白パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": "https://cdn2.fptshop.com.vn/unsafe/promotion_la_gi_4_4d1df7979f.png"
+                },
+                {
+                  "sskNbkNm": "POPUP背景色白_TOPBOTTOM白パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": ""
+                }
+              ]
+            }
+          }
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "formData": {},
+      "outputData": {
+        "wtz12201AppliedGrid": {
+          "row-index": 2,
+          "sskNbkNm": "春のセール",
+          "nbkStrDate": "2023/07/24-2023/07/25"
+        },
+        "labelEndOfData": "End Of Data"
+      },
+      "expectedMessages": {}
+    },
+    "TC_03": {
+      "description": "Testcase no data applySskDT and rcmndSskDT",
+      "sessionData": {
+        "key": "WTZ12201_IN_SD",
+        "value": {
+          "resultSet": {
+            "setSetNbkSResultDT": {
+              "applySskDT": [],
+              "rcmndSskDT": []
+            }
+          }
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "formData": {},
+      "outputData": {
+        "messageNoAppliedPromotion": "適用する販促情報はありませんでした",
+        "messageNoRecommendedPromotion":"おすすめする販促情報はありませんでした"
+
+      },
+      "expectedMessages": {}
+    },
+    "TC_04": {
+      "description": "Testcase no exists property applySskDT and rcmndSskDT",
+      "sessionData": {
+        "key": "WTZ12201_IN_SD",
+        "value": {
+          "resultSet": {
+            "setSetNbkSResultDT": {
+  
+            }
+          }
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "formData": {},
+      "outputData": {
+        "messageNoAppliedPromotion": "適用する販促情報はありませんでした",
+        "messageNoRecommendedPromotion":"おすすめする販促情報はありませんでした"
+
+      },
+      "expectedMessages": {}
+    },
+    "TC_05": {
+      "description": "Testcase no exists property applySskDT and rcmndSskDT",
+      "sessionData": {
+        "key": "WTZ12201_IN_SD",
+        "value": {
+          "resultSet": {
+            "setSetNbkSResultDT": {
+              "applySskDT": [
+                {
+                  "sskNbkNm": "最大サイズ_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX_VARCHAR2(60)",
+                  "nbkStrDate": "",
+                  "nbkEndDate": "",
+                  "filePathAdd": "https://cdn4.vieclam24h.vn/promotion_la_gi_03_dcca392dc1.jpeg"
+                },
+                {
+                  "sskNbkNm": "MAXSIZE_XXXXXXXXXXXXXXXXXXXXXXXXX_VARCHAR2(60)",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://www.pace.edu.vn/uploads/news/2024/08/2-cac-thuat-ngu-lien-quan-den-promotion.jpg"
+                },
+                {
+                  "sskNbkNm": "あいうえおかきくけこしすせそたちつてとなにぬねのはひふへほ",
+                  "nbkStrDate": "20230724",
+                  "nbkEndDate": "20230725",
+                  "filePathAdd": "https://prodima.vn/wp-content/uploads/2022/01/5-yeu-to-quan-trong-giup-chien-dich-promotion-mix-cua-doanh-nghiep-thanh-cong.jpg"
+                }
+              ],
+              "rcmndSskDT": [
+                {
+                  "sskNbkNm": "POPUP背景青パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": "https://blog.topcv.vn/wp-content/uploads/2024/05/sales-promotion-la-gi-topcv-07.jpg"
+                },
+                {
+                  "sskNbkNm": "POPUP背景青白パターン_エアコン",
+                  "nbkStrDate": "20230824",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": "https://cdn2.fptshop.com.vn/unsafe/promotion_la_gi_4_4d1df7979f.png"
+                },
+                {
+                  "sskNbkNm": "POPUP背景色白_TOPBOTTOM白パターン_エアコン",
+                  "nbkStrDate": "",
+                  "nbkEndDate": "20230825",
+                  "filePathAdd": ""
+                }
+              ]
+            }
+          }
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "unyoDate": "20250210",
+            "storeCd": "C0001",
+            "syoriStoreCd": "C0001",
+            "syoriStoreNmKnj": "テスト店舗",
+            "userId": "testuser",
+            "clientId": "client01",
+            "termNo": "TERM01",
+            "assetsNo": "ASSET01",
+            "keepPeriod": "6"
+          }
+        }
+      ],
+      "formData": {},
+      "outputData": {
+        "messageNoAppliedPromotion": "適用する販促情報はありませんでした",
+        "messageNoRecommendedPromotion":"おすすめする販促情報はありませんでした"
+
+      },
+      "expectedMessages": {}
+    }
+  }
+}
