@@ -6,7 +6,7 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
 import { TY30302Page } from '../../../pages/TY303/wty30302.page';
-import { WTY30302 } from '../../../constants/messages'; 
+import { WTY30302_COLUMN_NAMES } from '../../../constants/TY303/messages';
 
 test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
     let summaryPage: TY30302Page;
@@ -65,7 +65,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         }
         
         for (const size of Object.values(sizeMap)) {
-            const hasValue = await summaryPage.isTableCellHaveValue(size, WTY30302.COLUMN_NAMES.SIZE);
+            const hasValue = await summaryPage.isTableCellHaveValue(size, WTY30302_COLUMN_NAMES.SIZE);
             expect(hasValue).toBe(true);
             await snapExpect(size);
         }
@@ -106,7 +106,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         }
          
         for (const cmt of Object.values(cmtMap)) {
-            const hasValue = await summaryPage.isTableCellHaveValue(cmt, WTY30302.COLUMN_NAMES.MULTI_COMMENT);
+            const hasValue = await summaryPage.isTableCellHaveValue(cmt, WTY30302_COLUMN_NAMES.MULTI_COMMENT);
             expect(hasValue).toBe(true);
             await snapExpect(cmt);
         }
@@ -140,7 +140,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         // Verify cmt
         const prtMsu = "5"
 
-        const hasValue = await summaryPage.isTableCellHaveValue(prtMsu, WTY30302.COLUMN_NAMES.QUANTITY);
+        const hasValue = await summaryPage.isTableCellHaveValue(prtMsu, WTY30302_COLUMN_NAMES.QUANTITY);
         expect(hasValue).toBe(true);
         await snapExpect();
     });
@@ -172,7 +172,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         // Verify mkKata
         const mkKata = "ABC-123"
 
-        const hasValue = await summaryPage.isTableCellHaveValue(mkKata, WTY30302.COLUMN_NAMES.MODEL_NUMBER);
+        const hasValue = await summaryPage.isTableCellHaveValue(mkKata, WTY30302_COLUMN_NAMES.MODEL_NUMBER);
         expect(hasValue).toBe(true);
 
         await snapExpect();
@@ -209,7 +209,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         }
 
         for (const kk of Object.values(kkNm)) {
-            const hasValue = await summaryPage.isTableCellHaveValue(kk, WTY30302.COLUMN_NAMES.SALE_NAME);
+            const hasValue = await summaryPage.isTableCellHaveValue(kk, WTY30302_COLUMN_NAMES.SALE_NAME);
             expect(hasValue).toBe(true);
             await snapExpect(kk);
         }
