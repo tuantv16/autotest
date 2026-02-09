@@ -266,6 +266,7 @@ export class TY30301Page extends BasePage {
     async fillOutputDate(value: string): Promise<void> {
         const locator = this.page.locator(this.selectorsTY30301.outputDateInput);
         await this.waitForVisible(locator, 20000);
+        await this.clickClearOutputDateButton();
         await this.fillInput(locator, value);
     }
 
@@ -455,7 +456,9 @@ export class TY30301Page extends BasePage {
 
         // Ensure the element is scrolled into view (important for mobile viewport)
         try {
-            await locator.scrollIntoViewIfNeeded()
+            await locator.evaluate((el) => {
+              el.scrollIntoView({ block: 'center', behavior: 'smooth' })
+            })
             await this.page.waitForTimeout(300)
         } catch {
             // ignore if scrollIntoViewIfNeeded not supported
@@ -619,13 +622,29 @@ export class TY30301Page extends BasePage {
     
         return true; // All fields are empty
     }
+  
+    /**
+     * find サイズ (Size) select box locator
+     * @returns 
+     */
+    async findSizeInput(): Promise<Locator> {
+      const sizeInput = this.page.locator(this.selectors.sizeInput);
+      await this.waitForVisible(sizeInput, 2000);
+      await sizeInput.evaluate((el) => {
+        el.scrollIntoView({ block: 'center', behavior: 'smooth' })
+      });
+
+      await this.page.waitForTimeout(1000);
+
+      return sizeInput;
+    }
     
     /**
      * Check if select boxes have default values initialized
      */
     async checkSizeInputHaveDefaultValue(value: string): Promise<boolean> {
       const locator = this.page.locator(this.selectors.sizeInput);
-      locator.scrollIntoViewIfNeeded();
+      await locator.scrollIntoViewIfNeeded();
       await this.waitForVisible(locator, 1000);
       const valueDefault = await this.getTextOrEmpty(locator);
       if (value !== valueDefault) {
@@ -644,6 +663,10 @@ export class TY30301Page extends BasePage {
 
       // Check if the select is enabled/editable
       const isEnabled = await locator.isEnabled();
+
+      await locator.click(); // Click to open the dropdown
+      await this.waitForVisible(locator, 2000);
+      await this.page.waitForTimeout(1000); // Wait for options to render
 
       return isEnabled;
     }
@@ -693,13 +716,11 @@ export class TY30301Page extends BasePage {
       await this.waitForVisible(disposalInventoryToggle, 500);
       return disposalInventoryToggle;
     }
-    
+
     /**
-     * Check if マルチコメント (Multi Comment) combo box has expected options
+     * Click マルチコメント (Multi Comment) combo box to open options
      */
-    async checkMultiCommentOptions(
-      expectedOptions: Map<string, string>,
-    ): Promise<boolean> {
+    async clickMultiCommentOption(): Promise<void> {
       const locator = this.page.locator(this.selectors.multiCmmentInput);
       locator.scrollIntoViewIfNeeded();
 
@@ -708,6 +729,15 @@ export class TY30301Page extends BasePage {
       // Click to open the dropdown
       await locator.click();
       await this.page.waitForTimeout(500);
+    }
+    
+    /**
+     * Check if マルチコメント (Multi Comment) combo box has expected options
+     */
+    async checkMultiCommentOptions(
+      expectedOptions: Map<string, string>,
+    ): Promise<boolean> {
+      await this.clickMultiCommentOption();
 
       // Get all options from the MUI menu
       const optionLocators = this.page.locator("ul li.MuiButtonBase-root");
@@ -806,7 +836,7 @@ export class TY30301Page extends BasePage {
       const messageElement = errorDialog.locator('p');
       const actualMessage = await messageElement.textContent();
 
-      const message = expectedMessageId ? `${expectedMessage}\n${expectedMessageId}` : expectedMessage;
+      const message = expectedMessageId ? `${expectedMessageId}\n${expectedMessage}` : expectedMessage;
       return actualMessage?.trim() === message;
     }
       

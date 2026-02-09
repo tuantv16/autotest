@@ -208,8 +208,8 @@
                       "screenInfoDT": [
                             {
                                 "sbnhnFlg": "1",
-                                "unyoDate": "20251028",
-                                "shnCd": "00010316801"
+                                "outYmd": "20251028",
+                                "shnCd": "4904550580431"
                             }
                         ]
                   }
@@ -227,6 +227,13 @@
                         "unyoDate": "20251028",
                         "userId": "0596"
                   }
+                },
+                {
+                    "id": "btnInfoDT",
+                    "value": {
+                        "jgyksCd": "03"
+                    }
+                        
                 }
             ]
         },

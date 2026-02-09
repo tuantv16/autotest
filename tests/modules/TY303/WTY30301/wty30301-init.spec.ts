@@ -294,6 +294,9 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
       await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
       await summaryPage.navigate();
 
+      await summaryPage.findSizeInput();
+      await snapInput();
+
       const sizeInputDefaultValue = ""; // value default is empty
       const hasDefaultValues = await summaryPage.checkSizeInputHaveDefaultValue(
         sizeInputDefaultValue,
@@ -326,26 +329,29 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
       });
 
       await summaryPage.navigate();
+      await snapInput();
 
       // Click 通常 button and verify
       const normalToggle = await summaryPage.findNormalToggle();
       await normalToggle.click();
+      await page.waitForTimeout(1000);
 
       // expect shhnFlg value is "0" when click "通常
       const isNormalSelected = await summaryPage.checkSbnhFlgValue("0");
       expect(isNormalSelected).toBe(true);
 
-      await snapInput();
+      await snapExpect(1);
 
       // Click 処分 button and verify
       const disposalToggle = await summaryPage.findDisposalToggle();
       await disposalToggle.click();
+      await page.waitForTimeout(1000);
 
       // expect shhnFlg value is "1" when click "処分
       const isDisposalSelected = await summaryPage.checkSbnhFlgValue("1");
       expect(isDisposalSelected).toBe(true);
 
-      await snapExpect();
+      await snapExpect(2);
     });
 
     test("WTY30301_27", async ({
@@ -367,30 +373,35 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
       });
 
       await summaryPage.navigate();
+      await snapInput();
 
       // Click 処分品 button and verify
       const disposalToggle = await summaryPage.findDisposalToggle();
       await disposalToggle.click();
+      await page.waitForTimeout(1000);
 
       // Click 展示処分 button and verify
       const disposalDisplayToggle =
-        await summaryPage.findDisposalDisplayToggle();
+      await summaryPage.findDisposalDisplayToggle();
       await disposalDisplayToggle.click();
+      await page.waitForTimeout(1000);
 
       // expect dsgnKbn value is "D" when click 展示処分
       let isDisposalSelected = await summaryPage.checkDsgnKbnValue("D");
       expect(isDisposalSelected).toBe(true);
+      await snapExpect(1);
 
       // Click 在庫処分 button and verify
       const disposalInventoryToggle =
-        await summaryPage.findDisposalInventoryToggle();
+      await summaryPage.findDisposalInventoryToggle();
       await disposalInventoryToggle.click();
+      await page.waitForTimeout(1000);
 
       // expect dsgnKbn value is "C" when click 在庫処分
       isDisposalSelected = await summaryPage.checkDsgnKbnValue("C");
       expect(isDisposalSelected).toBe(true);
 
-      await snapExpect();
+      await snapExpect(2);
     });
 
     test("WTY30301_33", async ({
@@ -402,8 +413,13 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
     }) => {
       // Step 1: Access WTY30301 screen
       await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
-      await summaryPage.navigate();
+			await summaryPage.navigate();
 
+			await summaryPage.clickMultiCommentOption();
+			await snapInput();
+			// close dropdown
+			await page.keyboard.press("Escape");
+	
       // Step 2 & 3: Check options in マルチコメント(Cmt_CombBox) and verify the list
       const expectedOptions = new Map([
         ["1", "ズバリ"],
@@ -411,7 +427,7 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
       ]);
 
       const optionsMatch =
-        await summaryPage.checkMultiCommentOptions(expectedOptions);
+      await summaryPage.checkMultiCommentOptions(expectedOptions);
       expect(optionsMatch).toBe(true);
 
       await snapExpect();

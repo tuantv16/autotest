@@ -14,13 +14,7 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test("WTY30301_90", async ({
-    page,
-    baseUrl,
-    indexedDBHelper,
-    snapInput,
-    snapExpect,
-  }) => {
+  test("WTY30301_90", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
     const testData = loadTestData("TY303/wty30301", "wty30301", "TC_05");
 
     // Navigate to WTY30301 screen
@@ -35,17 +29,22 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
     // init screen with sbnFlg is 1
     await summaryPage.navigate();
 
+    // click search with data init from onRestoreScreenInfo
+    await summaryPage.clickButtonSearch();
+
     // clear Output Date field
     await summaryPage.clickClearOutputDateButton();
     await page.waitForTimeout(1000);
     await snapInput();
 
-    // click search button
-    await summaryPage.clickButtonSearch();
+    // Click 確定 and verify error message
+    const confirmButton = await summaryPage.findConfirmButton();
+    await confirmButton.click();
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.OUTPUT_DATE_REQUIRED
+      WTY30301_VALIDATION_MESSAGES.OUTPUT_DATE_REQUIRED.message,
+      WTY30301_VALIDATION_MESSAGES.OUTPUT_DATE_REQUIRED.msgId
     );
     expect(isErrorMessageCorrect).toBeTruthy();
     await snapExpect();
@@ -72,17 +71,22 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
     // init screen with sbnFlg is 1
     await summaryPage.navigate();
 
-    // clear Output Date field
+    // click search with data init from onRestoreScreenInfo
+    await summaryPage.clickButtonSearch();
+
+    // fill Output invalid
     await summaryPage.fillOutputDate("00003232");
     await page.waitForTimeout(1000);
     await snapInput();
 
-    // click search button
-    await summaryPage.clickButtonSearch();
+    // Click 確定 and verify error message
+    const confirmButton = await summaryPage.findConfirmButton();
+    await confirmButton.click();
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.INVALID_DATE_FORMAT
+      WTY30301_VALIDATION_MESSAGES.INVALID_DATE_FORMAT.message,
+      WTY30301_VALIDATION_MESSAGES.INVALID_DATE_FORMAT.msgId,
     );
     expect(isErrorMessageCorrect).toBeTruthy();
     await snapExpect();
@@ -119,7 +123,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.PRODUCT_NOT_SEARCHED
+      WTY30301_VALIDATION_MESSAGES.PRODUCT_NOT_SEARCHED.message,
+      WTY30301_VALIDATION_MESSAGES.PRODUCT_NOT_SEARCHED.msgId,
     );
     expect(isErrorMessageCorrect).toBeTruthy();
     await snapExpect();
@@ -159,7 +164,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.PRODUCT_DOES_NOT_MATCH
+      WTY30301_VALIDATION_MESSAGES.PRODUCT_DOES_NOT_MATCH.message,
+      WTY30301_VALIDATION_MESSAGES.PRODUCT_DOES_NOT_MATCH.msgId,
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -250,7 +256,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.FINAL_PRICE_CANNOT_BE_ZERO
+      WTY30301_VALIDATION_MESSAGES.FINAL_PRICE_CANNOT_BE_ZERO.message,
+      WTY30301_VALIDATION_MESSAGES.FINAL_PRICE_CANNOT_BE_ZERO.msgId,
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -291,7 +298,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_CANNOT_BE_ZERO
+      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_CANNOT_BE_ZERO.message,
+      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_CANNOT_BE_ZERO.msgId,
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -332,7 +340,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.SIZE_REQUIRED
+      WTY30301_VALIDATION_MESSAGES.SIZE_REQUIRED.message,
+      WTY30301_VALIDATION_MESSAGES.SIZE_REQUIRED.msgId,
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -373,7 +382,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.MULTI_COMMENT_REQUIRED
+      WTY30301_VALIDATION_MESSAGES.MULTI_COMMENT_REQUIRED.message,
+      WTY30301_VALIDATION_MESSAGES.MULTI_COMMENT_REQUIRED.msgId,
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -419,7 +429,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.PRICE_MISMATCH
+      WTY30301_VALIDATION_MESSAGES.PRICE_MISMATCH.message,
+      WTY30301_VALIDATION_MESSAGES.PRICE_MISMATCH.msgId
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -464,7 +475,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     let isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_MUST_BE_GREATER
+      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_MUST_BE_GREATER.message,
+      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_MUST_BE_GREATER.msgId
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -483,7 +495,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_MUST_BE_GREATER
+      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_MUST_BE_GREATER.message,
+      WTY30301_VALIDATION_MESSAGES.LISTED_PRICE_MUST_BE_GREATER.msgId
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
@@ -529,7 +542,8 @@ test.describe("WTY30301 - (マルチＰＯＰ出力指示)", () => {
 
     // verify error message
     const isErrorMessageCorrect = await summaryPage.checkValidateErrorMessage(
-      WTY30301_VALIDATION_MESSAGES.PRICE_MISMATCH
+      WTY30301_VALIDATION_MESSAGES.PRICE_MISMATCH.message,
+      WTY30301_VALIDATION_MESSAGES.PRICE_MISMATCH.msgId
     );
 
     expect(isErrorMessageCorrect).toBeTruthy();
