@@ -13,6 +13,92 @@ test.describe('TY31101 - 在庫属性変更', () => {
   test.afterEach(async ({ page }, testInfo) => {
     await takeScreenshotOnFailure(page, testInfo);
   });
+  test('WTY31101_53', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData('TY311/wty31101', 'wty31101', 'INIT_DATA');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.fillSlipNo(testData.formData.SHK_IG_KBN_1, () =>
+      snapInput(1),
+    );
+    await snapInput(2);
+    await summaryPage.clickSearch();
+    await page.waitForTimeout(1000);
+    const isShowDialog = await summaryPage.isErrorDialogVisible();
+    expect(isShowDialog).toBe(true);
+    const message = await summaryPage.waitForTextInBody(
+      WTY31101_MESSAGES.SHK_IG_KBN_1,
+      200,
+    );
+    expect(message).toBe(true);
+    await snapExpect();
+  });
+  test('WTY31101_54', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData('TY311/wty31101', 'wty31101', 'INIT_DATA');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.fillSlipNo(testData.formData.slipNo_SET_KBN_S, () =>
+      snapInput(1),
+    );
+    await snapInput(2);
+    await summaryPage.clickSearch();
+    await page.waitForTimeout(1000);
+    const isShowDialog = await summaryPage.isErrorDialogVisible();
+    expect(isShowDialog).toBe(true);
+    const message = await summaryPage.waitForTextInBody(
+      WTY31101_MESSAGES.slipNo_SET_KBN_S,
+      200,
+    );
+    expect(message).toBe(true);
+    await snapExpect();
+  });
+  test('WTY31101_55', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData('TY311/wty31101', 'wty31101', 'INIT_DATA');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.fillSlipNo(testData.formData.SHN_SBT_KBN_NOT_EQ_1_2, () =>
+      snapInput(1),
+    );
+    await snapInput(2);
+    await summaryPage.clickSearch();
+    await page.waitForTimeout(1000);
+    const isShowDialog = await summaryPage.isErrorDialogVisible();
+    expect(isShowDialog).toBe(true);
+    await snapExpect();
+  });
+
   test('WTY31101_61_66', async ({
     page,
     indexedDBHelper,
