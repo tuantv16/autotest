@@ -50,6 +50,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     await page.waitForTimeout(1000);
     await snapInput();
     await summaryPage.activeRadioButton('9', false, true);
+    await summaryPage.scrollToBottom();
     await summaryPage.focusInput(summaryPage.supplierFields[0].key);
     await page.waitForTimeout(500);
     const isShowSubTex = await summaryPage.verifyLabelVisible(

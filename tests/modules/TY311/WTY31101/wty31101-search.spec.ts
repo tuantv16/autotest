@@ -98,8 +98,86 @@ test.describe('TY31101 - 在庫属性変更', () => {
     expect(isShowDialog).toBe(true);
     await snapExpect();
   });
+  test('WTY31101_56', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData('TY311/wty31101', 'wty31101', 'INIT_DATA');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
 
-  test('WTY31101_61_66', async ({
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.fillSlipNo(testData.formData.slipNo_13, () =>
+      snapInput(1),
+    );
+    await summaryPage.clickSearch();
+    await page.waitForTimeout(1000);
+    const validateInforPr = await summaryPage.verifyInputsNotEmpty(
+      summaryPage.inforProducFields,
+    );
+    const validateInforSupplier = await summaryPage.verifyInputsNotEmpty(
+      summaryPage.supplierFields,
+    );
+    expect(validateInforPr).toBe(true);
+    expect(validateInforSupplier).toBe(true);
+    await snapInput(2);
+    await summaryPage.scrollToBottom();
+    await summaryPage.activeRadioButton('1', true);
+    await summaryPage.activeRadioButton('2', false, true);
+    await snapInput(3);
+    await summaryPage.scrollToTop();
+    await page.waitForTimeout(500);
+    // search again with other slipNo
+    await summaryPage.fillSlipNo(testData.formData.slipNo_13_2, () =>
+      snapInput(4),
+    );
+    await snapInput(5);
+    await summaryPage.clickSearch();
+    await page.waitForTimeout(1000);
+
+    const radiosIsReseted = await summaryPage.verifyRadioLabelsNoBgWhite();
+    expect(radiosIsReseted).toBe(true);
+    await summaryPage.scrollToBottom();
+    await snapExpect(1);
+  });
+
+  test('WTY31101_59', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData('TY311/wty31101', 'wty31101', 'INIT_DATA');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.activeRadioButton('3', true);
+    await summaryPage.activeRadioButton('9', false, true);
+    await summaryPage.scrollToBottom();
+    await page.waitForTimeout(500);
+    await snapInput(1);
+    await page.waitForTimeout(1000);
+    await summaryPage.fillSupplierCode(testData.formData.supplierTypeH, () =>
+      snapInput(2),
+    );
+    await page.waitForTimeout(1000);
+    await summaryPage.closeMenu();
+    const supplierName = await summaryPage.getSupplierName();
+    expect(supplierName).toBe('');
+    await snapExpect(1);
+  });
+  test('WTY31101_60_65', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -145,7 +223,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     await summaryPage.clickConfirmErrorDialog();
     await snapExpect(4);
   });
-  test('WTY31101_64', async ({
+  test('WTY31101_63', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -177,7 +255,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     expect(isShowDialog).toBe(true);
     await snapExpect(2);
   });
-  test('WTY31101_66', async ({
+  test('WTY31101_64', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -210,36 +288,5 @@ test.describe('TY31101 - 在庫属性変更', () => {
     await snapExpect(3);
     await summaryPage.clickCancelErrorDialog();
     await snapExpect(4);
-  });
-
-  test('WTY31101_60', async ({
-    page,
-    indexedDBHelper,
-    snapInput,
-    snapExpect,
-  }) => {
-    const testData = loadTestData('TY311/wty31101', 'wty31101', 'INIT_DATA');
-    await indexedDBHelper.initializeDB({
-      sessionData: testData.sessionData,
-      commonData: testData.commonData,
-    });
-
-    await summaryPage.navigate();
-    await page.waitForTimeout(1000);
-    await snapInput();
-    await summaryPage.activeRadioButton('3', true);
-    await summaryPage.activeRadioButton('9', false, true);
-    await summaryPage.scrollToBottom();
-    await page.waitForTimeout(500);
-    await snapInput(1);
-    await page.waitForTimeout(1000);
-    await summaryPage.fillSupplierCode(testData.formData.supplierTypeH, () =>
-      snapInput(2),
-    );
-    await page.waitForTimeout(1000);
-    await summaryPage.closeMenu();
-    const supplierName = await summaryPage.getSupplierName();
-    expect(supplierName).toBe('');
-    await snapExpect(1);
   });
 });

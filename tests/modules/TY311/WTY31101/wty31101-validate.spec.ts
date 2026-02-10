@@ -232,6 +232,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
       200,
     );
     expect(message).toBe(true);
+    await summaryPage.scrollToBottom();
     await snapExpect(1);
   });
   test('WTY31101_36', async ({
@@ -274,6 +275,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
       200,
     );
     expect(message).toBe(true);
+    await summaryPage.scrollToBottom();
     await snapExpect(1);
   });
   test('WTY31101_37', async ({
@@ -314,7 +316,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     expect(quantity).toBe('1000');
     await snapExpect(1);
   });
-  test('WTY31101_38', async ({
+  test('WTY31101_38_57', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -343,7 +345,7 @@ test.describe('TY31101 - 在庫属性変更', () => {
     expect(supplierName).toBeTruthy();
     await snapExpect(1);
   });
-  test('WTY31101_39', async ({
+  test('WTY31101_39_58', async ({
     page,
     indexedDBHelper,
     snapInput,
