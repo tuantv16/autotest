@@ -42,7 +42,8 @@ export const BUTTON_LABELS = {
 export const VALIDATION_ERROR_MESSAGES = {
   REQUIRED_FIELD: '必須入力エラー',
   INVALID_LENGTH: '商品の桁数が正しくありません',
-  START_DATE_AFTER_END_DATE: '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
+  START_DATE_AFTER_END_DATE:
+    '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
 
   HALF_WIDTH_REQUIRED: '半角で入力してください。',
   FULL_WIDTH_REQUIRED: '全角で入力してください。',
@@ -72,6 +73,10 @@ export const WTY23002_MESSAGES = {
   NO_DATA_FOUND: '該当データが存在しません。',
   INVALID_DATE_FORMAT: '日付の形式が正しくありません',
   INVALID_DATE_RANGE: '抽出期間の開始日は終了日以前を入力してください',
+} as const;
+export const WTY32201_MESSAGES = {
+  REQUIRED_SHELF_NUMBER: '棚番を入力してください。',
+  SHELF_NUMBER_LENGTH: '棚番は7桁で入力してください。',
 } as const;
 export const WTY30303 = {
   TITLE: 'セール選択',

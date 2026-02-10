@@ -1,0 +1,29 @@
+{
+  "wty32201": {
+    "TC_UI": {
+      "description": " init UI ty322",
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "00102PD498",
+            "keepPeriod": "6",
+            "storeCd": "11804",
+            "syoriStoreCd": "11804",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "498",
+            "unyoDate": "20251205",
+            "userId": "0015400907",
+            "screenId": "WTY10401"
+          }
+        }
+      ],
+      "formData": {
+        "shelfNumber_123": "123"
+      }
+    }
+  }
+}
