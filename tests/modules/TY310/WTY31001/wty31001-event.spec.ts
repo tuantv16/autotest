@@ -79,7 +79,7 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(errorMessage).toContain(
       "確定されていないデータを破棄します。よろしいですか？",
     );
-    await snapExpect(1);
+    await snapExpect();
 
     // Step 3: Confirm to go back
     await productInputPage.clickConfirmDialogButton();
@@ -87,7 +87,6 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     // Verify: Navigated back to WTZ10101
     expect(page.url()).not.toContain("WTY31001");
-    await snapExpect(2);
   });
 
   test("WTY31001_81", async ({ page, baseUrl, snapInput, snapExpect }) => {

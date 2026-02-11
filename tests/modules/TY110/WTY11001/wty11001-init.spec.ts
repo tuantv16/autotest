@@ -7,6 +7,7 @@ import { test, expect, loadTestData } from '../../../base/base-test';
 import { WTY11001Page } from '../../../pages/TY110/wty11001.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
 import { COMMON_MESSAGES } from '../../../constants/messages';
+import { WTY11001_headerTables } from '../../../pages/TY110/const/const-wty110';
 
 test.describe('WTY11001 - Check arrival schedule information (入荷予定情報照会)', () => {
     let schedulePage: WTY11001Page;
@@ -72,6 +73,9 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await schedulePage.clickRootKbnSelector();
 
+        const option = page.locator('[role="option"]', { hasText: 'モバイル' });
+        await option.scrollIntoViewIfNeeded();
+
         const item1 = await schedulePage.waitForTextInBody('全て');
         expect(item1).toBe(true);
 
@@ -83,7 +87,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         const item4 = await schedulePage.waitForTextInBody('移動入庫');
         expect(item4).toBe(true);
-
+        await page.waitForTimeout(500);
         await snapExpect();
     });
 
@@ -115,6 +119,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
         const item3 = await schedulePage.waitForTextInBody('展示品');
         expect(item3).toBe(true);
 
+        await page.waitForTimeout(500);
         await snapExpect();
     });
 
@@ -132,13 +137,17 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
         await page.waitForTimeout(1000);
 
         await schedulePage.waitForFormReady();
+        await schedulePage.selectorsObj.calendarButton.click();
+        await page.waitForTimeout(500);
+        await snapInput();
 
         const startDate = await schedulePage.selectorsObj.startDateInput.inputValue();
         expect(startDate).toBe(new Date().toISOString().slice(0, 10).replace(/-/g, '/'));
 
         const endDate = await schedulePage.selectorsObj.endDateInput.inputValue();
         expect(endDate).toBe('');
-
+        await schedulePage.selectorsObj.startDateInput.click();
+        await page.waitForTimeout(500);
         await snapExpect();
     });
 
@@ -201,7 +210,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await schedulePage.waitForFormReady();
 
-        const headerTable = [ 'No', 'JANコード', '発注数', '予定数', '入予定日', '型番', '入荷状態区分', 'メーカ名', '発注/指示番号'];
+        const headerTable = WTY11001_headerTables;
 
         for (const headText of headerTable) {
             const isHeaderVisible = await schedulePage.waitForTextInBody(headText);

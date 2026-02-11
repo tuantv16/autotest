@@ -54,4 +54,24 @@ export class TY10901Page extends BasePage {
             .getByTestId('ClearButtonIcon')
             .click({ force: true });
     }
+
+    async clickBarcodeByLabel(labelText: string)
+    {
+        const inputId = await this.page
+            .locator('label', { hasText: labelText })
+            .getAttribute('for');
+
+        expect(inputId).not.toBeNull();
+
+        const input = this.page.locator(`#${inputId}`);
+
+        await expect(input).toBeVisible();
+
+        const barcodeBtn = input
+            .locator('xpath=ancestor::div[contains(@class,"_textBoxContainer")]')
+            .locator('button[type="button"]');
+
+        await expect(barcodeBtn).toBeVisible();
+        await barcodeBtn.click();
+    }
 }

@@ -9,7 +9,7 @@ import { BasePage } from '../base.page';
 export class TY30302Page extends BasePage {
   // Selectors
   protected readonly selectors = {
-    headingTitle: '.text-heading-h4:has-text("マルチPOP出力指示一覧")',
+    headingTitle: '.text-heading-h4:has-text("マルチPOP出力指示一覧"), .text-heading-h3:has-text("マルチPOP出力指示一覧")',
     backButton: 'button:has(svg)',
     deleteButton: 'li[role="menuitem"]:has-text("削除")',
     editButton: 'li[role="menuitem"]:has-text("修正")',

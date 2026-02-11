@@ -48,10 +48,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
     expect(isKaikonIriVisible).toBe(true);
 
     // Verify: Labels and borders change to red color
-    await productInputPage.expectAllLabelsRed({
+    await productInputPage.expectAllLabelsColor({
       exclude: ["mode", "tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
-    await productInputPage.expectAllInputBordersRed({
+    await productInputPage.expectAllInputBordersColor({
       exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
     await snapExpect();
@@ -258,9 +258,9 @@ test.describe("WTY31001 - 供給移動依頼商品入力 (返品 Mode) Test Suit
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
-    await productInputPage.scrollToBottom();
     await productInputPage.clickHpnRadio();
     await page.waitForTimeout(1000);
+    await productInputPage.scrollToBottom();
 
     // Step 2: Enter some data in 定数依頼 and 基礎依頼
     await productInputPage.fillTSuIriInput("100");
