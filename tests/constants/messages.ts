@@ -42,7 +42,8 @@ export const BUTTON_LABELS = {
 export const VALIDATION_ERROR_MESSAGES = {
   REQUIRED_FIELD: '必須入力エラー',
   INVALID_LENGTH: '商品の桁数が正しくありません',
-  START_DATE_AFTER_END_DATE: '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
+  START_DATE_AFTER_END_DATE:
+    '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
 
   HALF_WIDTH_REQUIRED: '半角で入力してください。',
   FULL_WIDTH_REQUIRED: '全角で入力してください。',
@@ -73,6 +74,22 @@ export const WTY23002_MESSAGES = {
   INVALID_DATE_FORMAT: '日付の形式が正しくありません',
   INVALID_DATE_RANGE: '抽出期間の開始日は終了日以前を入力してください',
 } as const;
+
+export const WTY31101_MESSAGES = {
+  TE5050: '必須入力項目です。',
+  TE5097: '半角で入力してください。',
+  TE5130: '移動数を入力してください。',
+  TE5134: '移動数にマイナスの値は入力できません。',
+  TE5096: '商品コードまたはJANコードを入力してください。',
+  TE5147: '同一の移動元、移動先を指定することはできません。',
+  TE5137: '移動元区分を選択してください。',
+  TE5137_1: '移動先区分を選択してください。',
+  TE5130_1: '移動先に不良を選択している場合は、仕入先を入力してください。',
+  TE5096_1: '商品コードまたはJANコードを入力してください。',
+  slipNo_SET_KBN_S: 'セット商品ため、指定できません。',
+  SHK_IG_KBN_1: 'グロス商品ため、指定できません。',
+} as const;
+
 export const WTY30303 = {
   TITLE: 'セール選択',
   CONFIRM: '確定',
