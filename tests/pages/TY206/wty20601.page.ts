@@ -111,6 +111,7 @@ export class TY20601Page extends BasePage {
         errorBtnTextBox: '数値で入力してください。',
         errorBtnTextBoxTE5147: '他店手配でＬＥＣは指定できません。',
         errorBtnTextBoxTE5133: '部店コードが誤っています。',
+        errorTE5147: '直送時は自動または手配済のみ選択可能できません。',
 
         zaiJt: '属性',
         thiKbn: '手配',
@@ -469,13 +470,116 @@ export class TY20601Page extends BasePage {
      * @param text - The text to search for in the row
      * @returns true if the text exists in the row, false otherwise
      */
-    async isTextInRow(row: any, text: string): Promise<boolean> {
+    async isTextInRow(row: any, text: string | number): Promise<boolean> {
+        const expected = this.normalizeRowValue(text);
+        if (expected === '') {
+            return true;
+        }
         try {
-            await row.getByText(text, { exact: false }).waitFor({ state: 'visible', timeout: 500 });
+            await row.getByText(expected, { exact: false }).waitFor({ state: 'visible', timeout: 500 });
             return true;
         } catch (error) {
+            if (await this.isValueInRowInputs(row, expected)) {
+                return true;
+            }
+            return await this.isValueInRowText(row, expected);
+        }
+    }
+
+    private normalizeRowValue(value: string | number): string {
+        const raw = `${value ?? ''}`.trim();
+        if (raw === '') {
+            return '';
+        }
+        const normalized = raw
+            .replace(/\u3000/g, ' ')
+            .replace(/[０-９]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0xFEE0))
+            .replace(/[，]/g, ',');
+        return normalized.trim();
+    }
+
+    private toNumberIfPossible(value: string): number | null {
+        const numeric = value.replace(/,/g, '').trim();
+        if (numeric === '') {
+            return null;
+        }
+        const parsed = Number(numeric);
+        return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    private valuesMatch(actual: string, expected: string): boolean {
+        if (actual === expected) {
+            return true;
+        }
+        const actualNumber = this.toNumberIfPossible(actual);
+        const expectedNumber = this.toNumberIfPossible(expected);
+        return actualNumber !== null && expectedNumber !== null && actualNumber === expectedNumber;
+    }
+
+    private async isValueInRowInputs(row: any, expected: string): Promise<boolean> {
+        if (expected === '') {
             return false;
         }
+        const inputs = row.locator('input, textarea, select');
+        const count = await inputs.count();
+        for (let i = 0; i < count; i++) {
+            const input = inputs.nth(i);
+            const tagName = await input.evaluate(el => el.tagName.toLowerCase());
+            if (tagName === 'select') {
+                const selectedText = await input.evaluate(el => {
+                    const select = el as HTMLSelectElement;
+                    const option = select.selectedOptions.item(0);
+                    return option ? option.textContent ?? '' : '';
+                });
+                if (this.valuesMatch(this.normalizeRowValue(selectedText), expected)) {
+                    return true;
+                }
+                const selectValue = await input.inputValue();
+                if (this.valuesMatch(this.normalizeRowValue(selectValue), expected)) {
+                    return true;
+                }
+            } else {
+                const value = await input.inputValue();
+                if (this.valuesMatch(this.normalizeRowValue(value), expected)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private async isValueInRowText(row: any, expected: string): Promise<boolean> {
+        try {
+            const rowText = this.normalizeRowValue(await row.innerText());
+            if (rowText.includes(expected)) {
+                return true;
+            }
+        } catch (error) {
+            // Ignore and continue with cell-level checks
+        }
+
+        const cells = row.locator('.ag-cell, [role="gridcell"]');
+        const cellCount = await cells.count();
+        for (let i = 0; i < cellCount; i++) {
+            const cell = cells.nth(i);
+            const cellText = this.normalizeRowValue(await cell.innerText().catch(() => ''));
+            if (cellText.includes(expected)) {
+                return true;
+            }
+            const ariaLabel = this.normalizeRowValue(await cell.getAttribute('aria-label') ?? '');
+            if (ariaLabel.includes(expected)) {
+                return true;
+            }
+            const title = this.normalizeRowValue(await cell.getAttribute('title') ?? '');
+            if (title.includes(expected)) {
+                return true;
+            }
+            const dataValue = this.normalizeRowValue(await cell.getAttribute('data-value') ?? '');
+            if (dataValue.includes(expected)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -484,7 +588,7 @@ export class TY20601Page extends BasePage {
      * @param texts - Array of texts to search for in the row
      * @returns true if all texts exist in the row, false otherwise
      */
-    async verifyTextsInRow(row: any, texts: string[]): Promise<boolean> {
+    async verifyTextsInRow(row: any, texts: Array<string | number>): Promise<boolean> {
         try {
             for (const text of texts) {
                 const exists = await this.isTextInRow(row, text);

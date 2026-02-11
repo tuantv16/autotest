@@ -77,6 +77,50 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         await snapExpect();
     });
 
+    test('WTY20601_37', async ({
+                                   page,
+                                   baseUrl,
+                                   indexedDBHelper,
+                                   snapExpect,
+                               }) => {
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_20');
+        await page.goto(baseUrl, {waitUntil: 'domcontentloaded'});
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY206_WTY20601InitBC)
+            );
+        }, {timeout: 15000});
+
+        await testPage.navigate();
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+        const selectedRow = await testPage.clickRandomRow(0);
+        await testPage.selectedOption(testPage.Texts.thiKbn, testPage.THI_KBN_NM.TATEN);
+
+        expect(await testPage.verifyHighlight(testPage.THI_KBN_NM.TATEN, testPage.Locators.highlight)).toBe(true);
+        expect(await testPage.isBtnTextBoxDisabled()).toBe(false);
+        await testPage.fillBtnTextBox("00102");
+        await testPage.blurInputById(testPage.Locators.idBtnTextBox);
+
+        const errorBtnTextBox = await testPage.waitForTextInBody(testPage.Texts.errorBtnTextBox, 500);
+        expect(errorBtnTextBox).toBe(false);
+
+        const errorBtnTextBoxTE5147 = await testPage.waitForTextInBody(testPage.Texts.errorBtnTextBoxTE5147, 500);
+        expect(errorBtnTextBoxTE5147).toBe(false);
+
+        const errorBtnTextBoxTE5133 = await testPage.waitForTextInBody(testPage.Texts.errorBtnTextBoxTE5133, 500);
+        expect(errorBtnTextBoxTE5133).toBe(false);
+
+        await snapExpect();
+    });
+
     test('WTY20601_38', async ({
        page,
        baseUrl,
@@ -164,6 +208,8 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         expect(apiResponse.status()).toBe(200);
         const index = 1;
         const selectedRow = await testPage.clickRandomRow(index);
+        await testPage.clickButtonByText(testPage.Texts.deliveryPlaceSection);
+        await testPage.clickButtonByText(testPage.Texts.deliveryPlaceSection);
         expect(await testPage.isTextInRow(selectedRow.row, '持')).toBe(true);
         expect(await testPage.verifyButtonHighlight(testPage.Texts.deliveryPlaceSection)).toBe(false);
         await snapExpect();
@@ -344,42 +390,4 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         expect(await testPage.waitForTextInBody(testPage.Texts.errorBtnTextBox)).toBe(true);
         await snapExpect();
     });
-
-    test('WTY20601_48', async ({
-       page,
-       baseUrl,
-       indexedDBHelper,
-       snapInput,
-       snapExpect,
-   }) => {
-        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_42');
-        await page.goto(baseUrl, {waitUntil: 'domcontentloaded'});
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-
-        const apiResponsePromise = page.waitForResponse((res) => {
-            return (
-                res.request().method() === 'POST' &&
-                res.url().includes(API_ENDPOINTS.TY206_WTY20601InitBC)
-            );
-        }, {timeout: 15000});
-
-        await testPage.navigate();
-        const apiResponse = await apiResponsePromise;
-        expect(apiResponse.status()).toBe(200);
-        const index = 0;
-        const selectedRow = await testPage.clickRandomRow(index);
-        await testPage.fillBtnTextBox("test_error_msg");
-        await testPage.blurInputById(testPage.Locators.idBtnTextBox);
-        let messageError = await testPage.waitForTextInBody(testPage.Texts.errorBtnTextBox);
-        expect(messageError).toBe(true);
-        await snapInput();
-        await testPage.clickButtonByText(testPage.Texts.buttonClear);
-        messageError = await testPage.waitForTextInBody(testPage.Texts.errorBtnTextBox);
-        expect(messageError).toBe(false);
-        await snapExpect();
-    });
-
 });

@@ -15,6 +15,62 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         await takeScreenshotOnFailure(page, testInfo);
     });
 
+    test('WTY20601_07', async ({
+       page,
+       baseUrl,
+       indexedDBHelper,
+       snapExpect,
+   }) => {
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_full_data');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+        await testPage.navigate();
+
+        const amountOfProducts = testData.sessionData?.[0]?.value?.cartUriMeiDT?.length ?? 0;
+        const amountOfRows = await testPage.countTableRows();
+        expect(amountOfRows).toEqual(amountOfProducts - 1);
+
+        for (let i = 1; i < amountOfRows; i++) {
+            const row = await testPage.getRowByIndex(i - 1);
+            const textInRows = testPage.Input.inputTable.map(key =>
+                testData.sessionData?.[0]?.value?.cartUriMeiDT?.[i]?.[key] ?? ''
+            );
+            expect(await testPage.verifyTextsInRow(row, textInRows)).toBe(true);
+        }
+
+        const index = Number(testData.sessionData?.[0]?.value?.indexDT?.[0]?.index ?? 0) + 1
+
+        expect(await testPage.getInputValue(testPage.Selectors.productNo)).toEqual((index).toString());
+        await snapExpect();
+
+        const productKata = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.mkKata;
+        expect (await testPage.getInputValue(testPage.Selectors.productKata)).toEqual(productKata)
+
+        const thKbn = await testPage.getThKbnName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thKbn);
+        expect (await testPage.getInputValue(testPage.Selectors.thKbn)).toEqual(thKbn);
+
+        const chksKahiFlg = await testPage.getCksKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.chksKahiFlg);
+        expect (await testPage.getInputValue(testPage.Selectors.chksKahiFlg)).toEqual(chksKahiFlg);
+
+        const ykbrKahiFlg = await testPage.getYbKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.ykbrKahiFlg);
+        expect (await testPage.getInputValue(testPage.Selectors.ykbrKahiFlg)).toEqual(ykbrKahiFlg);
+
+        const thibtenNm = await testPage.emptyToSpace(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thibtenNm);
+        expect (await testPage.getInputValue(testPage.Selectors.thibtenNm)).toEqual(thibtenNm);
+
+        const zaiZokuSeiFlg = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.zaiZokuSeiFlg;
+        if (!zaiZokuSeiFlg) {
+            const zaiJt = testData.sessionData?.[0]?.value?.cartUriMeiDT?.[index]?.zaiJt;
+            const zaiJtName = await testPage.getZaiJtName(zaiJt);
+            expect (await testPage.hasParentLabelWithBgWhite(zaiJtName)).toBe(true);
+        }
+
+        await snapExpect();
+    });
+
     test('WTY20601_11', async ({
         page,
         baseUrl,
@@ -118,67 +174,10 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         });
 
         await testPage.navigate();
-
+        await page.reload();
         const loadingText = await testPage.waitForTextInBody('Loading...');
         await snapExpect();
         expect(loadingText).toBe(true);
-    });
-
-    test('WTY20601_07', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-        snapExpect,
-    }) => {
-        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_full_data');
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData,
-        });
-        await testPage.navigate();
-
-        const amountOfProducts = testData.sessionData?.[0]?.value?.cartUriMeiDT?.length ?? 0;
-        const amountOfRows = await testPage.countTableRows();
-        expect(amountOfRows).toEqual(amountOfProducts - 1);
-
-        for (let i = 1; i < amountOfRows; i++) {
-            const row = await testPage.getRowByIndex(i - 1);
-            const textInRows = testPage.Input.inputTable.map(key =>
-                testData.sessionData?.[0]?.value?.cartUriMeiDT?.[i]?.[key] ?? ''
-            );
-
-            expect(await testPage.verifyTextsInRow(row, textInRows)).toBe(true);
-        }
-
-        const index = Number(testData.sessionData?.[0]?.value?.indexDT?.[0]?.index ?? 0) + 1
-
-        expect(await testPage.getInputValue(testPage.Selectors.productNo)).toEqual((index).toString());
-        await snapExpect();
-
-        const productKata = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.mkKata;
-        expect (await testPage.getInputValue(testPage.Selectors.productKata)).toEqual(productKata)
-
-        const thKbn = await testPage.getThKbnName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thKbn);
-        expect (await testPage.getInputValue(testPage.Selectors.thKbn)).toEqual(thKbn);
-
-        const chksKahiFlg = await testPage.getCksKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.chksKahiFlg);
-        expect (await testPage.getInputValue(testPage.Selectors.chksKahiFlg)).toEqual(chksKahiFlg);
-
-        const ykbrKahiFlg = await testPage.getYbKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.ykbrKahiFlg);
-        expect (await testPage.getInputValue(testPage.Selectors.ykbrKahiFlg)).toEqual(ykbrKahiFlg);
-
-        const thibtenNm = await testPage.emptyToSpace(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thibtenNm);
-        expect (await testPage.getInputValue(testPage.Selectors.thibtenNm)).toEqual(thibtenNm);
-
-        const zaiZokuSeiFlg = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.zaiZokuSeiFlg;
-        if (!zaiZokuSeiFlg) {
-            const zaiJt = testData.sessionData?.[0]?.value?.cartUriMeiDT?.[index]?.zaiJt;
-            const zaiJtName = await testPage.getZaiJtName(zaiJt);
-            expect (await testPage.hasParentLabelWithBgWhite(zaiJtName)).toBe(true);
-        }
-
-        await snapExpect();
     });
 
     test('WTY20601_08', async ({
@@ -265,6 +264,62 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         expect(response.outDS).toBeDefined();
 
         const index = Number(testData.sessionData?.[0]?.value?.indexDT?.[0]?.index ?? 0) + 1
+
+        expect(await testPage.getInputValue(testPage.Selectors.productNo)).toEqual((index).toString());
+        await snapExpect();
+
+        const productKata = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.mkKata;
+        expect (await testPage.getInputValue(testPage.Selectors.productKata)).toEqual(productKata)
+
+        const thKbn = await testPage.getThKbnName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thKbn);
+        expect (await testPage.getInputValue(testPage.Selectors.thKbn)).toEqual(thKbn);
+
+        const chksKahiFlg = await testPage.getCksKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.chksKahiFlg);
+        expect (await testPage.getInputValue(testPage.Selectors.chksKahiFlg)).toEqual(chksKahiFlg);
+
+        const ykbrKahiFlg = await testPage.getYbKahiName(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.ykbrKahiFlg);
+        expect (await testPage.getInputValue(testPage.Selectors.ykbrKahiFlg)).toEqual(ykbrKahiFlg);
+
+        const thibtenNm = await testPage.emptyToSpace(testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.thibtenNm);
+        expect (await testPage.getInputValue(testPage.Selectors.thibtenNm)).toEqual(thibtenNm);
+
+        const zaiZokuSeiFlg = testData.sessionData?.[0]?.value?.cartUriMeiDT[index]?.zaiZokuSeiFlg;
+        if (!zaiZokuSeiFlg) {
+            const zaiJt = testData.sessionData?.[0]?.value?.cartUriMeiDT?.[index]?.zaiJt;
+            const zaiJtName = await testPage.getZaiJtName(zaiJt);
+            expect (await testPage.hasParentLabelWithBgWhite(zaiJtName)).toBe(true);
+        }
+    });
+
+    test('WTY20601_14', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_full_data');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData,
+        });
+
+        const apiResponsePromise = page.waitForResponse((res) => {
+            return (
+                res.request().method() === 'POST' &&
+                res.url().includes(API_ENDPOINTS.TY206_WTY20601InitBC)
+            );
+        }, { timeout: 15000 });
+
+        await testPage.navigate();
+        const apiResponse = await apiResponsePromise;
+        expect(apiResponse.status()).toBe(200);
+
+        const response = await apiResponse.json();
+        expect(response.outDS).toBeDefined();
+
+        const index = Number(testData.sessionData?.[0]?.value?.indexDT?.[0]?.index ?? 0) + 1
+        const selectedRow = await testPage.clickRandomRow(index - 1);
 
         expect(await testPage.getInputValue(testPage.Selectors.productNo)).toEqual((index).toString());
         await snapExpect();
