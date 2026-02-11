@@ -52,17 +52,6 @@ export const VALIDATION_ERROR_MESSAGES = {
 } as const;
 
 /**
- * Column name constants for WTY30302 (マルチPOP出力指示一覧)
- */
-export const WTY30302_COLUMN_NAMES = {
-  MODEL_NUMBER: '型番',
-  SIZE: 'サイズ',
-  QUANTITY: '枚数',
-  MULTI_COMMENT: 'マルチコメント',
-  SALE_NAME: 'セール名',
-} as const;
-
-/**
  * WTY23002 (見込み客照会) validation messages
  */
 export const WTY23002_MESSAGES = {
