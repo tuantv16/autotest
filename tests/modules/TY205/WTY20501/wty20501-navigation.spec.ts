@@ -25,7 +25,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         snapInput,
         snapExpect,
     }) => {
-        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_07');
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_14');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(500);
 

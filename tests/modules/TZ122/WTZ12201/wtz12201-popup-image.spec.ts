@@ -44,9 +44,9 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
-        await pageRecommendation.clickRowTable(0);
         await snapInput();
+        await pageRecommendation.clickRowTable(0);
+        await page.waitForTimeout(1000);
         const verifyModalVisible = await pageRecommendation.isPreviewModalVisible();
         expect(verifyModalVisible).toBe(true);
         await page.waitForTimeout(1000);
@@ -78,9 +78,8 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
-        await pageRecommendation.clickRowTable(0);
         await snapInput();
+        await pageRecommendation.clickRowTable(0);
         const verifyModalTitle = await pageRecommendation.checkTitlePreviewModal();
         expect(verifyModalTitle).toBe(testData.outputData.titlePopup);
         await page.waitForTimeout(1000);
@@ -112,9 +111,9 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
-        await pageRecommendation.clickRowTable(0);
         await snapInput();
+        await pageRecommendation.clickRowTable(0);
+
         const verifyModalImageModal = await pageRecommendation.checkExistsImagePreviewModal();
         expect(verifyModalImageModal).toBe(true);
         await page.waitForTimeout(1000);
@@ -146,9 +145,9 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
-        await pageRecommendation.clickRowTableRecommend(2);
         await snapInput();
+        await pageRecommendation.clickRowTableRecommend(2);
+       
         const verifyModalImageModal = await pageRecommendation.checkNotExistsImagePreviewModal();
         expect(verifyModalImageModal).toBe(true);
         await page.waitForTimeout(1000);
@@ -180,9 +179,9 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput(1);
         await pageRecommendation.clickRowTableRecommend(2);
-        await snapInput();
+        await snapInput(2);
         // click button x
         await pageRecommendation.clickButtonClosePreviewModal();
         
@@ -217,9 +216,9 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput(1);
         await pageRecommendation.clickRowTableRecommend(2);
-        await snapInput();
+        await snapInput(2);
         // Nút Zoom In (+)
         await pageRecommendation.clickButtonZoomIn();
         await page.waitForTimeout(2000);
@@ -303,9 +302,9 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
-        await pageRecommendation.clickRowTable(1);
         await snapInput();
+        await pageRecommendation.clickRowTable(1);
+        
         const verifyModalTitle = await pageRecommendation.checkTitlePreviewModal();
         expect(verifyModalTitle).toBe(testData.outputData.titlePopup_44);
         await page.waitForTimeout(1000);
@@ -337,11 +336,11 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
-        await pageRecommendation.clickRowTableRecommend(1);
         await snapInput();
+        await pageRecommendation.clickRowTableRecommend(1);
+       
         const verifyModalTitle = await pageRecommendation.checkTitlePreviewModal();
-        expect(verifyModalTitle).toBe(testData.outputData.titlePopup_44);
+        expect(verifyModalTitle).toBe(testData.outputData.titlePopup_45);
         await page.waitForTimeout(1000);
         await snapExpect();
     });
