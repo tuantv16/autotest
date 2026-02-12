@@ -22,7 +22,19 @@
         }
       ],
       "formData": {
-        "shelfNumber_123": "123"
+        "shelfNumber_123": "123",
+        "shelfNumber": "1234567",
+        "janCode_length_6": "123456",
+        "janCodeInvalid": "4901234567890",
+        "janCode": "4901234567894",
+        "quantity_negative": "-1",
+        "quantity_float": "1.5",
+        "quantity_length_5": "12345",
+        "quantity_max": "10000",
+        "quantity_1000": "1000",
+        "quantity_not_number": "ABCD",
+        "quantity": "100",
+        "pass": "9010"
       }
     }
   }
