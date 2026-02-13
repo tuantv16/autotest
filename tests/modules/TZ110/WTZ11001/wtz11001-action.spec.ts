@@ -239,7 +239,8 @@ test.describe('WTZ11001 - Delivery work result search (配達工事果検索)', 
         await deliveryWorkPage.navigate();
         await page.waitForTimeout(1000);
         await deliveryWorkPage.waitForFormReady();
-
+        await deliveryWorkPage.clickHaiMdKbn(3);
+        await page.waitForTimeout(1000);
         await snapInput();
         await page.waitForTimeout(1000);
         await deliveryWorkPage.clearHaikojiDate();
