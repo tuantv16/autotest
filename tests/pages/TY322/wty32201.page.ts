@@ -243,6 +243,9 @@ export class TY32201Page extends BasePage {
   async getModelNumber(): Promise<string> {
     return await this.getValueByName('modelNumber');
   }
+  async getShelfTotal(): Promise<string> {
+    return await this.getValueByName('shelfTotal');
+  }
   async clickButton(text: string): Promise<void> {
     const locator = this.page.locator(`button:has-text("${text}")`);
     await locator.click();
@@ -333,5 +336,23 @@ export class TY32201Page extends BasePage {
       }
     }
     return true;
+  }
+
+  /**
+   * Verify table contains data rows
+   * Checks if at least one row exists in the table using auto-waiting assertion
+   */
+  async verifyTableData(timeout: number = 10000): Promise<boolean> {
+    const firstRow = this.page
+      .locator(this.selectors.tableId)
+      .locator('.ag-center-cols-container [role="row"][row-index="0"]');
+    try {
+      // Wait for the first row to be visible (handles data loading)
+      await firstRow.waitFor({ state: 'visible', timeout });
+      return true;
+    } catch {
+      // Return false if timeout reached without finding a row
+      return false;
+    }
   }
 }

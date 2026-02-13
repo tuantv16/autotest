@@ -14,7 +14,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test('WTY32201_20', async ({
+  test('WTY32201_19', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -37,7 +37,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_21', async ({
+  test('WTY32201_20', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -62,8 +62,18 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_22', async ({ page, snapInput, snapExpect }) => {
+  test('WTY32201_21', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
     // validate shelf number
+    const testData = loadTestData('TY322/wty32201', 'wty32201', 'TC_UI');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
     await summaryPage.navigate();
     await page.waitForTimeout(1000);
     await snapInput();
@@ -77,7 +87,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_23', async ({
+  test('WTY32201_22', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -102,7 +112,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_24', async ({
+  test('WTY32201_23', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -128,7 +138,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_25', async ({
+  test('WTY32201_24', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -154,7 +164,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_26', async ({
+  test('WTY32201_25', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -180,7 +190,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_27', async ({
+  test('WTY32201_26', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -207,7 +217,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(message).toBe(true);
     await snapExpect();
   });
-  test('WTY32201_28', async ({
+  test('WTY32201_27', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -230,7 +240,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(quantity).toBe(testData.formData.quantity_1000);
     await snapExpect();
   });
-  test('WTY32201_29', async ({
+  test('WTY32201_28', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -253,7 +263,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     expect(quantity).toBe(testData.formData.quantity);
     await snapExpect();
   });
-  test('WTY32201_30', async ({
+  test('WTY32201_29', async ({
     page,
     indexedDBHelper,
     snapInput,
@@ -278,6 +288,91 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
       200,
     );
     expect(message).toBe(true);
+    await snapExpect();
+  });
+  test('WTY32201_30', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    // validate quantity
+    const testData = loadTestData('TY322/wty32201', 'wty32201', 'TC_UI');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.fillShelfNumber(testData.formData.shelfNumber);
+    await summaryPage.fillJanCode('0');
+    await page.waitForTimeout(200);
+    await summaryPage.clickRegister();
+    const shelfNumber = await summaryPage.getShelfNumber();
+    const janCode = await summaryPage.getJanCode();
+    expect(shelfNumber).toBe('');
+    expect(janCode).toBe('');
+    await snapExpect();
+  });
+  test('WTY32201_31', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    // validate jan code start with 27
+    const testData = loadTestData('TY322/wty32201', 'wty32201', 'TC_UI');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.fillShelfNumber(testData.formData.shelfNumber);
+    await summaryPage.fillJanCode(testData.formData.janCode);
+    await summaryPage.fillQuantity('2');
+    await page.waitForTimeout(200);
+    await snapInput(1);
+    await summaryPage.clickRegister();
+    await page.waitForTimeout(1000);
+
+    await summaryPage.fillShelfNumber(testData.formData.shelfNumber_2);
+    await summaryPage.fillJanCode(testData.formData.janCode);
+    await summaryPage.fillQuantity('3');
+    await page.waitForTimeout(200);
+    await snapInput(2);
+    await summaryPage.clickRegister();
+    await page.waitForTimeout(1000);
+    const shelfTotal = await summaryPage.getShelfTotal();
+    expect(shelfTotal).toBe('5');
+    await snapExpect();
+  });
+  test('WTY32201_32', async ({
+    page,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    // validate jan code start with 27
+    const testData = loadTestData('TY322/wty32201', 'wty32201', 'TC_UI');
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+    await summaryPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+    await summaryPage.fillShelfNumber(testData.formData.shelfNumber);
+    await summaryPage.fillJanCode(testData.formData.janCodeStart_271);
+    await summaryPage.fillQuantity('2');
+    await page.waitForTimeout(200);
+    await snapInput(1);
+    await summaryPage.clickRegister();
+    await page.waitForTimeout(1000);
+    const janCode = await summaryPage.getJanCode();
+    expect(janCode).toBe('');
     await snapExpect();
   });
 });

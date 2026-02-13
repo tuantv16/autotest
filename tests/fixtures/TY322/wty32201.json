@@ -24,8 +24,10 @@
       "formData": {
         "shelfNumber_123": "123",
         "shelfNumber": "1234567",
+        "shelfNumber_2": "4201567",
         "janCode_length_6": "123456",
-        "janCodeInvalid": "4901234567890",
+        "janCodeInvalid": "49012345678A9",
+        "janCodeStart_271": "2712345699675",
         "janCode": "4901234567894",
         "quantity_negative": "-1",
         "quantity_float": "1.5",

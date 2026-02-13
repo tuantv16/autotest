@@ -13,7 +13,7 @@ test.describe('WTY32201 - (棚卸カウント」)', () => {
     await takeScreenshotOnFailure(page, testInfo);
   });
 
-  test('WTY32201_12_19', async ({
+  test('WTY32201_12_18', async ({
     page,
     indexedDBHelper,
     snapInput,
