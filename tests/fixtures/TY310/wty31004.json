@@ -1,0 +1,53 @@
+{
+  "wty31004": {
+    "TC_21": {
+      "sessionData": [
+        {
+          "key": "WTY31004_IN_SD",
+          "value": {
+            "taiouJkySearchDT": [
+              {
+                "iraiNo": "12345693  ",
+                "gyoNo": "001"
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "00102",
+            "clientId": "00102T498",
+            "termNo": "498",
+            "assetsNo": "EF7111605",
+            "unyoDate": "20251231",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnj": "サワチカ・小松島",
+            "userId": "0001",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31004"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY31002"
+          }
+        }
+      ]
+    }
+  }
+}

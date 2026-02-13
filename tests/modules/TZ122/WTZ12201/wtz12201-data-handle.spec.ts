@@ -36,7 +36,6 @@ test.describe('WTZ12201 (レコメンド)', () => {
         });
         
         await page.waitForTimeout(500);
-        await snapInput();
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
             commonData: testData.commonData
@@ -45,6 +44,7 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
+        await snapInput();
 
         expect(await pageRecommendation.isRowVisible(2)).toBe(true);
         await snapExpect();
@@ -68,7 +68,6 @@ test.describe('WTZ12201 (レコメンド)', () => {
         });
         
         await page.waitForTimeout(500);
-        await snapInput();
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
             commonData: testData.commonData
@@ -77,7 +76,7 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         const isVisibleApply = await pageRecommendation.isTextVisible(testData.outputData.messageNoAppliedPromotion);
         expect(isVisibleApply).toBe(true);
 
@@ -104,7 +103,6 @@ test.describe('WTZ12201 (レコメンド)', () => {
         });
         
         await page.waitForTimeout(500);
-        await snapInput();
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
             commonData: testData.commonData
@@ -113,8 +111,9 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         const isVisibleApply = await pageRecommendation.isTextVisible(testData.outputData.messageNoAppliedPromotion);
+        expect(isVisibleApply).toBe(true);
         await snapExpect();
 
     });
@@ -136,7 +135,6 @@ test.describe('WTZ12201 (レコメンド)', () => {
         });
         
         await page.waitForTimeout(500);
-        await snapInput();
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
             commonData: testData.commonData
@@ -145,7 +143,7 @@ test.describe('WTZ12201 (レコメンド)', () => {
         await page.waitForTimeout(500);
         await pageRecommendation.navigate();
         await page.waitForTimeout(1000);
-
+        await snapInput();
         const isEmptyData = await pageRecommendation.checkValueCellDate();
         expect(isEmptyData).toBe(true);
         await snapExpect();

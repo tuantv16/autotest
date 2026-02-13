@@ -199,8 +199,8 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-        await summaryPage.inputCustomerNameKana(testData.formData.customerNameKana_37);
         await snapInput();
+        await summaryPage.inputCustomerNameKana(testData.formData.customerNameKana_37);
         const actualInput = await summaryPage.getCustomerNameKana();
         const verifyInputMaxLength = await summaryPage.verifyInputValue(
             testData.formData.customerNameKanaStandard_37,
@@ -426,7 +426,6 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         });
         
         await page.waitForTimeout(500);
-
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
         await snapInput();
@@ -438,6 +437,7 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             testData.formData.maxlength.summaryText,
             actualInput
         );
+
         expect(verifyInputMaxLength).toBe(true);
         await snapExpect();
     });
@@ -504,6 +504,40 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
             testData.formData.abstractColumnLabel
         );
         expect(isErrorMessageVisible).toBe(true);
+        await snapExpect();
+    });
+
+    test('WTY20501_49', async ({
+        page,
+        baseUrl,
+        indexedDBHelper,
+        snapInput,
+        snapExpect,
+    }) => {
+        const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_06');
+        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+        await page.waitForTimeout(500);
+
+        await indexedDBHelper.initializeDB({
+            sessionData: testData.sessionData,
+            commonData: testData.commonData
+        });
+        
+        await page.waitForTimeout(500);
+
+        await summaryPage.navigate();
+        await page.waitForTimeout(1000);
+
+        await summaryPage.inputAbstractColumn(testData.formData.abstractColumn_49);
+        await summaryPage.blurSummaryText();
+        await page.waitForTimeout(1000);
+        await snapInput();
+
+        await summaryPage.focusSummaryText();
+        const isErrorMessageVisible = await summaryPage.isErrorBorderVisible(
+            testData.formData.guestNameKanaLabel
+        );
+        expect(isErrorMessageVisible).toBe(false);
         await snapExpect();
     });
 

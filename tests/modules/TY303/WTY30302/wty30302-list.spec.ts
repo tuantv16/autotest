@@ -6,7 +6,7 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
 import { TY30302Page } from '../../../pages/TY303/wty30302.page';
-import { WTY30302_COLUMN_NAMES } from '../../../constants/messages'; 
+import { WTY30302_COLUMN_NAMES } from '../../../constants/TY303/messages';
 
 test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
     let summaryPage: TY30302Page;
