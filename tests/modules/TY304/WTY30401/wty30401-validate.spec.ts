@@ -114,7 +114,7 @@ test.describe("WTY30401 - 電子プライスペアリング情報登録 Test Sui
 
     // Verify:
     const msg = await productInputPage.getFieldErrorMessage("棚札ID");
-    expect(msg).toBe("棚札IDは半角英数のみ入力してください。");
+    expect(msg).toBe("棚札IDは100桁以内で入力してください。");
     await snapExpect();
   });
 
