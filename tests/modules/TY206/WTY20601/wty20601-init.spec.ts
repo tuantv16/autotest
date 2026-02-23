@@ -242,7 +242,7 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         indexedDBHelper,
         snapExpect,
     }) => {
-        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_full_data');
+        const testData = loadTestData('TY206/wty20601', 'wty20601', 'TC_24');
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
         await indexedDBHelper.initializeDB({
             sessionData: testData.sessionData,
@@ -405,6 +405,7 @@ test.describe('WTY20601 - (店別在庫照会)', () => {
         await testPage.selectedOption(testPage.Texts.zaiJt, testPage.ZAI_JT_NM.NEW);
         await testPage.selectedOption(testPage.Texts.thiKbn, testPage.THI_KBN_NM.AUTO);
         expect(await testPage.isBtnTextBoxDisabled()).toBe(true);
+        await snapExpect();
 
         await testPage.selectedOption(testPage.Texts.thiKbn, testPage.THI_KBN_NM.JITEN);
         expect(await testPage.isBtnTextBoxDisabled()).toBe(true);
