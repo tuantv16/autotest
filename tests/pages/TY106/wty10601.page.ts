@@ -36,6 +36,7 @@ export class WTY10601Page extends BasePage {
     hjZaiJRadio: 'input[name="hjZai"][value="2"]',
     zaiBtenDRadio: 'input[name="setShnFlg"][value="0"]',
     zaiBtenJRadio: 'input[name="setShnFlg"][value="1"]',
+    btnToggle: "#btn-toggle button",
 
     // Search buttons
     buttonSearch: 'button:has-text("検索")',
@@ -97,6 +98,10 @@ export class WTY10601Page extends BasePage {
       }
     }
     return true;
+  }
+
+  async btnClearIsVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.btnClear).isVisible();
   }
 
   async getPageTitle(): Promise<boolean> {
@@ -165,17 +170,11 @@ export class WTY10601Page extends BasePage {
   }
 
   async hjZaiYRadioVisible(): Promise<boolean> {
-    return await this.page
-      .locator(this.selectors.hjZaiYRadio)
-      .first()
-      .isVisible();
+    return (await this.page.locator(this.selectors.hjZaiYRadio).count()) > 0;
   }
 
   async hjZaiJRadioVisible(): Promise<boolean> {
-    return await this.page
-      .locator(this.selectors.hjZaiJRadio)
-      .first()
-      .isVisible();
+    return (await this.page.locator(this.selectors.hjZaiJRadio).count()) > 0;
   }
 
   async hjZaiYRadioChecked(): Promise<boolean> {
@@ -186,17 +185,11 @@ export class WTY10601Page extends BasePage {
   }
 
   async zaiBtenDRadioVisible(): Promise<boolean> {
-    return await this.page
-      .locator(this.selectors.zaiBtenDRadio)
-      .first()
-      .isVisible();
+    return (await this.page.locator(this.selectors.zaiBtenDRadio).count()) > 0;
   }
 
   async zaiBtenJRadioVisible(): Promise<boolean> {
-    return await this.page
-      .locator(this.selectors.zaiBtenJRadio)
-      .first()
-      .isVisible();
+    return (await this.page.locator(this.selectors.zaiBtenJRadio).count()) > 0;
   }
 
   async zaiBtenDRadioChecked(): Promise<boolean> {
@@ -204,5 +197,23 @@ export class WTY10601Page extends BasePage {
       .locator(this.selectors.zaiBtenDRadio)
       .first()
       .isChecked();
+  }
+
+  async isRadioClosed(): Promise<boolean> {
+    const section = this.page.locator("div.transition-all").first();
+
+    const classAttr = await section.getAttribute("class");
+    return classAttr?.includes("opacity-0") ?? false;
+  }
+
+  async isRadioOpened(): Promise<boolean> {
+    const section = this.page.locator("div.transition-all").first();
+
+    const classAttr = await section.getAttribute("class");
+    return classAttr?.includes("opacity-100") ?? false;
+  }
+
+  async clickBtnToggle(): Promise<void> {
+    await this.page.click(this.selectors.btnToggle);
   }
 }

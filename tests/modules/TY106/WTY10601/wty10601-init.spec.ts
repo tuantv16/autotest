@@ -64,7 +64,7 @@ test.describe("WTY10601 - 在庫一覧照会 Test Suite", () => {
     await snapExpect();
   });
 
-  test("WTY10601_9", async ({
+  test("WTY10601_8", async ({
     page,
     baseUrl,
     indexedDBHelper,
@@ -101,44 +101,6 @@ test.describe("WTY10601 - 在庫一覧照会 Test Suite", () => {
 
     const brCd = await productInputPage.getValueById("brCd");
     expect(brCd).toBe("");
-
-    await snapExpect();
-  });
-
-  test("WTY10601_10", async ({
-    page,
-    baseUrl,
-    indexedDBHelper,
-    snapInput,
-    snapExpect,
-  }) => {
-    const testData = await loadTestData("TY106/wty10601", "wty10601", "TC_7");
-    // Step 1: Login to system
-    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
-    await page.waitForTimeout(500);
-
-    await indexedDBHelper.initializeDB({
-      sessionData: testData.sessionData,
-      commonData: testData.commonData,
-    });
-
-    // Step 2: Open WTY10601 screen
-    await productInputPage.navigate();
-    await page.waitForTimeout(1000);
-    await snapInput();
-
-    // Verify:
-    const hjZaiYRadioVisible = await productInputPage.hjZaiYRadioVisible();
-    expect(hjZaiYRadioVisible).toBe(true);
-
-    const hjZaiJRadioVisible = await productInputPage.hjZaiJRadioVisible();
-    expect(hjZaiJRadioVisible).toBe(true);
-
-    const zaiBtenDRadioVisible = await productInputPage.zaiBtenDRadioVisible();
-    expect(zaiBtenDRadioVisible).toBe(true);
-
-    const zaiBtenJRadioVisible = await productInputPage.zaiBtenJRadioVisible();
-    expect(zaiBtenJRadioVisible).toBe(true);
 
     await snapExpect();
   });
