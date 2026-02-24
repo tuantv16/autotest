@@ -1,0 +1,119 @@
+{
+  "wty30201": {
+    "init": {
+      "description": "format value 基準日 successfully",
+      "sessionData": [{
+        "key": "WTY30201_IN_SD",
+        "value": {
+            
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+                "assetsNo": "EF7096380",
+                "clientId": "00905PD401",
+                "keepPeriod": "6",
+                "storeCd": "00256",
+                "syoriStoreCd": "00256",
+                "syoriStoreNmKnJ": "東海通",
+                "syoriStoreNmKn": "トウカゲイ",
+                "syoriStoreNmKnj": "東海通",
+                "termNo": "401",
+                "unyoDate": "20250808",
+                "userId": "1111"
+          }
+        },
+        {
+            "id": "taxInfoDT",
+            "value": {
+                "prcOutDataKrkeKknDT": [
+                {
+                "Index": "0",
+                "fromYmd": "20140317",
+                "toYmd": "20140331",
+                "dispYmd": "20140401"
+                },
+                {
+                "Index": "1",
+                "fromYmd": "20190917",
+                "toYmd": "20190930",
+                "dispYmd": "20191001"
+                }
+            ],
+            "zeiBetsuLayoutKbnDT": [
+                {
+                "Index": "0",
+                "fromYmd": "20140401",
+                "toYmd": "20190930",
+                "toString": "Kikan [20140401-20190930]"
+                }
+            ],
+            "taxInfoDT": [
+                {
+                "Index": "0",
+                "zeiRtHnkDate": "20190919",
+                "zeiRt": 8
+                },
+                {
+                "Index": "1",
+                "zeiRtHnkDate": "20080101",
+                "zeiRt": 5
+                }
+            ]
+            }
+        },
+        {
+            "id": "btnInfoDT",
+            "value": {
+                "areaCd": "529",
+                "blkCd": "520",
+                "btenCd": "04388",
+                "btrktKbn": "",
+                "chainId": "1",
+                "csNmKn": "七丁目１丁目",
+                "fcFlg": "",
+                "fcKtkbn": "",
+                "jgybCd": "120",
+                "jgyksCd": "03",
+                "jusCd": "23111043001",
+                "kdoJt": "10",
+                "keepPeriod": "6",
+                "ksCd": "03000",
+                "ktKbn": "01",
+                "pstNo": "4550001",
+                "ryAbtknNmKn": "トウカゲイ",
+                "ryAbtknNmKnj": "東海通",
+                "skgCd": "23111",
+                "skgNmKn": "名古屋市 港区",
+                "tofNmKnj": "愛知県",
+                "termNo": "419",
+                "tsutayaFlg": "0",
+                "unyoYmd": "20250805",
+                "zoneCd": "520"
+            }
+        }
+      ],
+      "formData": {
+         "outDate_08": "20250806",
+         "outDate_09": "20250808",
+         "outDate_16": "20250804",
+         "shnCd_17": "4901234567890",
+         "shnCd_18": "12345678",
+         "shnCd_19": "12345678901",
+         "moc_22": "1234",
+         "moc_23": "12345",
+         "shnCd_24": "123",
+         "moc_24": "ABC",
+         "bk_25": "1234567",
+         "bk_26": "12345678",
+         "bk_27": "ABC",
+         "msu_29": "1234",
+         "msu_30": "12345",
+         "msu_31": "ABC",
+         "msu_32": "10"
+      }
+    }
+}
+}
