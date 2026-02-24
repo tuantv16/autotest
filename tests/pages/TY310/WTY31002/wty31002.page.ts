@@ -32,6 +32,8 @@ export class WTY31002Page extends BasePage {
     // Button popup
     buttonCancelPro: 'button:has-text("商品取消")',
     buttonEditPro: 'button:has-text("商品修正")',
+    buttonCheckPro: 'button:has-text("状況照会")',
+    buttonInfoPro: 'button:has-text("商品照会")',
 
     // Menu
     actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
@@ -262,6 +264,14 @@ export class WTY31002Page extends BasePage {
 
   async isButtonEditProVisible(): Promise<boolean> {
     return await this.page.locator(this.selectors.buttonEditPro).isVisible();
+  }
+
+  async isButtonCheckProVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.buttonCheckPro).isVisible();
+  }
+
+  async isButtonInfoProVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.buttonInfoPro).isVisible();
   }
 
   async clickButtonCancelPro(): Promise<void> {

@@ -198,4 +198,27 @@ test.describe("WTY31004 - 在庫Ｃ対応状況 Test Suite", () => {
 
     await snapExpect();
   });
+
+  test("WTY31004_19", async ({ page, baseUrl, indexedDBHelper, snapInput, snapExpect }) => {
+    const testData = loadTestData("TY310/wty31004", "wty31004", "TC_21");
+
+    // Step 1: Login to system
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Open WTY31001 screen
+    await productInputPage.navigate();
+    await page.waitForTimeout(1000);
+    await snapInput();
+
+    const isInputsDisplayed = await productInputPage.isInputsDisplayed();
+    expect(isInputsDisplayed).toBe(true);
+
+    await snapExpect();
+  });
 });
