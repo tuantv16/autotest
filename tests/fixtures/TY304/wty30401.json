@@ -1,0 +1,52 @@
+{
+  "wty30401": {
+    "TC_05": {
+      "formData": {
+        "tnhdId_05": "KNSK_TND9999",
+        "tnhdId_18": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901",
+        "tnhdId_19": "TEST,001",
+        "tnhdId_20": "TEST 001",
+        "tnhdId_21": "ＴＥＳＴあいう",
+        "shnCd_05": "00579159611",
+        "shnCd_23": "ＴＥＳＴあいう"
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "00102",
+            "clientId": "00102T498",
+            "termNo": "498",
+            "assetsNo": "EF7111605",
+            "unyoDate": "20251231",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnj": "サワチカ・小松島",
+            "userId": "0001",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY30401"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10101"
+          }
+        }
+      ],
+      "expected": {
+        "shnCd_23": "TESTあいう"
+      }
+    }
+  }
+}
