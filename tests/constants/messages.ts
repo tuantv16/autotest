@@ -63,6 +63,18 @@ export const WTY23002_MESSAGES = {
   INVALID_DATE_FORMAT: '日付の形式が正しくありません',
   INVALID_DATE_RANGE: '抽出期間の開始日は終了日以前を入力してください',
 } as const;
+export const WTY32201_MESSAGES = {
+  REQUIRED_SHELF_NUMBER: '棚番を入力してください。',
+  SHELF_NUMBER_LENGTH: '棚番は7桁で入力してください。',
+  REQUIRED_JAN_CODE: '商品のJANコードを入力してください。',
+  JAN_CODE_LENGTH: '商品のJANコードは8桁もしくは13桁で入力してください。',
+  JAN_CODE_INVALID: 'JANコードが誤っています。',
+  QUANTITY_REQUIRED: '商品の品数を入力してください。',
+  QUANTITY_MIN: '品数は１以上で入力してください。',
+  QUANTITY_INTEGER: '品数は整数で入力してください。',
+  QUANTITY_MAX_LENGTH: '品数は4桁以内で入力してください。',
+  QUANTITY_MAX_VALUE: '品数は9999以下で入力してください。',
+} as const;
 
 export const WTY31101_MESSAGES = {
   TE5050: '必須入力項目です。',
