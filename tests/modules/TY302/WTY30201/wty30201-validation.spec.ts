@@ -581,7 +581,7 @@ test.describe('WTY30201 - (商品プライス出力指示)', () => {
       await page.waitForTimeout(1000);
       await productPriceOutputPage.clickConfirm();
       await page.waitForTimeout(1000);
-      const msuInput = await productPriceOutputPage.waitForTextInBody('商品が入力されていないため確定できません。できません。');
+      const msuInput = await productPriceOutputPage.waitForTextInBody('商品が入力されていないため確定できません。');
       expect(msuInput).toBe(true);
       await snapExpect();
     });
