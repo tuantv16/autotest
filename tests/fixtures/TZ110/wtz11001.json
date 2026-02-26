@@ -1,0 +1,67 @@
+{
+  "wtz11001": {
+    "TC_15": {
+      "description": "format value 基準日 successfully",
+      "sessionData": [{
+        "key": "WTZ11001_IN_SD",
+        "value": {
+            
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+              "assetsNo": "EF7096380",
+              "clientId": "0438874190",
+              "keepPeriod": "6",
+              "storeCd": "04388",
+              "syoriStoreCd": "04388",
+              "syoriStoreNmKnJ": "東海通",
+              "syoriStoreNmKn": "トウカゲイ",
+              "syoriStoreNmKnj": "東海通",
+              "termNo": "419",
+              "unyoDate": "20251028",
+              "userId": "70000"
+          }
+        },
+        {
+            "id": "btnInfoDT",
+            "value": {
+                "areaCd": "529",
+                "blkCd": "520",
+                "btenCd": "04388",
+                "btrktKbn": "",
+                "chainId": "1",
+                "csNmKn": "七丁目１丁目",
+                "fcFlg": "",
+                "fcKtkbn": "",
+                "jgybCd": "120",
+                "jgyksCd": "03",
+                "jusCd": "23111043001",
+                "kdoJt": "10",
+                "keepPeriod": "6",
+                "ksCd": "03000",
+                "ktKbn": "01",
+                "pstNo": "4550001",
+                "ryAbtknNmKn": "トウカゲイ",
+                "ryAbtknNmKnj": "東海通",
+                "skgCd": "23111",
+                "skgNmKn": "名古屋市 港区",
+                "tofNmKnj": "愛知県",
+                "termNo": "419",
+                "tsutayaFlg": "0",
+                "unyoYmd": "20251028",
+                "zoneCd": "520"
+            }
+        }
+      ],
+      "formData": {
+        "haikojiDate_15": "0606",
+        "chikiCd_15": "1234567",
+        "chikiCd_17": "123456@",
+        "chikiCd_18": "123"
+      }
+    }
+}   
+}

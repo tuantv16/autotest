@@ -101,6 +101,7 @@ export class WTY31001Page extends BasePage {
     cancelDialogButton: "button#cancel_button",
     actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
     confirmButton: 'button:has-text("確定")',
+    confirmButton2: 'button:has-text("商品確定")',
     clearButton: 'button:has-text("クリア")',
     requestSearchButton:
       'ul[role="menu"] li[role="menuitem"] span:has-text("依頼検索")',
@@ -620,7 +621,7 @@ export class WTY31001Page extends BasePage {
 
   async expectAllLabelsNotColor(
     options?: ExcludeKeys<typeof this.labelSelectors>,
-    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -637,7 +638,7 @@ export class WTY31001Page extends BasePage {
 
   async expectAllLabelsColor(
     options?: ExcludeKeys<typeof this.labelSelectors>,
-    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -654,7 +655,7 @@ export class WTY31001Page extends BasePage {
 
   async expectAllInputBordersNotColor(
     options?: ExcludeKeys<typeof this.inputSelectors>,
-    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 
@@ -671,7 +672,7 @@ export class WTY31001Page extends BasePage {
 
   async expectAllInputBordersColor(
     options?: ExcludeKeys<typeof this.inputSelectors>,
-    redColor =/rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
+    redColor = /rgb\(255,\s*0,\s*41\)|rgb\(153,\s*14,\s*14\)|rgba\(15,\s*164,\s*74,\s*1\)/,
   ): Promise<void> {
     const excludeSet = new Set(options?.exclude ?? []);
 

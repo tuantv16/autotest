@@ -1,0 +1,584 @@
+{
+  "wty31003": {
+    "TC_6": {
+      "sessionData": [
+        {
+          "key": "WTZ10101_OUT_SD",
+          "value": {
+            "shnInfoDT": [
+              {
+                "janCd": "4997236590169",
+                "shnCd": "00579159611",
+                "mkKata": "ADD-CB40H？？？？？？？？？？"
+              }
+            ]
+          }
+        },
+        {
+          "key": "WTY31003_IN_SD",
+          "value": {
+            "searchJknDT": [
+              {
+                "iritanCd": "0001",
+                "iraiDateS": "20250101",
+                "iraiDateE": "20251231",
+                "shnHani": "",
+                "shnJyoho": "",
+                "fromNo": 0,
+                "toNo": 0
+              }
+            ],
+            "inPutCommonDT": [
+              {
+                "index": 5
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "00102",
+            "clientId": "00102T498",
+            "termNo": "498",
+            "assetsNo": "EF7111605",
+            "unyoDate": "20251231",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnj": "サワチカ・小松島",
+            "userId": "0001",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "taxInfoDT": [
+              { "zeiRtHnkDate": "20190919", "zeiRt": "10" },
+              { "zeiRtHnkDate": "20140401", "zeiRt": "8" },
+              { "zeiRtHnkDate": "20080101", "zeiRt": "5" }
+            ],
+            "zeiBetsuLayoutKknDT": [
+              [
+                {
+                  "fromYmd": "20140401",
+                  "toYmd": "20190930",
+                  "toString": "Kikan [20140401-20190930]"
+                }
+              ]
+            ],
+            "prcOutDateKrkeKknDT": [
+              [
+                {
+                  "fromYmd": "20140317",
+                  "toYmd": "20140331",
+                  "dispYmd": "20140401"
+                },
+                {
+                  "fromYmd": "20190917",
+                  "toYmd": "20190930",
+                  "dispYmd": "20191001"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "termNo": "498",
+            "unyoYmd": "20251231",
+            "jgyksCd": "02",
+            "ktKbn": "01",
+            "chainCd": "6",
+            "btrktKbn": " ",
+            "rykbtenNmKnj": "サワチカ・小松島",
+            "rykbtenNmKn": "ｻﾜﾁｶ･ｺﾏﾂｼﾏ",
+            "ksCd": "0035",
+            "jgybCd": "999",
+            "zoneCd": "999",
+            "blkCd": "999",
+            "areaCd": "999",
+            "jusCd": "36203017000",
+            "skgCd": "0772",
+            "pstNo": "9640202",
+            "tdfkNmKnj": "福島県",
+            "skgNmKnj": "安達郡",
+            "csNmKnj": "東和町　針道　字壇ノ平",
+            "tsutayaFlg": "1",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "fcKtKbn": "1",
+            "fcFlg": ""
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31003"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10101"
+          }
+        }
+      ],
+      "expected": {
+        "shnCd_6": "4997236590169",
+        "kata_6": "ADD-CB40H？？？？？？？？？？"
+      }
+    },
+    "TC_7": {
+      "sessionData": [
+        {
+          "key": "WTZ10301_OUT_SD",
+          "value": {
+            "cbrInfoDT": [
+              {
+                "daiCd": "70",
+                "chuCd": "30",
+                "rykchuNmKnj": "中古トレカ"
+              }
+            ]
+          }
+        },
+        {
+          "key": "WTY31003_IN_SD",
+          "value": {
+            "searchJknDT": [
+              {
+                "iritanCd": "0001",
+                "iraiDateS": "20250101",
+                "iraiDateE": "20251231",
+                "shnHani": "",
+                "shnJyoho": "",
+                "fromNo": 0,
+                "toNo": 0
+              }
+            ],
+            "inPutCommonDT": [
+              {
+                "index": 5
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "00102",
+            "clientId": "00102T498",
+            "termNo": "498",
+            "assetsNo": "EF7111605",
+            "unyoDate": "20251231",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnj": "サワチカ・小松島",
+            "userId": "0001",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "taxInfoDT": [
+              { "zeiRtHnkDate": "20190919", "zeiRt": "10" },
+              { "zeiRtHnkDate": "20140401", "zeiRt": "8" },
+              { "zeiRtHnkDate": "20080101", "zeiRt": "5" }
+            ],
+            "zeiBetsuLayoutKknDT": [
+              [
+                {
+                  "fromYmd": "20140401",
+                  "toYmd": "20190930",
+                  "toString": "Kikan [20140401-20190930]"
+                }
+              ]
+            ],
+            "prcOutDateKrkeKknDT": [
+              [
+                {
+                  "fromYmd": "20140317",
+                  "toYmd": "20140331",
+                  "dispYmd": "20140401"
+                },
+                {
+                  "fromYmd": "20190917",
+                  "toYmd": "20190930",
+                  "dispYmd": "20191001"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "termNo": "498",
+            "unyoYmd": "20251231",
+            "jgyksCd": "02",
+            "ktKbn": "01",
+            "chainCd": "6",
+            "btrktKbn": " ",
+            "rykbtenNmKnj": "サワチカ・小松島",
+            "rykbtenNmKn": "ｻﾜﾁｶ･ｺﾏﾂｼﾏ",
+            "ksCd": "0035",
+            "jgybCd": "999",
+            "zoneCd": "999",
+            "blkCd": "999",
+            "areaCd": "999",
+            "jusCd": "36203017000",
+            "skgCd": "0772",
+            "pstNo": "9640202",
+            "tdfkNmKnj": "福島県",
+            "skgNmKnj": "安達郡",
+            "csNmKnj": "東和町　針道　字壇ノ平",
+            "tsutayaFlg": "1",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "fcKtKbn": "1",
+            "fcFlg": ""
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31003"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10301"
+          }
+        }
+      ],
+      "expected": {
+        "bnrCd": "7030",
+        "bnrNm": "中古トレカ"
+      }
+    },
+    "TC_8": {
+      "sessionData": [
+        {
+          "key": "WTZ10401_OUT_SD",
+          "value": {
+            "sbrInfoDT": [
+              {
+                "daiCd": "11",
+                "chuCd": "22",
+                "shoCd": "33",
+                "rykshoNmKnj": "その他プロジェクタ"
+              }
+            ]
+          }
+        },
+        {
+          "key": "WTY31003_IN_SD",
+          "value": {
+            "searchJknDT": [
+              {
+                "iritanCd": "0001",
+                "iraiDateS": "20250101",
+                "iraiDateE": "20251231",
+                "shnHani": "",
+                "shnJyoho": "",
+                "fromNo": 0,
+                "toNo": 0
+              }
+            ],
+            "inPutCommonDT": [
+              {
+                "index": 5
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "00102",
+            "clientId": "00102T498",
+            "termNo": "498",
+            "assetsNo": "EF7111605",
+            "unyoDate": "20251231",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnj": "サワチカ・小松島",
+            "userId": "0001",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "taxInfoDT": [
+              { "zeiRtHnkDate": "20190919", "zeiRt": "10" },
+              { "zeiRtHnkDate": "20140401", "zeiRt": "8" },
+              { "zeiRtHnkDate": "20080101", "zeiRt": "5" }
+            ],
+            "zeiBetsuLayoutKknDT": [
+              [
+                {
+                  "fromYmd": "20140401",
+                  "toYmd": "20190930",
+                  "toString": "Kikan [20140401-20190930]"
+                }
+              ]
+            ],
+            "prcOutDateKrkeKknDT": [
+              [
+                {
+                  "fromYmd": "20140317",
+                  "toYmd": "20140331",
+                  "dispYmd": "20140401"
+                },
+                {
+                  "fromYmd": "20190917",
+                  "toYmd": "20190930",
+                  "dispYmd": "20191001"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "termNo": "498",
+            "unyoYmd": "20251231",
+            "jgyksCd": "02",
+            "ktKbn": "01",
+            "chainCd": "6",
+            "btrktKbn": " ",
+            "rykbtenNmKnj": "サワチカ・小松島",
+            "rykbtenNmKn": "ｻﾜﾁｶ･ｺﾏﾂｼﾏ",
+            "ksCd": "0035",
+            "jgybCd": "999",
+            "zoneCd": "999",
+            "blkCd": "999",
+            "areaCd": "999",
+            "jusCd": "36203017000",
+            "skgCd": "0772",
+            "pstNo": "9640202",
+            "tdfkNmKnj": "福島県",
+            "skgNmKnj": "安達郡",
+            "csNmKnj": "東和町　針道　字壇ノ平",
+            "tsutayaFlg": "1",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "fcKtKbn": "1",
+            "fcFlg": ""
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31003"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ10401"
+          }
+        }
+      ],
+      "expected": {
+        "bnrCd": "112233",
+        "bnrNm": "その他プロジェクタ"
+      }
+    },
+    "TC_19": {
+      "formData": {
+        "shnCd_19": "00579159611",
+        "tanCd_27": "7000",
+        "iraiDateFrom_29": "2025/01/01",
+        "iraiDateTo_30": "2025/12/31",
+        "iraiDateFrom_31": "2025/01/31",
+        "iraiDateTo_31": "2025/01/01",
+        "tanCd_52": "0001",
+        "bnrCd_52": "1150",
+        "iraiDateFrom_52": "2025/01/01",
+        "iraiDateTo_52": "2025/12/31",
+        "shnCd_52": "00579159611"
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "00102",
+            "clientId": "00102T498",
+            "termNo": "498",
+            "assetsNo": "EF7111605",
+            "unyoDate": "20251231",
+            "syoriStoreCd": "00102",
+            "syoriStoreNmKnj": "サワチカ・小松島",
+            "userId": "0001",
+            "keepPeriod": "6"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "taxInfoDT": [
+              { "zeiRtHnkDate": "20190919", "zeiRt": "10" },
+              { "zeiRtHnkDate": "20140401", "zeiRt": "8" },
+              { "zeiRtHnkDate": "20080101", "zeiRt": "5" }
+            ],
+            "zeiBetsuLayoutKknDT": [
+              [
+                {
+                  "fromYmd": "20140401",
+                  "toYmd": "20190930",
+                  "toString": "Kikan [20140401-20190930]"
+                }
+              ]
+            ],
+            "prcOutDateKrkeKknDT": [
+              [
+                {
+                  "fromYmd": "20140317",
+                  "toYmd": "20140331",
+                  "dispYmd": "20140401"
+                },
+                {
+                  "fromYmd": "20190917",
+                  "toYmd": "20190930",
+                  "dispYmd": "20191001"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "termNo": "498",
+            "unyoYmd": "20251231",
+            "jgyksCd": "02",
+            "ktKbn": "01",
+            "chainCd": "6",
+            "btrktKbn": " ",
+            "rykbtenNmKnj": "サワチカ・小松島",
+            "rykbtenNmKn": "ｻﾜﾁｶ･ｺﾏﾂｼﾏ",
+            "ksCd": "0035",
+            "jgybCd": "999",
+            "zoneCd": "999",
+            "blkCd": "999",
+            "areaCd": "999",
+            "jusCd": "36203017000",
+            "skgCd": "0772",
+            "pstNo": "9640202",
+            "tdfkNmKnj": "福島県",
+            "skgNmKnj": "安達郡",
+            "csNmKnj": "東和町　針道　字壇ノ平",
+            "tsutayaFlg": "1",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "fcKtKbn": "1",
+            "fcFlg": ""
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31003"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY31001"
+          }
+        }
+      ],
+      "expected": {
+        "tanNm": "バルテス　西川",
+        "iraiDateFrom_29": "2025/01/01",
+        "iraiDateTo_30": "2025/12/31"
+      }
+    }
+  }
+}

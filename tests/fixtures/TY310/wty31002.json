@@ -1,0 +1,914 @@
+{
+  "wty31002": {
+    "TC_11": {
+      "formData": {
+        "comment_TextArea_17": "This is a test comment for TC_17",
+        "comment_TextArea_26": "これはテストコメントです。This is a test comment."
+      },
+      "sessionData": [
+        {
+          "key": "WTY31001_OUT_SD",
+          "value": {
+            "kkyIriHeadDT": [
+              {
+                "shoriKbn": "1",
+                "kkyHpn": "1",
+                "iraiNo": "",
+                "iraiDate": "20251028",
+                "teikeiCd": "",
+                "cmt": ""
+              }
+            ],
+            "kkyIriMsiDT": [
+              {
+                "gyoNo": "001",
+                "shnCd": "00029436460",
+                "janCd": "04975584305307",
+                "kata": "DSA-456K",
+                "mkNm": "ﾃﾞｲｴﾂｸｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": "客",
+                "rnk": "B ",
+                "bKbn": " ",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "2",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "002",
+                "shnCd": "00010013557",
+                "janCd": "04962458558440",
+                "kata": "IHL-SLV4S？？？？4？？",
+                "mkNm": "ﾙﾐﾅｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "F ",
+                "bKbn": " ",
+                "rHinIri": "789",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "199",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "2",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "003",
+                "shnCd": "00579159611",
+                "janCd": "04997236590169",
+                "kata": "ADD-CB40H？？？？？？？？？？",
+                "mkNm": "ﾒｲﾍﾞﾘﾝ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "C ",
+                "bKbn": "Z",
+                "rHinIri": "123",
+                "tenjiIri": "456",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "004",
+                "shnCd": "00010003329",
+                "janCd": "04902530777222",
+                "kata": "W32L-H90",
+                "mkNm": "ﾋﾀﾁ",
+                "shnNm": "カラーテレビ",
+                "kyaku": " ",
+                "rnk": "Z ",
+                "bKbn": "3",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "",
+                "htcycNoM": 0,
+                "cancel": "0"
+              }
+            ],
+            "processResult": "success"
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "kkyIriHeadDT": [
+              {
+                "shoriKbn": "1",
+                "kkyHpn": "1",
+                "iraiNo": "",
+                "iraiDate": "20251028",
+                "teikeiCd": "",
+                "cmt": ""
+              }
+            ],
+            "kkyIriMsiDT": [
+              {
+                "gyoNo": "001",
+                "shnCd": "00029436460",
+                "janCd": "04975584305307",
+                "kata": "DSA-456K",
+                "mkNm": "ﾃﾞｲｴﾂｸｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": "客",
+                "rnk": "B ",
+                "bKbn": " ",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "2",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "002",
+                "shnCd": "00010013557",
+                "janCd": "04962458558440",
+                "kata": "IHL-SLV4S？？？？4？？",
+                "mkNm": "ﾙﾐﾅｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "F ",
+                "bKbn": " ",
+                "rHinIri": "789",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "199",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "2",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "003",
+                "shnCd": "00579159611",
+                "janCd": "04997236590169",
+                "kata": "ADD-CB40H？？？？？？？？？？",
+                "mkNm": "ﾒｲﾍﾞﾘﾝ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "C ",
+                "bKbn": "Z",
+                "rHinIri": "123",
+                "tenjiIri": "456",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "004",
+                "shnCd": "00010003329",
+                "janCd": "04902530777222",
+                "kata": "W32L-H90",
+                "mkNm": "ﾋﾀﾁ",
+                "shnNm": "カラーテレビ",
+                "kyaku": " ",
+                "rnk": "Z ",
+                "bKbn": "3",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "",
+                "htcycNoM": 0,
+                "cancel": "0"
+              }
+            ],
+            "processResult": "success"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": [
+              {
+                "preScreenId": "WTY31001",
+                "screenId": "WTY31001",
+                "nextScreenId": "WTY31002",
+                "openedFromNewTab": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31002"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY31001"
+          }
+        }
+      ]
+    },
+    "TC_24": {
+      "formData": {
+        "comment_TextArea_17": "This is a test comment for TC_23",
+        "comment_TextArea_26": "これはテストコメントです。This is a test comment."
+      },
+      "sessionData": [
+        {
+          "key": "WTY31002_IN_SD",
+          "value": {
+            "iraiInfoGetDT": [
+              {
+                "iraiNo": "12345679  ",
+                "fromNo": 1,
+                "toNo": 30,
+                "shoriKbn": "4"
+              }
+            ],
+            "searchJknDT": [
+              {
+                "iritanCd": "0001",
+                "shnJyoho": "00579159611",
+                "btenCd": "00102",
+                "fromNo": 0,
+                "toNo": 0
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "kkyIriHeadDT": [
+              {
+                "shoriKbn": "1",
+                "kkyHpn": "1",
+                "iraiNo": "",
+                "iraiDate": "20251028",
+                "teikeiCd": "",
+                "cmt": ""
+              }
+            ],
+            "kkyIriMsiDT": [
+              {
+                "gyoNo": "001",
+                "shnCd": "00029436460",
+                "janCd": "04975584305307",
+                "kata": "DSA-456K",
+                "mkNm": "ﾃﾞｲｴﾂｸｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": "客",
+                "rnk": "B ",
+                "bKbn": " ",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "2",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "002",
+                "shnCd": "00010013557",
+                "janCd": "04962458558440",
+                "kata": "IHL-SLV4S？？？？4？？",
+                "mkNm": "ﾙﾐﾅｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "F ",
+                "bKbn": " ",
+                "rHinIri": "789",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "199",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "2",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "003",
+                "shnCd": "00579159611",
+                "janCd": "04997236590169",
+                "kata": "ADD-CB40H？？？？？？？？？？",
+                "mkNm": "ﾒｲﾍﾞﾘﾝ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "C ",
+                "bKbn": "Z",
+                "rHinIri": "123",
+                "tenjiIri": "456",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "004",
+                "shnCd": "00010003329",
+                "janCd": "04902530777222",
+                "kata": "W32L-H90",
+                "mkNm": "ﾋﾀﾁ",
+                "shnNm": "カラーテレビ",
+                "kyaku": " ",
+                "rnk": "Z ",
+                "bKbn": "3",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "",
+                "htcycNoM": 0,
+                "cancel": "0"
+              }
+            ],
+            "processResult": "success"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31002"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY31003"
+          }
+        }
+      ]
+    },
+    "TC_25": {
+      "formData": {
+        "comment_TextArea_17": "This is a test comment for TC_23",
+        "comment_TextArea_26": "これはテストコメントです。This is a test comment."
+      },
+      "sessionData": [
+        {
+          "key": "WTY31002_IN_SD",
+          "value": {
+            "iraiInfoGetDT": [
+              {
+                "iraiNo": "12345690  ",
+                "fromNo": 1,
+                "toNo": 30,
+                "shoriKbn": "2"
+              }
+            ],
+            "searchJknDT": [
+              {
+                "iritanCd": "0001",
+                "iraiDateS": "20250101",
+                "iraiDateE": "20251231",
+                "shnJyoho": "4997236590169",
+                "btenCd": "00102",
+                "fromNo": 0,
+                "toNo": 0
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "kkyIriHeadDT": [
+              {
+                "shoriKbn": "1",
+                "kkyHpn": "1",
+                "iraiNo": "",
+                "iraiDate": "20251028",
+                "teikeiCd": "",
+                "cmt": ""
+              }
+            ],
+            "kkyIriMsiDT": [
+              {
+                "gyoNo": "001",
+                "shnCd": "00029436460",
+                "janCd": "04975584305307",
+                "kata": "DSA-456K",
+                "mkNm": "ﾃﾞｲｴﾂｸｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": "客",
+                "rnk": "B ",
+                "bKbn": " ",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "2",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "002",
+                "shnCd": "00010013557",
+                "janCd": "04962458558440",
+                "kata": "IHL-SLV4S？？？？4？？",
+                "mkNm": "ﾙﾐﾅｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "F ",
+                "bKbn": " ",
+                "rHinIri": "789",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "199",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "2",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "003",
+                "shnCd": "00579159611",
+                "janCd": "04997236590169",
+                "kata": "ADD-CB40H？？？？？？？？？？",
+                "mkNm": "ﾒｲﾍﾞﾘﾝ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "C ",
+                "bKbn": "Z",
+                "rHinIri": "123",
+                "tenjiIri": "456",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "004",
+                "shnCd": "00010003329",
+                "janCd": "04902530777222",
+                "kata": "W32L-H90",
+                "mkNm": "ﾋﾀﾁ",
+                "shnNm": "カラーテレビ",
+                "kyaku": " ",
+                "rnk": "Z ",
+                "bKbn": "3",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "",
+                "htcycNoM": 0,
+                "cancel": "0"
+              }
+            ],
+            "processResult": "success"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31002"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY31003"
+          }
+        }
+      ]
+    },
+    "TC_30": {
+      "sessionData": [
+        {
+          "key": "WTY31002_IN_SD",
+          "value": {
+            "kkyIriHeadDT": [
+              {
+                "shoriKbn": "1",
+                "kkyHpn": "1",
+                "iraiNo": "",
+                "iraiDate": "20251007"
+              }
+            ],
+            "kkyIriMsiDT": [
+              {
+                "gyoNo": "001",
+                "shnCd": "00010011881",
+                "janCd": "04954271822266",
+                "kata": "IHL-SLV4S？？？？4？？",
+                "mkNm": "ﾙﾐﾅｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "F ",
+                "bKbn": " ",
+                "rHinIri": "1",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "10",
+                "tHai": "21",
+                "dcYukoZai": "999",
+                "tenji": "1",
+                "kaikon": "65",
+                "d1tSu": "2",
+                "d2tSu": "150",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              }
+            ],
+            "iraiInfoGetDT": [],
+            "searchJknDT": [],
+            "outPutCommonDT": [],
+            "inPutCommonDT": [
+              {
+                "index": 1
+              }
+            ]
+          }
+        }
+      ],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "kkyIriHeadDT": [
+              {
+                "shoriKbn": "1",
+                "kkyHpn": "1",
+                "iraiNo": "",
+                "iraiDate": "20251028",
+                "teikeiCd": "",
+                "cmt": ""
+              }
+            ],
+            "kkyIriMsiDT": [
+              {
+                "gyoNo": "001",
+                "shnCd": "00029436460",
+                "janCd": "04975584305307",
+                "kata": "DSA-456K",
+                "mkNm": "ﾃﾞｲｴﾂｸｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": "客",
+                "rnk": "B ",
+                "bKbn": " ",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "2",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "002",
+                "shnCd": "00010013557",
+                "janCd": "04962458558440",
+                "kata": "IHL-SLV4S？？？？4？？",
+                "mkNm": "ﾙﾐﾅｽ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "F ",
+                "bKbn": " ",
+                "rHinIri": "789",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "199",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "2",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "003",
+                "shnCd": "00579159611",
+                "janCd": "04997236590169",
+                "kata": "ADD-CB40H？？？？？？？？？？",
+                "mkNm": "ﾒｲﾍﾞﾘﾝ",
+                "shnNm": "ＡＶファニチャー",
+                "kyaku": " ",
+                "rnk": "C ",
+                "bKbn": "Z",
+                "rHinIri": "123",
+                "tenjiIri": "456",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "",
+                "tSuDel": "0",
+                "gZai": "20",
+                "yukoZai": "999",
+                "tHai": "1998",
+                "dcYukoZai": "999",
+                "tenji": "999",
+                "kaikon": "999",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "200",
+                "htcycNoM": 0,
+                "cancel": "0"
+              },
+              {
+                "gyoNo": "004",
+                "shnCd": "00010003329",
+                "janCd": "04902530777222",
+                "kata": "W32L-H90",
+                "mkNm": "ﾋﾀﾁ",
+                "shnNm": "カラーテレビ",
+                "kyaku": " ",
+                "rnk": "Z ",
+                "bKbn": "3",
+                "rHinIri": "",
+                "tenjiIri": "",
+                "kaikonIri": "",
+                "tSuIri": "",
+                "kisoIri": "1",
+                "tSuDel": "0",
+                "gZai": "0",
+                "yukoZai": "0",
+                "tHai": "0",
+                "dcYukoZai": "",
+                "tenji": "0",
+                "kaikon": "0",
+                "d1tSu": "",
+                "d2tSu": "",
+                "tenjiKisoSu": "",
+                "htcycNoM": 0,
+                "cancel": "0"
+              }
+            ],
+            "processResult": "success"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
+          "id": "screenId",
+          "value": {
+            "screenId": "WTY31002"
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTY31001"
+          }
+        }
+      ]
+    }
+  }
+}

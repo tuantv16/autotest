@@ -6,7 +6,7 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
 import { TY30302Page } from '../../../pages/TY303/wty30302.page';
-import { WTY30302_COLUMN_NAMES } from '../../../constants/messages';
+import { WTY30302_COLUMN_NAMES, WTY30302_MESSAGES } from '../../../constants/TY303/messages';
 
 test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
     let summaryPage: TY30302Page;
@@ -109,7 +109,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
 
         // Verify confirmation message
         const confirmMessage = await summaryPage.getConfirmationMessage();
-        expect(confirmMessage).toContain('選択の印刷指示を削除');
+        expect(confirmMessage).toContain(WTY30302_MESSAGES.CONFIRM_DELETE);
 
         await snapExpect();
     });
@@ -155,7 +155,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         const isDialogVisible = await summaryPage.isErrorDialogVisible("wty30302-error-dialog ._modal_1fy9j_13");
         expect(isDialogVisible).toBe(true);
 
-        await snapExpect("before confirm deletion");
+        await snapExpect(1);
 
         // Click Cancel button (いいえ) to cancel deletion
         await summaryPage.clickCancelButton();
@@ -175,7 +175,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         const isEditButtonStillVisible = await summaryPage.isEditButtonVisible();
         expect(isEditButtonStillVisible).toBe(false);
 
-        await snapExpect("after cancel deletion");
+        await snapExpect(2);
     });
 
     test('WTY30302_39', async ({
@@ -250,6 +250,9 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
 
         await summaryPage.dismissErrorDialog("wty30302-error-dialog ._modal_1fy9j_13");
 
+        // Before clicking back button screenshot
+        await snapExpect(1);
+
         // Click button back
         await summaryPage.clickBackButton();
 
@@ -257,7 +260,7 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         const currentUrl = page.url();
         expect(currentUrl).toContain('WTY30301SalesInAdvanceCorrection');
 
-        await snapExpect();
+        await snapExpect(2);
     });
 
     test('WTY30302_46', async ({
@@ -404,6 +407,9 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         const initialHeaderPosition = await summaryPage.getTableHeaderPosition();
         expect(initialHeaderPosition.top).toBeGreaterThan(0);
 
+        // Before scrolling screenshot
+        await snapExpect(1);
+
         // Scroll table down
         await summaryPage.scrollTableDownEndOfData();
 
@@ -414,7 +420,8 @@ test.describe('WTY30302 - (マルチPOP出力指示一覧)', () => {
         // Allow small difference due to rendering
         expect(afterScrollHeaderPosition.top).toEqual(initialHeaderPosition.top);
 
-        await snapExpect();
+        // After scrolling screenshot
+        await snapExpect(2);
     });
 
      test('WTY30302_52', async ({

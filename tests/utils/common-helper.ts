@@ -84,4 +84,22 @@ export class CommonHelper {
     const data = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(data);
   }
+
+  /**
+   * Load test data from TypeScript module (supports dynamic env variables)
+   * Supports subfolder paths (e.g., 'TY205/wty20501' or 'wty20501')
+   * Use this for test data that needs environment variables like DEFAULT_PORTRAIT
+   * 
+   * @example
+   * const testData = CommonHelper.loadTestDataTS('TY201/wty20101').wty20101.TC_01;
+   */
+  static loadTestDataTS(fileName: string): any {
+    const tsPath = path.join(__dirname, '../fixtures', `${fileName}.ts`);
+    if (!fs.existsSync(tsPath)) {
+      throw new Error(`TypeScript test data file not found: ${tsPath}`);
+    }
+    // Use require to load TypeScript module (already compiled by ts-node)
+    const module = require(tsPath);
+    return module;
+  }
 }

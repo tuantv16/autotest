@@ -1,5 +1,5 @@
 /**
- * WTY31001 Stock Supply Request Product Input Page Object
+ * WTY31002 Stock Supply Request Product Input Page Object
  * Page Object for 供給移動依頼商品入力 screen
  */
 
@@ -12,6 +12,7 @@ export class WTY31002Page extends BasePage {
     templateSelectorTitle: 'label[for="tk_comment"]:has-text("定型ｺﾒﾝﾄ")',
     templateSelectBox: "#tk_comment",
     commentTextArea: "#comment_TextArea",
+    clearProductButton: 'img[alt="クリア"]',
 
     // Items table
     noColumnHeader: 'div.multi-row-header-cell:has-text("No.")',
@@ -28,9 +29,11 @@ export class WTY31002Page extends BasePage {
     rowTable: '.ag-pinned-left-cols-container div[role="row"]',
     rowNoTable: ".ag-pinned-left-cols-container .multi-row-cell-item",
 
-    // Buttona popup
+    // Button popup
     buttonCancelPro: 'button:has-text("商品取消")',
     buttonEditPro: 'button:has-text("商品修正")',
+    buttonCheckPro: 'button:has-text("状況照会")',
+    buttonInfoPro: 'button:has-text("商品照会")',
 
     // Menu
     actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
@@ -263,6 +266,14 @@ export class WTY31002Page extends BasePage {
     return await this.page.locator(this.selectors.buttonEditPro).isVisible();
   }
 
+  async isButtonCheckProVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.buttonCheckPro).isVisible();
+  }
+
+  async isButtonInfoProVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.buttonInfoPro).isVisible();
+  }
+
   async clickButtonCancelPro(): Promise<void> {
     const button = this.page.locator(this.selectors.buttonCancelPro);
     await button.click();
@@ -281,5 +292,9 @@ export class WTY31002Page extends BasePage {
   async clickButtonRequestCancel(): Promise<void> {
     const button = this.page.locator(this.selectors.btnRequestCancel);
     await button.click();
+  }
+
+  async clickClearTanCdInput(): Promise<void> {
+    await this.page.locator(this.selectors.clearProductButton).click();
   }
 }

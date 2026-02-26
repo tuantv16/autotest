@@ -269,9 +269,11 @@ test.describe("WTY31002 - 供給移動依頼登録 Test Suite", () => {
     // Step 2: Open WTY31001 screen
     await productInputPage.navigate();
     await page.waitForTimeout(500);
-    await snapInput();
 
     await productInputPage.openMenu();
+    await page.waitForTimeout(1000);
+    await snapInput();
+
     await productInputPage.clickBtnEdit();
     await page.waitForTimeout(1000);
 
@@ -477,12 +479,14 @@ test.describe("WTY31002 - 供給移動依頼登録 Test Suite", () => {
     await snapInput();
 
     // Verify: Input 依頼番号 = ''
+    await productInputPage.openMenu();
+    await snapExpect(1);
     const iriNoInputValue = await productInputPage.getIriNoInputValue();
     expect(iriNoInputValue).not.toBe("");
 
     const commentTextAreaDisabled =
       await productInputPage.commentTextAreaDisabled();
     expect(commentTextAreaDisabled).toBe(true);
-    await snapExpect();
+    await snapExpect(2);
   });
 });

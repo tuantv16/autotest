@@ -15,6 +15,7 @@ test.describe('WTZ10401 Search Tests', () => {
         await PageWTZ10401.navigate();
         
         await PageWTZ10401.getRadioLabelLocator(PageWTZ10401.labels.radioCode).click();
+        await page.locator(PageWTZ10401.selectors.searchKeyName).fill('123456');
         await page.waitForTimeout(1000);
 
         await snapExpect();
@@ -40,6 +41,7 @@ test.describe('WTZ10401 Search Tests', () => {
         await PageWTZ10401.navigate();
         
         await PageWTZ10401.getRadioLabelLocator(PageWTZ10401.labels.radioKana).click();
+        await page.locator(PageWTZ10401.selectors.searchKeyName).fill('123456789012345');
         await page.waitForTimeout(1000);
 
         expect(await PageWTZ10401.isInputMaxLength(PageWTZ10401.selectors.searchKeyName, 15)).toBe(true);

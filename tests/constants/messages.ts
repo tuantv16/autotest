@@ -42,23 +42,13 @@ export const BUTTON_LABELS = {
 export const VALIDATION_ERROR_MESSAGES = {
   REQUIRED_FIELD: '必須入力エラー',
   INVALID_LENGTH: '商品の桁数が正しくありません',
-  START_DATE_AFTER_END_DATE: '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
+  START_DATE_AFTER_END_DATE:
+    '入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。',
 
   HALF_WIDTH_REQUIRED: '半角で入力してください。',
   FULL_WIDTH_REQUIRED: '全角で入力してください。',
   INVALID_LATER_DATE: '以降の日付を入力してください。',
   INVALID_DATE_AFTER_REIWA_70: '令和70年以降になるため入力できません',
-} as const;
-
-/**
- * Column name constants for WTY30302 (マルチPOP出力指示一覧)
- */
-export const WTY30302_COLUMN_NAMES = {
-  MODEL_NUMBER: '型番',
-  SIZE: 'サイズ',
-  QUANTITY: '枚数',
-  MULTI_COMMENT: 'マルチコメント',
-  SALE_NAME: 'セール名',
 } as const;
 
 /**
@@ -73,6 +63,34 @@ export const WTY23002_MESSAGES = {
   INVALID_DATE_FORMAT: '日付の形式が正しくありません',
   INVALID_DATE_RANGE: '抽出期間の開始日は終了日以前を入力してください',
 } as const;
+export const WTY32201_MESSAGES = {
+  REQUIRED_SHELF_NUMBER: '棚番を入力してください。',
+  SHELF_NUMBER_LENGTH: '棚番は7桁で入力してください。',
+  REQUIRED_JAN_CODE: '商品のJANコードを入力してください。',
+  JAN_CODE_LENGTH: '商品のJANコードは8桁もしくは13桁で入力してください。',
+  JAN_CODE_INVALID: 'JANコードが誤っています。',
+  QUANTITY_REQUIRED: '商品の品数を入力してください。',
+  QUANTITY_MIN: '品数は１以上で入力してください。',
+  QUANTITY_INTEGER: '品数は整数で入力してください。',
+  QUANTITY_MAX_LENGTH: '品数は4桁以内で入力してください。',
+  QUANTITY_MAX_VALUE: '品数は9999以下で入力してください。',
+} as const;
+
+export const WTY31101_MESSAGES = {
+  TE5050: '必須入力項目です。',
+  TE5097: '半角で入力してください。',
+  TE5130: '移動数を入力してください。',
+  TE5134: '移動数にマイナスの値は入力できません。',
+  TE5096: '商品コードまたはJANコードを入力してください。',
+  TE5147: '同一の移動元、移動先を指定することはできません。',
+  TE5137: '移動元区分を選択してください。',
+  TE5137_1: '移動先区分を選択してください。',
+  TE5130_1: '移動先に不良を選択している場合は、仕入先を入力してください。',
+  TE5096_1: '商品コードまたはJANコードを入力してください。',
+  slipNo_SET_KBN_S: 'セット商品ため、指定できません。',
+  SHK_IG_KBN_1: 'グロス商品ため、指定できません。',
+} as const;
+
 export const WTY30303 = {
   TITLE: 'セール選択',
   CONFIRM: '確定',
