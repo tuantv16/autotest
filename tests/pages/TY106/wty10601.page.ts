@@ -26,9 +26,12 @@ export class WTY10601Page extends BasePage {
 
     // Inputs fields
     btenCdInput: "input#btenCd",
+    btenCdClearBtn: "#btenCd + img[data-testid='ClearButton']",
     btenNmInput: "input#btenNm",
     shnCdInput: "input#shnCd",
+    shnCdClearBtn: "#shnCd ~ img[data-testid='ClearButton']",
     brCdInput: "input#brCd",
+    brCdClearBtn: "#brCd + img[data-testid='ClearButton']",
     brNmInput: "input#brNm",
 
     // Radio buttons
@@ -43,6 +46,7 @@ export class WTY10601Page extends BasePage {
 
     // Table
     tbodyAgrid: 'div.ag-center-cols-container[role="rowgroup"]',
+    rowTable: '.ag-center-cols-container div[role="row"][row-index="0"]',
 
     // Menu buttons
     actionMenuButton: 'button.MuiButtonBase-root[aria-haspopup="true"]',
@@ -57,9 +61,35 @@ export class WTY10601Page extends BasePage {
     btnClear: 'button:has-text("クリア")',
 
     // Menu popup
-    searchStore: 'button:has-text("Department store search")',
+    searchStore: 'button:has-text("部店検索")',
     searchDaiCd: 'button:has-text("中分類")',
     searchChuCd: 'button:has-text("小分類")',
+
+    // Items table
+    mkKataColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("型番")',
+    shnZhlvColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("引")',
+    shnRnkColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("RK")',
+    btrKbnColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("物")',
+    rhinzaiMkiknColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("新品")',
+    tenjiZaiColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("展示")',
+    kiknhnColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("開梱")',
+    kkhoZaiColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("確保")',
+    tokutenZaiColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("特定")',
+    fryohnColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("不良")',
+    zaiSaiColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("差異")',
+    jituZaikoColumnHeader:
+      'div.ag-header-cell-label span.ag-header-cell-text:has-text("計")',
   };
 
   async navigate(pilotKey: string = "prod"): Promise<void> {
@@ -125,6 +155,20 @@ export class WTY10601Page extends BasePage {
       .isVisible();
   }
 
+  async btenNmInputDisabled(): Promise<boolean> {
+    return await this.page
+      .locator(this.selectors.btenNmInput)
+      .first()
+      .isDisabled();
+  }
+
+  async brNmInputDisabled(): Promise<boolean> {
+    return await this.page
+      .locator(this.selectors.brNmInput)
+      .first()
+      .isDisabled();
+  }
+
   async shnCdInputVisible(): Promise<boolean> {
     return await this.page
       .locator(this.selectors.shnCdInput)
@@ -161,6 +205,31 @@ export class WTY10601Page extends BasePage {
     const errorMessage = parentContainer.locator("p.text-red-600");
     const text = await errorMessage.textContent().catch(() => null);
     return text || "";
+  }
+
+  async areGridColumnsVisible(): Promise<boolean> {
+    const columnSelectors = [
+      this.selectors.mkKataColumnHeader,
+      this.selectors.shnZhlvColumnHeader,
+      this.selectors.shnRnkColumnHeader,
+      this.selectors.btrKbnColumnHeader,
+      this.selectors.rhinzaiMkiknColumnHeader,
+      this.selectors.tenjiZaiColumnHeader,
+      this.selectors.kiknhnColumnHeader,
+      this.selectors.kkhoZaiColumnHeader,
+      this.selectors.tokutenZaiColumnHeader,
+      this.selectors.fryohnColumnHeader,
+      this.selectors.zaiSaiColumnHeader,
+      this.selectors.jituZaikoColumnHeader,
+    ];
+
+    for (const selector of columnSelectors) {
+      const isVisible = await this.page.locator(selector).isVisible();
+      if (!isVisible) {
+        return false;
+      }
+    }
+    return true;
   }
 
   async isAgGridEmpty(): Promise<boolean> {
@@ -215,5 +284,63 @@ export class WTY10601Page extends BasePage {
 
   async clickBtnToggle(): Promise<void> {
     await this.page.click(this.selectors.btnToggle);
+  }
+
+  async buttonSearchIsVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.buttonSearch).isVisible();
+  }
+
+  async buttonSearchIsClickable(): Promise<boolean> {
+    const button = this.page.locator(this.selectors.buttonSearch);
+    return await button.isEnabled();
+  }
+
+  async focusBtenCdInput(): Promise<void> {
+    await this.page.focus(this.selectors.btenCdInput);
+  }
+
+  async searchStoreButtonIsVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.searchStore).isVisible();
+  }
+
+  async focusBrCdInput(): Promise<void> {
+    await this.page.focus(this.selectors.brCdInput);
+  }
+
+  async searchDaiCdButtonIsVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.searchDaiCd).isVisible();
+  }
+
+  async searchChuCdButtonIsVisible(): Promise<boolean> {
+    return await this.page.locator(this.selectors.searchChuCd).isVisible();
+  }
+
+  async clickButtonSearch(): Promise<void> {
+    await this.page.locator(this.selectors.buttonSearch).first().click();
+  }
+
+  async blurShnCdInput(): Promise<void> {
+    await this.page.locator(this.selectors.shnCdInput).first().blur();
+  }
+
+  async blurBrCdInput(): Promise<void> {
+    await this.page.locator(this.selectors.brCdInput).first().blur();
+  }
+
+  async clickBtenCdClearBtn(): Promise<void> {
+    await this.page.locator(this.selectors.btenCdClearBtn).first().click();
+  }
+
+  async clickShnCdClearBtn(): Promise<void> {
+    await this.page.locator(this.selectors.shnCdClearBtn).first().click();
+  }
+
+  async clickBrCdClearBtn(): Promise<void> {
+    await this.page.locator(this.selectors.brCdClearBtn).first().click();
+  }
+
+  async clickFirstRow(): Promise<void> {
+    const firstRow = this.page.locator(this.selectors.rowTable);
+    await firstRow.click();
   }
 }
