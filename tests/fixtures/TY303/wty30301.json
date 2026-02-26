@@ -64,7 +64,6 @@
                 "finalSellingPriceInput": "227333"
             }
         },
-
         "TC_02":{
             "description":"Verify search product",
             "sessionData": [{
@@ -136,6 +135,149 @@
                 "listedPriceInput": "227333",
                 "finalSellingPriceInput": "227333"
             }
+        },
+        "TC_03":{
+            "description":"Init from WTZ01001 screen",
+            "sessionData": [
+                {
+                    "key": "WTY30301_IN_SD",
+                    "value": {
+                    }
+                }
+            ],
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "04388",
+                        "syoriStoreCd": "04388",
+                        "unyoDate": "20251028",
+                        "userId": "0596"
+                    }
+                }
+            ]
+        },
+        "TC_04": {
+            "description":"Init from onRestoreScreenInfo screen with edit mode",
+            "sessionData": [
+                {
+                  "key": "WTY30301_IN_SD",
+                  "value": {
+                      "screenInfoDT": [
+                            {
+                                "outYmd": "20210806",
+                                "shnCd": "00010316801",
+                                "mockSu": "0",
+                                "mpopSiz": "1",
+                                "prtMsu": "1",
+                                "keisaiKk": "04904550580431",
+                                "cmtKbn": "1",
+                                "lbk": "1000",
+                                "editMode": true,
+                                "sbnhnFlg": "0",
+                                "janCd": "04904550580431",
+                                "hskkNo": "20260101008",
+                                "sbnFlg": "0",
+                                "dsgnKbn": "E"
+                            }
+                        ]
+                  }
+                }
+            ],
+            "commonData": [
+                {
+                  "id": "commonDT",
+                  "value": {
+                        "clientId": "0438874190",
+                        "keepPeriod": "6",
+                        "storeCd": "04388",
+                        "syoriStoreCd": "04388",
+                        "termNo": "419",
+                        "unyoDate": "20251028",
+                        "userId": "0596"
+                  }
+                }
+            ]
+        },
+        "TC_05": {
+            "description":"Init from onRestoreScreenInfo for validate screen check",
+            "sessionData": [
+                {
+                  "key": "WTY30301_IN_SD",
+                  "value": {
+                      "screenInfoDT": [
+                            {
+                                "sbnhnFlg": "1",
+                                "outYmd": "20251028",
+                                "shnCd": "4904550580431"
+                            }
+                        ]
+                  }
+                }
+            ],
+            "commonData": [
+                {
+                  "id": "commonDT",
+                  "value": {
+                        "clientId": "0438874190",
+                        "keepPeriod": "6",
+                        "storeCd": "04388",
+                        "syoriStoreCd": "04388",
+                        "termNo": "419",
+                        "unyoDate": "20251028",
+                        "userId": "0596"
+                  }
+                },
+                {
+                    "id": "btnInfoDT",
+                    "value": {
+                        "jgyksCd": "03"
+                    }
+                        
+                }
+            ]
+        },
+        "TC_06": {
+            "description":"Init from WTY30302 screen and searching with data",
+            "sessionData": [
+                {
+                    "key": "WTY30303_OUT_SD",
+                    "value": {
+                        "shnChkInDT": [
+                            {
+                                "dsgnKbn": "",
+                                "shnCd": "00010316801",
+                                "janCd": "04904550580431",
+                                "outYmd": "20251028",
+                                "hskkNo": "20260101007",
+                                "sbnFlg": "0"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "commonData": [
+                {
+                  "id": "commonDT",
+                  "value": {
+                        "assetsNo": "EF7096380",
+                        "clientId": "0438874190",
+                        "keepPeriod": "6",
+                        "storeCd": "04388",
+                        "syoriStoreCd": "04388",
+                        "termNo": "419",
+                        "unyoDate": "20251028",
+                        "userId": "0596"
+                  }
+                },
+                {
+                    "id": "btnInfoDT",
+                    "value": {
+                        "jgyksCd": "03"
+                    }
+                        
+                }
+            ]
         }
     }
 }

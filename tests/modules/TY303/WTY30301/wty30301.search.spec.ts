@@ -230,7 +230,7 @@ test.describe('WTY30301 - (マルチＰＯＰ出力指示)', () => {
         await page.waitForTimeout(1000);
 
         // Step 7: Verify tenjiZai is formatted with thousand separators
-        await summaryPage.expectThousandSeparated('tenjiZai');
+        await summaryPage.expectThousandSeparated('prtMsu');
         await snapExpect();
     });
 
