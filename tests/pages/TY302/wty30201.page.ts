@@ -32,8 +32,8 @@ export class TY30201Page extends BasePage {
     clearButton: 'button:has-text("クリア")',
     searchButton: 'button:has-text("検索")[type="button"]',
     barCodeButton: 'div.right-2.absolute.top-1\\/2.-translate-y-1\\/2.transform button.cursor-pointer[type="button"]',
-    clearOutDate: 'span[data-testid="ClearButton"]',
-    clearShnCd: '#shnCd+div+img',
+    clearOutDate: '#outDate div div span[data-testid="ClearButton"]',
+    clearShnCd: '#shnCd+div+div span[data-testid="ClearButton"]',
     outDateCommitButton: 'button:has-text("出力日確定")',
 
   };
