@@ -92,7 +92,7 @@ test.describe('WTZ10301 Search Tests', () => {
 
     });
 
-    test('WTZ10301_17', async ({
+    test('WTZ10301_22', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -134,7 +134,7 @@ test.describe('WTZ10301 Search Tests', () => {
 
     });
 
-    test('WTZ10301_18', async ({
+    test('WTZ10301_23', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -176,7 +176,7 @@ test.describe('WTZ10301 Search Tests', () => {
         await snapExpect();
     });
 
-    test('WTZ10301_19', async ({
+    test('WTZ10301_24', async ({
         page,
         baseUrl,
         indexedDBHelper,
