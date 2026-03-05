@@ -1,0 +1,114 @@
+{
+  "wty20801": {
+    "TC_04": {
+      "description": "wty20801 TC_04",
+      "sessionData": [{
+        "key": "WTY20801_IN_SD",
+        "value": {
+          "ty208ParamDT": [
+            {}
+          ],
+          "ty208sechiInfoDT": [
+            {}
+          ],
+          "ty208deleteSechiNoList": []
+        }
+      }]
+    },
+    "TC_05": {
+      "description": "wty20801 TC_05",
+      "sessionData": [{
+        "key": "WTY20801_IN_SD",
+        "value": {
+          "ty208ParamDT": [
+            {}
+          ],
+          "ty208sechiInfoDT": [
+            {
+              "sechiKnrNo": "04904550585979"
+            },
+            {
+              "sechiKnrNo": "04904550585999"
+            }
+          ],
+          "ty208deleteSechiNoList": []
+        }
+      }]
+    },
+    "TC_11": {
+      "description": "wty20801 TC_11",
+      "sessionData": [{
+        "key": "WTY20801_IN_SD",
+        "value": {
+          "ty208ParamDT": [
+            {}
+          ],
+          "ty208sechiInfoDT": [
+            {
+              "sechiKnrNo": "04904550585979"
+            },
+            {
+              "sechiKnrNo": "04904550585999"
+            }
+          ],
+          "ty208deleteSechiNoList": []
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "clientId": "00905PD401",
+            "screenId": "WTY20601",
+            "storeCd": "00905",
+            "syoriStoreCd": "00905",
+            "termNo": "401",
+            "unyoDate": "20250806",
+            "userId": "10596T401"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "04388",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "七丁目１丁目",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "23111043001",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "03000",
+            "ktKbn": "01",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "トウカゲイ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2020",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "1",
+            "jnrurNbnthanKbn": "2",
+            "pntKyotenIds": "0"
+          }
+        }
+      ]
+    }
+  }
+}
