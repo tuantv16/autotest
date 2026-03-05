@@ -8,7 +8,7 @@ test.describe('WTZ10301 Search Tests', () => {
         PageWTZ10301 = new WTZ10301Page(page);
     });
 
-    test('WTZ10301_30', async ({
+    test('WTZ10301_17', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -42,7 +42,7 @@ test.describe('WTZ10301 Search Tests', () => {
         await snapExpect();
     });
 
-    test('WTZ10301_31', async ({
+    test('WTZ10301_18', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -60,7 +60,7 @@ test.describe('WTZ10301 Search Tests', () => {
         await PageWTZ10301.navigate();
 
         const searchKeyInput = page.locator(PageWTZ10301.selectors.searchKeyInput);
-        await searchKeyInput.fill('デジタルカメラ');
+        await searchKeyInput.fill('全角カナ');
         await page.waitForTimeout(1000);
         await snapInput();
 
@@ -76,7 +76,7 @@ test.describe('WTZ10301 Search Tests', () => {
         await snapExpect();
     });
 
-    test('WTZ10301_32', async ({
+    test('WTZ10301_19', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -110,7 +110,7 @@ test.describe('WTZ10301 Search Tests', () => {
         await snapExpect();
     });
 
-    test('WTZ10301_33', async ({
+    test('WTZ10301_20', async ({
         page,
         baseUrl,
         indexedDBHelper,
@@ -128,7 +128,7 @@ test.describe('WTZ10301 Search Tests', () => {
         await PageWTZ10301.navigate();
 
         const searchKeyInput = page.locator(PageWTZ10301.selectors.searchKeyInput);
-        await searchKeyInput.fill('１２３');
+        await searchKeyInput.fill('𝟙 ');
         await page.waitForTimeout(1000);
         await snapInput();
 
@@ -144,7 +144,7 @@ test.describe('WTZ10301 Search Tests', () => {
         await snapExpect();
     });
 
-    test('WTZ10301_34', async ({
+    test('WTZ10301_21', async ({
         page,
         baseUrl,
         indexedDBHelper,
