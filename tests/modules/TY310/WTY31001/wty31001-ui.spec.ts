@@ -176,11 +176,15 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
 
+    await productInputPage.clickHpnRadio();
+    await productInputPage.scrollToBottom();
+    await page.waitForTimeout(1000);
+    await snapInput();
+
     // Step 3: Select radio "供給" (should already be selected by default)
     await productInputPage.clickKkyRadio();
+    await productInputPage.scrollToBottom();
     await page.waitForTimeout(1000);
-
-    await snapInput();
 
     // Verify: Radio button 供給 is checked
     const kkyRadioChecked = await productInputPage.isKkyRadioChecked();
@@ -191,12 +195,12 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(isKaikonIriVisible).toBe(false);
 
     // Verify: Label colors are default when 供給 is selected
-    await productInputPage.expectAllLabelsNotRed({
+    await productInputPage.expectAllLabelsNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
 
     // Verify: Input border colors are defaultwhen 供給 is selected
-    await productInputPage.expectAllInputBordersNotRed({
+    await productInputPage.expectAllInputBordersNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
 
@@ -211,12 +215,13 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     // Step 2: Navigate to WTY31001 (Open screen)
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
+    await productInputPage.scrollToBottom();
+    await snapInput();
 
     // Step 3: Select radio "返品"
     await productInputPage.clickHpnRadio();
+    await productInputPage.scrollToBottom();
     await page.waitForTimeout(1000);
-
-    await snapInput();
 
     // Verify: Radio button 返品 is checked
     const hpnRadioChecked = await productInputPage.isHpnRadioChecked();
@@ -227,12 +232,12 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     expect(isKaikonIriVisible).toBe(true);
 
     // Verify: Label colors are red when 返品 is selected
-    await productInputPage.expectAllLabelsRed({
+    await productInputPage.expectAllLabelsColor({
       exclude: ["mode", "tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
 
     // Verify: Input border colors are red when 返品 is selected
-    await productInputPage.expectAllInputBordersRed({
+    await productInputPage.expectAllInputBordersColor({
       exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
 
@@ -552,10 +557,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapInput(2);
 
     // Verify: When selecting 供給, labels and borders display default colors (NOT red)
-    await productInputPage.expectAllLabelsNotRed({
+    await productInputPage.expectAllLabelsNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
-    await productInputPage.expectAllInputBordersNotRed({
+    await productInputPage.expectAllInputBordersNotColor({
       exclude: ["kaikon", "kaikonIri"],
     });
 
@@ -568,10 +573,10 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await snapInput(3);
 
     // Verify: When selecting 返品, labels and borders display red color
-    await productInputPage.expectAllLabelsRed({
+    await productInputPage.expectAllLabelsColor({
       exclude: ["mode", "tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
-    await productInputPage.expectAllInputBordersRed({
+    await productInputPage.expectAllInputBordersColor({
       exclude: ["tHai", "dcYukoZai", "hoju", "rHinIri"],
     });
 
@@ -599,20 +604,27 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.navigate();
     await page.waitForTimeout(1000);
     await snapInput();
+    await snapExpect(1);
+    await productInputPage.scrollToBottom();
+    await snapExpect(2);
 
     // Verify: All editable fields are editable
     const rHinIriEditable = await productInputPage.rHinIriInputIsEditable();
     expect(rHinIriEditable).toBe(true);
+    await productInputPage.fillRHinIriInput('12345');
 
     const tenjiIriEditable = await productInputPage.tenjiIriInputIsEditable();
     expect(tenjiIriEditable).toBe(true);
+    await productInputPage.fillTenjiIriInput('11111');
 
     const tSuIriEditable = await productInputPage.tSuIriInputIsEditable();
     expect(tSuIriEditable).toBe(true);
+    await productInputPage.fillTSuIriInput('22222');
 
     const kisoIriEditable = await productInputPage.kisoIriInputIsEditable();
     expect(kisoIriEditable).toBe(true);
-    await snapExpect();
+    await productInputPage.fillKisoIriInput('33333');
+    await snapExpect(3);
   });
 
   test("WTY31001_27", async ({

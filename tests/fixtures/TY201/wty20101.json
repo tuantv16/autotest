@@ -1,0 +1,94 @@
+{
+  "wty20101": {
+    "TC_01": {
+      "description": "Search product",
+      "sessionData": {
+        "key": "WTY20101_IN_SD",
+        "value": {
+          "cartHeaderDT": [
+            {
+              "jznuridenNo": "00102498019991",
+              "jznuridenHkkDate": "20250210",
+              "kokCd": "C0001",
+              "uesamaFlg": "0",
+              "hbKbn": "1"
+            }
+          ]
+        }
+      },
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "0438874190",
+            "keepPeriod": "6",
+            "storeCd": "04172",
+            "syoriStoreCd": "04172",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "419",
+            "unyoDate": "20251028",
+            "userId": "0001"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "04388",
+            "btrktKbn": "",
+            "chainId": "1",
+            "csNmKn": "七丁目１丁目",
+            "fcFlg": "",
+            "fcKtkbn": "",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "23111043001",
+            "kdoJt": "10",
+            "keepPeriod": "6",
+            "ksCd": "03000",
+            "ktKbn": "01",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "トウカゲイ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "hikiwatashi": "0",
+            "defaultTh": "1",
+            "defaultKyoten": "2",
+            "jnrurNbnthanKbn": "1",
+            "pntKyotenIds": "0",
+            "defaultPortrait": "2",
+            "jznuriNoHtbanKbn": "1"
+          }
+        },
+        {
+          "id": "loginInfoDT",
+          "value": {
+            "syoriStoreCd": "04388",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通"
+          }
+        }
+      ],
+      "formData": {
+        "customerNameKanji": "山田太郎"
+        
+      }
+    }
+  }
+
+}

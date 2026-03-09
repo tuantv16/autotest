@@ -1,0 +1,43 @@
+{
+  "wty32201": {
+    "TC_UI": {
+      "description": " init UI ty322",
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "assetsNo": "EF7096380",
+            "clientId": "00102PD498",
+            "keepPeriod": "6",
+            "storeCd": "11804",
+            "syoriStoreCd": "11804",
+            "syoriStoreNmKnJ": "東海通",
+            "syoriStoreNmKn": "トウカゲイ",
+            "syoriStoreNmKnj": "東海通",
+            "termNo": "498",
+            "unyoDate": "20251205",
+            "userId": "0015400907",
+            "screenId": "WTY10401"
+          }
+        }
+      ],
+      "formData": {
+        "shelfNumber_123": "123",
+        "shelfNumber": "1234567",
+        "shelfNumber_2": "4201567",
+        "janCode_length_6": "123456",
+        "janCodeInvalid": "49012345678A9",
+        "janCodeStart_271": "2712345699675",
+        "janCode": "4901234567894",
+        "quantity_negative": "-1",
+        "quantity_float": "1.5",
+        "quantity_length_5": "12345",
+        "quantity_max": "10000",
+        "quantity_1000": "1000",
+        "quantity_not_number": "ABCD",
+        "quantity": "100",
+        "pass": "9010"
+      }
+    }
+  }
+}

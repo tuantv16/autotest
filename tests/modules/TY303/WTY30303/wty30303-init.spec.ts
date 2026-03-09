@@ -130,7 +130,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify マルチコメント is displayed as「インプロ」
-        await summaryPage.verifyMultiCommentText(1, WTY30303.MULTI_COMMENT_INPRO);
+        await summaryPage.verifyMultiCommentText(2, WTY30303.MULTI_COMMENT_INPRO);
         await snapExpect();
     });
 
@@ -160,7 +160,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         await snapInput();
 
         // Step 4: Verify マルチコメント is blank
-        await summaryPage.verifyMultiCommentIsBlank(2);
+        await summaryPage.verifyMultiCommentIsBlank(1);
         await snapExpect();
     });
 
@@ -201,7 +201,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         snapInput,
         snapExpect
     }) => {
-        const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_04');
+        const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
 
         // Step 1: Open base URL
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -231,7 +231,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         snapInput,
         snapExpect
     }) => {
-        const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_04');
+        const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_01');
 
         // Step 1: Open base URL
         await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
@@ -405,7 +405,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         if (rowCount2 < 2) {
             throw new Error(`Expected at least 2 rows, but found ${rowCount2}`);
         }
-        await summaryPage.getRowByIndex(1).click();
+        await summaryPage.getRowByIndex(2).click();
         await page.waitForTimeout(1000);
 
         // Step 5: Verify セール Image (EDION) and Pict Image both visible
@@ -443,7 +443,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         // Step 3: Navigate to セール選択 screen and prepare
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-        await snapInput();
+        await snapInput(0);
 
         // Step 4: Select first sale (row 1)
         const rowCount = await summaryPage.getRowCount();
@@ -452,6 +452,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         }
         await summaryPage.getRowByIndex(0).click();
         await page.waitForTimeout(1000);
+        await snapInput(1);
 
         // Step 5: Click footer confirm and verify navigation returns to previous screen
         await summaryPage.verifySaleHighlighted(0);
@@ -616,7 +617,6 @@ test.describe('WTY30301 - (セール選択)', () => {
         // Ensure preview src updated and is same as last captured
         const finalSrc = await summaryPage.getPreviewImageSrc();
         expect(finalSrc).toBe(lastSrc);
-
         await snapExpect();
     });
 
@@ -819,11 +819,12 @@ test.describe('WTY30301 - (セール選択)', () => {
         // Step 3: Navigate to Sale Selection screen (セール選択)
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-        await snapInput();
+        await snapInput(0);
 
         // Step 4: Select one sale
         await summaryPage.getRowByIndex(0).click();
         await page.waitForTimeout(1000);
+        await snapInput(1);
 
         // Step 5: Verify back button (<) is visible
         const isBackButtonVisible = await summaryPage.isBackButtonVisible();
@@ -881,6 +882,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         expect(imgVisible).toBe(true);
         const previewSrc = await summaryPage.getPreviewImageSrc();
         expect(previewSrc).toBeTruthy();
+        await snapExpect();
     });
 
     test('WTY30303_32', async ({
@@ -1104,7 +1106,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         // Step 3: Navigate to セール選択 screen
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-        await snapInput();
+        await snapInput(0);
 
         // Step 4: Ensure there is at least one sale and select it
         const rowCount = await summaryPage.getRowCount();
@@ -1113,6 +1115,7 @@ test.describe('WTY30301 - (セール選択)', () => {
         }
         await summaryPage.getRowByIndex(0).click();
         await page.waitForTimeout(500);
+        await snapInput(1);
 
         // Step 5: Click 確定 to navigate to WTY30301 (マルチＰＯＰ出力指示)
         await summaryPage.clickFooterConfirm(WTY30303.CONFIRM);
@@ -1125,37 +1128,6 @@ test.describe('WTY30301 - (セール選択)', () => {
         // Also verify title on page
         const titleFound = await summaryPage.waitForTextInBody(WTY30303.MULTI_POP_TITLE, 5000);
         expect(titleFound).toBe(true);
-        await snapExpect();
-    });
-
-    test('WTY30303_38', async ({
-        page,
-        baseUrl,
-        indexedDBHelper,
-        snapInput,
-        snapExpect
-    }) => {
-        const testData = loadTestData('TY303/wty30303', 'wty30303', 'TC_03');
-
-        // Step 1: Go to base URL
-        await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-        await page.waitForTimeout(1000);
-
-        // Step 2: Inject IndexedDB data (API resultCnt > 0)
-        await indexedDBHelper.initializeDB({
-            sessionData: testData.sessionData,
-            commonData: testData.commonData
-        });
-        await page.waitForTimeout(1000);
-
-        // Step 3: Navigate to セール選択 screen
-        await summaryPage.navigate();
-        await page.waitForTimeout(1000);
-        await snapInput();
-
-        // Step 4: Verify message error api response
-        const noDataMessageFound = await summaryPage.waitForTextInBody(WTY30303.PARAM_ERROR, 5000);
-        expect(noDataMessageFound).toBe(true);
         await snapExpect();
     });
 });

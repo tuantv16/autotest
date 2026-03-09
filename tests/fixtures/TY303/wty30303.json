@@ -11,7 +11,7 @@
                                 "shnCd": "",
                                 "janCd": "04904550580431",
                                 "hskkNo": "",
-                                "outYmd": "20251028",
+                                "outYmd": "",
                                 "sbnFlg": "0",
                                 "dsgnKbn": "",
                                 "jgksCd": "03"
@@ -39,7 +39,7 @@
                     "unyoDate": "20251028",
                     "storeCd": "04388",
                     "syoriStoreCd": "04388",
-                    "userId": "70000",
+                    "userId": "0596",
                     "clientId": "0438874190",
                     "termNo": "419",
                     "screenId": "WTY30303"
@@ -56,9 +56,9 @@
                         "shnChkInDT": [
                             {
                                 "shnCd": "",
-                                "janCd": "999999",
+                                "janCd": "04904550580431",
                                 "hskkNo": "",
-                                "outYmd": "20251028",
+                                "outYmd": "",
                                 "sbnFlg": "0",
                                 "dsgnKbn": "",
                                 "jgksCd": "03"
@@ -83,10 +83,10 @@
             "commonData": [{
                 "id": "commonDT",
                 "value": {
-                    "unyoDate": "20251028",
+                    "unyoDate": "20191028",
                     "storeCd": "04388",
                     "syoriStoreCd": "04388",
-                    "userId": "70000",
+                    "userId": "0596",
                     "clientId": "0438874190",
                     "termNo": "419",
                     "screenId": "WTY30303"

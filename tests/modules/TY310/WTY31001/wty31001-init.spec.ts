@@ -177,4 +177,64 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
 
     await snapExpect();
   });
+
+  test("WTY31001_9_1", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_9");
+
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(500);
+    await snapInput();
+
+    // Verify:
+    const productValue = await productInputPage.getProductInputValue();
+    expect(productValue).toBe(testData.expected.productInputValue);
+
+    await snapExpect();
+  });
+
+  test("WTY31001_9_2", async ({
+    page,
+    baseUrl,
+    indexedDBHelper,
+    snapInput,
+    snapExpect,
+  }) => {
+    const testData = loadTestData("TY310/wty31001", "wty31001", "TC_9");
+
+    // Step 1: Setup
+    await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+
+    await indexedDBHelper.initializeDB({
+      sessionData: testData.sessionData,
+      commonData: testData.commonData,
+    });
+
+    // Step 2: Navigate to WTY31001
+    await productInputPage.navigate();
+    await page.waitForTimeout(500);
+    await snapInput();
+
+    // Verify:
+    const productValue = await productInputPage.getProductInputValue();
+    expect(productValue).toBe(testData.expected.productInputValue);
+
+    await snapExpect();
+  });
 });

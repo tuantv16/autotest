@@ -1,0 +1,164 @@
+{
+  "wty31101": {
+    "INIT_DATA": {
+      "description": "init session data",
+      "sessionData": [],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+            "storeCd": "10596",
+            "unyoDate": "20250101",
+            "syoriStoreCd": "00102",
+            "userId": "0001",
+            "clientId": "00905PD401",
+            "termNo": "401",
+            "screenId": "WTY23001"
+          }
+        },
+        {
+          "id": "systemDT",
+          "value": {
+            "nendo": "2025",
+            "jznuriNoHtbanKbn": "2",
+            "defaultThi": "0",
+            "defaultKyoten": "2",
+            "hikiwatashi": "1",
+            "pntKyseiTs": "0"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102",
+            "btrktKbn": "1",
+            "chainId": "1",
+            "csNmKn": "七丁目 1丁目",
+            "fcFlg": "0",
+            "fcKtkbn": "0",
+            "jgybCd": "120",
+            "jgyksCd": "03",
+            "jusCd": "231101403001",
+            "kdoJt": "10",
+            "keepPeriod": "99991231",
+            "ksCd": "0300",
+            "ktKbn": "6",
+            "pstNo": "4550001",
+            "ryAbtknNmKn": "ﾅｺﾞﾔｺｳﾘ",
+            "ryAbtknNmKnj": "東海通",
+            "skgCd": "23111",
+            "skgNmKn": "名古屋市 港区",
+            "tofNmKnj": "愛知県",
+            "termNo": "419",
+            "tsutayaFlg": "0",
+            "unyoYmd": "20251028",
+            "zoneCd": "520"
+          }
+        },
+        {
+          "id": "tanInfoDT",
+          "value": {
+            "btenCd": "00102",
+            "tanCd": "0001",
+            "tanNmKnj": "テスト担当者",
+            "tanNmKn": "ﾃｽﾄﾀﾝﾄｳｼｬ",
+            "shaGyoshaCd": "A0004783  ",
+            "shaFlg": "3",
+            "shoribtenCd": "00102",
+            "ykshkKbn": " ",
+            "tKngnKbn1": "0101",
+            "tKngnKbn2": " ",
+            "tKngnKbn3": " ",
+            "tKngnKbn4": " ",
+            "tKngnKbn5": " ",
+            "tKngnKbn6": " ",
+            "tKngnKbn7": " ",
+            "tKngnKbn8": " ",
+            "tKngnKbn9": " ",
+            "tKngnKbn10": " ",
+            "cKngnKbn1": "0005",
+            "cKngnKbn2": " ",
+            "cKngnKbn3": " ",
+            "cKngnKbn4": " ",
+            "cKngnKbn5": " ",
+            "cKngnKbn6": " ",
+            "cKngnKbn7": " ",
+            "cKngnKbn8": " ",
+            "cKngnKbn9": " ",
+            "cKngnKbn10": " ",
+            "vKngnKbn1": "0101",
+            "vKngnKbn2": "0202",
+            "vKngnKbn3": "0301",
+            "vKngnKbn4": "0401",
+            "vKngnKbn5": "0502",
+            "vKngnKbn6": "0602",
+            "vKngnKbn7": " ",
+            "vKngnKbn8": " ",
+            "vKngnKbn9": " ",
+            "vKngnKbn10": " ",
+            "lKngnKbn1": "0101",
+            "lKngnKbn2": "0201",
+            "lKngnKbn3": "0301",
+            "lKngnKbn4": "0401",
+            "lKngnKbn5": " ",
+            "lKngnKbn6": " ",
+            "lKngnKbn7": " ",
+            "lKngnKbn8": " ",
+            "lKngnKbn9": " ",
+            "lKngnKbn10": " "
+          }
+        },
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": null
+          }
+        }
+      ],
+      "formData": {
+        "slipNo_13": "0000011171670",
+        "slipNo_13_2": "4974019533247",
+        "slipNo_8": "11171670",
+        "slipNo_SET_KBN_S": "00010011645",
+        "SHK_IG_KBN_1": "00026797250",
+        "SHN_SBT_KBN_NOT_EQ_1_2": "00011013687",
+        "slipNo_11": "00010539118",
+        "fullWidth": "１２３４５６７８９０１２３",
+        "quantity": "100",
+        "quantity_5": "-5",
+        "quantity_zero": "0",
+        "quantity_10000": "10000",
+        "supplierCode": "C000047993",
+        "supplierCode_9": "C00004799",
+        "supplierCodeTypeV": "V000999001",
+        "supplierTypeH": "H999900023",
+        "supplierCodeNotFound": "C100047993",
+        "quantityGreaterThan": "150"
+      }
+    },
+    "TC_18": {
+      "description": "init session data",
+      "sessionData": [],
+      "commonData": [
+        {
+          "id": "preScreenId",
+          "value": {
+            "preScreenId": "WTZ01001"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": [
+            {
+              "preScreenId": "WTZ01001",
+              "screenId": "WTZ01001",
+              "nextScreenId": "WTY31101"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

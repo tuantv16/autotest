@@ -187,6 +187,108 @@
           "userId": "70000"
         }
       }]
+    },
+    "TC_35_36": {
+      "description": "wty20702 TC_35_36",
+      "sessionData": [{
+        "key": "WTY20702_SD",
+        "value": {
+          "searchJknJsDT": [
+            {
+              "jchtenCd": "00112",
+              "shkoHou": "4",
+              "shkobtenCd": "13010",
+              "unyoDate": "20250813",
+              "scZaikoTesuKbn": "1",
+              "jizenDenNo": "00102410001584",
+              "jizenDenHkkDate": "20250414"
+            }
+          ],
+          "shnJsDT": [
+            {
+              "jizenDenGyoNo": "001",
+              "jizenDenSetGyoNo": "00",
+              "shnCd": "00010012956",
+              "jchSu": "10",
+              "zaiJt": "1",
+              "thiKbn": "0",
+              "thibtenCd": "00112",
+              "nykaSkGntShnFlg": "0",
+              "nykaSkGntBtenCd1": "00112",
+              "nykaSkGntBtenCd2": "00102",
+              "nykaSkGntBtenCd3": "00099",
+              "shnChotatuKbn": "1"
+            }
+          ]
+        }
+      }],
+      "commonData": [{
+        "id": "commonDT",
+        "value": {
+          "assetsNo": "EF7096380",
+          "clientId": "0438874190",
+          "keepPeriod": "6",
+          "storeCd": "04388",
+          "syoriStoreCd": "04388",
+          "syoriStoreNmKnJ": "東海通",
+          "syoriStoreNmKn": "トウカゲイ",
+          "syoriStoreNmKnj": "東海通",
+          "termNo": "419",
+          "unyoDate": "20251028",
+          "userId": "70000"
+        }
+      }]
+    },
+    "TC_37": {
+      "description": "wty20702 TC_37",
+      "sessionData": [{
+        "key": "WTY20702_SD",
+        "value": {
+          "searchJknJsDT": [
+            {
+              "jchtenCd": "00112",
+              "shkoHou": "4",
+              "shkobtenCd": "13010",
+              "unyoDate": "20250813",
+              "scZaikoTesuKbn": "2",
+              "jizenDenNo": "00102410001584",
+              "jizenDenHkkDate": "20250414"
+            }
+          ],
+          "shnJsDT": [
+            {
+              "jizenDenGyoNo": "001",
+              "jizenDenSetGyoNo": "00",
+              "shnCd": "00010012956",
+              "jchSu": "10",
+              "zaiJt": "1",
+              "thiKbn": "0",
+              "thibtenCd": "00112",
+              "nykaSkGntShnFlg": "0",
+              "nykaSkGntBtenCd1": "00112",
+              "nykaSkGntBtenCd2": "00102",
+              "nykaSkGntBtenCd3": "00099",
+              "shnChotatuKbn": "2"
+            }
+          ]
+        }
+      }],
+      "commonData": [{
+        "id": "commonDT",
+        "value": {
+          "assetsNo": "EF7096380",
+          "clientId": "0438874190",
+          "keepPeriod": "6",
+          "storeCd": "04388",
+          "syoriStoreCd": "04388",
+          "syoriStoreNmKnJ": "東海通",
+          "syoriStoreNmKn": "トウカゲイ",
+          "syoriStoreNmKnj": "東海通",
+          "termNo": "419",
+          "unyoDate": "20251028",
+          "userId": "70000"
+        }
+      }]
     }
   }
 }

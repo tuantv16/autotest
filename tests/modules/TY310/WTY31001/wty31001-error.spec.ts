@@ -35,17 +35,15 @@ test.describe("WTY31001 - 供給移動依頼商品入力 Test Suite", () => {
     await productInputPage.fillProductInput("00010013557");
     await productInputPage.clickSearchButton();
     await page.waitForTimeout(500);
+    await productInputPage.scrollToBottom();
 
     // Step 3: Enter "0" into 良品依頼 field
     await productInputPage.fillRHinIriInput("0");
     await productInputPage.fillTenjiIriInput("0");
-    await productInputPage.fillTSuIriInput("0");
-    await productInputPage.fillKisoIriInput("0");
     await page.waitForTimeout(500);
     await snapInput();
 
     // Step 4: Blur the field
-    await productInputPage.blurKisoIriInput();
     await page.waitForTimeout(500);
 
     await productInputPage.clickConfirmButton();

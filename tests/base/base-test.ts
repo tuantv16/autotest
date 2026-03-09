@@ -82,8 +82,8 @@ export interface BaseTestData {
 }
 
 /**
- * Helper to load test data from fixtures
- * @param fileName - Name of the test data file (e.g., 'TY205/wty20501' or 'wty20501')
+ * Helper to load test data from Json fixture files
+ * @param fileName - Name of the test data file .json(e.g., 'TY205/wty20501' or 'wty20501')
  * @param screenCode - Screen code (e.g., 'wty20501')
  * @param caseCode - Test case code (e.g., 'TC_01')
  */
@@ -91,3 +91,17 @@ export function loadTestData(fileName: string, screenCode: string, caseCode: str
   const allData = CommonHelper.loadTestData(fileName);
   return allData[screenCode]?.[caseCode];
 }
+
+/**
+ * Helper to load test data from TypeScript fixture files (supports dynamic env variables)
+ * @param fileName - Name of the test data file .ts (e.g., 'TY205/wty20501' or 'wty20501')
+ * @param screenCode - Screen code (e.g., 'wty20501')
+ * @param caseCode - Test case code (e.g., 'TC_01')
+ * @example
+ * const testData = loadTestDataTS('TY201/wty20101', 'wty20101', 'TC_01');
+ */
+export function loadTestDataTS(fileName: string, screenCode: string, caseCode: string): any {
+  const allData = CommonHelper.loadTestDataTS(fileName);
+  return allData[screenCode]?.[caseCode];
+}
+

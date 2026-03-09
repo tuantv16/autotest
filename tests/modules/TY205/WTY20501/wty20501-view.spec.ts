@@ -251,32 +251,9 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
         expect(isInputDisabledByNameKana).toBe(true);
         const isTextareaDisabledByName = await summaryPage.isTextareaDisabledByName(summaryPage.fieldNames.summary);
         expect(isTextareaDisabledByName).toBe(true);   
+        await page.waitForTimeout(1000);
         await snapExpect();
     });
-
-    // test('WTY20501_65', async ({
-    //     page,
-    //     baseUrl,
-    //     indexedDBHelper,
-    //     snapInput,
-    //     snapExpect,
-    // }) => {
-    //     const testData = loadTestData('TY205/wty20501', 'wty20501', 'TC_13');
-    //     await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
-    //     await page.waitForTimeout(500);
-
-    //     await indexedDBHelper.initializeDB({
-    //         sessionData: testData.sessionData,
-    //         commonData: testData.commonData
-    //     });
-        
-    //     await page.waitForTimeout(500);
-    //     await summaryPage.navigate();
-    //     await page.waitForTimeout(1000);
-    //     const verifyDefaultData = await summaryPage.verifyDefaultData();
-    //     expect(verifyDefaultData).toBe(true);
-    //     await snapExpect();
-    // });
 
     test('WTY20501_66', async ({
         page,
@@ -298,14 +275,19 @@ test.describe('WTY20501 - Summary Input (摘要欄入力)', () => {
 
         await summaryPage.navigate();
         await page.waitForTimeout(1000);
-
+        await summaryPage.fillForm(testData.formData.inputData);
         const isTextVisibleSummary = await summaryPage.isTextVisible(testData.formData.label.summary);
         expect(isTextVisibleSummary).toBe(true);
         const isTextVisibleCustomerNameKanji = await summaryPage.isTextVisible(testData.formData.label.customerNameKanji);
         expect(isTextVisibleCustomerNameKanji).toBe(true);
         const isTextVisibleCustomerNameKana = await summaryPage.isTextVisible(testData.formData.label.customerNameKana);
         expect(isTextVisibleCustomerNameKana).toBe(true);
-
+        const isTextVisibleDeliveryDate = await summaryPage.isTextVisible(testData.formData.label.deliveryDate);
+        expect(isTextVisibleDeliveryDate).toBe(true);
+        const isTextVisibleKeishoKbn = await summaryPage.isTextVisible(testData.formData.label.honorific);
+        expect(isTextVisibleKeishoKbn).toBe(true);
+        const isTextVisiblePaymentMethod = await summaryPage.isTextVisible(testData.formData.label.paymentMethod);
+        expect(isTextVisiblePaymentMethod).toBe(true);
         await snapExpect();
     });
 

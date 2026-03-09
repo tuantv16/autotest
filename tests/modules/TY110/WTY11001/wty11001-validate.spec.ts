@@ -6,7 +6,8 @@
 import { test, expect, loadTestData } from '../../../base/base-test';
 import { WTY11001Page } from '../../../pages/TY110/wty11001.page';
 import { takeScreenshotOnFailure } from '../../../utils/common-helper';
-import { COMMON_MESSAGES } from '../../../constants/messages';
+import { COMMON_MESSAGES, VALIDATION_ERROR_MESSAGES } from '../../../constants/messages';
+import { WTY11001_ERROR_MESSAGES } from '../../../pages/TY110/const/const-wty110';
 
 test.describe('WTY11001 - Check arrival schedule information (入荷予定情報照会)', () => {
     let schedulePage: WTY11001Page;
@@ -49,7 +50,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await page.waitForTimeout(2000);
 
-        const isValidateMessageVisible = await schedulePage.waitForTextInBody('入荷予定期間終了日には入荷予定期間開始日以降の日付を入力してください。', 5000);
+        const isValidateMessageVisible = await schedulePage.waitForTextInBody(VALIDATION_ERROR_MESSAGES.START_DATE_AFTER_END_DATE, 5000);
         expect(isValidateMessageVisible).toBe(true);
 
         await snapExpect();
@@ -87,7 +88,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await page.waitForTimeout(2000);
 
-        const isValidateMessageVisible = await schedulePage.waitForTextInBody('移動依頼番号は半角14文字で入力してください。', 5000);
+        const isValidateMessageVisible = await schedulePage.waitForTextInBody(WTY11001_ERROR_MESSAGES.SLIP_NO_LENGTH_14_MOBIE, 5000);
         expect(isValidateMessageVisible).toBe(true);
 
         await snapExpect();
@@ -125,7 +126,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await page.waitForTimeout(2000);
 
-        const isValidateMessageVisible = await schedulePage.waitForTextInBody('売上伝票番号は半角14文字で入力してください。', 5000);
+        const isValidateMessageVisible = await schedulePage.waitForTextInBody(WTY11001_ERROR_MESSAGES.SLIP_NO_LENGTH_14_SUPPLY, 5000);
         expect(isValidateMessageVisible).toBe(true);
 
         await snapExpect();
@@ -196,7 +197,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await schedulePage.clickSearchButton();
 
-        const messageValidate = await schedulePage.waitForTextInBody("客注以外とき、売上伝票番号は入力できません。", 5000);
+        const messageValidate = await schedulePage.waitForTextInBody(WTY11001_ERROR_MESSAGES.SLIP_NO_ERROR, 5000);
         expect(messageValidate).toBe(true);
 
         await snapExpect();
@@ -229,7 +230,7 @@ test.describe('WTY11001 - Check arrival schedule information (入荷予定情報
 
         await schedulePage.clickSearchButton();
 
-        const messageValidate = await schedulePage.waitForTextInBody("分類コードは、２桁または４桁または６桁で入力してください。", 5000);
+        const messageValidate = await schedulePage.waitForTextInBody(WTY11001_ERROR_MESSAGES.BRCD_LENGTH_ERROR, 5000);
         expect(messageValidate).toBe(true);
 
         await snapExpect();

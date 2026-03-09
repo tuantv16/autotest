@@ -1,0 +1,342 @@
+{
+    "wtz11201": {
+        "TC_01": {
+            "description": "Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "00102",
+                        "unyoDate": "20251201",
+                        "syoriStoreCd": "00102",
+                        "userId": "00102T401",
+                        "clientId": "00102PD401",
+                        "termNo": "401",
+                        "screenId": "WTY20201"
+                    }
+                }
+            ],
+            "sessionData": [
+                {
+                    "key": "WTZ11201_IN_SD",
+                    "value": {
+                        "searchMethodId": "",
+                        "searchValueText": "ｶｱ",
+                        "jusCd": "12343214",
+                        "address": "",
+                        "jusInfoDT": [
+                            {
+                            "jusJusHsiKbn": "1",
+                            "jusJusCd": "13101000000",
+                            "jusDkaiJuskso": 2,
+                            "jusFullJusKnj": "東京都千代田区"
+                            }
+                        ],
+                        "kokSearchCtrlDT": [
+                            {
+                            "syoriKbn": "0",
+                            "returnKbn": "0",
+                            "uesmDispFlg": "0",
+                            "mientDispFlg": "0",
+                            "kokSelKbn": "0",
+                            "searchMethod": "02",
+                            "telNo": "",
+                            "shimeiKn": "ｶｱ",
+                            "jusCd": "",
+                            "kanNo": "",
+                            "denNo": "12345",
+                            "gaibujohoKbn": "0",
+                            "parentFormId": "WTY40201",
+                            "haiDispFlg": "0"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "TC_02": {
+            "description": "Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "00102",
+                        "unyoDate": "20251201",
+                        "syoriStoreCd": "00102",
+                        "userId": "00102T401",
+                        "clientId": "00102PD401",
+                        "termNo": "401",
+                        "screenId": "WTY20201"
+                    }
+                }
+            ],
+            "sessionData": [
+                {
+                    "key": "WTZ11201_IN_SD",
+                    "value": {
+                        "searchMethodId": "",
+                        "searchValueText": "",
+                        "jusCd": "",
+                        "address": "",
+                        "jusInfoDT": [
+                            {
+                            "jusJusHsiKbn": "1",
+                            "jusJusCd": "13101000000",
+                            "jusDkaiJuskso": 2,
+                            "jusFullJusKnj": "東京都千代田区"
+                            }
+                        ],
+                        "kokSearchCtrlDT": [
+                            {
+                            "syoriKbn": "1",
+                            "returnKbn": "0",
+                            "uesmDispFlg": "0",
+                            "mientDispFlg": "0",
+                            "kokSelKbn": "0",
+                            "searchMethod": "02",
+                            "telNo": "",
+                            "shimeiKn": "",
+                            "jusCd": "",
+                            "kanNo": "",
+                            "denNo": "12345",
+                            "gaibujohoKbn": "0",
+                            "parentFormId": "WTY40201",
+                            "haiDispFlg": "0"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "TC_03": {
+            "description": "Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "00102",
+                        "unyoDate": "20251201",
+                        "syoriStoreCd": "00102",
+                        "userId": "00102T401",
+                        "clientId": "00102PD401",
+                        "termNo": "401",
+                        "screenId": "WTY20201"
+                    }
+                }
+            ],
+            "sessionData": [
+                {
+                    "key": "WTZ11201_IN_SD",
+                    "value": {
+                        "jusInfoDT": [
+                            {
+                                "jusJusHsiKbn": "1",
+                                "jusJusCd": "13101000000",
+                                "jusDkaiJuskso": 2,
+                                "jusFullJusKnj": "東京都千代田区"
+                            }
+                        ],
+                        "kokSearchCtrlDT": [
+                            {
+                                "syoriKbn": "2",
+                                "returnKbn": "0",
+                                "uesmDispFlg": "0",
+                                "mientDispFlg": "0",
+                                "kokSelKbn": "0",
+                                "searchMethod": "02",
+                                "telNo": "",
+                                "shimeiKn": "",
+                                "jusCd": "",
+                                "kanNo": "",
+                                "denNo": "12345",
+                                "gaibujohoKbn": "0",
+                                "parentFormId": "WTY40201",
+                                "haiDispFlg": "0"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "TC_04": {
+            "description": "Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "00102",
+                        "unyoDate": "20251201",
+                        "syoriStoreCd": "00102",
+                        "userId": "00102T401",
+                        "clientId": "00102PD401",
+                        "termNo": "401",
+                        "screenId": "WTY20201"
+                    }
+                }
+            ],
+            "sessionData": [
+                {
+                    "key": "WTZ11201_IN_SD",
+                    "value": {
+                        "jusInfoDT": [
+                            {
+                                "jusJusHsiKbn": "1",
+                                "jusJusCd": "13101000000",
+                                "jusDkaiJuskso": 2,
+                                "jusFullJusKnj": "東京都千代田区"
+                            }
+                        ],
+                        "kokSearchCtrlDT": [
+                            {
+                                "syoriKbn": "1",
+                                "returnKbn": "1",
+                                "uesmDispFlg": "0",
+                                "mientDispFlg": "0",
+                                "kokSelKbn": "0",
+                                "searchMethod": "",
+                                "telNo": "",
+                                "shimeiKn": "",
+                                "jusCd": "",
+                                "kanNo": "",
+                                "denNo": "12345",
+                                "gaibujohoKbn": "0",
+                                "parentFormId": "WTY40201",
+                                "haiDispFlg": "0"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "TC_05": {
+            "description": "Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "00102",
+                        "unyoDate": "20251201",
+                        "syoriStoreCd": "00102",
+                        "userId": "00102T401",
+                        "clientId": "00102PD401",
+                        "termNo": "401",
+                        "screenId": "WTY20201"
+                    }
+                }
+            ],
+            "sessionData": [
+                {
+                    "key": "WTZ11201_IN_SD",
+                    "value": {
+                        "jusInfoDT": [
+                            {
+                                "jusJusHsiKbn": "1",
+                                "jusJusCd": "13101000000",
+                                "jusDkaiJuskso": 2,
+                                "jusFullJusKnj": "東京都千代田区"
+                            }
+                        ],
+                        "kokSearchCtrlDT": [
+                            {
+                                "syoriKbn": "0",
+                                "returnKbn": "1",
+                                "uesmDispFlg": "0",
+                                "mientDispFlg": "0",
+                                "kokSelKbn": "0",
+                                "searchMethod": "02",
+                                "telNo": "",
+                                "shimeiKn": "",
+                                "jusCd": "",
+                                "kanNo": "",
+                                "denNo": "12345",
+                                "gaibujohoKbn": "0",
+                                "parentFormId": "WTY40201",
+                                "haiDispFlg": "0"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "TC_06": {
+            "description": "Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "00102",
+                        "unyoDate": "20251201",
+                        "syoriStoreCd": "00102",
+                        "userId": "00102T401",
+                        "clientId": "00102PD401",
+                        "termNo": "401",
+                        "screenId": "WTY20201"
+                    }
+                }
+            ],
+            "sessionData": [
+                {
+                    "key": "WTZ11201_IN_SD",
+                    "value": {
+                        "wty40201Flg": "1",
+                        "jusInfoDT": [
+                            {
+                                "jusJusHsiKbn": "1",
+                                "jusJusCd": "13101000000",
+                                "jusDkaiJuskso": 2,
+                                "jusFullJusKnj": "東京都千代田区"
+                            }
+                        ],
+                        "kokSearchCtrlDT": [
+                            {
+                                "syoriKbn": "0",
+                                "returnKbn": "1",
+                                "uesmDispFlg": "0",
+                                "mientDispFlg": "0",
+                                "kokSelKbn": "0",
+                                "searchMethod": "02",
+                                "telNo": "",
+                                "shimeiKn": "",
+                                "jusCd": "",
+                                "kanNo": "",
+                                "denNo": "12345",
+                                "gaibujohoKbn": "0",
+                                "parentFormId": "WTY40201",
+                                "haiDispFlg": "0"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "TC_07": {
+            "description": "Register warranty claim successfully",
+            "commonData": [
+                {
+                    "id": "commonDT",
+                    "value": {
+                        "storeCd": "00102",
+                        "unyoDate": "20251201",
+                        "syoriStoreCd": "00102",
+                        "userId": "00102T401",
+                        "clientId": "00102PD401",
+                        "termNo": "401",
+                        "screenId": "WTY20201"
+                    }
+                },
+                {
+                    "id": "systemDT", 
+                    "value": {
+                        "nendo": "2025",
+                        "hikiwatashi": "0",
+                        "defaultTh": "1",
+                        "defaultKyoten": "1",
+                        "jnrurNbnthanKbn": "2",
+                        "pntKyotenIds": "0",
+                        "defaultPortrait": "1"
+                    }
+                }
+            ]
+        }
+    }
+}

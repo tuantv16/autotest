@@ -689,4 +689,36 @@ export class BasePage {
         const text = await content.textContent();
         return text?.trim() || '';      
     }
+    
+    async clickClearByInput(
+        inputIdSelector: string 
+    ) {
+        const field = this.page.locator(inputIdSelector);
+        await expect(field).toBeVisible();
+
+        const container = field.locator(
+            'xpath=ancestor::div[contains(@class,"_textBoxContainer")]'
+        );
+
+        const clearBtn = container.locator('[data-testid="ClearButton"]');
+
+        await expect(clearBtn).toBeVisible();
+        await clearBtn.click();
+    }
+
+    async isRadioChecked(name: string, labelText?: string): Promise<boolean> {
+        if (!labelText) {
+            const checked = await this.page
+            .locator(`input[type="radio"][name="${name}"]:checked`)
+            .count();
+
+            return checked > 0;
+        }
+
+        const radio = this.page
+            .locator('label', { hasText: labelText })
+            .locator(`input[type="radio"][name="${name}"]`);
+
+        return await radio.isChecked();
+    }
 }

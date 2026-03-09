@@ -4,5 +4,6 @@ playwright-report/
 test-results/
 logs/
 screenshots/
+playwright-test-screenshots/
 .env.test
 .env

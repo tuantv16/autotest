@@ -313,6 +313,10 @@ export class TY2050Page extends BasePage {
   }
 
   async isTextVisible(text: string, exact: boolean = true): Promise<boolean> {
+    if (!text) {
+      return false;
+    }
+
     const locator = this.page.getByText(text, { exact });
     return await locator
       .first()
@@ -355,9 +359,19 @@ export class TY2050Page extends BasePage {
   async blurCustomerNameKanji(): Promise<void> {
     await this.blurInputById(this.fieldNames.customerNameKanji);
   }
-     
+    
+  async blurSummaryText(): Promise<void> {
+    await this.blurInputById(this.fieldNames.summary);
+  }
+
   async focusCustomerNameKanji(): Promise<void> {
     const locator = this.page.locator(this.selectors.customerNameKanji);
+    await this.waitForVisible(locator, 2000);
+    await locator.click({ timeout: 2000 });
+  }
+
+  async focusSummaryText(): Promise<void> {
+    const locator = this.page.locator(this.selectors.summaryTextarea);
     await this.waitForVisible(locator, 2000);
     await locator.click({ timeout: 2000 });
   }
@@ -403,7 +417,7 @@ export class TY2050Page extends BasePage {
 
     return true;
   }
-
+  
   async getSummaryText(): Promise<string> {
     const locator = this.page.locator(this.selectors.summaryTextarea);
     const actualInput = (await locator.inputValue()) || "";

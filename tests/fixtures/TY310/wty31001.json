@@ -331,6 +331,20 @@
           }
         },
         {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
+          }
+        },
+        {
           "id": "preScreenId",
           "value": {
             "preScreenId": "WTY31001"
@@ -360,7 +374,7 @@
               },
               {
                 "rowId": "row_1",
-                "janCd": "4901234567891",
+                "janCd": "4968373212542",
                 "shnCd": "00010006468",
                 "shnNm": "商品名A",
                 "iraiSu": "10"
@@ -406,6 +420,20 @@
             "jnrurNbnthanKbn": "2",
             "pntKyotenIds": "0",
             "defaultPortrait": "1"
+          }
+        },
+        {
+          "id": "btnInfoDT",
+          "value": {
+            "areaCd": "529",
+            "blkCd": "520",
+            "btenCd": "00102"
+          }
+        },
+        {
+          "id": "screenDT",
+          "value": {
+            "screenDT": []
           }
         },
         {
@@ -650,7 +678,7 @@
         {
           "id": "preScreenId",
           "value": {
-            "preScreenId": "WTZ10101"
+            "preScreenId": "WTZ11101"
           }
         }
       ]
