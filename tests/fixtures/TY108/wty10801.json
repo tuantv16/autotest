@@ -1,0 +1,44 @@
+{
+  "wty10801": {
+    "TC_15": {
+      "sessionData": [{
+        "key": "WTY10801_IN_SD",
+        "value": {
+            
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+              "assetsNo": "EF7096380",
+              "clientId": "0438874190",
+              "keepPeriod": "6",
+              "storeCd": "04388",
+              "syoriStoreCd": "04388",
+              "syoriStoreNmKnJ": "東海通",
+              "syoriStoreNmKn": "トウカゲイ",
+              "syoriStoreNmKnj": "東海通",
+              "termNo": "419",
+              "unyoDate": "20251028",
+              "userId": "70000"
+          }
+        }
+      ],
+      "formData": {
+        "startDate_15": "2026",
+        "startDate_17": "20260224",
+        "endDate_17": "20260223",
+        "chuCd_18": "131",
+        "chuCd_19": "131b",
+        "denNo_20": "131b",
+        "denNo_21": "123456789098765",
+        "startDate_22": "20260223",
+        "chuCd_36": "1234",
+        "denNo_37": "12345678901234",
+        "startDate_38": "20260223",
+        "endDate_39": "20260222"
+      }
+    }
+}
+}

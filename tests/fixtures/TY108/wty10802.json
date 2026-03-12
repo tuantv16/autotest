@@ -1,0 +1,33 @@
+{
+  "wty10802": {
+    "TC_05": {
+      "sessionData": [{
+        "key": "WTY10802_IN_SD",
+        "value": {
+            
+        }
+      }],
+      "commonData": [
+        {
+          "id": "commonDT",
+          "value": {
+              "assetsNo": "EF7096380",
+              "clientId": "0438874190",
+              "keepPeriod": "6",
+              "storeCd": "04388",
+              "syoriStoreCd": "04388",
+              "syoriStoreNmKnJ": "東海通",
+              "syoriStoreNmKn": "トウカゲイ",
+              "syoriStoreNmKnj": "東海通",
+              "termNo": "419",
+              "unyoDate": "20251028",
+              "userId": "70000"
+          }
+        }
+      ],
+      "formData": {
+        
+      }
+    }
+}
+}
