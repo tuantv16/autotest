@@ -93,6 +93,21 @@ export class CommonHelper {
    * @example
    * const testData = CommonHelper.loadTestDataTS('TY201/wty20101').wty20101.TC_01;
    */
+  /**
+   * Generate a unique code from a prefix, for test data with UNIQUE constraint
+   * (e.g. product SKU, customer code...)
+   *
+   * @example
+   * CommonHelper.uniqueCode('AUTO-SKU-') // 'AUTO-SKU-1755091234567042'
+   */
+  static uniqueCode(prefix: string = ''): string {
+    const timestamp = Date.now().toString();
+    const random = Math.floor(Math.random() * 1000)
+      .toString()
+      .padStart(3, '0');
+    return `${prefix}${timestamp}${random}`;
+  }
+
   static loadTestDataTS(fileName: string): any {
     const tsPath = path.join(__dirname, '../fixtures', `${fileName}.ts`);
     if (!fs.existsSync(tsPath)) {

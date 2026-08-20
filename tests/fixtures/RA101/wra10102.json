@@ -1,0 +1,65 @@
+{
+    "wra10102": {
+        "TC_01": {
+            "description": "Đăng ký sản phẩm thành công với dữ liệu hợp lệ",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "Sản phẩm Automation Test",
+                "price": "150000",
+                "stock": "25",
+                "description": "Sản phẩm được tạo tự động bởi Playwright automation test."
+            },
+            "expected": {
+                "priceText": "150.000 ₫",
+                "stockText": "25",
+                "statusText": "Đang bán"
+            }
+        },
+        "TC_02": {
+            "description": "Đăng ký sản phẩm thất bại: Mã SKU đã tồn tại",
+            "formData": {
+                "skuPrefix": "DUP-SKU-",
+                "name": "San pham trung SKU - lan 1",
+                "price": "99000",
+                "stock": "10",
+                "description": "Sản phẩm dùng để tạo sẵn mã SKU trên hệ thống."
+            },
+            "duplicatedFormData": {
+                "name": "San pham trung SKU - lan 2",
+                "price": "120000",
+                "stock": "5",
+                "description": "Sản phẩm đăng ký lại bằng mã SKU đã tồn tại."
+            }
+        },
+        "TC_03": {
+            "description": "Đăng ký sản phẩm thất bại: bỏ trống các trường bắt buộc",
+            "formData": {
+                "sku": "",
+                "name": "",
+                "price": "",
+                "stock": "",
+                "description": "Chỉ nhập mô tả, bỏ trống toàn bộ trường bắt buộc."
+            }
+        },
+        "TC_04": {
+            "description": "Đăng ký sản phẩm thất bại: Mã SKU chỉ chứa khoảng trắng",
+            "formData": {
+                "sku": "   ",
+                "name": "San pham SKU chi co khoang trang",
+                "price": "50000",
+                "stock": "3",
+                "description": "Mã SKU chỉ gồm khoảng trắng nên bị loại bởi validate phía server."
+            }
+        },
+        "TC_05": {
+            "description": "Đăng ký sản phẩm thất bại: Giá bán vượt quá giới hạn cho phép",
+            "formData": {
+                "skuPrefix": "OVER-PRICE-",
+                "name": "San pham gia ban vuot gioi han",
+                "price": "1000000000000",
+                "stock": "1",
+                "description": "Giá bán lớn hơn 999999999999.99 nên không được phép đăng ký."
+            }
+        }
+    }
+}
