@@ -7,6 +7,7 @@ import { test as base, expect } from '@playwright/test';
 import { IndexedDBHelper } from '../utils/indexeddb-helper';
 import { CommonHelper } from '../utils/common-helper';
 import { snapExpect as snapExpectImpl, snapInput as snapInputImpl } from '../utils/screenshot-helper';
+import { RetailDataSeeder } from '../utils/db/retail-data';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
@@ -19,6 +20,12 @@ export interface TestFixtures {
   baseUrl: string;
   snapInput: (index?: string | number) => Promise<string>;
   snapExpect: (index?: string | number) => Promise<string>;
+  /**
+   * Tạo dữ liệu tiền đề cho test của retail_app và tự dọn khi test kết thúc.
+   * Chỉ khởi tạo khi test thực sự khai nó, nên test không dùng thì không chạm database.
+   * Xem `tests/utils/db/retail-data.ts`.
+   */
+  retailData: RetailDataSeeder;
 }
 
 /**
@@ -62,6 +69,36 @@ export const test = base.extend<TestFixtures>({
 
   snapExpect: async ({ page }, use, testInfo) => {
     await use(async (index?: string | number) => snapExpectImpl(page, testInfo, index));
+  },
+
+  // Dữ liệu test của retail_app: tự tạo khi test cần, tự xóa cứng khi test xong.
+  // Teardown của fixture chạy KỂ CẢ khi test fail hoặc timeout, nên không cần afterEach.
+  retailData: async ({}, use, testInfo) => {
+    const seeder = new RetailDataSeeder();
+    await use(seeder);
+
+    // Dọn thất bại KHÔNG được làm fail một test vốn đã pass — nhưng cũng không được im
+    // lặng, vì im lặng là để rác lại trong database mà không ai biết.
+    const leftover = seeder.tracked;
+    try {
+      await seeder.cleanup();
+    } catch (error: any) {
+      console.error(
+        [
+          '',
+          '╔══════════════════════════════════════════════════════════════════════════╗',
+          '║  DỌN DỮ LIỆU TEST THẤT BẠI — DATABASE ĐANG CÒN RÁC                       ║',
+          '╚══════════════════════════════════════════════════════════════════════════╝',
+          `  Test        : ${testInfo.title}`,
+          `  Mã SKU sót  : ${leftover.join(', ') || '(không có)'}`,
+          `  Nguyên nhân : ${error?.message?.split('\n')[0] ?? error}`,
+          '',
+          '  Dọn tay bằng lệnh (chạy từ gốc workspace):',
+          '      python tools/data/run_sql.py',
+          '',
+        ].join('\n'),
+      );
+    }
   },
 });
 

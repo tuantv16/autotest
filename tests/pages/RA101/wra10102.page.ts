@@ -1,18 +1,34 @@
 /**
- * Page Object - WRA10102 (Đăng ký sản phẩm / Thêm sản phẩm)
- * Chỉ chứa selector và các hàm thao tác UI (actions), không chứa assertion nghiệp vụ.
+ * Page Object — WRA10102 (Thêm sản phẩm / Đăng ký sản phẩm)
+ * Chỉ chứa selector và hàm thao tác UI. KHÔNG chứa assertion.
  *
- * Selector được trích xuất từ source code:
- * - retail_app/resources/views/products/create.blade.php
- * - retail_app/resources/views/products/_form.blade.php
- * - retail_app/resources/views/partials/flash.blade.php
+ * Selector trích xuất từ source code app (appSourcePath = ./apps/retail_app):
+ * - resources/views/products/create.blade.php   (tiêu đề trang, thẻ form)
+ * - resources/views/products/_form.blade.php    (toàn bộ trường nhập, nút Lưu/Hủy)
+ * - resources/views/partials/flash.blade.php    (khối thông báo lỗi/thành công)
+ * - app/Http/Controllers/ProductController.php  (đích điều hướng sau khi lưu)
+ *
+ * CẠM BẪY của màn này, đã xử lý bên dưới:
+ *
+ * 1. `name="is_active"` xuất hiện HAI lần: một input hidden value="0" đứng trước
+ *    (_form.blade.php:49) và checkbox value="1" (_form.blade.php:51). Selector
+ *    `input[name="is_active"]` sẽ khớp 2 element -> phải chỉ rõ [type="checkbox"].
+ *
+ * 2. `id="sku"`, `id="name"`, `id="price"` là id chung, trùng với màn Sửa sản phẩm
+ *    (cả hai màn render chung _form.blade.php). Mọi selector đều được scope trong
+ *    thẻ form của màn này, không bám id trần.
+ *
+ * 3. Mọi trường bắt buộc đều có thuộc tính `required` (_form.blade.php:7,16,25,34)
+ *    -> bỏ trống rồi bấm Lưu thì TRÌNH DUYỆT chặn, request không tới server và
+ *    trang không tải lại. Muốn kiểm nhánh đó phải đọc trạng thái validate của
+ *    trình duyệt, không chờ điều hướng.
  */
 
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from '../base.page';
 import { getRA101BaseUrl, RA101_PATHS, RA101_URL_PATTERNS } from './const/const-ra101';
 
-/** Dữ liệu nhập của form đăng ký sản phẩm */
+/** Dữ liệu nhập của form Thêm sản phẩm */
 export interface WRA10102FormData {
   sku: string;
   name: string;
@@ -24,359 +40,199 @@ export interface WRA10102FormData {
 
 export type WRA10102FormFieldKey = keyof WRA10102FormData;
 
-/** Các trường dạng input/textarea (không tính checkbox isActive) */
+/** Các trường dạng input/textarea — không tính checkbox isActive */
 export type WRA10102InputFieldKey = Exclude<WRA10102FormFieldKey, 'isActive'>;
 
 export class WRA10102Page extends BasePage {
-  // Selectors
+  /** Thẻ form của màn Thêm sản phẩm (create.blade.php:12) — dùng để scope mọi trường */
+  private readonly formScope = 'form[action$="/products"]';
+
   private readonly selectorsWRA10102 = {
-    // Tiêu đề màn hình
+    /** div.page__head h1 — create.blade.php:7 */
     pageTitle: 'div.page__head h1',
 
-    // Form
-    form: 'div.card__body form[method="POST"]',
-    csrfToken: 'input[name="_token"]',
+    /** button[type="submit"] trong form — _form.blade.php:57 */
+    saveButton: 'form[action$="/products"] button[type="submit"]',
 
-    // Các trường nhập liệu
-    skuInput: '#sku',
-    nameInput: '#name',
-    priceInput: '#price',
-    stockInput: '#stock',
-    descriptionTextarea: '#description',
-    isActiveCheckbox: 'input[type="checkbox"][name="is_active"]',
+    /** Liên kết Hủy, trỏ về danh sách — _form.blade.php:58 */
+    cancelButton: 'form[action$="/products"] a.btn:not(.btn--primary)',
 
-    // Button
-    saveButton: 'div.form-actions button[type="submit"]',
-    cancelButton: 'div.form-actions a.btn[href$="/products"]',
-
-    // Thông báo lỗi
+    /** Khối thông báo lỗi tổng — flash.blade.php:5-14 */
     errorAlert: 'div.alert.alert--error',
-    errorAlertTitle: 'div.alert.alert--error strong',
+
+    /** Từng dòng lỗi trong khối trên — flash.blade.php:9-11 */
     errorAlertItems: 'div.alert.alert--error ul li',
-    successAlert: 'div.alert.alert--success',
-    fieldErrorClass: 'div.field__error',
-    inputErrorClass: 'input--error',
-  };
 
-  /** Map field key -> selector của element nhập liệu */
-  private readonly fieldSelectors: Record<WRA10102InputFieldKey, string> = {
-    sku: this.selectorsWRA10102.skuInput,
-    name: this.selectorsWRA10102.nameInput,
-    price: this.selectorsWRA10102.priceInput,
-    stock: this.selectorsWRA10102.stockInput,
-    description: this.selectorsWRA10102.descriptionTextarea,
-  };
+    /** Tiêu đề khối lỗi — flash.blade.php:6 */
+    errorAlertTitle: 'div.alert.alert--error strong',
+  } as const;
 
-  /** Map field key -> hàm nhập dữ liệu tương ứng */
-  private readonly formFieldFillers: Record<WRA10102FormFieldKey, (value: any) => Promise<void>> = {
-    sku: async (value: string) => this.fillSku(value),
-    name: async (value: string) => this.fillName(value),
-    price: async (value: string) => this.fillPrice(value),
-    stock: async (value: string) => this.fillStock(value),
-    description: async (value: string) => this.fillDescription(value),
-    isActive: async (value: boolean) => this.setActive(value),
+  /**
+   * Selector của từng trường nhập, scope trong thẻ form để không đụng màn Sửa.
+   * Nguồn: _form.blade.php dòng 6, 15, 24, 33, 44, 51.
+   */
+  private readonly fieldSelectors: Record<WRA10102FormFieldKey, string> = {
+    sku: `${this.formScope} input[name="sku"]`,
+    name: `${this.formScope} input[name="name"]`,
+    price: `${this.formScope} input[name="price"]`,
+    stock: `${this.formScope} input[name="stock"]`,
+    description: `${this.formScope} textarea[name="description"]`,
+    // [type="checkbox"] là BẮT BUỘC: có thêm input hidden cùng name (cạm bẫy 1)
+    isActive: `${this.formScope} input[type="checkbox"][name="is_active"]`,
   };
 
   constructor(page: Page) {
-    super(page, getRA101BaseUrl());
+    super(page);
   }
 
-  /**
-   * Truy cập trực tiếp màn hình đăng ký sản phẩm
-   */
+  /** Mở trực tiếp màn Thêm sản phẩm */
   async navigate(): Promise<void> {
-    await this.goto(RA101_PATHS.PRODUCT_CREATE);
+    await this.page.goto(`${getRA101BaseUrl()}${RA101_PATHS.PRODUCT_CREATE}`);
+    await this.waitForFormReady();
   }
 
-  /**
-   * Chờ form đăng ký sản phẩm hiển thị xong
-   */
+  /** Chờ form nhập đã sẵn sàng để nhập liệu */
   async waitForFormReady(): Promise<void> {
-    await this.page.waitForSelector(this.selectorsWRA10102.skuInput, {
-      state: 'visible',
-      timeout: 10000,
-    });
+    await this.waitForVisible(this.page.locator(this.fieldSelectors.sku));
+    await this.waitForVisible(this.page.locator(this.selectorsWRA10102.saveButton));
   }
 
-  /**
-   * Lấy tiêu đề màn hình (h1)
-   */
+  /** Lấy tiêu đề trang (kỳ vọng: `Thêm sản phẩm`) */
   async getPageTitle(): Promise<string> {
     const title = this.page.locator(this.selectorsWRA10102.pageTitle);
     return (await this.getTextByLocator(title)).trim();
   }
 
-  /**
-   * Nhập Mã SKU
-   */
-  async fillSku(value: string): Promise<void> {
-    await this.fillFieldValue('sku', value);
+  /** Locator của một trường, dùng khi test cần thao tác riêng lẻ */
+  getFieldLocator(field: WRA10102FormFieldKey): Locator {
+    return this.page.locator(this.fieldSelectors[field]);
   }
 
   /**
-   * Nhập Tên sản phẩm
+   * Điền form. Nhận dữ liệu MỘT PHẦN — chỉ trường nào truyền vào mới bị chạm,
+   * nhờ đó test kiểm bỏ trống một trường không phải dựng cả bộ dữ liệu.
+   *
+   * Chuỗi rỗng vẫn được xử lý (xóa sạch trường đó), khác với không truyền.
    */
-  async fillName(value: string): Promise<void> {
-    await this.fillFieldValue('name', value);
-  }
+  async fillForm(data: Partial<WRA10102FormData>): Promise<void> {
+    const inputKeys: WRA10102InputFieldKey[] = ['sku', 'name', 'price', 'stock', 'description'];
 
-  /**
-   * Nhập Giá bán (₫)
-   */
-  async fillPrice(value: string): Promise<void> {
-    await this.fillFieldValue('price', value);
-  }
-
-  /**
-   * Nhập Số lượng tồn
-   */
-  async fillStock(value: string): Promise<void> {
-    await this.fillFieldValue('stock', value);
-  }
-
-  /**
-   * Nhập Mô tả
-   */
-  async fillDescription(value: string): Promise<void> {
-    await this.fillFieldValue('description', value);
-  }
-
-  /**
-   * Tick / bỏ tick checkbox "Đang bán"
-   */
-  async setActive(checked: boolean): Promise<void> {
-    const checkbox = this.page.locator(this.selectorsWRA10102.isActiveCheckbox);
-    await this.waitForVisible(checkbox);
-
-    if (checked) {
-      await checkbox.check();
-    } else {
-      await checkbox.uncheck();
-    }
-  }
-
-  /**
-   * Nhập dữ liệu vào form (chỉ nhập các trường được truyền vào)
-   */
-  async fillForm(formData: Partial<WRA10102FormData>): Promise<void> {
-    for (const key of Object.keys(formData) as WRA10102FormFieldKey[]) {
-      const value = formData[key];
-      if (value == null) continue;
-
-      const filler = this.formFieldFillers[key];
-
-      if (!filler) {
-        throw new Error(`No filler defined for field: ${key}`);
+    for (const key of inputKeys) {
+      const value = data[key];
+      if (value === undefined) {
+        continue;
       }
 
-      await filler(value);
-    }
-  }
-
-  /**
-   * Xóa trắng toàn bộ các trường nhập liệu
-   */
-  async clearForm(): Promise<void> {
-    for (const key of Object.keys(this.fieldSelectors) as WRA10102InputFieldKey[]) {
       const locator = this.page.locator(this.fieldSelectors[key]);
       await this.waitForVisible(locator);
-      await locator.clear();
+      await locator.fill(value);
+    }
+
+    if (data.isActive !== undefined) {
+      await this.setActiveCheckbox(data.isActive);
     }
   }
 
+  /** Tích / bỏ tích ô `Đang bán` */
+  async setActiveCheckbox(checked: boolean): Promise<void> {
+    const checkbox = this.page.locator(this.fieldSelectors.isActive);
+    await this.waitForVisible(checkbox);
+
+    if ((await checkbox.isChecked()) !== checked) {
+      await checkbox.click();
+    }
+  }
+
+  /** Đọc giá trị hiện tại của một trường nhập */
+  async getFieldValue(field: WRA10102InputFieldKey): Promise<string> {
+    return await this.page.locator(this.fieldSelectors[field]).inputValue();
+  }
+
+  /** Ô `Đang bán` hiện đang được tích hay không */
+  async isActiveChecked(): Promise<boolean> {
+    return await this.page.locator(this.fieldSelectors.isActive).isChecked();
+  }
+
   /**
-   * Click button "Lưu" để đăng ký sản phẩm
-   * - Form hợp lệ theo validate của trình duyệt: chờ submit + điều hướng xong
-   * - Form không hợp lệ: trình duyệt chặn submit, không có điều hướng để chờ
+   * Bấm nút `Lưu` và chờ trang tải xong.
+   *
+   * Dùng cho trường hợp request THỰC SỰ tới server — tức mọi trường bắt buộc đã
+   * được điền. Trường bắt buộc còn trống thì trình duyệt chặn submit (cạm bẫy 3),
+   * trang không tải lại và hàm này chỉ chờ hết thời gian rồi đi tiếp.
    */
   async clickSave(): Promise<void> {
     const button = this.page.locator(this.selectorsWRA10102.saveButton);
     await this.waitForVisible(button);
 
-    const willSubmit = await this.isFormNativelyValid();
-
-    if (!willSubmit) {
-      await button.click();
-      return;
-    }
-
-    await this.clickAndWaitForLoad(button);
-  }
-
-  /**
-   * Kiểm tra toàn bộ form có hợp lệ theo validate của trình duyệt (HTML5) hay không
-   */
-  async isFormNativelyValid(): Promise<boolean> {
-    const form = this.page.locator(this.selectorsWRA10102.form);
-    await this.waitForVisible(form);
-    return await form.evaluate((el: Element) => (el as HTMLFormElement).checkValidity());
-  }
-
-  /**
-   * Click button "Hủy" để quay lại danh sách sản phẩm
-   */
-  async clickCancel(): Promise<void> {
-    const button = this.page.locator(this.selectorsWRA10102.cancelButton);
-    await this.waitForVisible(button);
+    const loaded = this.page.waitForEvent('load', { timeout: 15000 }).catch(() => null);
     await button.click();
-    await this.waitForNavigation(RA101_URL_PATTERNS.PRODUCT_LIST);
-    await this.page.waitForLoadState('networkidle');
-  }
-
-  /**
-   * Lấy giá trị hiện tại của 1 trường nhập liệu
-   */
-  async getFieldValue(field: WRA10102InputFieldKey): Promise<string> {
-    const locator = this.page.locator(this.fieldSelectors[field]);
-    await this.waitForVisible(locator);
-    return await locator.inputValue();
-  }
-
-  /**
-   * Kiểm tra checkbox "Đang bán" có đang được tick hay không
-   */
-  async isActiveChecked(): Promise<boolean> {
-    const checkbox = this.page.locator(this.selectorsWRA10102.isActiveCheckbox);
-    await this.waitForVisible(checkbox);
-    return await checkbox.isChecked();
-  }
-
-  /**
-   * Kiểm tra trường có hợp lệ theo validate của trình duyệt (HTML5) hay không
-   */
-  async isFieldNativelyValid(field: WRA10102InputFieldKey): Promise<boolean> {
-    const locator = this.page.locator(this.fieldSelectors[field]);
-    await this.waitForVisible(locator);
-    return await locator.evaluate(
-      (el: Element) => (el as HTMLInputElement | HTMLTextAreaElement).checkValidity(),
-    );
-  }
-
-  /**
-   * Lấy message validate của trình duyệt (HTML5) trên 1 trường
-   */
-  async getNativeValidationMessage(field: WRA10102InputFieldKey): Promise<string> {
-    const locator = this.page.locator(this.fieldSelectors[field]);
-    await this.waitForVisible(locator);
-    return await locator.evaluate(
-      (el: Element) => (el as HTMLInputElement | HTMLTextAreaElement).validationMessage,
-    );
-  }
-
-  /**
-   * Kiểm tra khối tổng hợp lỗi (.alert--error) có hiển thị hay không
-   */
-  async isErrorSummaryVisible(): Promise<boolean> {
-    return await this.isLocatorVisible(this.page.locator(this.selectorsWRA10102.errorAlert));
-  }
-
-  /**
-   * Lấy tiêu đề của khối tổng hợp lỗi
-   */
-  async getErrorSummaryTitle(): Promise<string> {
-    const title = this.page.locator(this.selectorsWRA10102.errorAlertTitle);
-    return (await this.getTextByLocator(title)).trim();
-  }
-
-  /**
-   * Lấy danh sách message trong khối tổng hợp lỗi
-   */
-  async getErrorSummaryMessages(): Promise<string[]> {
-    const items = this.page.locator(this.selectorsWRA10102.errorAlertItems);
-    await this.waitForVisible(items.first());
-
-    const messages = await items.allInnerTexts();
-    return messages.map((message) => message.trim());
-  }
-
-  /**
-   * Lấy locator message lỗi hiển thị ngay dưới 1 trường
-   */
-  private getFieldErrorLocator(field: WRA10102InputFieldKey): Locator {
-    return this.page.locator(
-      `div.field:has(${this.fieldSelectors[field]}) ${this.selectorsWRA10102.fieldErrorClass}`,
-    );
-  }
-
-  /**
-   * Kiểm tra message lỗi của 1 trường có hiển thị hay không
-   */
-  async isFieldErrorVisible(field: WRA10102InputFieldKey): Promise<boolean> {
-    return await this.isLocatorVisible(this.getFieldErrorLocator(field));
-  }
-
-  /**
-   * Lấy message lỗi hiển thị ngay dưới 1 trường
-   */
-  async getFieldErrorMessage(field: WRA10102InputFieldKey): Promise<string> {
-    const error = this.getFieldErrorLocator(field).first();
-    return (await this.getTextByLocator(error)).trim();
-  }
-
-  /**
-   * Kiểm tra 1 trường có được tô viền lỗi (class input--error) hay không
-   */
-  async hasErrorBorder(field: WRA10102InputFieldKey): Promise<boolean> {
-    const locator = this.page.locator(this.fieldSelectors[field]);
-    await this.waitForVisible(locator);
-
-    const classList = await locator
-      .evaluate((el: Element) => Array.from(el.classList) as string[])
-      .catch(() => [] as string[]);
-
-    return classList.includes(this.selectorsWRA10102.inputErrorClass);
-  }
-
-  /**
-   * Kiểm tra flash message thành công có hiển thị trên màn hình đăng ký hay không
-   */
-  async isSuccessAlertVisible(): Promise<boolean> {
-    return await this.isLocatorVisible(
-      this.page.locator(this.selectorsWRA10102.successAlert),
-      2000,
-    );
-  }
-
-  /**
-   * Kiểm tra button "Lưu" hiển thị và cho phép thao tác
-   */
-  async isSaveButtonEnabled(): Promise<boolean> {
-    const button = this.page.locator(this.selectorsWRA10102.saveButton);
-    await this.waitForVisible(button);
-    return await button.isEnabled();
-  }
-
-  /**
-   * Click 1 element gây điều hướng (submit form / click link) và chờ trang mới load xong
-   */
-  private async clickAndWaitForLoad(locator: Locator, timeout: number = 15000): Promise<void> {
-    const loaded = this.page.waitForEvent('load', { timeout }).catch(() => null);
-    await locator.click();
     await loaded;
     await this.page.waitForLoadState('networkidle');
   }
 
-  /**
-   * Chờ và kiểm tra 1 element có hiển thị hay không
-   * (locator.isVisible() không chờ, nên dùng waitFor để tránh kiểm tra sớm)
-   */
-  private async isLocatorVisible(locator: Locator, timeout: number = 10000): Promise<boolean> {
+  /** Bấm `Hủy` — quay về danh sách, không lưu gì */
+  async clickCancel(): Promise<void> {
+    const link = this.page.locator(this.selectorsWRA10102.cancelButton);
+    await this.waitForVisible(link);
+
+    const loaded = this.page.waitForEvent('load', { timeout: 15000 }).catch(() => null);
+    await link.click();
+    await loaded;
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  /** Vẫn đang ở màn Thêm sản phẩm hay đã chuyển đi */
+  isOnCreatePage(): boolean {
+    return RA101_URL_PATTERNS.PRODUCT_CREATE.test(this.getCurrentUrl());
+  }
+
+  /** Khối thông báo lỗi tổng có hiển thị hay không */
+  async isErrorAlertVisible(timeout: number = 5000): Promise<boolean> {
     try {
-      await locator.first().waitFor({ state: 'visible', timeout });
+      await this.page.locator(this.selectorsWRA10102.errorAlert).first().waitFor({
+        state: 'visible',
+        timeout,
+      });
       return true;
     } catch {
       return false;
     }
   }
 
+  /** Tiêu đề của khối lỗi (kỳ vọng: `Không lưu được, vui lòng kiểm tra lại:`) */
+  async getErrorAlertTitle(): Promise<string> {
+    const title = this.page.locator(this.selectorsWRA10102.errorAlertTitle);
+    return (await this.getTextByLocator(title)).trim();
+  }
+
   /**
-   * Nhập giá trị vào 1 trường theo key (xóa trắng trước khi nhập)
-   * Form của Retail App là HTML thuần (không có mask/format khi gõ) nên dùng fill() cho ổn định.
+   * Danh sách từng dòng lỗi trong khối thông báo.
+   * Không có khối lỗi thì trả về mảng rỗng, không throw.
    */
-  private async fillFieldValue(field: WRA10102InputFieldKey, value: string): Promise<void> {
-    const locator = this.page.locator(this.fieldSelectors[field]);
-    await this.waitForVisible(locator);
-    await locator.scrollIntoViewIfNeeded();
-    await locator.fill(value);
+  async getErrorMessages(): Promise<string[]> {
+    if (!(await this.isErrorAlertVisible())) {
+      return [];
+    }
+
+    const items = this.page.locator(this.selectorsWRA10102.errorAlertItems);
+    const count = await items.count();
+
+    const messages: string[] = [];
+    for (let i = 0; i < count; i += 1) {
+      messages.push((await items.nth(i).innerText()).trim());
+    }
+
+    return messages;
+  }
+
+  /**
+   * Trường này có đang hợp lệ theo validate CỦA TRÌNH DUYỆT hay không.
+   * Dùng cho nhánh bỏ trống trường `required` (cạm bẫy 3) — lúc đó không có
+   * request nào tới server nên không có khối lỗi để đọc.
+   */
+  async isFieldNativelyValid(field: WRA10102InputFieldKey): Promise<boolean> {
+    return await this.page
+      .locator(this.fieldSelectors[field])
+      .evaluate((el) => (el as HTMLInputElement).checkValidity());
   }
 }

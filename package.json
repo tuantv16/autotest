@@ -6,8 +6,9 @@
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
     "test:report": "npx playwright show-report",
-    "test:ra101": "npx playwright test tests/modules/RA101 --workers=1",
-    "cleanup:ra101": "docker exec -i retail_mysql mysql -ularavel -psecret laravel < scripts/cleanup-retail-test-data.sql",
+    "test:ra101": "npx playwright test tests/modules/RA101 --workers=1 && npm run cleanup:ra101",
+    "test:ra101:noclean": "npx playwright test tests/modules/RA101 --workers=1",
+    "cleanup:ra101": "python ../tools/data/run_sql.py",
     "install-browsers": "npx playwright install"
   },
   "devDependencies": {

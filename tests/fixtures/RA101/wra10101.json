@@ -1,0 +1,61 @@
+{
+    "$comment": "Fixture màn WRA10101 (Danh sách / Tìm sản phẩm). Nguồn testcase: testcases/retail_testcases/product/product_search.md. Dữ liệu tiền đề KHÔNG do test tạo qua UI mà do test_data/retail_data/seed-wra10101.sql nạp trước bằng SQL, nên các mã SKU dưới đây là CỐ ĐỊNH, phải khớp từng ký tự với file SQL đó. Dọn sau khi chạy: python tools/data/run_sql.py",
+
+    "wra10101": {
+        "TC_01": {
+            "description": "Tìm sản phẩm theo mã SKU có trong dữ liệu — kỳ vọng ra đúng 1 dòng",
+            "sourceTestcase": "TC_PRODUCT_SEARCH_01",
+            "formData": {
+                "keyword": "SEARCH-SKU-0001"
+            },
+            "expected": {
+                "rowCount": 1,
+                "sku": "SEARCH-SKU-0001",
+                "name": "Bàn làm việc gỗ sồi tự nhiên",
+                "priceText": "2.500.000 ₫",
+                "stockText": "15",
+                "statusText": "Đang bán"
+            }
+        },
+
+        "TC_02": {
+            "description": "Tìm bằng mã SKU KHÔNG tồn tại — kỳ vọng danh sách rỗng kèm thông báo",
+            "sourceTestcase": "TC_PRODUCT_SEARCH_02",
+            "$note": "Testcase khách tự mâu thuẫn: tiêu đề ghi 'theo tên sản phẩm' nhưng Step 4 ghi 'Nhập Mã SKU không tồn tại'. Test này bám theo STEP. Từ khóa dưới đây được chọn để chắc chắn không khớp bản ghi nào: nó không là chuỗi con của mã SKU hay tên của 4 dòng data mồi.",
+            "formData": {
+                "keyword": "SEARCH-SKU-KHONG-TON-TAI-9999"
+            },
+            "expected": {
+                "rowCount": 0,
+                "emptyMessage": "Chưa có sản phẩm nào khớp điều kiện."
+            }
+        },
+
+        "TC_03": {
+            "description": "Lọc danh sách theo trạng thái Đang bán",
+            "sourceTestcase": "TC_PRODUCT_SEARCH_03",
+            "formData": {
+                "statusValue": "active"
+            },
+            "expected": {
+                "minRowCount": 1,
+                "statusText": "Đang bán",
+                "notStatusText": "Ngừng bán"
+            }
+        },
+
+        "TC_04": {
+            "description": "Lọc danh sách theo trạng thái Ngừng bán",
+            "sourceTestcase": "TC_PRODUCT_SEARCH_04",
+            "$note": "Testcase khách tự mâu thuẫn: tiêu đề và cột Result đều ghi 'Ngừng bán' (2 phiếu) nhưng Step 3 ghi 'Đang bán' và trùng nguyên văn Step của TC_PRODUCT_SEARCH_03 (1 phiếu). Test này lấy theo đa số 2/3, tức Ngừng bán. Giữ nguyên Step thì testcase trùng hoàn toàn TC_03 mà kỳ vọng trái ngược — không thể đạt.",
+            "formData": {
+                "statusValue": "inactive"
+            },
+            "expected": {
+                "minRowCount": 1,
+                "statusText": "Ngừng bán",
+                "notStatusText": "Đang bán"
+            }
+        }
+    }
+}

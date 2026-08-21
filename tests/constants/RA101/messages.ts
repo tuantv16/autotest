@@ -40,3 +40,43 @@ export const WRA10102_ERROR_MESSAGES = {
   SKU_MAX_LENGTH: 'mã SKU không được dài hơn 50 ký tự.',
   NAME_MAX_LENGTH: 'tên sản phẩm không được dài hơn 255 ký tự.',
 } as const;
+
+/**
+ * WRA10103 (Sửa sản phẩm)
+ *
+ * Message lỗi validate của WRA10103 DÙNG CHUNG với WRA10102: hai màn cùng dùng
+ * ProductRequest (retail_app/app/Http/Requests/ProductRequest.php) và cùng render
+ * products/_form.blade.php -> tái sử dụng WRA10102_ERROR_MESSAGES ở trên,
+ * KHÔNG nhân bản thành khối WRA10103_ERROR_MESSAGES.
+ */
+export const WRA10103_SUCCESS_MESSAGES = {
+  /** ProductController@update (ProductController.php:56): "Đã cập nhật sản phẩm \"{name}\"." */
+  PRODUCT_UPDATED: (productName: string): string => `Đã cập nhật sản phẩm "${productName}".`,
+} as const;
+
+/**
+ * Gợi ý (.field__hint) trên form sản phẩm — dùng chung cho WRA10102 và WRA10103
+ * vì cả hai màn đều render products/_form.blade.php
+ */
+export const RA101_FORM_HINTS = {
+  /** _form.blade.php:35 — dòng hint ngay dưới ô "Số lượng tồn" */
+  STOCK_HINT: 'Đây là số còn lại thực tế — đơn hàng đang mở đã được trừ khỏi con số này.',
+} as const;
+
+/**
+ * Thông báo của màn WRA10101 — Danh sách / Tìm sản phẩm.
+ * Nội dung phải NGUYÊN VĂN kể cả dấu câu, test so khớp chính xác chuỗi này.
+ */
+export const WRA10101_MESSAGES = {
+  /**
+   * Hiện thay cho TOÀN BỘ bảng khi không có bản ghi nào khớp điều kiện lọc.
+   * Nguồn: apps/retail_app/resources/views/products/index.blade.php:38
+   */
+  EMPTY_RESULT: 'Chưa có sản phẩm nào khớp điều kiện.',
+
+  /**
+   * Liên kết nằm bên trong khối rỗng ở trên.
+   * Nguồn: apps/retail_app/resources/views/products/index.blade.php:39
+   */
+  EMPTY_RESULT_LINK: 'Thêm sản phẩm đầu tiên',
+} as const;

@@ -1,0 +1,173 @@
+{
+    "wra10103": {
+        "TC_01": {
+            "description": "Sửa sản phẩm thành công khi đổi nhiều trường cùng lúc",
+            "note": "Spec §8 Step 9 yêu cầu KHÔNG sửa ô Mã SKU (kết quả mong đợi: cột SKU = mã SKU ban đầu) nên khối này KHÔNG có newSkuPrefix. Muốn phủ tình huống đổi Mã SKU sang mã mới thì phải bổ sung dòng testcase trong spec §8 trước; khi đó mã mới vẫn bắt buộc bắt đầu bằng AUTO-SKU- (spec §7).",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "Ban go tu dong",
+                "price": "150000",
+                "stock": "25",
+                "description": "Mo ta ban dau"
+            },
+            "editFormData": {
+                "name": "Ban go tu dong da sua",
+                "price": "199000",
+                "stock": "40",
+                "description": "Mo ta sau khi sua"
+            },
+            "expected": {
+                "nameText": "Ban go tu dong da sua",
+                "descriptionText": "Mo ta sau khi sua",
+                "priceText": "199.000 ₫",
+                "stockText": "40",
+                "statusText": "Đang bán"
+            }
+        },
+        "TC_02": {
+            "description": "Sửa thành công khi giữ nguyên mã SKU của chính sản phẩm — không bị báo trùng",
+            "note": "Chỉ đổi Tên sản phẩm; Mã SKU / Giá bán / Số lượng tồn / Mô tả để nguyên giá trị điền sẵn. Cột SKU trên danh sách phải bằng đúng mã sinh ở bước tiền đề bằng CommonHelper.uniqueCode(skuPrefix) → so với biến trong spec.ts, không hardcode vào fixture.",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "San pham giu SKU",
+                "price": "150000",
+                "stock": "25",
+                "description": "Mo ta san pham giu SKU"
+            },
+            "editFormData": {
+                "name": "San pham giu SKU v2"
+            },
+            "expected": {
+                "nameText": "San pham giu SKU v2"
+            }
+        },
+        "TC_03": {
+            "description": "Sửa thất bại khi đổi sang mã SKU của một sản phẩm khác",
+            "note": "Cần HAI sản phẩm tiền đề. formData = sản phẩm A (mang mã X, tạo ra chỉ để giữ mã đó); secondFormData = sản phẩm B (mang mã Y, là sản phẩm được mở màn Sửa theo spec §8 Step 4). Step 5 nhập vào ô Mã SKU của B đúng mã X thực tế của A — mã đó sinh lúc chạy bằng CommonHelper.uniqueCode(formData.skuPrefix) nên KHÔNG có key sku hardcode. Ghi nhận cả hai mã để dọn.",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "San pham A",
+                "price": "150000",
+                "stock": "25",
+                "description": "San pham A giu ma SKU X."
+            },
+            "secondFormData": {
+                "secondSkuPrefix": "AUTO-SKU-",
+                "name": "San pham B",
+                "price": "120000",
+                "stock": "10",
+                "description": "San pham B se bi doi ma SKU thanh X."
+            },
+            "expected": {
+                "firstProductNameText": "San pham A",
+                "secondProductNameText": "San pham B"
+            }
+        },
+        "TC_04": {
+            "description": "Sửa thất bại khi bỏ trống các trường bắt buộc",
+            "note": "Spec §8 Step 5 chỉ xóa trắng 4 trường bắt buộc (Mã SKU, Tên sản phẩm, Giá bán, Số lượng tồn), KHÔNG xóa Mô tả. Trình duyệt chặn submit nên dữ liệu trong hệ thống giữ nguyên như bước tiền đề. Vẫn phải ghi nhận mã SKU để dọn (spec §7).",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "San pham bo trong",
+                "price": "150000",
+                "stock": "25",
+                "description": "Mo ta san pham bo trong."
+            },
+            "editFormData": {
+                "sku": "",
+                "name": "",
+                "price": "",
+                "stock": ""
+            },
+            "expected": {
+                "nameText": "San pham bo trong",
+                "priceText": "150.000 ₫",
+                "stockText": "25"
+            }
+        },
+        "TC_05": {
+            "description": "Bỏ tích `Đang bán` rồi lưu — sản phẩm chuyển sang Ngừng bán",
+            "note": "Sản phẩm tiền đề tạo ở trạng thái đang bán (ô Đang bán để nguyên trạng thái đã tích). expected.isActiveChecked là trạng thái ô tích khi mở lại màn Sửa sau khi lưu.",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "San pham ngung ban",
+                "price": "150000",
+                "stock": "25",
+                "description": "Mo ta san pham ngung ban.",
+                "isActive": true
+            },
+            "editFormData": {
+                "isActive": false
+            },
+            "expected": {
+                "nameText": "San pham ngung ban",
+                "priceText": "150.000 ₫",
+                "stockText": "25",
+                "statusText": "Ngừng bán",
+                "isActiveChecked": false
+            }
+        },
+        "TC_06": {
+            "description": "Bấm `Hủy` sau khi sửa — không lưu thay đổi nào",
+            "note": "expected.*Text là giá trị trên màn Danh sách (tiền định dạng @vnd). expected.reopenedFormValues là giá trị điền sẵn khi mở lại màn Sửa: Giá bán bị cast decimal:2 nên là '150000.00', Số lượng tồn cast integer nên là '25' — hai định dạng khác nhau, đừng assert lẫn.",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "San pham huy",
+                "price": "150000",
+                "stock": "25",
+                "description": "Mo ta san pham huy."
+            },
+            "editFormData": {
+                "name": "San pham huy bi doi",
+                "price": "888000",
+                "stock": "99"
+            },
+            "expected": {
+                "nameText": "San pham huy",
+                "priceText": "150.000 ₫",
+                "stockText": "25",
+                "reopenedFormValues": {
+                    "name": "San pham huy",
+                    "price": "150000.00",
+                    "stock": "25"
+                }
+            }
+        },
+        "TC_07": {
+            "description": "Form Sửa được điền sẵn đúng dữ liệu hiện tại của sản phẩm",
+            "note": "Ô Mã SKU và dòng phụ dưới tiêu đề phải bằng đúng mã sinh ở bước tiền đề (CommonHelper.uniqueCode(skuPrefix)) → không đưa vào expected để khỏi hardcode. Giá bán điền sẵn bị cast decimal:2 (Product.php:26) nên là '150000.00', KHÔNG phải '150000' và cũng KHÔNG phải '150.000 ₫' của màn Danh sách; Số lượng tồn cast integer (Product.php:27) nên là '25' không định dạng. Dòng gợi ý dưới ô Số lượng tồn tra ở constants/RA101/messages.ts, không lặp lại trong fixture.",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "San pham dien san",
+                "price": "150000",
+                "stock": "25",
+                "description": "Mo ta dien san",
+                "isActive": true
+            },
+            "expected": {
+                "nameValue": "San pham dien san",
+                "priceValue": "150000.00",
+                "stockValue": "25",
+                "descriptionValue": "Mo ta dien san",
+                "isActiveChecked": true
+            }
+        },
+        "TC_11": {
+            "description": "Sửa thất bại khi Giá bán vượt trần cho phép",
+            "note": "Trần giá bán lấy từ elements.json (rule max:999999999999.99 — ProductRequest.php:27); giá trị vượt trần dùng trong TC là 1000000000000 đúng theo spec §8 Step 5. Lưu thất bại nên trên danh sách Giá bán vẫn là giá của bước tiền đề; vẫn phải ghi nhận mã SKU để dọn.",
+            "formData": {
+                "skuPrefix": "AUTO-SKU-",
+                "name": "San pham gia vuot tran",
+                "price": "150000",
+                "stock": "25",
+                "description": "Mo ta san pham gia vuot tran."
+            },
+            "editFormData": {
+                "price": "1000000000000"
+            },
+            "expected": {
+                "priceText": "150.000 ₫"
+            }
+        }
+    }
+}
