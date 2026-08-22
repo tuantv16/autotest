@@ -1,0 +1,57 @@
+{
+    "$comment": "Fixture màn WRA10201 (Danh sách / Tìm đơn hàng). Nguồn testcase: testcases/retail_testcases/order/order_search.md. KHÔNG có data mồi và KHÔNG cần dọn: 5 testcase đều CHỈ ĐỌC (lọc danh sách), không tạo/sửa/xóa bản ghi nào. Các testcase cần 'giá trị có tồn tại trong cơ sở dữ liệu' thì đọc thẳng từ dòng đầu của danh sách lúc chạy — đúng như thao tác của tester thật, và không phụ thuộc database của máy nào. Vì vậy fixture này chỉ giữ những giá trị KHÔNG phụ thuộc dữ liệu.",
+
+    "wra10201": {
+        "TC_01": {
+            "description": "Tìm đơn hàng theo Mã đơn có trong dữ liệu — kỳ vọng ra đúng 1 dòng, đúng mã đó",
+            "sourceTestcase": "TC_ORDER_SEARCH_01",
+            "$note": "Mã đơn dùng để tìm được lấy từ dòng đầu danh sách lúc chạy, không hardcode ở đây. Mã đơn là UNIQUE (migrations/2026_08_13_100003_create_orders_table.php) và bộ lọc dùng LIKE %term% trên cột code (Order.php:69) nên tìm bằng mã đầy đủ ra đúng 1 dòng.",
+            "expected": {
+                "rowCount": 1
+            }
+        },
+
+        "TC_02": {
+            "description": "Tìm đơn hàng theo Tên khách hàng có trong dữ liệu — mọi dòng trả về phải chứa tên đó",
+            "sourceTestcase": "TC_ORDER_SEARCH_02",
+            "$note": "Tên khách cũng lấy từ dòng đầu danh sách lúc chạy. Một khách có thể có nhiều đơn nên KHÔNG chốt rowCount, chỉ kiểm >= 1 và mọi dòng đều khớp tên.",
+            "expected": {
+                "minRowCount": 1
+            }
+        },
+
+        "TC_03": {
+            "description": "Tìm bằng Mã đơn KHÔNG tồn tại — kỳ vọng danh sách rỗng kèm thông báo",
+            "sourceTestcase": "TC_ORDER_SEARCH_03",
+            "formData": {
+                "keyword": "DH99999999-KHONG-TON-TAI"
+            },
+            "$note": "Từ khóa được chọn để chắc chắn không khớp bản ghi nào: mã đơn sinh theo mẫu DH{Ymd}-{5 số} (OrderService) nên không mã nào chứa chuỗi 'KHONG-TON-TAI'; chuỗi này cũng không thể là tên hay SĐT khách.",
+            "expected": {
+                "rowCount": 0,
+                "emptyMessage": "Chưa có đơn hàng nào khớp điều kiện."
+            }
+        },
+
+        "TC_04": {
+            "description": "Lọc danh sách theo selectbox trạng thái = Hoàn thành",
+            "sourceTestcase": "TC_ORDER_SEARCH_04",
+            "formData": {
+                "statusValue": "completed"
+            },
+            "expected": {
+                "minRowCount": 1,
+                "statusText": "Hoàn thành"
+            }
+        },
+
+        "TC_05": {
+            "description": "Lọc danh sách theo khoảng Từ ngày - Đến ngày",
+            "sourceTestcase": "TC_ORDER_SEARCH_05",
+            "$note": "Khoảng ngày lấy từ Ngày đặt của dòng đầu danh sách lúc chạy (from = to = ngày đó) nên luôn có ít nhất 1 dòng khớp, không phụ thuộc dữ liệu của máy. Bộ lọc dùng whereDate >= from AND whereDate <= to (OrderController.php:25-26) nên hai đầu mút ĐƯỢC tính vào.",
+            "expected": {
+                "minRowCount": 1
+            }
+        }
+    }
+}

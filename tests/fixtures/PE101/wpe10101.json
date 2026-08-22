@@ -1,0 +1,79 @@
+{
+  "$comment": "Fixture màn WPE10101 — tìm kiếm sản phẩm. Nguồn testcase: testcases/pets_testcases/product/product_search.md. Mọi giá trị 'expected' lấy từ API thật của app (GET /api/products) tại thời điểm sinh, không phải ước lượng. Shape 2 cấp là bắt buộc: loadTestData('PE101/wpe10101', 'wpe10101', 'TC_01') — CLAUDE.md §2.3.",
+  "$comment_data": "Màn này CHỈ ĐỌC: app không có UI tạo/sửa sản phẩm nên fixture không seed và không cần cleanup. Dữ liệu tiền đề là seed gốc db/init/01-schema.sql (24 sản phẩm). Nếu test khác đã đặt hàng mà chưa dọn thì tồn kho lệch — nhưng tổng số sản phẩm không đổi, các TC ở đây vẫn đúng.",
+  "wpe10101": {
+    "TC_01": {
+      "description": "Tìm kiếm theo tên sản phẩm có dấu",
+      "formData": { "search": "Tông đơ" },
+      "expected": {
+        "total": 1,
+        "skus": ["GR-001"],
+        "productName": "Tông đơ cắt lông chó mèo Pro-Clip",
+        "price": 620000
+      }
+    },
+    "TC_02": {
+      "description": "Tìm kiếm không dấu vẫn ra kết quả có dấu (collation utf8mb4_unicode_ci)",
+      "formData": { "search": "tong" },
+      "expected": {
+        "total": 1,
+        "skus": ["GR-001"],
+        "productName": "Tông đơ cắt lông chó mèo Pro-Clip"
+      }
+    },
+    "TC_03": {
+      "description": "Tìm kiếm theo mã SKU chính xác",
+      "formData": { "search": "GR-001" },
+      "expected": {
+        "total": 1,
+        "skus": ["GR-001"],
+        "skuLabel": "SKU GR-001"
+      }
+    },
+    "TC_04": {
+      "description": "Tìm kiếm theo từ khóa chỉ nằm trong mô tả sản phẩm",
+      "formData": { "search": "Omega" },
+      "expected": {
+        "total": 1,
+        "skus": ["HE-002"],
+        "productName": "Kem chống rụng lông và ngứa da 60g"
+      }
+    },
+    "TC_05": {
+      "description": "Tìm kiếm từ khóa không tồn tại",
+      "formData": { "search": "khong-co-gi" },
+      "expected": {
+        "total": 0,
+        "skus": []
+      }
+    },
+    "TC_06": {
+      "description": "Tìm kiếm bỏ qua khoảng trắng đầu/cuối từ khóa",
+      "formData": { "search": "  bat an  " },
+      "expected": {
+        "total": 1,
+        "skus": ["FE-001"],
+        "productName": "Bát ăn đôi inox chống trượt"
+      }
+    },
+    "TC_07": {
+      "description": "Xóa từ khóa thì danh sách trở về đầy đủ",
+      "formData": { "search": "tong", "searchCleared": "" },
+      "expected": {
+        "totalAfterSearch": 1,
+        "totalAfterClearMin": 24,
+        "cardsOnFirstPage": 12,
+        "$comment": "totalAfterClearMin là SÀN, không phải số cố định: suite chạy song song và có spec tự seed sản phẩm vào cùng database."
+      }
+    },
+    "TC_08": {
+      "description": "Tìm kiếm khi đang ở trang 2 thì nhảy về trang 1",
+      "formData": { "search": "tong" },
+      "expected": {
+        "total": 1,
+        "skus": ["GR-001"],
+        "paginationVisible": false
+      }
+    }
+  }
+}
