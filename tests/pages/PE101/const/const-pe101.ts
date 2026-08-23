@@ -5,18 +5,25 @@
  * Nguồn của từng nhóm ghi ngay trên khai báo, theo Luật 2 (CLAUDE.md §1).
  */
 
+import { projectBaseUrl } from '../../../support/project-config';
+
 /**
  * Base URL của app pets.
  *
  * `playwright.config.ts` KHÔNG khai `baseURL` (CLAUDE.md §2.4) nên cấm
  * `page.goto('/duong-dan')`. Mọi điều hướng phải đi qua hàm này.
  *
- * Biến môi trường: `PETS_BASE_URL` (project.config.json → advanced.baseUrlEnvVar).
- * Mặc định `http://localhost:8090` — cổng nginx của app.
- * Nguồn: apps/pets/docker-compose.yml (service `web`, ports "8090:80").
+ * **KHÔNG viết cứng cổng ở đây.** `projectBaseUrl()` đọc `project.config.json` của dự án
+ * đang active: ưu tiên biến môi trường khai ở `advanced.baseUrlEnvVar` (`PETS_BASE_URL`),
+ * không có thì lấy khóa `baseUrl` (hiện là `http://localhost:8090` — cổng nginx, nguồn
+ * `apps/pets/docker-compose.yml`, service `web`, ports "8090:80").
+ *
+ * Vì sao không để `process.env.PETS_BASE_URL || 'http://localhost:8090'` như trước: cổng
+ * bị khai hai chỗ, đổi dự án hoặc đổi cổng là phải sửa cả hai, quên một chỗ thì test chạy
+ * trên app cũ mà không báo gì. Một cổng, một chỗ khai.
  */
 export function getPE101BaseUrl(): string {
-  return process.env.PETS_BASE_URL || 'http://localhost:8090';
+  return projectBaseUrl();
 }
 
 /**
@@ -130,6 +137,24 @@ export const PE101_PET_TYPE = {
   all: '',
   dog: 'dog',
   cat: 'cat',
+} as const;
+
+/**
+ * Slug 6 danh mục của seed, dùng cho `categoryChip(slug)` và query `?category=`.
+ * Nguồn: apps/pets/db/init/01-schema.sql:70-76 (INSERT INTO categories).
+ *
+ * Slug là **dữ liệu**, không phải hằng của code: thêm danh mục trong DB thì phải bổ sung
+ * ở đây. `'all'` không nằm trong bảng — đó là giá trị mặc định của client
+ * (App.jsx:8) và backend bỏ qua điều kiện danh mục khi gặp nó (products.js:52).
+ */
+export const PE101_CATEGORY = {
+  all: 'all',
+  grooming: 'grooming',
+  feeding: 'feeding',
+  toys: 'toys',
+  health: 'health',
+  accessory: 'accessory',
+  housing: 'housing',
 } as const;
 
 /**

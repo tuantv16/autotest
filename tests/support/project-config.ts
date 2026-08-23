@@ -7,7 +7,7 @@
  * án = sửa `project.config.json`, code test không đụng tới.
  *
  * Mọi khóa bắt đầu bằng `$` là chú thích cho người đọc, bị bỏ khi parse — cùng quy ước
- * với `tools/config/cfg.py`.
+ * với `core/cfg.py`.
  */
 
 import * as fs from 'fs';

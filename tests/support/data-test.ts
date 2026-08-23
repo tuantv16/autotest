@@ -17,7 +17,7 @@
  * Còn đúng một kẽ mà không cơ chế trong-process nào bít được: worker bị kill cứng
  * (Ctrl+C, hết RAM, mất điện). Lưới cuối cho trường hợp đó là dọn cả đợt:
  *
- *     python tools/data/run_sql.py
+ *     python core/data/run_sql.py
  *
  * ── Dùng thế nào ───────────────────────────────────────────────────────────────
  * Spec có ghi dữ liệu thì import từ file này thay cho `base-test`:

@@ -15,7 +15,7 @@
  * Xem `autotest/tests/utils/db/retail-data.ts`.
  */
 
-import { test, expect, loadTestData } from '../../../base/base-test';
+import { test, expect, loadTestData } from '../../../support/projects/retail-test';
 import { WRA10101Page } from '../../../pages/RA101/wra10101.page';
 import { WRA10102Page } from '../../../pages/RA101/wra10102.page';
 import {

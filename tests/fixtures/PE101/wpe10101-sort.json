@@ -1,0 +1,73 @@
+{
+  "$comment": "Fixture màn WPE10101 — SẮP XẾP. Nguồn testcase: testcases/pets_testcases/product/product_sort.md (6 TC). Shape 2 cấp bắt buộc: loadTestData('PE101/wpe10101-sort', 'wpe10101-sort', 'TC_01') — CLAUDE.md §2.3. Tách khỏi wpe10101.json vì file đó đã dùng hết TC_01..TC_08 cho bộ tìm kiếm.",
+  "$comment_data": "Màn này CHỈ ĐỌC — app không có UI tạo/sửa sản phẩm nên fixture không seed và không cần cleanup. Dữ liệu tiền đề là seed gốc db/init/01-schema.sql (24 sản phẩm, pageSize 12 → 2 trang). Mọi thứ tự trong 'expected' ĐO ĐƯỢC từ GET /api/products tại thời điểm sinh, không ước lượng.",
+  "$comment_ratingtie": "TC_02 chỉ khai vị trí SỐ 1. rating_desc là ORDER BY p.rating DESC không có tiêu chí phụ (products.js:10) nên GR-001 và TO-003 cùng 4.8 có thứ tự KHÔNG xác định — cố tình không đưa vào expected.",
+
+  "wpe10101-sort": {
+    "TC_01": {
+      "description": "Mặc định sắp xếp theo mới nhất",
+      "formData": { "sort": "newest" },
+      "expected": {
+        "total": 24,
+        "firstSku": "HO-004",
+        "firstName": "Thảm làm mát gel mùa hè size L",
+        "secondSku": "HO-003"
+      }
+    },
+    "TC_02": {
+      "description": "Sắp xếp theo đánh giá cao nhất — chỉ assert vị trí 1 vì rating_desc không có tie-break",
+      "formData": { "sort": "rating_desc" },
+      "expected": {
+        "total": 24,
+        "firstSku": "FE-003",
+        "firstName": "Máy cho ăn tự động 4 bữa mỗi ngày",
+        "firstRating": "4.9"
+      }
+    },
+    "TC_03": {
+      "description": "Sắp xếp theo tên A-Z bỏ qua dấu tiếng Việt (collation utf8mb4_unicode_ci)",
+      "formData": { "sort": "name_asc" },
+      "expected": {
+        "total": 24,
+        "firstSkus": ["AC-004", "HE-003", "FE-001", "FE-002"],
+        "firstNames": [
+          "Balo trong suốt phi hành gia",
+          "Bàn chải và kem đánh răng vị gà",
+          "Bát ăn đôi inox chống trượt",
+          "Bình nước treo chuồng 500ml"
+        ]
+      }
+    },
+    "TC_04": {
+      "description": "Đổi sắp xếp khi đang ở trang 2 thì quay về trang 1",
+      "formData": { "sort": "name_asc" },
+      "expected": {
+        "pageBefore": 2,
+        "pageAfter": 1,
+        "totalPages": 2,
+        "firstSku": "AC-004"
+      }
+    },
+    "TC_05": {
+      "description": "Sắp xếp giữ nguyên khi chuyển sang trang 2",
+      "formData": { "sort": "name_asc" },
+      "expected": {
+        "totalPages": 2,
+        "lastSkuPage1": "GR-005",
+        "lastNamePage1": "Khăn lau tai - mắt không cồn (100 tờ)",
+        "firstSkuPage2": "HO-003",
+        "firstNamePage2": "Khay vệ sinh mèo có mái che",
+        "cardsOnPage2": 12
+      }
+    },
+    "TC_06": {
+      "description": "Kết hợp sắp xếp giá thấp đến cao với lọc danh mục Đồ chơi vận động",
+      "formData": { "sort": "price_asc", "category": "toys" },
+      "expected": {
+        "total": 4,
+        "skusInOrder": ["TO-002", "TO-004", "TO-001", "TO-003"],
+        "pricesInOrder": [55000, 69000, 89000, 970000]
+      }
+    }
+  }
+}

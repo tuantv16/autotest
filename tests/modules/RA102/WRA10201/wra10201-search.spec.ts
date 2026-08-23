@@ -29,7 +29,7 @@
  *   tiền đề, kèm thông báo nói rõ đó là thiếu dữ liệu chứ không phải app sai.
  */
 
-import { test, expect, loadTestData } from '../../../base/base-test';
+import { test, expect, loadTestData } from '../../../support/projects/retail-test';
 import { WRA10201Page } from '../../../pages/RA102/wra10201.page';
 import {
   RA102_MENU_LABELS,

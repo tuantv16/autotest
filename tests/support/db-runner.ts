@@ -2,7 +2,7 @@
  * Chạy SQL vào database của **dự án đang active**, không biết đó là dự án nào.
  *
  * Lệnh kết nối lấy nguyên văn từ `project.config.json → advanced.cleanupCmd` — đúng
- * chuỗi mà `tools/data/run_sql.py` dùng. Nghĩa là chỉ có MỘT chỗ khai cách nối database
+ * chuỗi mà `core/data/run_sql.py` dùng. Nghĩa là chỉ có MỘT chỗ khai cách nối database
  * cho cả phía Python và phía TypeScript; đổi dự án (đổi container, đổi user) không phải
  * sửa dòng code nào.
  *
@@ -12,10 +12,11 @@
  * (chỉ cần import là throw lúc collect test). Dùng `child_process` thì KHÔNG cần cài
  * thêm gì, và `package.json` là vùng cấm (CLAUDE.md §1 Luật 3).
  *
- * Cạm bẫy Rancher Desktop: `DOCKER_CONTEXT=default` là BẮT BUỘC — context mặc định
- * `desktop-linux` trỏ vào daemon không tồn tại nên mọi lệnh docker báo "cannot find the
- * file specified" dù container vẫn chạy. Đã khai ở `.claude/settings.json#env`; runner
- * này tự điền nếu môi trường chưa có.
+ * Container chạy trên **Docker Desktop** (máy này đã bỏ Rancher Desktop). Runner ghim
+ * `DOCKER_CONTEXT=desktop-linux` khi môi trường chưa khai, để lệnh docker không phụ
+ * thuộc context nào đang active. Không dùng `default`: đó là context suy từ DOCKER_HOST
+ * nên nó đổi chủ trong im lặng nếu một runtime khác được bật lại. Giá trị chính thức
+ * khai ở `.claude/settings.local.json#env`.
  */
 
 import { execFileSync } from 'child_process';
@@ -192,7 +193,7 @@ export class DbRunner {
       return execFileSync(bin, args, {
         input: script,
         encoding: 'utf-8',
-        env: { ...process.env, DOCKER_CONTEXT: process.env.DOCKER_CONTEXT || 'default' },
+        env: { ...process.env, DOCKER_CONTEXT: process.env.DOCKER_CONTEXT || 'desktop-linux' },
         maxBuffer: 32 * 1024 * 1024,
       });
     } catch (error: any) {

@@ -315,6 +315,36 @@ export class WPE10101Page extends BasePage {
     );
   }
 
+  /**
+   * Đọc tên sản phẩm đang hiển thị, **theo đúng thứ tự trên lưới**.
+   *
+   * Dùng cho test sắp xếp: `productName(sku)` chỉ trả lời "sản phẩm X tên gì", không trả
+   * lời được "sản phẩm nào đứng trước". Ở đây thứ tự chính là thứ cần kiểm nên đọc theo
+   * vị trí là đúng, khác với các test khác phải scope theo `data-sku`.
+   *
+   * Nguồn: components/ProductCard.jsx:25 (`data-testid="product-name"` trong .map()).
+   */
+  async listedNames(): Promise<string[]> {
+    return this.productCards.evaluateAll((nodes) =>
+      nodes.map((n) => n.querySelector('[data-testid="product-name"]')?.textContent?.trim() || ''),
+    );
+  }
+
+  /**
+   * Đọc giá (dạng số) của các sản phẩm đang hiển thị, theo đúng thứ tự trên lưới.
+   *
+   * Bỏ mọi ký tự không phải chữ số — chuỗi hiển thị là `620.000 ₫` với dấu chấm phân cách
+   * nghìn và U+00A0 trước ₫ (api.js:33-35), so chuỗi trực tiếp rất dễ sai.
+   *
+   * Nguồn: components/ProductCard.jsx:36
+   */
+  async listedPrices(): Promise<number[]> {
+    const raw = await this.productCards.evaluateAll((nodes) =>
+      nodes.map((n) => n.querySelector('[data-testid="product-price"]')?.textContent || ''),
+    );
+    return raw.map((text) => Number(text.replace(/\D/g, '')));
+  }
+
   // ───────────────────────────────────────────────────────────────────────────
   // Nội bộ
   // ───────────────────────────────────────────────────────────────────────────

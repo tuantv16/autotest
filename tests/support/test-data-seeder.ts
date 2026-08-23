@@ -279,7 +279,7 @@ export class TestDataSeeder {
           `  Nguyên nhân : ${String(error?.message || error).split('\n')[0]}`,
           '',
           '  Dọn tay bằng lệnh (chạy từ gốc workspace):',
-          '      python tools/data/run_sql.py',
+          '      python core/data/run_sql.py',
           '',
         ]
           .filter(Boolean)
@@ -307,5 +307,5 @@ export class TestDataSeeder {
  * vẫn được xóa sạch.
  *
  * Kẽ duy nhất còn lại là worker bị kill cứng (Ctrl+C, hết RAM) — không cơ chế
- * trong-process nào bít được. Lưới cuối cho trường hợp đó: `python tools/data/run_sql.py`.
+ * trong-process nào bít được. Lưới cuối cho trường hợp đó: `python core/data/run_sql.py`.
  */

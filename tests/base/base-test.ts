@@ -1,13 +1,20 @@
 /**
  * Base Test Class
  * Common setup and utilities for all tests
+ *
+ * FILE NÀY KHÔNG BIẾT DỰ ÁN NÀO LÀ DỰ ÁN NÀO. Không import seeder/page/const của một
+ * dự án cụ thể, không hardcode cổng hay tên container. Tri thức riêng của từng dự án
+ * nằm ở `tests/support/**` (extend từ file này) và `project.config.json`.
+ *
+ * Sửa file này chỉ được phép trong cửa sổ onboard (`advanced.baseLocked = false`) —
+ * CLAUDE.md §1 Luật 3. Kiểm bằng: python core/cfg.py --guard <đường dẫn>
  */
 
 import { test as base, expect } from '@playwright/test';
 import { IndexedDBHelper } from '../utils/indexeddb-helper';
 import { CommonHelper } from '../utils/common-helper';
 import { snapExpect as snapExpectImpl, snapInput as snapInputImpl } from '../utils/screenshot-helper';
-import { RetailDataSeeder } from '../utils/db/retail-data';
+import { projectBaseUrl } from '../support/project-config';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
@@ -20,12 +27,6 @@ export interface TestFixtures {
   baseUrl: string;
   snapInput: (index?: string | number) => Promise<string>;
   snapExpect: (index?: string | number) => Promise<string>;
-  /**
-   * Tạo dữ liệu tiền đề cho test của retail_app và tự dọn khi test kết thúc.
-   * Chỉ khởi tạo khi test thực sự khai nó, nên test không dùng thì không chạm database.
-   * Xem `tests/utils/db/retail-data.ts`.
-   */
-  retailData: RetailDataSeeder;
 }
 
 /**
@@ -57,9 +58,13 @@ export const test = base.extend<TestFixtures>({
     await use(CommonHelper);
   },
 
-  // Base URL fixture
+  // Base URL fixture — lấy từ project.config.json của dự án ĐANG ACTIVE.
+  // Trước đây mặc định là 'http://localhost:5173' (cổng của một dự án cũ): quên khai
+  // BASE_URL là test lặng lẽ chọc vào app khác và fail với lý do vô nghĩa.
+  // projectBaseUrl() ưu tiên biến môi trường khai ở advanced.baseUrlEnvVar, rồi mới
+  // tới khóa baseUrl. BASE_URL vẫn được tôn trọng để không phá thói quen cũ.
   baseUrl: async ({}, use) => {
-    const url = process.env.BASE_URL || 'http://localhost:5173';
+    const url = process.env.BASE_URL || projectBaseUrl();
     await use(url);
   },
 
@@ -69,36 +74,6 @@ export const test = base.extend<TestFixtures>({
 
   snapExpect: async ({ page }, use, testInfo) => {
     await use(async (index?: string | number) => snapExpectImpl(page, testInfo, index));
-  },
-
-  // Dữ liệu test của retail_app: tự tạo khi test cần, tự xóa cứng khi test xong.
-  // Teardown của fixture chạy KỂ CẢ khi test fail hoặc timeout, nên không cần afterEach.
-  retailData: async ({}, use, testInfo) => {
-    const seeder = new RetailDataSeeder();
-    await use(seeder);
-
-    // Dọn thất bại KHÔNG được làm fail một test vốn đã pass — nhưng cũng không được im
-    // lặng, vì im lặng là để rác lại trong database mà không ai biết.
-    const leftover = seeder.tracked;
-    try {
-      await seeder.cleanup();
-    } catch (error: any) {
-      console.error(
-        [
-          '',
-          '╔══════════════════════════════════════════════════════════════════════════╗',
-          '║  DỌN DỮ LIỆU TEST THẤT BẠI — DATABASE ĐANG CÒN RÁC                       ║',
-          '╚══════════════════════════════════════════════════════════════════════════╝',
-          `  Test        : ${testInfo.title}`,
-          `  Mã SKU sót  : ${leftover.join(', ') || '(không có)'}`,
-          `  Nguyên nhân : ${error?.message?.split('\n')[0] ?? error}`,
-          '',
-          '  Dọn tay bằng lệnh (chạy từ gốc workspace):',
-          '      python tools/data/run_sql.py',
-          '',
-        ].join('\n'),
-      );
-    }
   },
 });
 
@@ -120,8 +95,8 @@ export interface BaseTestData {
 
 /**
  * Helper to load test data from Json fixture files
- * @param fileName - Name of the test data file .json(e.g., 'TY205/wty20501' or 'wty20501')
- * @param screenCode - Screen code (e.g., 'wty20501')
+ * @param fileName - Name of the test data file .json(e.g., '<MODULE>/<screen>' or '<screen>')
+ * @param screenCode - Screen code (e.g., '<screen>')
  * @param caseCode - Test case code (e.g., 'TC_01')
  */
 export function loadTestData(fileName: string, screenCode: string, caseCode: string): any {
@@ -131,11 +106,11 @@ export function loadTestData(fileName: string, screenCode: string, caseCode: str
 
 /**
  * Helper to load test data from TypeScript fixture files (supports dynamic env variables)
- * @param fileName - Name of the test data file .ts (e.g., 'TY205/wty20501' or 'wty20501')
- * @param screenCode - Screen code (e.g., 'wty20501')
+ * @param fileName - Name of the test data file .ts (e.g., '<MODULE>/<screen>' or '<screen>')
+ * @param screenCode - Screen code (e.g., '<screen>')
  * @param caseCode - Test case code (e.g., 'TC_01')
  * @example
- * const testData = loadTestDataTS('TY201/wty20101', 'wty20101', 'TC_01');
+ * const testData = loadTestDataTS('<MODULE>/<screen>', '<screen>', 'TC_01');
  */
 export function loadTestDataTS(fileName: string, screenCode: string, caseCode: string): any {
   const allData = CommonHelper.loadTestDataTS(fileName);
